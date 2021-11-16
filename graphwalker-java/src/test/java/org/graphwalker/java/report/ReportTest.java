@@ -1,72 +1,72 @@
-package org.graphwalker.java.report;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""r""e""p""o""r""t"";"
 
-/*
- * #%L
- * GraphWalker Java
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""J""a""v""a"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import static org.junit.Assert.assertThat;
-import static org.xmlunit.matchers.HasXPathMatcher.hasXPath;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""x""m""l""u""n""i""t"".""m""a""t""c""h""e""r""s"".""H""a""s""X""P""a""t""h""M""a""t""c""h""e""r"".""h""a""s""X""P""a""t""h"";"
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.io.factory.json.JsonContextFactory;
-import org.graphwalker.java.test.Executor;
-import org.graphwalker.java.test.TestExecutor;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""F""i""l""e""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""t""e""x""t"".""D""a""t""e""F""o""r""m""a""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""t""e""x""t"".""S""i""m""p""l""e""D""a""t""e""F""o""r""m""a""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""D""a""t""e"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""j""s""o""n"".""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""t""e""s""t"".""E""x""e""c""u""t""o""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""t""e""s""t"".""T""e""s""t""E""x""e""c""u""t""o""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""R""u""l""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""r""u""l""e""s"".""T""e""m""p""o""r""a""r""y""F""o""l""d""e""r"";"
 
-/**
- * @author Nils Olsson
- */
-public class ReportTest {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""R""e""p""o""r""t""T""e""s""t"" ""{"
 
-  @Rule
-  public TemporaryFolder testFolder = new TemporaryFolder();
+" "" ""@""R""u""l""e"
+" "" ""p""u""b""l""i""c"" ""T""e""m""p""o""r""a""r""y""F""o""l""d""e""r"" ""t""e""s""t""F""o""l""d""e""r"" ""="" ""n""e""w"" ""T""e""m""p""o""r""a""r""y""F""o""l""d""e""r""("")"";"
 
-  @Test
-  public void writeReport() throws IOException {
-    Date date = new Date();
-    DateFormat formatter = new SimpleDateFormat("yyyyMMdd'T'HHmmssSSS");
-    Path reportName = Paths.get(testFolder.getRoot().toPath().toString(),
-                                "TEST-GraphWalker-" + formatter.format(date) + ".xml");
-    XMLReportGenerator xmlReportGenerator = new XMLReportGenerator(date, System.getProperties());
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""w""r""i""t""e""R""e""p""o""r""t""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""D""a""t""e"" ""d""a""t""e"" ""="" ""n""e""w"" ""D""a""t""e""("")"";"
+" "" "" "" ""D""a""t""e""F""o""r""m""a""t"" ""f""o""r""m""a""t""t""e""r"" ""="" ""n""e""w"" ""S""i""m""p""l""e""D""a""t""e""F""o""r""m""a""t""("""""y""y""y""y""M""M""d""d""'""T""'""H""H""m""m""s""s""S""S""S""""")"";"
+" "" "" "" ""P""a""t""h"" ""r""e""p""o""r""t""N""a""m""e"" ""="" ""P""a""t""h""s"".""g""e""t""(""t""e""s""t""F""o""l""d""e""r"".""g""e""t""R""o""o""t""("")"".""t""o""P""a""t""h""("")"".""t""o""S""t""r""i""n""g""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""T""E""S""T""-""G""r""a""p""h""W""a""l""k""e""r""-""""" ""+"" ""f""o""r""m""a""t""t""e""r"".""f""o""r""m""a""t""(""d""a""t""e"")"" ""+"" """"".""x""m""l""""")"";"
+" "" "" "" ""X""M""L""R""e""p""o""r""t""G""e""n""e""r""a""t""o""r"" ""x""m""l""R""e""p""o""r""t""G""e""n""e""r""a""t""o""r"" ""="" ""n""e""w"" ""X""M""L""R""e""p""o""r""t""G""e""n""e""r""a""t""o""r""(""d""a""t""e"","" ""S""y""s""t""e""m"".""g""e""t""P""r""o""p""e""r""t""i""e""s""("")"")"";"
 
-    List<Context> contexts = new JsonContextFactory().create(Paths.get("org/graphwalker/java/test/PetClinic.json"));
-    Executor executor = new TestExecutor(contexts);
-    xmlReportGenerator.writeReport(testFolder.getRoot().toPath().toFile(), executor);
-    String xml = new String(Files.readAllBytes(reportName));
-    assertThat(xml, hasXPath("/testsuites/@tests"));
-    assertThat(xml, hasXPath("/testsuites/@failures"));
-    assertThat(xml, hasXPath("/testsuites/@errors"));
-  }
-}
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""("""""o""r""g""/""g""r""a""p""h""w""a""l""k""e""r""/""j""a""v""a""/""t""e""s""t""/""P""e""t""C""l""i""n""i""c"".""j""s""o""n""""")"")"";"
+" "" "" "" ""E""x""e""c""u""t""o""r"" ""e""x""e""c""u""t""o""r"" ""="" ""n""e""w"" ""T""e""s""t""E""x""e""c""u""t""o""r""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""x""m""l""R""e""p""o""r""t""G""e""n""e""r""a""t""o""r"".""w""r""i""t""e""R""e""p""o""r""t""(""t""e""s""t""F""o""l""d""e""r"".""g""e""t""R""o""o""t""("")"".""t""o""P""a""t""h""("")"".""t""o""F""i""l""e""("")"","" ""e""x""e""c""u""t""o""r"")"";"
+" "" "" "" ""S""t""r""i""n""g"" ""x""m""l"" ""="" ""n""e""w"" ""S""t""r""i""n""g""(""F""i""l""e""s"".""r""e""a""d""A""l""l""B""y""t""e""s""(""r""e""p""o""r""t""N""a""m""e"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""x""m""l"","" ""h""a""s""X""P""a""t""h""("""""/""t""e""s""t""s""u""i""t""e""s""/""@""t""e""s""t""s""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""x""m""l"","" ""h""a""s""X""P""a""t""h""("""""/""t""e""s""t""s""u""i""t""e""s""/""@""f""a""i""l""u""r""e""s""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""x""m""l"","" ""h""a""s""X""P""a""t""h""("""""/""t""e""s""t""s""u""i""t""e""s""/""@""e""r""r""o""r""s""""")"")"";"
+" "" ""}"
+"}"

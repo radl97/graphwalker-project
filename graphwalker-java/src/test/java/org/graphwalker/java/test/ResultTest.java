@@ -1,164 +1,164 @@
-package org.graphwalker.java.test;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""t""e""s""t"";"
 
-/*-
- * #%L
- * GraphWalker Java
- * %%
- * Copyright (C) 2005 - 2017 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*""-"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""J""a""v""a"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""7"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import static org.hamcrest.core.Is.is;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""I""s"".""i""s"";"
 
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.io.factory.json.JsonContextFactory;
-import org.hamcrest.core.StringStartsWith;
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""C""o""l""l""e""c""t""i""o""n""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""j""s""o""n"".""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""S""t""r""i""n""g""S""t""a""r""t""s""W""i""t""h"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""s""o""n"".""J""S""O""N""O""b""j""e""c""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
 
-/**
- * Created by krikar on 2016-05-13.
- */
-public class ResultTest {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""6""-""0""5""-""1""3""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""R""e""s""u""l""t""T""e""s""t"" ""{"
 
-  /**
-   * Verifies statistics with multiple models execution.
-   */
-  @Test
-  public void petClinic() throws IOException {
-    List<Context> contexts = new JsonContextFactory().create(Paths.get("org/graphwalker/java/test/PetClinic.json"));
-    Executor executor = new TestExecutor(contexts);
-    JSONObject results = executor.execute(true).getResults();
+" "" ""/""*""*"
+" "" "" ""*"" ""V""e""r""i""f""i""e""s"" ""s""t""a""t""i""s""t""i""c""s"" ""w""i""t""h"" ""m""u""l""t""i""p""l""e"" ""m""o""d""e""l""s"" ""e""x""e""c""u""t""i""o""n""."
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""p""e""t""C""l""i""n""i""c""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""("""""o""r""g""/""g""r""a""p""h""w""a""l""k""e""r""/""j""a""v""a""/""t""e""s""t""/""P""e""t""C""l""i""n""i""c"".""j""s""o""n""""")"")"";"
+" "" "" "" ""E""x""e""c""u""t""o""r"" ""e""x""e""c""u""t""o""r"" ""="" ""n""e""w"" ""T""e""s""t""E""x""e""c""u""t""o""r""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""J""S""O""N""O""b""j""e""c""t"" ""r""e""s""u""l""t""s"" ""="" ""e""x""e""c""u""t""o""r"".""e""x""e""c""u""t""e""(""t""r""u""e"")"".""g""e""t""R""e""s""u""l""t""s""("")"";"
 
-    Assert.assertThat("totalNumberOfModels", results.getInt("totalNumberOfModels"), is(5));
-    Assert.assertThat("totalCompletedNumberOfModels", results.getInt("totalCompletedNumberOfModels"), is(5));
-    Assert.assertThat("totalIncompleteNumberOfModels", results.getInt("totalIncompleteNumberOfModels"), is(0));
-    Assert.assertThat("totalFailedNumberOfModels", results.getInt("totalFailedNumberOfModels"), is(0));
-    Assert.assertThat("totalNotExecutedNumberOfModels", results.getInt("totalNotExecutedNumberOfModels"), is(0));
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""5"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""C""o""m""p""l""e""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""C""o""m""p""l""e""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""5"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""I""n""c""o""m""p""l""e""t""e""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""I""n""c""o""m""p""l""e""t""e""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""F""a""i""l""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""F""a""i""l""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""o""t""E""x""e""c""u""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""o""t""E""x""e""c""u""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
 
-    Assert.assertThat("vertexCoverage", results.getInt("vertexCoverage"), is(100));
-    Assert.assertThat("totalNumberOfEdges", results.getInt("totalNumberOfEdges"), is(25));
-    Assert.assertThat("totalNumberOfVisitedVertices", results.getInt("totalNumberOfVisitedVertices"), is(16));
-    Assert.assertThat("totalNumberOfUnvisitedVertices", results.getInt("totalNumberOfUnvisitedVertices"), is(0));
-    Assert.assertThat("totalNumberOfVisitedEdges", results.getInt("totalNumberOfVisitedEdges"), is(25));
-    Assert.assertThat("edgeCoverage", results.getInt("edgeCoverage"), is(100));
-    Assert.assertThat("totalNumberOfVertices", results.getInt("totalNumberOfVertices"), is(16));
-    Assert.assertThat("totalNumberOfUnvisitedEdges", results.getInt("totalNumberOfUnvisitedEdges"), is(0));
-  }
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""v""e""r""t""e""x""C""o""v""e""r""a""g""e""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""v""e""r""t""e""x""C""o""v""e""r""a""g""e""""")"","" ""i""s""(""1""0""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""E""d""g""e""s""""")"","" ""i""s""(""2""5"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""1""6"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""E""d""g""e""s""""")"","" ""i""s""(""2""5"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""e""d""g""e""C""o""v""e""r""a""g""e""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""e""d""g""e""C""o""v""e""r""a""g""e""""")"","" ""i""s""(""1""0""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""1""6"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""E""d""g""e""s""""")"","" ""i""s""(""0"")"")"";"
+" "" ""}"
 
-  /**
-   * Verifies statistics model with requirements.
-   */
-  @Test
-  public void login() throws IOException {
-    List<Context> contexts = new JsonContextFactory().create(Paths.get("org/graphwalker/java/test/Login.json"));
-    Executor executor = new TestExecutor(contexts);
-    JSONObject results = executor.execute(true).getResults();
+" "" ""/""*""*"
+" "" "" ""*"" ""V""e""r""i""f""i""e""s"" ""s""t""a""t""i""s""t""i""c""s"" ""m""o""d""e""l"" ""w""i""t""h"" ""r""e""q""u""i""r""e""m""e""n""t""s""."
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""l""o""g""i""n""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""("""""o""r""g""/""g""r""a""p""h""w""a""l""k""e""r""/""j""a""v""a""/""t""e""s""t""/""L""o""g""i""n"".""j""s""o""n""""")"")"";"
+" "" "" "" ""E""x""e""c""u""t""o""r"" ""e""x""e""c""u""t""o""r"" ""="" ""n""e""w"" ""T""e""s""t""E""x""e""c""u""t""o""r""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""J""S""O""N""O""b""j""e""c""t"" ""r""e""s""u""l""t""s"" ""="" ""e""x""e""c""u""t""o""r"".""e""x""e""c""u""t""e""(""t""r""u""e"")"".""g""e""t""R""e""s""u""l""t""s""("")"";"
 
-    Assert.assertThat("totalNumberOfModels", results.getInt("totalNumberOfModels"), is(1));
-    Assert.assertThat("totalCompletedNumberOfModels", results.getInt("totalCompletedNumberOfModels"), is(1));
-    Assert.assertThat("totalIncompleteNumberOfModels", results.getInt("totalIncompleteNumberOfModels"), is(0));
-    Assert.assertThat("totalFailedNumberOfModels", results.getInt("totalFailedNumberOfModels"), is(0));
-    Assert.assertThat("totalNotExecutedNumberOfModels", results.getInt("totalNotExecutedNumberOfModels"), is(0));
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""C""o""m""p""l""e""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""C""o""m""p""l""e""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""I""n""c""o""m""p""l""e""t""e""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""I""n""c""o""m""p""l""e""t""e""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""F""a""i""l""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""F""a""i""l""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""o""t""E""x""e""c""u""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""o""t""E""x""e""c""u""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
 
-    Assert.assertThat("vertexCoverage", results.getInt("vertexCoverage"), is(100));
-    Assert.assertThat("totalNumberOfEdges", results.getInt("totalNumberOfEdges"), is(9));
-    Assert.assertThat("totalNumberOfVisitedVertices", results.getInt("totalNumberOfVisitedVertices"), is(3));
-    Assert.assertThat("totalNumberOfUnvisitedVertices", results.getInt("totalNumberOfUnvisitedVertices"), is(0));
-    Assert.assertThat("totalNumberOfVisitedEdges", results.getInt("totalNumberOfVisitedEdges"), is(9));
-    Assert.assertThat("edgeCoverage", results.getInt("edgeCoverage"), is(100));
-    Assert.assertThat("totalNumberOfVertices", results.getInt("totalNumberOfVertices"), is(3));
-    Assert.assertThat("totalNumberOfUnvisitedEdges", results.getInt("totalNumberOfUnvisitedEdges"), is(0));
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""v""e""r""t""e""x""C""o""v""e""r""a""g""e""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""v""e""r""t""e""x""C""o""v""e""r""a""g""e""""")"","" ""i""s""(""1""0""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""E""d""g""e""s""""")"","" ""i""s""(""9"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""3"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""E""d""g""e""s""""")"","" ""i""s""(""9"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""e""d""g""e""C""o""v""e""r""a""g""e""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""e""d""g""e""C""o""v""e""r""a""g""e""""")"","" ""i""s""(""1""0""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""3"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""E""d""g""e""s""""")"","" ""i""s""(""0"")"")"";"
 
-    // The requirement part
-    Assert.assertThat("totalNumberOfRequirement", results.getInt("totalNumberOfRequirement"), is(3));
-    Assert.assertThat("totalNumberOfUncoveredRequirement", results.getInt("totalNumberOfUncoveredRequirement"), is(0));
-    Assert.assertThat("totalNumberOfPassedRequirement", results.getInt("totalNumberOfPassedRequirement"), is(3));
+" "" "" "" ""/""/"" ""T""h""e"" ""r""e""q""u""i""r""e""m""e""n""t"" ""p""a""r""t"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""R""e""q""u""i""r""e""m""e""n""t""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""R""e""q""u""i""r""e""m""e""n""t""""")"","" ""i""s""(""3"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""c""o""v""e""r""e""d""R""e""q""u""i""r""e""m""e""n""t""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""c""o""v""e""r""e""d""R""e""q""u""i""r""e""m""e""n""t""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""P""a""s""s""e""d""R""e""q""u""i""r""e""m""e""n""t""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""P""a""s""s""e""d""R""e""q""u""i""r""e""m""e""n""t""""")"","" ""i""s""(""3"")"")"";"
 
-    Assert.assertThat("requirementsPassed", results.getJSONArray("requirementsPassed").length(), is(3));
-    List<String> requirements = new ArrayList<>();
-    for (int index = 0; index < results.getJSONArray("requirementsPassed").length(); index++) {
-      requirements.add(results.getJSONArray("requirementsPassed").getJSONObject(index).getString("requirementKey"));
-    }
-    List<String> expectedRequirements = Arrays.asList("Req 1", "Req 2", "Req 3");
-    Collections.sort(requirements);
-    Assert.assertThat("requirementsPassed list", requirements.toArray(), is(expectedRequirements.toArray()));
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""r""e""q""u""i""r""e""m""e""n""t""s""P""a""s""s""e""d""""","" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""r""e""q""u""i""r""e""m""e""n""t""s""P""a""s""s""e""d""""")"".""l""e""n""g""t""h""("")"","" ""i""s""(""3"")"")"";"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""r""e""q""u""i""r""e""m""e""n""t""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""i""n""t"" ""i""n""d""e""x"" ""="" ""0"";"" ""i""n""d""e""x"" ""<"" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""r""e""q""u""i""r""e""m""e""n""t""s""P""a""s""s""e""d""""")"".""l""e""n""g""t""h""("")"";"" ""i""n""d""e""x""+""+"")"" ""{"
+" "" "" "" "" "" ""r""e""q""u""i""r""e""m""e""n""t""s"".""a""d""d""(""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""r""e""q""u""i""r""e""m""e""n""t""s""P""a""s""s""e""d""""")"".""g""e""t""J""S""O""N""O""b""j""e""c""t""(""i""n""d""e""x"")"".""g""e""t""S""t""r""i""n""g""("""""r""e""q""u""i""r""e""m""e""n""t""K""e""y""""")"")"";"
+" "" "" "" ""}"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""e""x""p""e""c""t""e""d""R""e""q""u""i""r""e""m""e""n""t""s"" ""="" ""A""r""r""a""y""s"".""a""s""L""i""s""t""("""""R""e""q"" ""1""""","" """""R""e""q"" ""2""""","" """""R""e""q"" ""3""""")"";"
+" "" "" "" ""C""o""l""l""e""c""t""i""o""n""s"".""s""o""r""t""(""r""e""q""u""i""r""e""m""e""n""t""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""r""e""q""u""i""r""e""m""e""n""t""s""P""a""s""s""e""d"" ""l""i""s""t""""","" ""r""e""q""u""i""r""e""m""e""n""t""s"".""t""o""A""r""r""a""y""("")"","" ""i""s""(""e""x""p""e""c""t""e""d""R""e""q""u""i""r""e""m""e""n""t""s"".""t""o""A""r""r""a""y""("")"")"")"";"
 
-    Assert.assertThat("requirementsFailed", results.getJSONArray("requirementsFailed").length(), is(0));
-  }
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""r""e""q""u""i""r""e""m""e""n""t""s""F""a""i""l""e""d""""","" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""r""e""q""u""i""r""e""m""e""n""t""s""F""a""i""l""e""d""""")"".""l""e""n""g""t""h""("")"","" ""i""s""(""0"")"")"";"
+" "" ""}"
 
-  /**
-   * Verifies statistics multiple with model that has run failures.
-   */
-  @Test
-  public void dualPathModel() throws IOException {
-    List<Context> contexts = new JsonContextFactory().create(Paths.get("org/graphwalker/java/test/DualPathModel.json"));
-    Executor executor = new TestExecutor(contexts);
-    JSONObject results = executor.execute(true).getResults();
+" "" ""/""*""*"
+" "" "" ""*"" ""V""e""r""i""f""i""e""s"" ""s""t""a""t""i""s""t""i""c""s"" ""m""u""l""t""i""p""l""e"" ""w""i""t""h"" ""m""o""d""e""l"" ""t""h""a""t"" ""h""a""s"" ""r""u""n"" ""f""a""i""l""u""r""e""s""."
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""d""u""a""l""P""a""t""h""M""o""d""e""l""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""("""""o""r""g""/""g""r""a""p""h""w""a""l""k""e""r""/""j""a""v""a""/""t""e""s""t""/""D""u""a""l""P""a""t""h""M""o""d""e""l"".""j""s""o""n""""")"")"";"
+" "" "" "" ""E""x""e""c""u""t""o""r"" ""e""x""e""c""u""t""o""r"" ""="" ""n""e""w"" ""T""e""s""t""E""x""e""c""u""t""o""r""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""J""S""O""N""O""b""j""e""c""t"" ""r""e""s""u""l""t""s"" ""="" ""e""x""e""c""u""t""o""r"".""e""x""e""c""u""t""e""(""t""r""u""e"")"".""g""e""t""R""e""s""u""l""t""s""("")"";"
 
-    Assert.assertThat("totalNumberOfModels", results.getInt("totalNumberOfModels"), is(1));
-    Assert.assertThat("totalCompletedNumberOfModels", results.getInt("totalCompletedNumberOfModels"), is(0));
-    Assert.assertThat("totalIncompleteNumberOfModels", results.getInt("totalIncompleteNumberOfModels"), is(0));
-    Assert.assertThat("totalFailedNumberOfModels", results.getInt("totalFailedNumberOfModels"), is(1));
-    Assert.assertThat("totalNotExecutedNumberOfModels", results.getInt("totalNotExecutedNumberOfModels"), is(0));
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""C""o""m""p""l""e""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""C""o""m""p""l""e""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""I""n""c""o""m""p""l""e""t""e""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""I""n""c""o""m""p""l""e""t""e""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""F""a""i""l""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""F""a""i""l""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""o""t""E""x""e""c""u""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""o""t""E""x""e""c""u""t""e""d""N""u""m""b""e""r""O""f""M""o""d""e""l""s""""")"","" ""i""s""(""0"")"")"";"
 
-    Assert.assertThat("vertexCoverage", results.getInt("vertexCoverage"), is(75));
-    Assert.assertThat("totalNumberOfEdges", results.getInt("totalNumberOfEdges"), is(5));
-    Assert.assertThat("totalNumberOfVisitedVertices", results.getInt("totalNumberOfVisitedVertices"), is(3));
-    Assert.assertThat("totalNumberOfUnvisitedVertices", results.getInt("totalNumberOfUnvisitedVertices"), is(1));
-    Assert.assertThat("totalNumberOfVisitedEdges", results.getInt("totalNumberOfVisitedEdges"), is(3));
-    Assert.assertThat("edgeCoverage", results.getInt("edgeCoverage"), is(60));
-    Assert.assertThat("totalNumberOfVertices", results.getInt("totalNumberOfVertices"), is(4));
-    Assert.assertThat("totalNumberOfUnvisitedEdges", results.getInt("totalNumberOfUnvisitedEdges"), is(2));
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""v""e""r""t""e""x""C""o""v""e""r""a""g""e""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""v""e""r""t""e""x""C""o""v""e""r""a""g""e""""")"","" ""i""s""(""7""5"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""E""d""g""e""s""""")"","" ""i""s""(""5"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""3"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""E""d""g""e""s""""")"","" ""i""s""(""3"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""e""d""g""e""C""o""v""e""r""a""g""e""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""e""d""g""e""C""o""v""e""r""a""g""e""""")"","" ""i""s""(""6""0"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""e""r""t""i""c""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""V""e""r""t""i""c""e""s""""")"","" ""i""s""(""4"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""E""d""g""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""I""n""t""("""""t""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""E""d""g""e""s""""")"","" ""i""s""(""2"")"")"";"
 
-    // Verify the list of unvisited vertices
-    Assert.assertThat("verticesNotVisited", results.getJSONArray("verticesNotVisited").length(), is(1));
-    List<String> unvisitedVertices = new ArrayList<>();
-    for (int index = 0; index < results.getJSONArray("verticesNotVisited").length(); index++) {
-      unvisitedVertices.add(results.getJSONArray("verticesNotVisited").getJSONObject(index).getString("vertexName"));
-      unvisitedVertices.add(results.getJSONArray("verticesNotVisited").getJSONObject(index).getString("vertexId"));
-    }
-    List<String> expectedUnvisitedVertices = Arrays.asList("v3", "n3");
-    Assert.assertThat("verticesNotVisited list", unvisitedVertices.toArray(), is(expectedUnvisitedVertices.toArray()));
+" "" "" "" ""/""/"" ""V""e""r""i""f""y"" ""t""h""e"" ""l""i""s""t"" ""o""f"" ""u""n""v""i""s""i""t""e""d"" ""v""e""r""t""i""c""e""s"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""v""e""r""t""i""c""e""s""N""o""t""V""i""s""i""t""e""d""""","" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""v""e""r""t""i""c""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""l""e""n""g""t""h""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""u""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""i""n""t"" ""i""n""d""e""x"" ""="" ""0"";"" ""i""n""d""e""x"" ""<"" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""v""e""r""t""i""c""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""l""e""n""g""t""h""("")"";"" ""i""n""d""e""x""+""+"")"" ""{"
+" "" "" "" "" "" ""u""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s"".""a""d""d""(""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""v""e""r""t""i""c""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""g""e""t""J""S""O""N""O""b""j""e""c""t""(""i""n""d""e""x"")"".""g""e""t""S""t""r""i""n""g""("""""v""e""r""t""e""x""N""a""m""e""""")"")"";"
+" "" "" "" "" "" ""u""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s"".""a""d""d""(""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""v""e""r""t""i""c""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""g""e""t""J""S""O""N""O""b""j""e""c""t""(""i""n""d""e""x"")"".""g""e""t""S""t""r""i""n""g""("""""v""e""r""t""e""x""I""d""""")"")"";"
+" "" "" "" ""}"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""e""x""p""e""c""t""e""d""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s"" ""="" ""A""r""r""a""y""s"".""a""s""L""i""s""t""("""""v""3""""","" """""n""3""""")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""v""e""r""t""i""c""e""s""N""o""t""V""i""s""i""t""e""d"" ""l""i""s""t""""","" ""u""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s"".""t""o""A""r""r""a""y""("")"","" ""i""s""(""e""x""p""e""c""t""e""d""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s"".""t""o""A""r""r""a""y""("")"")"")"";"
 
-    // Verify the list of unvisited edges
-    Assert.assertThat("edgesNotVisited", results.getJSONArray("edgesNotVisited").length(), is(2));
-    List<String> unvisitedEdges = new ArrayList<>();
-    for (int index = 0; index < results.getJSONArray("edgesNotVisited").length(); index++) {
-      unvisitedEdges.add(results.getJSONArray("edgesNotVisited").getJSONObject(index).getString("edgeName"));
-      unvisitedEdges.add(results.getJSONArray("edgesNotVisited").getJSONObject(index).getString("edgeId"));
-    }
-    List<String> expectedUnvisitedEdges = Arrays.asList("e3", "e2", "e5", "e4");
-    Assert.assertThat("edgesNotVisited list", unvisitedEdges.toArray(), is(expectedUnvisitedEdges.toArray()));
+" "" "" "" ""/""/"" ""V""e""r""i""f""y"" ""t""h""e"" ""l""i""s""t"" ""o""f"" ""u""n""v""i""s""i""t""e""d"" ""e""d""g""e""s"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""e""d""g""e""s""N""o""t""V""i""s""i""t""e""d""""","" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""e""d""g""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""l""e""n""g""t""h""("")"","" ""i""s""(""2"")"")"";"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""u""n""v""i""s""i""t""e""d""E""d""g""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""i""n""t"" ""i""n""d""e""x"" ""="" ""0"";"" ""i""n""d""e""x"" ""<"" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""e""d""g""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""l""e""n""g""t""h""("")"";"" ""i""n""d""e""x""+""+"")"" ""{"
+" "" "" "" "" "" ""u""n""v""i""s""i""t""e""d""E""d""g""e""s"".""a""d""d""(""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""e""d""g""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""g""e""t""J""S""O""N""O""b""j""e""c""t""(""i""n""d""e""x"")"".""g""e""t""S""t""r""i""n""g""("""""e""d""g""e""N""a""m""e""""")"")"";"
+" "" "" "" "" "" ""u""n""v""i""s""i""t""e""d""E""d""g""e""s"".""a""d""d""(""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""e""d""g""e""s""N""o""t""V""i""s""i""t""e""d""""")"".""g""e""t""J""S""O""N""O""b""j""e""c""t""(""i""n""d""e""x"")"".""g""e""t""S""t""r""i""n""g""("""""e""d""g""e""I""d""""")"")"";"
+" "" "" "" ""}"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""e""x""p""e""c""t""e""d""U""n""v""i""s""i""t""e""d""E""d""g""e""s"" ""="" ""A""r""r""a""y""s"".""a""s""L""i""s""t""("""""e""3""""","" """""e""2""""","" """""e""5""""","" """""e""4""""")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""e""d""g""e""s""N""o""t""V""i""s""i""t""e""d"" ""l""i""s""t""""","" ""u""n""v""i""s""i""t""e""d""E""d""g""e""s"".""t""o""A""r""r""a""y""("")"","" ""i""s""(""e""x""p""e""c""t""e""d""U""n""v""i""s""i""t""e""d""E""d""g""e""s"".""t""o""A""r""r""a""y""("")"")"")"";"
 
-    Assert.assertThat("failures", results.getJSONArray("failures").length(), is(1));
-    Assert.assertThat("failure text", results.getJSONArray("failures").getJSONObject(0).getString("failure"),
-                      new StringStartsWith("org.graphwalker.core.generator.NoPathFoundException: Could not find a valid path from element: v2"));
-  }
-}
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""f""a""i""l""u""r""e""s""""","" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""f""a""i""l""u""r""e""s""""")"".""l""e""n""g""t""h""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""("""""f""a""i""l""u""r""e"" ""t""e""x""t""""","" ""r""e""s""u""l""t""s"".""g""e""t""J""S""O""N""A""r""r""a""y""("""""f""a""i""l""u""r""e""s""""")"".""g""e""t""J""S""O""N""O""b""j""e""c""t""(""0"")"".""g""e""t""S""t""r""i""n""g""("""""f""a""i""l""u""r""e""""")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""e""w"" ""S""t""r""i""n""g""S""t""a""r""t""s""W""i""t""h""("""""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""N""o""P""a""t""h""F""o""u""n""d""E""x""c""e""p""t""i""o""n"":"" ""C""o""u""l""d"" ""n""o""t"" ""f""i""n""d"" ""a"" ""v""a""l""i""d"" ""p""a""t""h"" ""f""r""o""m"" ""e""l""e""m""e""n""t"":"" ""v""2""""")"")"";"
+" "" ""}"
+"}"

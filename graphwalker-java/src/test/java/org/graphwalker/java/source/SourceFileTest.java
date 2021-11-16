@@ -1,53 +1,53 @@
-package org.graphwalker.java.source;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""s""o""u""r""c""e"";"
 
-import org.junit.Assert;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-import java.io.IOException;
-import java.nio.file.Paths;
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h""s"";"
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""I""s"".""i""s"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t"";"
 
-public class SourceFileTest {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""S""o""u""r""c""e""F""i""l""e""T""e""s""t"" ""{"
 
-  @Test
-  public void createSourceFileWithModelName() throws IOException {
-    SourceFile sourceFile = new SourceFile("MyModel", Paths.get("/model.json"));
-    assertThat(sourceFile.getOutputPath(), is(Paths.get("/MyModel.java")));
-    assertThat(sourceFile.getInputPath(), is(Paths.get("/model.json")));
-    assertThat(sourceFile.getRelativePath(), is(Paths.get("model.json")));
-    assertThat(sourceFile.getPackageName(), is(""));
-    assertThat(sourceFile.getClassName(), is("MyModel"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""c""r""e""a""t""e""S""o""u""r""c""e""F""i""l""e""W""i""t""h""M""o""d""e""l""N""a""m""e""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""S""o""u""r""c""e""F""i""l""e"" ""s""o""u""r""c""e""F""i""l""e"" ""="" ""n""e""w"" ""S""o""u""r""c""e""F""i""l""e""("""""M""y""M""o""d""e""l""""","" ""P""a""t""h""s"".""g""e""t""("""""/""m""o""d""e""l"".""j""s""o""n""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""O""u""t""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""M""y""M""o""d""e""l"".""j""a""v""a""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""I""n""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""R""e""l""a""t""i""v""e""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""P""a""c""k""a""g""e""N""a""m""e""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""C""l""a""s""s""N""a""m""e""("")"","" ""i""s""("""""M""y""M""o""d""e""l""""")"")"";"
+" "" ""}"
 
-  @Test
-  public void createSourceFileWithOutputPath() throws IOException {
-    SourceFile sourceFile = new SourceFile(Paths.get("/model.json"), Paths.get("/"), Paths.get("/output"));
-    assertThat(sourceFile.getOutputPath(), is(Paths.get("/output/model.java")));
-    assertThat(sourceFile.getInputPath(), is(Paths.get("/model.json")));
-    assertThat(sourceFile.getRelativePath(), is(Paths.get("model.json")));
-    assertThat(sourceFile.getPackageName(), is(""));
-    assertThat(sourceFile.getClassName(), is("model"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""c""r""e""a""t""e""S""o""u""r""c""e""F""i""l""e""W""i""t""h""O""u""t""p""u""t""P""a""t""h""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""S""o""u""r""c""e""F""i""l""e"" ""s""o""u""r""c""e""F""i""l""e"" ""="" ""n""e""w"" ""S""o""u""r""c""e""F""i""l""e""(""P""a""t""h""s"".""g""e""t""("""""/""m""o""d""e""l"".""j""s""o""n""""")"","" ""P""a""t""h""s"".""g""e""t""("""""/""""")"","" ""P""a""t""h""s"".""g""e""t""("""""/""o""u""t""p""u""t""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""O""u""t""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""o""u""t""p""u""t""/""m""o""d""e""l"".""j""a""v""a""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""I""n""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""R""e""l""a""t""i""v""e""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""P""a""c""k""a""g""e""N""a""m""e""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""C""l""a""s""s""N""a""m""e""("")"","" ""i""s""("""""m""o""d""e""l""""")"")"";"
+" "" ""}"
 
-  @Test
-  public void createSourceFileWithModelNameAndOutputPath() throws IOException {
-    SourceFile sourceFile = new SourceFile("MyModel", Paths.get("/model.json"), Paths.get("/"), Paths.get("/output"));
-    assertThat(sourceFile.getOutputPath(), is(Paths.get("/output/MyModel.java")));
-    assertThat(sourceFile.getInputPath(), is(Paths.get("/model.json")));
-    assertThat(sourceFile.getRelativePath(), is(Paths.get("model.json")));
-    assertThat(sourceFile.getPackageName(), is(""));
-    assertThat(sourceFile.getClassName(), is("MyModel"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""c""r""e""a""t""e""S""o""u""r""c""e""F""i""l""e""W""i""t""h""M""o""d""e""l""N""a""m""e""A""n""d""O""u""t""p""u""t""P""a""t""h""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""S""o""u""r""c""e""F""i""l""e"" ""s""o""u""r""c""e""F""i""l""e"" ""="" ""n""e""w"" ""S""o""u""r""c""e""F""i""l""e""("""""M""y""M""o""d""e""l""""","" ""P""a""t""h""s"".""g""e""t""("""""/""m""o""d""e""l"".""j""s""o""n""""")"","" ""P""a""t""h""s"".""g""e""t""("""""/""""")"","" ""P""a""t""h""s"".""g""e""t""("""""/""o""u""t""p""u""t""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""O""u""t""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""o""u""t""p""u""t""/""M""y""M""o""d""e""l"".""j""a""v""a""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""I""n""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""R""e""l""a""t""i""v""e""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""P""a""c""k""a""g""e""N""a""m""e""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""C""l""a""s""s""N""a""m""e""("")"","" ""i""s""("""""M""y""M""o""d""e""l""""")"")"";"
+" "" ""}"
 
-  @Test
-  public void createSourceFileWithNestedFolders() throws IOException {
-    SourceFile sourceFile = new SourceFile("MyModel", Paths.get("/company/path/model.json"), Paths.get("/"), Paths.get("/output"));
-    assertThat(sourceFile.getOutputPath(), is(Paths.get("/output/company/path/MyModel.java")));
-    assertThat(sourceFile.getInputPath(), is(Paths.get("/company/path/model.json")));
-    assertThat(sourceFile.getRelativePath(), is(Paths.get("company/path/model.json")));
-    assertThat(sourceFile.getPackageName(), is("company.path"));
-    assertThat(sourceFile.getClassName(), is("MyModel"));
-  }
-}
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""c""r""e""a""t""e""S""o""u""r""c""e""F""i""l""e""W""i""t""h""N""e""s""t""e""d""F""o""l""d""e""r""s""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""S""o""u""r""c""e""F""i""l""e"" ""s""o""u""r""c""e""F""i""l""e"" ""="" ""n""e""w"" ""S""o""u""r""c""e""F""i""l""e""("""""M""y""M""o""d""e""l""""","" ""P""a""t""h""s"".""g""e""t""("""""/""c""o""m""p""a""n""y""/""p""a""t""h""/""m""o""d""e""l"".""j""s""o""n""""")"","" ""P""a""t""h""s"".""g""e""t""("""""/""""")"","" ""P""a""t""h""s"".""g""e""t""("""""/""o""u""t""p""u""t""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""O""u""t""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""o""u""t""p""u""t""/""c""o""m""p""a""n""y""/""p""a""t""h""/""M""y""M""o""d""e""l"".""j""a""v""a""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""I""n""p""u""t""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""/""c""o""m""p""a""n""y""/""p""a""t""h""/""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""R""e""l""a""t""i""v""e""P""a""t""h""("")"","" ""i""s""(""P""a""t""h""s"".""g""e""t""("""""c""o""m""p""a""n""y""/""p""a""t""h""/""m""o""d""e""l"".""j""s""o""n""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""P""a""c""k""a""g""e""N""a""m""e""("")"","" ""i""s""("""""c""o""m""p""a""n""y"".""p""a""t""h""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""s""o""u""r""c""e""F""i""l""e"".""g""e""t""C""l""a""s""s""N""a""m""e""("")"","" ""i""s""("""""M""y""M""o""d""e""l""""")"")"";"
+" "" ""}"
+"}"

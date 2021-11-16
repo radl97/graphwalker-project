@@ -1,91 +1,91 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0""""" ""e""n""c""o""d""i""n""g""="""""U""T""F""-""8""""" ""?"">"
+"<""x""s"":""s""c""h""e""m""a"" ""x""m""l""n""s"":""x""s""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""""">"
 
-    <xs:element name="failure">
-        <xs:complexType mixed="true">
-            <xs:attribute name="type" type="xs:string" use="optional"/>
-            <xs:attribute name="message" type="xs:string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""f""a""i""l""u""r""e""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"" ""m""i""x""e""d""="""""t""r""u""e""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""y""p""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""m""e""s""s""a""g""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-    <xs:element name="error">
-        <xs:complexType mixed="true">
-            <xs:attribute name="type" type="xs:string" use="optional"/>
-            <xs:attribute name="message" type="xs:string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""e""r""r""o""r""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"" ""m""i""x""e""d""="""""t""r""u""e""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""y""p""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""m""e""s""s""a""g""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-    <xs:element name="properties">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="property" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""p""r""o""p""e""r""t""i""e""s""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""p""r""o""p""e""r""t""y""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-    <xs:element name="property">
-        <xs:complexType>
-            <xs:attribute name="name" type="xs:string" use="required"/>
-            <xs:attribute name="value" type="xs:string" use="required"/>
-        </xs:complexType>
-    </xs:element>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""p""r""o""p""e""r""t""y""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""n""a""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""v""a""l""u""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-    <xs:element name="skipped" type="xs:string"/>
-    <xs:element name="system-err" type="xs:string"/>
-    <xs:element name="system-out" type="xs:string"/>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""s""k""i""p""p""e""d""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g"""""/"">"
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""s""y""s""t""e""m""-""e""r""r""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g"""""/"">"
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""s""y""s""t""e""m""-""o""u""t""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g"""""/"">"
 
-    <xs:element name="testcase">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="skipped" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="error" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="failure" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="system-out" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="system-err" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="required"/>
-            <xs:attribute name="assertions" type="xs:string" use="optional"/>
-            <xs:attribute name="time" type="xs:string" use="optional"/>
-            <xs:attribute name="classname" type="xs:string" use="optional"/>
-            <xs:attribute name="status" type="xs:string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""t""e""s""t""c""a""s""e""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""s""k""i""p""p""e""d""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""e""r""r""o""r""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""f""a""i""l""u""r""e""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""s""y""s""t""e""m""-""o""u""t""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""s""y""s""t""e""m""-""e""r""r""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""n""a""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""a""s""s""e""r""t""i""o""n""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""i""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""c""l""a""s""s""n""a""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""s""t""a""t""u""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-    <xs:element name="testsuite">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="properties" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="testcase" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="system-out" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="system-err" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="required"/>
-            <xs:attribute name="tests" type="xs:string" use="required"/>
-            <xs:attribute name="failures" type="xs:string" use="optional"/>
-            <xs:attribute name="errors" type="xs:string" use="optional"/>
-            <xs:attribute name="time" type="xs:string" use="optional"/>
-            <xs:attribute name="disabled" type="xs:string" use="optional"/>
-            <xs:attribute name="skipped" type="xs:string" use="optional"/>
-            <xs:attribute name="timestamp" type="xs:string" use="optional"/>
-            <xs:attribute name="hostname" type="xs:string" use="optional"/>
-            <xs:attribute name="id" type="xs:string" use="optional"/>
-            <xs:attribute name="package" type="xs:string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""t""e""s""t""s""u""i""t""e""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""p""r""o""p""e""r""t""i""e""s""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""t""e""s""t""c""a""s""e""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""s""y""s""t""e""m""-""o""u""t""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""s""y""s""t""e""m""-""e""r""r""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""n""a""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""e""s""t""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""f""a""i""l""u""r""e""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""e""r""r""o""r""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""i""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""d""i""s""a""b""l""e""d""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""s""k""i""p""p""e""d""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""i""m""e""s""t""a""m""p""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""h""o""s""t""n""a""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""i""d""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""c""k""a""g""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-    <xs:element name="testsuites">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="testsuite" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="optional"/>
-            <xs:attribute name="time" type="xs:string" use="optional"/>
-            <xs:attribute name="tests" type="xs:string" use="optional"/>
-            <xs:attribute name="failures" type="xs:string" use="optional"/>
-            <xs:attribute name="disabled" type="xs:string" use="optional"/>
-            <xs:attribute name="errors" type="xs:string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
+" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""t""e""s""t""s""u""i""t""e""s""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""r""e""f""="""""t""e""s""t""s""u""i""t""e""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""n""a""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""i""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""e""s""t""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""f""a""i""l""u""r""e""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""d""i""s""a""b""l""e""d""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""e""r""r""o""r""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
 
-</xs:schema>
+"<""/""x""s"":""s""c""h""e""m""a"">"

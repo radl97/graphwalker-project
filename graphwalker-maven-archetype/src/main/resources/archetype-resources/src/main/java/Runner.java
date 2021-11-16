@@ -1,21 +1,21 @@
-#set($symbol_pound='#')
-#set($symbol_dollar='$')
-#set($symbol_escape='\' )
-package ${package};
+"#""s""e""t""(""$""s""y""m""b""o""l""_""p""o""u""n""d""=""'""#""'"")"
+"#""s""e""t""(""$""s""y""m""b""o""l""_""d""o""l""l""a""r""=""'""$""'"")"
+"#""s""e""t""(""$""s""y""m""b""o""l""_""e""s""c""a""p""e""=""'""\""'"" "")"
+"p""a""c""k""a""g""e"" ""$""{""p""a""c""k""a""g""e""}"";"
 
-import ${package}.SomeSmallTest;
-import org.graphwalker.java.test.Result;
-import org.graphwalker.java.test.TestExecutor;
+"i""m""p""o""r""t"" ""$""{""p""a""c""k""a""g""e""}"".""S""o""m""e""S""m""a""l""l""T""e""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""t""e""s""t"".""R""e""s""u""l""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""t""e""s""t"".""T""e""s""t""E""x""e""c""u""t""o""r"";"
 
-import java.io.IOException;
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
 
-public class Runner {
-  public static void main(String[] args) throws IOException {
-    TestExecutor executor = new TestExecutor(
-      SomeSmallTest.class
-    );
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""R""u""n""n""e""r"" ""{"
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""v""o""i""d"" ""m""a""i""n""(""S""t""r""i""n""g""[""]"" ""a""r""g""s"")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""T""e""s""t""E""x""e""c""u""t""o""r"" ""e""x""e""c""u""t""o""r"" ""="" ""n""e""w"" ""T""e""s""t""E""x""e""c""u""t""o""r""("
+" "" "" "" "" "" ""S""o""m""e""S""m""a""l""l""T""e""s""t"".""c""l""a""s""s"
+" "" "" "" "")"";"
 
-    Result result = executor.execute(true);
-    System.out.println("Done: [" + result.getResults().toString(2) + "]");
-  }
-}
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""e""x""e""c""u""t""o""r"".""e""x""e""c""u""t""e""(""t""r""u""e"")"";"
+" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""D""o""n""e"":"" ""[""""" ""+"" ""r""e""s""u""l""t"".""g""e""t""R""e""s""u""l""t""s""("")"".""t""o""S""t""r""i""n""g""(""2"")"" ""+"" """""]""""")"";"
+" "" ""}"
+"}"

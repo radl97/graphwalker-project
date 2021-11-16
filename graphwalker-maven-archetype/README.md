@@ -1,21 +1,21 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-maven-archetype/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-maven-archetype)
-GraphWalker Maven Archetype
-================
+"[""!""[""M""a""v""e""n"" ""C""e""n""t""r""a""l""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""m""a""v""e""n""-""a""r""c""h""e""t""y""p""e""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""m""a""v""e""n""-""a""r""c""h""e""t""y""p""e"")"
+"G""r""a""p""h""W""a""l""k""e""r"" ""M""a""v""e""n"" ""A""r""c""h""e""t""y""p""e"
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-A GraphWalker maven archetype. To help create boilerplate GraphWalker maven projects.
+"A"" ""G""r""a""p""h""W""a""l""k""e""r"" ""m""a""v""e""n"" ""a""r""c""h""e""t""y""p""e""."" ""T""o"" ""h""e""l""p"" ""c""r""e""a""t""e"" ""b""o""i""l""e""r""p""l""a""t""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""m""a""v""e""n"" ""p""r""o""j""e""c""t""s""."
 
-To create a sample project:
+"T""o"" ""c""r""e""a""t""e"" ""a"" ""s""a""m""p""l""e"" ""p""r""o""j""e""c""t"":"
 
-~~~sh
-%> mvn archetype:generate -B -DarchetypeGroupId=org.graphwalker -DarchetypeArtifactId=graphwalker-maven-archetype -DgroupId=com.company -DartifactId=myProject -DarchetypeVersion=LATESTmvn archetype:generate -B -DarchetypeGroupId=org.graphwalker -DarchetypeArtifactId=graphwalker-maven-archetype -DgroupId=com.company -DartifactId=myProject -DarchetypeVersion=LATEST
-~~~
+"~""~""~""s""h"
+"%"">"" ""m""v""n"" ""a""r""c""h""e""t""y""p""e"":""g""e""n""e""r""a""t""e"" ""-""B"" ""-""D""a""r""c""h""e""t""y""p""e""G""r""o""u""p""I""d""=""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"" ""-""D""a""r""c""h""e""t""y""p""e""A""r""t""i""f""a""c""t""I""d""=""g""r""a""p""h""w""a""l""k""e""r""-""m""a""v""e""n""-""a""r""c""h""e""t""y""p""e"" ""-""D""g""r""o""u""p""I""d""=""c""o""m"".""c""o""m""p""a""n""y"" ""-""D""a""r""t""i""f""a""c""t""I""d""=""m""y""P""r""o""j""e""c""t"" ""-""D""a""r""c""h""e""t""y""p""e""V""e""r""s""i""o""n""=""L""A""T""E""S""T""m""v""n"" ""a""r""c""h""e""t""y""p""e"":""g""e""n""e""r""a""t""e"" ""-""B"" ""-""D""a""r""c""h""e""t""y""p""e""G""r""o""u""p""I""d""=""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"" ""-""D""a""r""c""h""e""t""y""p""e""A""r""t""i""f""a""c""t""I""d""=""g""r""a""p""h""w""a""l""k""e""r""-""m""a""v""e""n""-""a""r""c""h""e""t""y""p""e"" ""-""D""g""r""o""u""p""I""d""=""c""o""m"".""c""o""m""p""a""n""y"" ""-""D""a""r""t""i""f""a""c""t""I""d""=""m""y""P""r""o""j""e""c""t"" ""-""D""a""r""c""h""e""t""y""p""e""V""e""r""s""i""o""n""=""L""A""T""E""S""T"
+"~""~""~"
 
-Then cd into the project:
-~~~sh
-%> cd myProject
-~~~
-Build and run the test:
-~~~sh
-%> mvn compile exec:java -Dexec.mainClass="com.company.Runner" 
-~~~
+"T""h""e""n"" ""c""d"" ""i""n""t""o"" ""t""h""e"" ""p""r""o""j""e""c""t"":"
+"~""~""~""s""h"
+"%"">"" ""c""d"" ""m""y""P""r""o""j""e""c""t"
+"~""~""~"
+"B""u""i""l""d"" ""a""n""d"" ""r""u""n"" ""t""h""e"" ""t""e""s""t"":"
+"~""~""~""s""h"
+"%"">"" ""m""v""n"" ""c""o""m""p""i""l""e"" ""e""x""e""c"":""j""a""v""a"" ""-""D""e""x""e""c"".""m""a""i""n""C""l""a""s""s""="""""c""o""m"".""c""o""m""p""a""n""y"".""R""u""n""n""e""r""""" "
+"~""~""~"
 
