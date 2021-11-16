@@ -1,125 +1,125 @@
-package org.graphwalker.core.common;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"";"
 
-/*-
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2017 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*""-"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""7"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import org.junit.Test;
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-import java.util.*;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""*"";"
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""C""o""r""e""M""a""t""c""h""e""r""s"".""i""n""s""t""a""n""c""e""O""f"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""F""a""l""s""e"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""T""r""u""e"";"
 
-public class ObjectsTest {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""O""b""j""e""c""t""s""T""e""s""t"" ""{"
 
-  @Test
-  public void testIsNullOrEmpty() throws Exception {
-    assertTrue(Objects.isNullOrEmpty((List)null));
-    assertTrue(Objects.isNullOrEmpty((Set)null));
-    assertTrue(Objects.isNullOrEmpty((Map)null));
-    assertTrue(Objects.isNullOrEmpty((String)null));
-    assertTrue(Objects.isNullOrEmpty(new ArrayList<>()));
-    assertTrue(Objects.isNullOrEmpty(new HashSet<>()));
-    assertTrue(Objects.isNullOrEmpty(new HashMap<>()));
-    assertTrue(Objects.isNullOrEmpty(""));
-    assertFalse(Objects.isNullOrEmpty(Arrays.asList("value")));
-    assertFalse(Objects.isNullOrEmpty(new HashSet<>(Arrays.asList("value"))));
-    Map<String, String> nonEmptyMap = new HashMap<>();
-    nonEmptyMap.put("key", "value");
-    assertFalse(Objects.isNullOrEmpty(nonEmptyMap));
-    assertFalse(Objects.isNullOrEmpty("value"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""I""s""N""u""l""l""O""r""E""m""p""t""y""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""(""L""i""s""t"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""(""S""e""t"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""(""M""a""p"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""(""S""t""r""i""n""g"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""H""a""s""h""M""a""p""<"">""("")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""("""""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""A""r""r""a""y""s"".""a""s""L""i""s""t""("""""v""a""l""u""e""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""H""a""s""h""S""e""t""<"">""(""A""r""r""a""y""s"".""a""s""L""i""s""t""("""""v""a""l""u""e""""")"")"")"")"";"
+" "" "" "" ""M""a""p""<""S""t""r""i""n""g"","" ""S""t""r""i""n""g"">"" ""n""o""n""E""m""p""t""y""M""a""p"" ""="" ""n""e""w"" ""H""a""s""h""M""a""p""<"">""("")"";"
+" "" "" "" ""n""o""n""E""m""p""t""y""M""a""p"".""p""u""t""("""""k""e""y""""","" """""v""a""l""u""e""""")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""(""n""o""n""E""m""p""t""y""M""a""p"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y""("""""v""a""l""u""e""""")"")"";"
+" "" ""}"
 
-  @Test
-  public void testIsNotNullOrEmpty() throws Exception {
-    assertFalse(Objects.isNotNullOrEmpty((List)null));
-    assertFalse(Objects.isNotNullOrEmpty((Set)null));
-    assertFalse(Objects.isNotNullOrEmpty((Map)null));
-    assertFalse(Objects.isNotNullOrEmpty((String)null));
-    assertFalse(Objects.isNotNullOrEmpty(new ArrayList<>()));
-    assertFalse(Objects.isNotNullOrEmpty(new HashSet<>()));
-    assertFalse(Objects.isNotNullOrEmpty(new HashMap<>()));
-    assertFalse(Objects.isNotNullOrEmpty(""));
-    assertTrue(Objects.isNotNullOrEmpty(Arrays.asList("value")));
-    assertTrue(Objects.isNotNullOrEmpty(new HashSet<>(Arrays.asList("value"))));
-    Map<String, String> nonEmptyMap = new HashMap<>();
-    nonEmptyMap.put("key", "value");
-    assertTrue(Objects.isNotNullOrEmpty(nonEmptyMap));
-    assertTrue(Objects.isNotNullOrEmpty("value"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""I""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""(""L""i""s""t"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""(""S""e""t"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""(""M""a""p"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""(""S""t""r""i""n""g"")""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""H""a""s""h""M""a""p""<"">""("")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""("""""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""A""r""r""a""y""s"".""a""s""L""i""s""t""("""""v""a""l""u""e""""")"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""n""e""w"" ""H""a""s""h""S""e""t""<"">""(""A""r""r""a""y""s"".""a""s""L""i""s""t""("""""v""a""l""u""e""""")"")"")"")"";"
+" "" "" "" ""M""a""p""<""S""t""r""i""n""g"","" ""S""t""r""i""n""g"">"" ""n""o""n""E""m""p""t""y""M""a""p"" ""="" ""n""e""w"" ""H""a""s""h""M""a""p""<"">""("")"";"
+" "" "" "" ""n""o""n""E""m""p""t""y""M""a""p"".""p""u""t""("""""k""e""y""""","" """""v""a""l""u""e""""")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""n""o""n""E""m""p""t""y""M""a""p"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""("""""v""a""l""u""e""""")"")"";"
+" "" ""}"
 
-  @Test(expected = UnsupportedOperationException.class)
-  public void testUnmodifiableList() throws Exception {
-    List<String> list = Objects.unmodifiableList(new ArrayList<>());
-    list.add("value");
-  }
+" "" ""@""T""e""s""t""(""e""x""p""e""c""t""e""d"" ""="" ""U""n""s""u""p""p""o""r""t""e""d""O""p""e""r""a""t""i""o""n""E""x""c""e""p""t""i""o""n"".""c""l""a""s""s"")"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""U""n""m""o""d""i""f""i""a""b""l""e""L""i""s""t""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""l""i""s""t"" ""="" ""O""b""j""e""c""t""s"".""u""n""m""o""d""i""f""i""a""b""l""e""L""i""s""t""(""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"")"";"
+" "" "" "" ""l""i""s""t"".""a""d""d""("""""v""a""l""u""e""""")"";"
+" "" ""}"
 
-  @Test(expected = UnsupportedOperationException.class)
-  public void testUnmodifiableSet() throws Exception {
-    Set<String> set = Objects.unmodifiableSet(new HashSet<>());
-    set.add("value");
-  }
+" "" ""@""T""e""s""t""(""e""x""p""e""c""t""e""d"" ""="" ""U""n""s""u""p""p""o""r""t""e""d""O""p""e""r""a""t""i""o""n""E""x""c""e""p""t""i""o""n"".""c""l""a""s""s"")"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""U""n""m""o""d""i""f""i""a""b""l""e""S""e""t""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""S""e""t""<""S""t""r""i""n""g"">"" ""s""e""t"" ""="" ""O""b""j""e""c""t""s"".""u""n""m""o""d""i""f""i""a""b""l""e""S""e""t""(""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"")"";"
+" "" "" "" ""s""e""t"".""a""d""d""("""""v""a""l""u""e""""")"";"
+" "" ""}"
 
-  @Test(expected = UnsupportedOperationException.class)
-  public void testUnmodifiableMap() throws Exception {
-    Map<String, String> map = Objects.unmodifiableMap(new HashMap<>());
-    map.put("key", "value");
-  }
+" "" ""@""T""e""s""t""(""e""x""p""e""c""t""e""d"" ""="" ""U""n""s""u""p""p""o""r""t""e""d""O""p""e""r""a""t""i""o""n""E""x""c""e""p""t""i""o""n"".""c""l""a""s""s"")"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""U""n""m""o""d""i""f""i""a""b""l""e""M""a""p""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""M""a""p""<""S""t""r""i""n""g"","" ""S""t""r""i""n""g"">"" ""m""a""p"" ""="" ""O""b""j""e""c""t""s"".""u""n""m""o""d""i""f""i""a""b""l""e""M""a""p""(""n""e""w"" ""H""a""s""h""M""a""p""<"">""("")"")"";"
+" "" "" "" ""m""a""p"".""p""u""t""("""""k""e""y""""","" """""v""a""l""u""e""""")"";"
+" "" ""}"
 
-  @Test
-  public void testIsNull() throws Exception {
-    assertTrue(Objects.isNull(null));
-    assertFalse(Objects.isNull("value"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""I""s""N""u""l""l""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""(""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""u""l""l""("""""v""a""l""u""e""""")"")"";"
+" "" ""}"
 
-  @Test
-  public void testIsNotNull() throws Exception {
-    assertFalse(Objects.isNotNull(null));
-    assertTrue(Objects.isNotNull("value"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""I""s""N""o""t""N""u""l""l""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""(""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""("""""v""a""l""u""e""""")"")"";"
+" "" ""}"
 
-  @Test
-  public void testEquals() throws Exception {
-    assertTrue(Objects.equals(null, null));
-    assertTrue(Objects.equals("value", "value"));
-    assertFalse(Objects.equals(null, "value"));
-    assertFalse(Objects.equals("value", null));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""E""q""u""a""l""s""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""n""u""l""l"","" ""n""u""l""l"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""e""q""u""a""l""s""("""""v""a""l""u""e""""","" """""v""a""l""u""e""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""n""u""l""l"","" """""v""a""l""u""e""""")"")"";"
+" "" "" "" ""a""s""s""e""r""t""F""a""l""s""e""(""O""b""j""e""c""t""s"".""e""q""u""a""l""s""("""""v""a""l""u""e""""","" ""n""u""l""l"")"")"";"
+" "" ""}"
 
-  @Test
-  public void testHash() throws Exception {
-    assertTrue(Objects.hash("value") == Objects.hash("value"));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""H""a""s""h""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""O""b""j""e""c""t""s"".""h""a""s""h""("""""v""a""l""u""e""""")"" ""=""="" ""O""b""j""e""c""t""s"".""h""a""s""h""("""""v""a""l""u""e""""")"")"";"
+" "" ""}"
 
-  @Test
-  public void testExtension() throws Exception {
-    assertTrue(TestObjects.isNull(null));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""E""x""t""e""n""s""i""o""n""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""r""u""e""(""T""e""s""t""O""b""j""e""c""t""s"".""i""s""N""u""l""l""(""n""u""l""l"")"")"";"
+" "" ""}"
 
-  private class TestObjects extends Objects {}
-}
+" "" ""p""r""i""v""a""t""e"" ""c""l""a""s""s"" ""T""e""s""t""O""b""j""e""c""t""s"" ""e""x""t""e""n""d""s"" ""O""b""j""e""c""t""s"" ""{""}"
+"}"

@@ -1,178 +1,178 @@
-/*
- [The "BSD licence"]
- Copyright (c) 2013 Terence Parr
- All rights reserved.
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions
- are met:
- 1. Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
- 2. Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the distribution.
- 3. The name of the author may not be used to endorse or promote products
-    derived from this software without specific prior written permission.
- THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
- IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
- INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
- THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-/** Derived from http://www.graphviz.org/doc/info/lang.html.
-    Comments pulled from spec.
- */
-grammar DOT;
+"/""*"
+" ""[""T""h""e"" """""B""S""D"" ""l""i""c""e""n""c""e"""""]"
+" ""C""o""p""y""r""i""g""h""t"" ""(""c"")"" ""2""0""1""3"" ""T""e""r""e""n""c""e"" ""P""a""r""r"
+" ""A""l""l"" ""r""i""g""h""t""s"" ""r""e""s""e""r""v""e""d""."
+" ""R""e""d""i""s""t""r""i""b""u""t""i""o""n"" ""a""n""d"" ""u""s""e"" ""i""n"" ""s""o""u""r""c""e"" ""a""n""d"" ""b""i""n""a""r""y"" ""f""o""r""m""s"","" ""w""i""t""h"" ""o""r"" ""w""i""t""h""o""u""t"
+" ""m""o""d""i""f""i""c""a""t""i""o""n"","" ""a""r""e"" ""p""e""r""m""i""t""t""e""d"" ""p""r""o""v""i""d""e""d"" ""t""h""a""t"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"
+" ""a""r""e"" ""m""e""t"":"
+" ""1""."" ""R""e""d""i""s""t""r""i""b""u""t""i""o""n""s"" ""o""f"" ""s""o""u""r""c""e"" ""c""o""d""e"" ""m""u""s""t"" ""r""e""t""a""i""n"" ""t""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"
+" "" "" "" ""n""o""t""i""c""e"","" ""t""h""i""s"" ""l""i""s""t"" ""o""f"" ""c""o""n""d""i""t""i""o""n""s"" ""a""n""d"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""d""i""s""c""l""a""i""m""e""r""."
+" ""2""."" ""R""e""d""i""s""t""r""i""b""u""t""i""o""n""s"" ""i""n"" ""b""i""n""a""r""y"" ""f""o""r""m"" ""m""u""s""t"" ""r""e""p""r""o""d""u""c""e"" ""t""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"
+" "" "" "" ""n""o""t""i""c""e"","" ""t""h""i""s"" ""l""i""s""t"" ""o""f"" ""c""o""n""d""i""t""i""o""n""s"" ""a""n""d"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""d""i""s""c""l""a""i""m""e""r"" ""i""n"" ""t""h""e"
+" "" "" "" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""a""n""d""/""o""r"" ""o""t""h""e""r"" ""m""a""t""e""r""i""a""l""s"" ""p""r""o""v""i""d""e""d"" ""w""i""t""h"" ""t""h""e"" ""d""i""s""t""r""i""b""u""t""i""o""n""."
+" ""3""."" ""T""h""e"" ""n""a""m""e"" ""o""f"" ""t""h""e"" ""a""u""t""h""o""r"" ""m""a""y"" ""n""o""t"" ""b""e"" ""u""s""e""d"" ""t""o"" ""e""n""d""o""r""s""e"" ""o""r"" ""p""r""o""m""o""t""e"" ""p""r""o""d""u""c""t""s"
+" "" "" "" ""d""e""r""i""v""e""d"" ""f""r""o""m"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""s""p""e""c""i""f""i""c"" ""p""r""i""o""r"" ""w""r""i""t""t""e""n"" ""p""e""r""m""i""s""s""i""o""n""."
+" ""T""H""I""S"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" ""B""Y"" ""T""H""E"" ""A""U""T""H""O""R"" ""`""`""A""S"" ""I""S""'""'"" ""A""N""D"" ""A""N""Y"" ""E""X""P""R""E""S""S"" ""O""R"
+" ""I""M""P""L""I""E""D"" ""W""A""R""R""A""N""T""I""E""S"","" ""I""N""C""L""U""D""I""N""G"","" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"","" ""T""H""E"" ""I""M""P""L""I""E""D"" ""W""A""R""R""A""N""T""I""E""S"
+" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"" ""A""N""D"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""R""E"" ""D""I""S""C""L""A""I""M""E""D""."
+" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"" ""A""U""T""H""O""R"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""D""I""R""E""C""T"","" ""I""N""D""I""R""E""C""T"","
+" ""I""N""C""I""D""E""N""T""A""L"","" ""S""P""E""C""I""A""L"","" ""E""X""E""M""P""L""A""R""Y"","" ""O""R"" ""C""O""N""S""E""Q""U""E""N""T""I""A""L"" ""D""A""M""A""G""E""S"" ""(""I""N""C""L""U""D""I""N""G"","" ""B""U""T"
+" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"","" ""P""R""O""C""U""R""E""M""E""N""T"" ""O""F"" ""S""U""B""S""T""I""T""U""T""E"" ""G""O""O""D""S"" ""O""R"" ""S""E""R""V""I""C""E""S"";"" ""L""O""S""S"" ""O""F"" ""U""S""E"","
+" ""D""A""T""A"","" ""O""R"" ""P""R""O""F""I""T""S"";"" ""O""R"" ""B""U""S""I""N""E""S""S"" ""I""N""T""E""R""R""U""P""T""I""O""N"")"" ""H""O""W""E""V""E""R"" ""C""A""U""S""E""D"" ""A""N""D"" ""O""N"" ""A""N""Y"
+" ""T""H""E""O""R""Y"" ""O""F"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""C""O""N""T""R""A""C""T"","" ""S""T""R""I""C""T"" ""L""I""A""B""I""L""I""T""Y"","" ""O""R"" ""T""O""R""T"
+" ""(""I""N""C""L""U""D""I""N""G"" ""N""E""G""L""I""G""E""N""C""E"" ""O""R"" ""O""T""H""E""R""W""I""S""E"")"" ""A""R""I""S""I""N""G"" ""I""N"" ""A""N""Y"" ""W""A""Y"" ""O""U""T"" ""O""F"" ""T""H""E"" ""U""S""E"" ""O""F"
+" ""T""H""I""S"" ""S""O""F""T""W""A""R""E"","" ""E""V""E""N"" ""I""F"" ""A""D""V""I""S""E""D"" ""O""F"" ""T""H""E"" ""P""O""S""S""I""B""I""L""I""T""Y"" ""O""F"" ""S""U""C""H"" ""D""A""M""A""G""E""."
+"*""/"
+"/""*""*"" ""D""e""r""i""v""e""d"" ""f""r""o""m"" ""h""t""t""p"":""/""/""w""w""w"".""g""r""a""p""h""v""i""z"".""o""r""g""/""d""o""c""/""i""n""f""o""/""l""a""n""g"".""h""t""m""l""."
+" "" "" "" ""C""o""m""m""e""n""t""s"" ""p""u""l""l""e""d"" ""f""r""o""m"" ""s""p""e""c""."
+" ""*""/"
+"g""r""a""m""m""a""r"" ""D""O""T"";"
 
-graph
-   : STRICT? ( GRAPH | DIGRAPH ) id? '{' stmt_list '}'
-   ;
+"g""r""a""p""h"
+" "" "" "":"" ""S""T""R""I""C""T""?"" ""("" ""G""R""A""P""H"" ""|"" ""D""I""G""R""A""P""H"" "")"" ""i""d""?"" ""'""{""'"" ""s""t""m""t""_""l""i""s""t"" ""'""}""'"
+" "" "" "";"
 
-stmt_list
-   : ( stmt ';'? )*
-   ;
+"s""t""m""t""_""l""i""s""t"
+" "" "" "":"" ""("" ""s""t""m""t"" ""'"";""'""?"" "")""*"
+" "" "" "";"
 
-stmt
-   : node_stmt | edge_stmt | attr_stmt | id '=' id | subgraph
-   ;
+"s""t""m""t"
+" "" "" "":"" ""n""o""d""e""_""s""t""m""t"" ""|"" ""e""d""g""e""_""s""t""m""t"" ""|"" ""a""t""t""r""_""s""t""m""t"" ""|"" ""i""d"" ""'""=""'"" ""i""d"" ""|"" ""s""u""b""g""r""a""p""h"
+" "" "" "";"
 
-attr_stmt
-   : ( GRAPH | NODE | EDGE ) attr_list
-   ;
+"a""t""t""r""_""s""t""m""t"
+" "" "" "":"" ""("" ""G""R""A""P""H"" ""|"" ""N""O""D""E"" ""|"" ""E""D""G""E"" "")"" ""a""t""t""r""_""l""i""s""t"
+" "" "" "";"
 
-attr_list
-   : ( '[' a_list? ']' )+
-   ;
+"a""t""t""r""_""l""i""s""t"
+" "" "" "":"" ""("" ""'""[""'"" ""a""_""l""i""s""t""?"" ""'""]""'"" "")""+"
+" "" "" "";"
 
-a_list
-   : ( id ( '=' id )? ','? )+
-   ;
+"a""_""l""i""s""t"
+" "" "" "":"" ""("" ""i""d"" ""("" ""'""=""'"" ""i""d"" "")""?"" ""'"",""'""?"" "")""+"
+" "" "" "";"
 
-edge_stmt
-   : ( node_id | subgraph ) edgeRHS attr_list?
-   ;
+"e""d""g""e""_""s""t""m""t"
+" "" "" "":"" ""("" ""n""o""d""e""_""i""d"" ""|"" ""s""u""b""g""r""a""p""h"" "")"" ""e""d""g""e""R""H""S"" ""a""t""t""r""_""l""i""s""t""?"
+" "" "" "";"
 
-edgeRHS
-   : ( edgeop ( node_id | subgraph ) )+
-   ;
+"e""d""g""e""R""H""S"
+" "" "" "":"" ""("" ""e""d""g""e""o""p"" ""("" ""n""o""d""e""_""i""d"" ""|"" ""s""u""b""g""r""a""p""h"" "")"" "")""+"
+" "" "" "";"
 
-edgeop
-   : '->' | '--'
-   ;
+"e""d""g""e""o""p"
+" "" "" "":"" ""'""-"">""'"" ""|"" ""'""-""-""'"
+" "" "" "";"
 
-node_stmt
-   : node_id attr_list?
-   ;
+"n""o""d""e""_""s""t""m""t"
+" "" "" "":"" ""n""o""d""e""_""i""d"" ""a""t""t""r""_""l""i""s""t""?"
+" "" "" "";"
 
-node_id
-   : id port?
-   ;
+"n""o""d""e""_""i""d"
+" "" "" "":"" ""i""d"" ""p""o""r""t""?"
+" "" "" "";"
 
-port
-   : ':' id ( ':' id )?
-   ;
+"p""o""r""t"
+" "" "" "":"" ""'"":""'"" ""i""d"" ""("" ""'"":""'"" ""i""d"" "")""?"
+" "" "" "";"
 
-subgraph
-   : ( SUBGRAPH id? )? '{' stmt_list '}'
-   ;
+"s""u""b""g""r""a""p""h"
+" "" "" "":"" ""("" ""S""U""B""G""R""A""P""H"" ""i""d""?"" "")""?"" ""'""{""'"" ""s""t""m""t""_""l""i""s""t"" ""'""}""'"
+" "" "" "";"
 
-id
-   : ID | STRING | HTML_STRING | NUMBER
-   ;
+"i""d"
+" "" "" "":"" ""I""D"" ""|"" ""S""T""R""I""N""G"" ""|"" ""H""T""M""L""_""S""T""R""I""N""G"" ""|"" ""N""U""M""B""E""R"
+" "" "" "";"
 
-// "The keywords node, edge, graph, digraph, subgraph, and strict are
-// case-independent"
+"/""/"" """""T""h""e"" ""k""e""y""w""o""r""d""s"" ""n""o""d""e"","" ""e""d""g""e"","" ""g""r""a""p""h"","" ""d""i""g""r""a""p""h"","" ""s""u""b""g""r""a""p""h"","" ""a""n""d"" ""s""t""r""i""c""t"" ""a""r""e"
+"/""/"" ""c""a""s""e""-""i""n""d""e""p""e""n""d""e""n""t""""
 
-STRICT
-   : [Ss] [Tt] [Rr] [Ii] [Cc] [Tt]
-   ;
-
-
-GRAPH
-   : [Gg] [Rr] [Aa] [Pp] [Hh]
-   ;
+"S""T""R""I""C""T"
+" "" "" "":"" ""[""S""s""]"" ""[""T""t""]"" ""[""R""r""]"" ""[""I""i""]"" ""[""C""c""]"" ""[""T""t""]"
+" "" "" "";"
 
 
-DIGRAPH
-   : [Dd] [Ii] [Gg] [Rr] [Aa] [Pp] [Hh]
-   ;
+"G""R""A""P""H"
+" "" "" "":"" ""[""G""g""]"" ""[""R""r""]"" ""[""A""a""]"" ""[""P""p""]"" ""[""H""h""]"
+" "" "" "";"
 
 
-NODE
-   : [Nn] [Oo] [Dd] [Ee]
-   ;
+"D""I""G""R""A""P""H"
+" "" "" "":"" ""[""D""d""]"" ""[""I""i""]"" ""[""G""g""]"" ""[""R""r""]"" ""[""A""a""]"" ""[""P""p""]"" ""[""H""h""]"
+" "" "" "";"
 
 
-EDGE
-   : [Ee] [Dd] [Gg] [Ee]
-   ;
+"N""O""D""E"
+" "" "" "":"" ""[""N""n""]"" ""[""O""o""]"" ""[""D""d""]"" ""[""E""e""]"
+" "" "" "";"
 
 
-SUBGRAPH
-   : [Ss] [Uu] [Bb] [Gg] [Rr] [Aa] [Pp] [Hh]
-   ;
+"E""D""G""E"
+" "" "" "":"" ""[""E""e""]"" ""[""D""d""]"" ""[""G""g""]"" ""[""E""e""]"
+" "" "" "";"
 
 
-/** "a numeral [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? )" */ NUMBER
-   : '-'? ( '.' DIGIT+ | DIGIT+ ( '.' DIGIT* )? )
-   ;
+"S""U""B""G""R""A""P""H"
+" "" "" "":"" ""[""S""s""]"" ""[""U""u""]"" ""[""B""b""]"" ""[""G""g""]"" ""[""R""r""]"" ""[""A""a""]"" ""[""P""p""]"" ""[""H""h""]"
+" "" "" "";"
 
 
-fragment DIGIT
-   : [0-9]
-   ;
+"/""*""*"" """""a"" ""n""u""m""e""r""a""l"" ""[""-""]""?""("".""[""0""-""9""]""+"" ""|"" ""[""0""-""9""]""+""("".""[""0""-""9""]""*"")""?"" "")""""" ""*""/"" ""N""U""M""B""E""R"
+" "" "" "":"" ""'""-""'""?"" ""("" ""'"".""'"" ""D""I""G""I""T""+"" ""|"" ""D""I""G""I""T""+"" ""("" ""'"".""'"" ""D""I""G""I""T""*"" "")""?"" "")"
+" "" "" "";"
 
 
-/** "any double-quoted string ("...") possibly containing escaped quotes" */ STRING
-   : '"' ( '\\"' | . )*? '"'
-   ;
+"f""r""a""g""m""e""n""t"" ""D""I""G""I""T"
+" "" "" "":"" ""[""0""-""9""]"
+" "" "" "";"
 
 
-/** "Any string of alphabetic ([a-zA-Z\200-\377]) characters, underscores
- *  ('_') or digits ([0-9]), not beginning with a digit"
- */ ID
-   : LETTER ( LETTER | DIGIT )*
-   ;
+"/""*""*"" """""a""n""y"" ""d""o""u""b""l""e""-""q""u""o""t""e""d"" ""s""t""r""i""n""g"" ""(""""".""."".""""")"" ""p""o""s""s""i""b""l""y"" ""c""o""n""t""a""i""n""i""n""g"" ""e""s""c""a""p""e""d"" ""q""u""o""t""e""s""""" ""*""/"" ""S""T""R""I""N""G"
+" "" "" "":"" ""'"""""'"" ""("" ""'""\""\"""""'"" ""|"" ""."" "")""*""?"" ""'"""""'"
+" "" "" "";"
 
 
-fragment LETTER
-   : [a-zA-Z\u0080-\u00FF_]
-   ;
+"/""*""*"" """""A""n""y"" ""s""t""r""i""n""g"" ""o""f"" ""a""l""p""h""a""b""e""t""i""c"" ""(""[""a""-""z""A""-""Z""\""2""0""0""-""\""3""7""7""]"")"" ""c""h""a""r""a""c""t""e""r""s"","" ""u""n""d""e""r""s""c""o""r""e""s"
+" ""*"" "" ""(""'""_""'"")"" ""o""r"" ""d""i""g""i""t""s"" ""(""[""0""-""9""]"")"","" ""n""o""t"" ""b""e""g""i""n""n""i""n""g"" ""w""i""t""h"" ""a"" ""d""i""g""i""t""""
+" ""*""/"" ""I""D"
+" "" "" "":"" ""L""E""T""T""E""R"" ""("" ""L""E""T""T""E""R"" ""|"" ""D""I""G""I""T"" "")""*"
+" "" "" "";"
 
 
-/** "HTML strings, angle brackets must occur in matched pairs, and
- *  unescaped newlines are allowed."
- */ HTML_STRING
-   : '<' ( TAG | ~ [<>] )* '>'
-   ;
+"f""r""a""g""m""e""n""t"" ""L""E""T""T""E""R"
+" "" "" "":"" ""[""a""-""z""A""-""Z""\""u""0""0""8""0""-""\""u""0""0""F""F""_""]"
+" "" "" "";"
 
 
-fragment TAG
-   : '<' .*? '>'
-   ;
+"/""*""*"" """""H""T""M""L"" ""s""t""r""i""n""g""s"","" ""a""n""g""l""e"" ""b""r""a""c""k""e""t""s"" ""m""u""s""t"" ""o""c""c""u""r"" ""i""n"" ""m""a""t""c""h""e""d"" ""p""a""i""r""s"","" ""a""n""d"
+" ""*"" "" ""u""n""e""s""c""a""p""e""d"" ""n""e""w""l""i""n""e""s"" ""a""r""e"" ""a""l""l""o""w""e""d"".""""
+" ""*""/"" ""H""T""M""L""_""S""T""R""I""N""G"
+" "" "" "":"" ""'""<""'"" ""("" ""T""A""G"" ""|"" ""~"" ""[""<"">""]"" "")""*"" ""'"">""'"
+" "" "" "";"
 
 
-COMMENT
-   : '/*' .*? '*/' -> skip
-   ;
+"f""r""a""g""m""e""n""t"" ""T""A""G"
+" "" "" "":"" ""'""<""'"" "".""*""?"" ""'"">""'"
+" "" "" "";"
 
 
-LINE_COMMENT
-   : '//' .*? '\r'? '\n' -> skip
-   ;
+"C""O""M""M""E""N""T"
+" "" "" "":"" ""'""/""*""'"" "".""*""?"" ""'""*""/""'"" ""-"">"" ""s""k""i""p"
+" "" "" "";"
 
 
-/** "a '#' character is considered a line output from a C preprocessor (e.g.,
- *  # 34 to indicate line 34 ) and discarded"
- */ PREPROC
-   : '#' ~[\r\n]* -> skip
-   ;
+"L""I""N""E""_""C""O""M""M""E""N""T"
+" "" "" "":"" ""'""/""/""'"" "".""*""?"" ""'""\""r""'""?"" ""'""\""n""'"" ""-"">"" ""s""k""i""p"
+" "" "" "";"
 
 
-WS
-   : [ \t\n\r]+ -> skip
-   ;
+"/""*""*"" """""a"" ""'""#""'"" ""c""h""a""r""a""c""t""e""r"" ""i""s"" ""c""o""n""s""i""d""e""r""e""d"" ""a"" ""l""i""n""e"" ""o""u""t""p""u""t"" ""f""r""o""m"" ""a"" ""C"" ""p""r""e""p""r""o""c""e""s""s""o""r"" ""(""e"".""g""."","
+" ""*"" "" ""#"" ""3""4"" ""t""o"" ""i""n""d""i""c""a""t""e"" ""l""i""n""e"" ""3""4"" "")"" ""a""n""d"" ""d""i""s""c""a""r""d""e""d""""
+" ""*""/"" ""P""R""E""P""R""O""C"
+" "" "" "":"" ""'""#""'"" ""~""[""\""r""\""n""]""*"" ""-"">"" ""s""k""i""p"
+" "" "" "";"
+
+
+"W""S"
+" "" "" "":"" ""["" ""\""t""\""n""\""r""]""+"" ""-"">"" ""s""k""i""p"
+" "" "" "";"

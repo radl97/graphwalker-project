@@ -1,208 +1,208 @@
-package org.graphwalker.core.model;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"";"
 
-/*
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import static org.graphwalker.core.model.Edge.RuntimeEdge;
-import static org.graphwalker.core.model.Model.RuntimeModel;
-import static org.graphwalker.core.model.Vertex.RuntimeVertex;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThat;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""M""o""d""e""l"".""R""u""n""t""i""m""e""M""o""d""e""l"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""I""s"".""i""s"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""E""q""u""a""l""s"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""N""o""t""E""q""u""a""l""s"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t"";"
 
-import java.util.HashSet;
-import java.util.Set;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""S""e""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""S""e""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-/**
- * @author Nils Olsson
- */
-public class VisitorTest {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""V""i""s""i""t""o""r""T""e""s""t"" ""{"
 
-  RuntimeModel model = new Model().addEdge(
-      new Edge()
-          .setName("edge1")
-          .setSourceVertex(new Vertex()
-                               .setName("vertex1"))
-          .setTargetVertex(new Vertex()
-                               .setName("vertex2")))
-      .build();
+" "" ""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"".""a""d""d""E""d""g""e""("
+" "" "" "" "" "" ""n""e""w"" ""E""d""g""e""("")"
+" "" "" "" "" "" "" "" "" "" "".""s""e""t""N""a""m""e""("""""e""d""g""e""1""""")"
+" "" "" "" "" "" "" "" "" "" "".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""n""e""w"" ""V""e""r""t""e""x""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""s""e""t""N""a""m""e""("""""v""e""r""t""e""x""1""""")"")"
+" "" "" "" "" "" "" "" "" "" "".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""n""e""w"" ""V""e""r""t""e""x""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""s""e""t""N""a""m""e""("""""v""e""r""t""e""x""2""""")"")"")"
+" "" "" "" "" "" "".""b""u""i""l""d""("")"";"
 
-  @Test
-  public void visitVertex() throws Exception {
-    ElementVisitor visitor = new MyElementVisitor();
-    new Vertex().setName("vertex").build().accept(visitor);
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""V""e""r""t""e""x""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""v""i""s""i""t""o""r"" ""="" ""n""e""w"" ""M""y""E""l""e""m""e""n""t""V""i""s""i""t""o""r""("")"";"
+" "" "" "" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""e""r""t""e""x""""")"".""b""u""i""l""d""("")"".""a""c""c""e""p""t""(""v""i""s""i""t""o""r"")"";"
+" "" ""}"
 
-  @Test
-  public void visitVertices() throws Exception {
-    MyNamedVertexCounter visitor = new MyNamedVertexCounter();
-    model.accept(visitor);
-    assertThat(visitor.count, is(2));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""V""e""r""t""i""c""e""s""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""M""y""N""a""m""e""d""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""v""i""s""i""t""o""r"" ""="" ""n""e""w"" ""M""y""N""a""m""e""d""V""e""r""t""e""x""C""o""u""n""t""e""r""("")"";"
+" "" "" "" ""m""o""d""e""l"".""a""c""c""e""p""t""(""v""i""s""i""t""o""r"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""v""i""s""i""t""o""r"".""c""o""u""n""t"","" ""i""s""(""2"")"")"";"
+" "" ""}"
 
-  @Test
-  public void visitEdge() throws Exception {
-    ElementVisitor visitor = new MyEdgeVisitor();
-    new Edge().setName("edge1").setSourceVertex(new Vertex()).setTargetVertex(new Vertex()).build().accept(visitor);
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""E""d""g""e""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""v""i""s""i""t""o""r"" ""="" ""n""e""w"" ""M""y""E""d""g""e""V""i""s""i""t""o""r""("")"";"
+" "" "" "" ""n""e""w"" ""E""d""g""e""("")"".""s""e""t""N""a""m""e""("""""e""d""g""e""1""""")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""n""e""w"" ""V""e""r""t""e""x""("")"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""n""e""w"" ""V""e""r""t""e""x""("")"")"".""b""u""i""l""d""("")"".""a""c""c""e""p""t""(""v""i""s""i""t""o""r"")"";"
+" "" ""}"
 
-  @Test
-  public void visitEdges() throws Exception {
-    Vertex startVertex = new Vertex().setName("start");
-    Vertex endVertex = new Vertex().setName("end");
-    RuntimeModel pseudograph = new Model()
-        .addEdge(new Edge().setSourceVertex(startVertex).setTargetVertex(endVertex))
-        .addEdge(new Edge().setSourceVertex(endVertex).setTargetVertex(endVertex))
-        .build();
-    MyLoopEdgeFinder visitor = new MyLoopEdgeFinder();
-    pseudograph.accept(visitor);
-    assertThat(visitor.count, is(1));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""E""d""g""e""s""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""V""e""r""t""e""x"" ""s""t""a""r""t""V""e""r""t""e""x"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""s""t""a""r""t""""")"";"
+" "" "" "" ""V""e""r""t""e""x"" ""e""n""d""V""e""r""t""e""x"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""e""n""d""""")"";"
+" "" "" "" ""R""u""n""t""i""m""e""M""o""d""e""l"" ""p""s""e""u""d""o""g""r""a""p""h"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"
+" "" "" "" "" "" "" "" "".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""s""t""a""r""t""V""e""r""t""e""x"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""e""n""d""V""e""r""t""e""x"")"")"
+" "" "" "" "" "" "" "" "".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""e""n""d""V""e""r""t""e""x"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""e""n""d""V""e""r""t""e""x"")"")"
+" "" "" "" "" "" "" "" "".""b""u""i""l""d""("")"";"
+" "" "" "" ""M""y""L""o""o""p""E""d""g""e""F""i""n""d""e""r"" ""v""i""s""i""t""o""r"" ""="" ""n""e""w"" ""M""y""L""o""o""p""E""d""g""e""F""i""n""d""e""r""("")"";"
+" "" "" "" ""p""s""e""u""d""o""g""r""a""p""h"".""a""c""c""e""p""t""(""v""i""s""i""t""o""r"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""v""i""s""i""t""o""r"".""c""o""u""n""t"","" ""i""s""(""1"")"")"";"
+" "" ""}"
 
-  @Test
-  public void detectBridge() throws Exception {
-    Vertex start = new Vertex();
-    Vertex v1 = new Vertex().setName("V1");
-    Vertex v2 = new Vertex().setName("V2");
-    Edge e1 = new Edge().setSourceVertex(start).setTargetVertex(v2);
-    Model model = new Model().addEdge(e1)
-        .addEdge(new Edge().setSourceVertex(start).setTargetVertex(v1));
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""d""e""t""e""c""t""B""r""i""d""g""e""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""V""e""r""t""e""x"" ""s""t""a""r""t"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"";"
+" "" "" "" ""V""e""r""t""e""x"" ""v""1"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""V""1""""")"";"
+" "" "" "" ""V""e""r""t""e""x"" ""v""2"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""V""2""""")"";"
+" "" "" "" ""E""d""g""e"" ""e""1"" ""="" ""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""s""t""a""r""t"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""2"")"";"
+" "" "" "" ""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"".""a""d""d""E""d""g""e""(""e""1"")"
+" "" "" "" "" "" "" "" "".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""s""t""a""r""t"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""1"")"")"";"
 
-    MyVertexCounter count1 = new MyVertexCounter(model.build());
-    MyVertexCounter count2 = new MyVertexCounter(model.build(), e1.build());
+" "" "" "" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""c""o""u""n""t""1"" ""="" ""n""e""w"" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r""(""m""o""d""e""l"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""c""o""u""n""t""2"" ""="" ""n""e""w"" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r""(""m""o""d""e""l"".""b""u""i""l""d""("")"","" ""e""1"".""b""u""i""l""d""("")"")"";"
 
-    start.build().accept(count1);
-    start.build().accept(count2);
+" "" "" "" ""s""t""a""r""t"".""b""u""i""l""d""("")"".""a""c""c""e""p""t""(""c""o""u""n""t""1"")"";"
+" "" "" "" ""s""t""a""r""t"".""b""u""i""l""d""("")"".""a""c""c""e""p""t""(""c""o""u""n""t""2"")"";"
 
-    // if e1 is a bridge then the vertex count will differ between count1 and count2
-    assertNotEquals(count1.count, count2.count);
+" "" "" "" ""/""/"" ""i""f"" ""e""1"" ""i""s"" ""a"" ""b""r""i""d""g""e"" ""t""h""e""n"" ""t""h""e"" ""v""e""r""t""e""x"" ""c""o""u""n""t"" ""w""i""l""l"" ""d""i""f""f""e""r"" ""b""e""t""w""e""e""n"" ""c""o""u""n""t""1"" ""a""n""d"" ""c""o""u""n""t""2"
+" "" "" "" ""a""s""s""e""r""t""N""o""t""E""q""u""a""l""s""(""c""o""u""n""t""1"".""c""o""u""n""t"","" ""c""o""u""n""t""2"".""c""o""u""n""t"")"";"
 
-    // if we add a edge between v1 and v2 then e1 is no longer a bridge and count1 and count3 should be the same
-    model.addEdge(new Edge().setSourceVertex(v1).setTargetVertex(v2));
-    MyVertexCounter count3 = new MyVertexCounter(model.build(), e1.build());
-    start.build().accept(count3);
-    assertEquals(count1.count, count3.count);
+" "" "" "" ""/""/"" ""i""f"" ""w""e"" ""a""d""d"" ""a"" ""e""d""g""e"" ""b""e""t""w""e""e""n"" ""v""1"" ""a""n""d"" ""v""2"" ""t""h""e""n"" ""e""1"" ""i""s"" ""n""o"" ""l""o""n""g""e""r"" ""a"" ""b""r""i""d""g""e"" ""a""n""d"" ""c""o""u""n""t""1"" ""a""n""d"" ""c""o""u""n""t""3"" ""s""h""o""u""l""d"" ""b""e"" ""t""h""e"" ""s""a""m""e"
+" "" "" "" ""m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""1"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""2"")"")"";"
+" "" "" "" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""c""o""u""n""t""3"" ""="" ""n""e""w"" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r""(""m""o""d""e""l"".""b""u""i""l""d""("")"","" ""e""1"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""s""t""a""r""t"".""b""u""i""l""d""("")"".""a""c""c""e""p""t""(""c""o""u""n""t""3"")"";"
+" "" "" "" ""a""s""s""e""r""t""E""q""u""a""l""s""(""c""o""u""n""t""1"".""c""o""u""n""t"","" ""c""o""u""n""t""3"".""c""o""u""n""t"")"";"
 
-  }
+" "" ""}"
 
-  private class MyElementVisitor implements ElementVisitor {
+" "" ""p""r""i""v""a""t""e"" ""c""l""a""s""s"" ""M""y""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""i""m""p""l""e""m""e""n""t""s"" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""{"
 
-    @Override
-    public void visit(Element element) {
-    }
-  }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" ""}"
+" "" ""}"
 
-  private class MyNamedVertexCounter implements ElementVisitor {
+" "" ""p""r""i""v""a""t""e"" ""c""l""a""s""s"" ""M""y""N""a""m""e""d""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""i""m""p""l""e""m""e""n""t""s"" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""{"
 
-    int count = 0;
+" "" "" "" ""i""n""t"" ""c""o""u""n""t"" ""="" ""0"";"
 
-    @Override
-    public void visit(Element element) {
-      if (element instanceof RuntimeModel) {
-        RuntimeModel model = (RuntimeModel) element;
-        // We don't need to visit() all edges to count the vertices with names, it's just PoC (we could just loop over them)
-        for (Element childElement : model.getElements()) {
-          childElement.accept(this);
-        }
-      } else if (element instanceof RuntimeVertex && element.hasName()) {
-        count++;
-      }
-    }
-  }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""M""o""d""e""l"")"" ""{"
+" "" "" "" "" "" "" "" ""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""(""R""u""n""t""i""m""e""M""o""d""e""l"")"" ""e""l""e""m""e""n""t"";"
+" "" "" "" "" "" "" "" ""/""/"" ""W""e"" ""d""o""n""'""t"" ""n""e""e""d"" ""t""o"" ""v""i""s""i""t""("")"" ""a""l""l"" ""e""d""g""e""s"" ""t""o"" ""c""o""u""n""t"" ""t""h""e"" ""v""e""r""t""i""c""e""s"" ""w""i""t""h"" ""n""a""m""e""s"","" ""i""t""'""s"" ""j""u""s""t"" ""P""o""C"" ""(""w""e"" ""c""o""u""l""d"" ""j""u""s""t"" ""l""o""o""p"" ""o""v""e""r"" ""t""h""e""m"")"
+" "" "" "" "" "" "" "" ""f""o""r"" ""(""E""l""e""m""e""n""t"" ""c""h""i""l""d""E""l""e""m""e""n""t"" "":"" ""m""o""d""e""l"".""g""e""t""E""l""e""m""e""n""t""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""h""i""l""d""E""l""e""m""e""n""t"".""a""c""c""e""p""t""(""t""h""i""s"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""&""&"" ""e""l""e""m""e""n""t"".""h""a""s""N""a""m""e""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""c""o""u""n""t""+""+"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
 
-  private class MyLoopEdgeFinder implements ElementVisitor {
+" "" ""p""r""i""v""a""t""e"" ""c""l""a""s""s"" ""M""y""L""o""o""p""E""d""g""e""F""i""n""d""e""r"" ""i""m""p""l""e""m""e""n""t""s"" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""{"
 
-    int count = 0;
+" "" "" "" ""i""n""t"" ""c""o""u""n""t"" ""="" ""0"";"
 
-    @Override
-    public void visit(Element element) {
-      if (element instanceof RuntimeModel) {
-        RuntimeModel model = (RuntimeModel) element;
-        for (RuntimeEdge edge : model.getEdges()) {
-          if (edge.getSourceVertex().equals(edge.getTargetVertex())) {
-            count++;
-          }
-        }
-      }
-    }
-  }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""M""o""d""e""l"")"" ""{"
+" "" "" "" "" "" "" "" ""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""(""R""u""n""t""i""m""e""M""o""d""e""l"")"" ""e""l""e""m""e""n""t"";"
+" "" "" "" "" "" "" "" ""f""o""r"" ""(""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""m""o""d""e""l"".""g""e""t""E""d""g""e""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"".""e""q""u""a""l""s""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""o""u""n""t""+""+"";"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
 
-  private class MyEdgeVisitor implements ElementVisitor {
+" "" ""p""r""i""v""a""t""e"" ""c""l""a""s""s"" ""M""y""E""d""g""e""V""i""s""i""t""o""r"" ""i""m""p""l""e""m""e""n""t""s"" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""{"
 
-    @Override
-    public void visit(Element element) {
-    }
-  }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" ""}"
+" "" ""}"
 
-  private class MyVertexCounter implements ElementVisitor {
+" "" ""p""r""i""v""a""t""e"" ""c""l""a""s""s"" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""i""m""p""l""e""m""e""n""t""s"" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""{"
 
-    private RuntimeModel model;
-    private int count = 0;
-    private Set<Element> visited = new HashSet<>();
+" "" "" "" ""p""r""i""v""a""t""e"" ""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""i""n""t"" ""c""o""u""n""t"" ""="" ""0"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""S""e""t""<""E""l""e""m""e""n""t"">"" ""v""i""s""i""t""e""d"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
 
-    MyVertexCounter(RuntimeModel model) {
-      this(model, null);
-    }
+" "" "" "" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r""(""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"")"" ""{"
+" "" "" "" "" "" ""t""h""i""s""(""m""o""d""e""l"","" ""n""u""l""l"")"";"
+" "" "" "" ""}"
 
-    MyVertexCounter(RuntimeModel model, RuntimeEdge skipEdge) {
-      this.model = model;
-      if (null != skipEdge) {
-        visited.add(skipEdge);
-      }
-    }
+" "" "" "" ""M""y""V""e""r""t""e""x""C""o""u""n""t""e""r""(""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"","" ""R""u""n""t""i""m""e""E""d""g""e"" ""s""k""i""p""E""d""g""e"")"" ""{"
+" "" "" "" "" "" ""t""h""i""s"".""m""o""d""e""l"" ""="" ""m""o""d""e""l"";"
+" "" "" "" "" "" ""i""f"" ""(""n""u""l""l"" ""!""="" ""s""k""i""p""E""d""g""e"")"" ""{"
+" "" "" "" "" "" "" "" ""v""i""s""i""t""e""d"".""a""d""d""(""s""k""i""p""E""d""g""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    @Override
-    public void visit(Element element) {
-      visited.add(element);
-      if (element instanceof RuntimeVertex) {
-        visit((RuntimeVertex) element);
-      } else if (element instanceof RuntimeEdge) {
-        visit((RuntimeEdge) element);
-      }
-    }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" "" "" ""v""i""s""i""t""e""d"".""a""d""d""(""e""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"")"" ""{"
+" "" "" "" "" "" "" "" ""v""i""s""i""t""(""(""R""u""n""t""i""m""e""V""e""r""t""e""x"")"" ""e""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""E""d""g""e"")"" ""{"
+" "" "" "" "" "" "" "" ""v""i""s""i""t""(""(""R""u""n""t""i""m""e""E""d""g""e"")"" ""e""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    private void visit(RuntimeVertex vertex) {
-      count++;
-      for (RuntimeEdge edge : model.getOutEdges(vertex)) {
-        if (isNotVisited(edge)) {
-          edge.accept(this);
-        }
-      }
-    }
+" "" "" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""v""i""s""i""t""(""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"")"" ""{"
+" "" "" "" "" "" ""c""o""u""n""t""+""+"";"
+" "" "" "" "" "" ""f""o""r"" ""(""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""m""o""d""e""l"".""g""e""t""O""u""t""E""d""g""e""s""(""v""e""r""t""e""x"")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""i""s""N""o""t""V""i""s""i""t""e""d""(""e""d""g""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""e""d""g""e"".""a""c""c""e""p""t""(""t""h""i""s"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    private void visit(RuntimeEdge edge) {
-      if (isNotVisited(edge.getTargetVertex())) {
-        edge.getTargetVertex().accept(this);
-      }
-    }
+" "" "" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""v""i""s""i""t""(""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""i""s""N""o""t""V""i""s""i""t""e""d""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" ""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"".""a""c""c""e""p""t""(""t""h""i""s"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    private boolean isNotVisited(Element element) {
-      return !visited.contains(element);
-    }
-  }
-}
+" "" "" "" ""p""r""i""v""a""t""e"" ""b""o""o""l""e""a""n"" ""i""s""N""o""t""V""i""s""i""t""e""d""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""!""v""i""s""i""t""e""d"".""c""o""n""t""a""i""n""s""(""e""l""e""m""e""n""t"")"";"
+" "" "" "" ""}"
+" "" ""}"
+"}"

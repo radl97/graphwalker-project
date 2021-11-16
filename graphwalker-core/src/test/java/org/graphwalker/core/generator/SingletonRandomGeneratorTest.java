@@ -1,43 +1,43 @@
-package org.graphwalker.core.generator;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"";"
 
-import org.junit.Test;
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-import java.util.Random;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""R""a""n""d""o""m"";"
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""C""o""r""e""M""a""t""c""h""e""r""s"".""i""n""s""t""a""n""c""e""O""f"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""C""o""r""e""M""a""t""c""h""e""r""s"".""i""s"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""M""a""t""c""h""e""r""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t"";"
 
-public class SingletonRandomGeneratorTest {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r""T""e""s""t"" ""{"
 
-  @Test
-  public void instantiation() {
-    assertThat(SingletonRandomGenerator.random(), is(instanceOf(Random.class)));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""i""n""s""t""a""n""t""i""a""t""i""o""n""("")"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""r""a""n""d""o""m""("")"","" ""i""s""(""i""n""s""t""a""n""c""e""O""f""(""R""a""n""d""o""m"".""c""l""a""s""s"")"")"")"";"
+" "" ""}"
 
-  @Test
-  public void seed() {
-    SingletonRandomGenerator.setSeed(123);
-    assertThat(SingletonRandomGenerator.nextInt(), is(-1188957731));
-    assertThat(SingletonRandomGenerator.nextInt(), is(1018954901));
-    assertThat(SingletonRandomGenerator.nextInt(), is(-39088943));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""e""e""d""("")"" ""{"
+" "" "" "" ""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""s""e""t""S""e""e""d""(""1""2""3"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""("")"","" ""i""s""(""-""1""1""8""8""9""5""7""7""3""1"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""("")"","" ""i""s""(""1""0""1""8""9""5""4""9""0""1"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""("")"","" ""i""s""(""-""3""9""0""8""8""9""4""3"")"")"";"
+" "" ""}"
 
-  @Test
-  public void un_seeded() {
-    assertThat(SingletonRandomGenerator.nextInt(), is(instanceOf(int.class)));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""u""n""_""s""e""e""d""e""d""("")"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""("")"","" ""i""s""(""i""n""s""t""a""n""c""e""O""f""(""i""n""t"".""c""l""a""s""s"")"")"")"";"
+" "" ""}"
 
-  @Test
-  public void seededBoundNextInt() {
-    SingletonRandomGenerator.setSeed(123);
-    assertThat(SingletonRandomGenerator.nextInt(1), is(0));
-    assertThat(SingletonRandomGenerator.nextInt(99), is(86));
-    assertThat(SingletonRandomGenerator.nextInt(999), is(245));
-  }
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""e""e""d""e""d""B""o""u""n""d""N""e""x""t""I""n""t""("")"" ""{"
+" "" "" "" ""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""s""e""t""S""e""e""d""(""1""2""3"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""(""1"")"","" ""i""s""(""0"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""(""9""9"")"","" ""i""s""(""8""6"")"")"";"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""(""9""9""9"")"","" ""i""s""(""2""4""5"")"")"";"
+" "" ""}"
 
-  @Test
-  public void un_seededBoundNextInt() {
-    assertThat(SingletonRandomGenerator.nextInt(999), is(instanceOf(int.class)));
-  }
-}
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""u""n""_""s""e""e""d""e""d""B""o""u""n""d""N""e""x""t""I""n""t""("")"" ""{"
+" "" "" "" ""a""s""s""e""r""t""T""h""a""t""(""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""n""e""x""t""I""n""t""(""9""9""9"")"","" ""i""s""(""i""n""s""t""a""n""c""e""O""f""(""i""n""t"".""c""l""a""s""s"")"")"")"";"
+" "" ""}"
+"}"

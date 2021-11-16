@@ -1,7 +1,7 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-dsl/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-dsl)
-GraphWalker DSL
-===================
+"[""!""[""M""a""v""e""n"" ""C""e""n""t""r""a""l""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""d""s""l""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""d""s""l"")"
+"G""r""a""p""h""W""a""l""k""e""r"" ""D""S""L"
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-===============
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-Contains most of the text parsing logic using ANTLR4
+"C""o""n""t""a""i""n""s"" ""m""o""s""t"" ""o""f"" ""t""h""e"" ""t""e""x""t"" ""p""a""r""s""i""n""g"" ""l""o""g""i""c"" ""u""s""i""n""g"" ""A""N""T""L""R""4"
