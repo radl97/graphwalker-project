@@ -1,345 +1,345 @@
-<?xml version="1.0"?>
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0"""""?"">"
 
-<xs:schema
-    targetNamespace="http://graphml.graphdrawing.org/xmlns"
+"<""x""s"":""s""c""h""e""m""a"
+" "" "" "" ""t""a""r""g""e""t""N""a""m""e""s""p""a""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
 
-    xmlns="http://graphml.graphdrawing.org/xmlns"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+" "" "" "" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
+" "" "" "" ""x""m""l""n""s"":""x""s""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""""
 
-    elementFormDefault="qualified"
-    attributeFormDefault="unqualified"
-    >
+" "" "" "" ""e""l""e""m""e""n""t""F""o""r""m""D""e""f""a""u""l""t""="""""q""u""a""l""i""f""i""e""d""""
+" "" "" "" ""a""t""t""r""i""b""u""t""e""F""o""r""m""D""e""f""a""u""l""t""="""""u""n""q""u""a""l""i""f""i""e""d""""
+" "" "" "" "">"
 
-  <xs:annotation>
-    <xs:documentation
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-     This document defines the GraphML language including GraphML attributes and GraphML parseinfo.
-    </xs:documentation>
-  </xs:annotation>
-  <xs:redefine schemaLocation="graphml-structure.xsd">
-    <xs:attributeGroup name="key.extra.attrib">
-      <xs:annotation>
-      <xs:documentation
-          source="http://graphml.graphdrawing.org/"
-          xml:lang="en">
-        Redefinition of file graphml-structure.xsd.
-        Extends the attribute group key.extra.attrib (which takes
-        part in the attribute list of &lt;key>) by adding the
-        attribute group key.attributes.attrib which is defined below.
-      </xs:documentation>
-    </xs:annotation>
-      <xs:attributeGroup ref="key.extra.attrib"/>
-      <xs:attributeGroup ref="key.attributes.attrib"/>
-    </xs:attributeGroup>
-
-
-    <xs:attributeGroup name="graph.extra.attrib">
-      <xs:annotation>
-      <xs:documentation
-          source="http://graphml.graphdrawing.org/"
-          xml:lang="en">
-        Redefinition of file graphml-structure.xsd.
-        Extends the attribute group node.extra.attrib (which takes
-        part in the attribute list of &lt;node>) by adding the
-        attribute group node.parseinfo.attrib which is defined below.
-      </xs:documentation>
-    </xs:annotation>
-      <xs:attributeGroup ref="graph.extra.attrib"/>
-      <xs:attributeGroup ref="graph.parseinfo.attrib"/>
-    </xs:attributeGroup>
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" ""T""h""i""s"" ""d""o""c""u""m""e""n""t"" ""d""e""f""i""n""e""s"" ""t""h""e"" ""G""r""a""p""h""M""L"" ""l""a""n""g""u""a""g""e"" ""i""n""c""l""u""d""i""n""g"" ""G""r""a""p""h""M""L"" ""a""t""t""r""i""b""u""t""e""s"" ""a""n""d"" ""G""r""a""p""h""M""L"" ""p""a""r""s""e""i""n""f""o""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" ""<""x""s"":""r""e""d""e""f""i""n""e"" ""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""g""r""a""p""h""m""l""-""s""t""r""u""c""t""u""r""e"".""x""s""d""""">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""k""e""y"".""e""x""t""r""a"".""a""t""t""r""i""b""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" "" "" ""R""e""d""e""f""i""n""i""t""i""o""n"" ""o""f"" ""f""i""l""e"" ""g""r""a""p""h""m""l""-""s""t""r""u""c""t""u""r""e"".""x""s""d""."
+" "" "" "" "" "" "" "" ""E""x""t""e""n""d""s"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""k""e""y"".""e""x""t""r""a"".""a""t""t""r""i""b"" ""(""w""h""i""c""h"" ""t""a""k""e""s"
+" "" "" "" "" "" "" "" ""p""a""r""t"" ""i""n"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""l""i""s""t"" ""o""f"" ""&""l""t"";""k""e""y"">"")"" ""b""y"" ""a""d""d""i""n""g"" ""t""h""e"
+" "" "" "" "" "" "" "" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""k""e""y"".""a""t""t""r""i""b""u""t""e""s"".""a""t""t""r""i""b"" ""w""h""i""c""h"" ""i""s"" ""d""e""f""i""n""e""d"" ""b""e""l""o""w""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""k""e""y"".""e""x""t""r""a"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""k""e""y"".""a""t""t""r""i""b""u""t""e""s"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
 
 
-    <xs:attributeGroup name="node.extra.attrib">
-     <xs:annotation>
-      <xs:documentation
-          source="http://graphml.graphdrawing.org/"
-          xml:lang="en">
-        Redefinition of file graphml-structure.xsd.
-        Extends the attribute group graph.extra.attrib (which takes
-        part in the attribute list of &lt;graph>) by adding the
-        attribute group graph.parseinfo.attrib which is defined below.
-      </xs:documentation>
-    </xs:annotation>
-      <xs:attributeGroup ref="node.extra.attrib"/>
-      <xs:attributeGroup ref="node.parseinfo.attrib"/>
-    </xs:attributeGroup>
-
-  </xs:redefine>
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""g""r""a""p""h"".""e""x""t""r""a"".""a""t""t""r""i""b""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" "" "" ""R""e""d""e""f""i""n""i""t""i""o""n"" ""o""f"" ""f""i""l""e"" ""g""r""a""p""h""m""l""-""s""t""r""u""c""t""u""r""e"".""x""s""d""."
+" "" "" "" "" "" "" "" ""E""x""t""e""n""d""s"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""n""o""d""e"".""e""x""t""r""a"".""a""t""t""r""i""b"" ""(""w""h""i""c""h"" ""t""a""k""e""s"
+" "" "" "" "" "" "" "" ""p""a""r""t"" ""i""n"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""l""i""s""t"" ""o""f"" ""&""l""t"";""n""o""d""e"">"")"" ""b""y"" ""a""d""d""i""n""g"" ""t""h""e"
+" "" "" "" "" "" "" "" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""n""o""d""e"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b"" ""w""h""i""c""h"" ""i""s"" ""d""e""f""i""n""e""d"" ""b""e""l""o""w""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""g""r""a""p""h"".""e""x""t""r""a"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""g""r""a""p""h"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
 
 
-  <!--types as in graphml-attributes.xsd -->
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""n""o""d""e"".""e""x""t""r""a"".""a""t""t""r""i""b""""">"
+" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" "" "" ""R""e""d""e""f""i""n""i""t""i""o""n"" ""o""f"" ""f""i""l""e"" ""g""r""a""p""h""m""l""-""s""t""r""u""c""t""u""r""e"".""x""s""d""."
+" "" "" "" "" "" "" "" ""E""x""t""e""n""d""s"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""g""r""a""p""h"".""e""x""t""r""a"".""a""t""t""r""i""b"" ""(""w""h""i""c""h"" ""t""a""k""e""s"
+" "" "" "" "" "" "" "" ""p""a""r""t"" ""i""n"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""l""i""s""t"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">"")"" ""b""y"" ""a""d""d""i""n""g"" ""t""h""e"
+" "" "" "" "" "" "" "" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""g""r""a""p""h"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b"" ""w""h""i""c""h"" ""i""s"" ""d""e""f""i""n""e""d"" ""b""e""l""o""w""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""n""o""d""e"".""e""x""t""r""a"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""n""o""d""e"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
 
-  <xs:simpleType name="key.name.type" final="#all">
-
-    <xs:annotation>
-      <xs:documentation
-          source="http://graphml.graphdrawing.org/(Dokumentation der Attributes Erweiterung; entsprechende Stelle.html)"
-          xml:lang="en">
-        Simple type for the attr.name attribute of &lt;key>.
-        key.name.type is final, that is, it may not be extended
-        or restricted.
-        key.name.type is a restriction of xs:NMTOKEN
-        Allowed values: (no restriction)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:NMTOKEN"/>
-  </xs:simpleType>
-
-
-  <xs:simpleType name="key.type.type" final="#all">
-
-    <xs:annotation>
-      <xs:documentation
-          source="http://graphml.graphdrawing.org/(Dokumentation der Attributes Erweiterung; entsprechende Stelle.html)"
-          xml:lang="en">
-        Simple type for the attr.type attribute of &lt;key>.
-        key.type.type is final, that is, it may not be extended
-        or restricted.
-        key.type.type is a restriction of xs:NMTOKEN
-        Allowed values: boolean, int, long, float, double, string, complex.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="boolean"/>
-      <xs:enumeration value="int"/>
-      <xs:enumeration value="long"/>
-      <xs:enumeration value="float"/>
-      <xs:enumeration value="double"/>
-      <xs:enumeration value="string"/>
-      <xs:enumeration value="complex"/>
-    </xs:restriction>
-  </xs:simpleType>
+" "" ""<""/""x""s"":""r""e""d""e""f""i""n""e"">"
 
 
-  <xs:attributeGroup name="key.attributes.attrib">
-    <xs:annotation>
-      <xs:documentation
-          source="http://graphml.graphdrawing.org/"
-          xml:lang="en">
-        Definition of the attribute group key.attributes.attrib.
-        This group consists of the two optional attributes
-        - attr.name (gives the name for the data function)
-        - attr.type (declares the range of values for the data function)
-      </xs:documentation>
-    </xs:annotation>
-    <xs:attribute name="attr.name" type="key.name.type" use="optional"/>
-    <xs:attribute name="attr.type" type="key.type.type" use="optional"/>
-  </xs:attributeGroup>
+" "" ""<""!""-""-""t""y""p""e""s"" ""a""s"" ""i""n"" ""g""r""a""p""h""m""l""-""a""t""t""r""i""b""u""t""e""s"".""x""s""d"" ""-""-"">"
 
-  <!--types as in graphml-parseinfo.xsd -->
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""k""e""y"".""n""a""m""e"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
 
-  <xs:simpleType name="graph.order.type" final="#all">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.order attribute of &lt;graph>.
-      graph.order.type is final, that is, it may not be extended
-                          or restricted.
-      graph.order.type is a restriction of xs:NMTOKEN
-      Allowed values: free, nodesfirst, adjacencylist.
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="free"/>
-      <xs:enumeration value="nodesfirst"/>
-      <xs:enumeration value="adjacencylist"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="graph.nodes.type" final="#all">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.nodes attribute of &lt;graph>.
-      graph.nodes.type is final, that is, it may not be extended
-                          or restricted.
-      graph.nodes.type is a restriction of xs:nonNegativeInteger
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:restriction base="xs:nonNegativeInteger"/>
-  </xs:simpleType>
-
-  <xs:simpleType name="graph.edges.type" final="#all">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.edges attribute of &lt;graph>.
-      graph.edges.type is final, that is, it may not be extended
-                          or restricted.
-      graph.edges.type is a restriction of xs:nonNegativeInteger
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:restriction base="xs:nonNegativeInteger"/>
-  </xs:simpleType>
-
-  <xs:simpleType name="graph.maxindegree.type" final="#all">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.maxindegree attribute of &lt;graph>.
-      graph.maxindegree.type is final, that is, it may not be extended
-                          or restricted.
-      graph.maxindegree.type is a restriction of xs:nonNegativeInteger
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:restriction base="xs:nonNegativeInteger"/>
-  </xs:simpleType>
-
-  <xs:simpleType name="graph.maxoutdegree.type" final="#all">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.maxoutdegree attribute of &lt;graph>.
-      graph.maxoutdegree.type is final, that is, it may not be extended
-                          or restricted.
-      graph.maxoutdegree.type is a restriction of xs:nonNegativeInteger
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:restriction base="xs:nonNegativeInteger"/>
-  </xs:simpleType>
-
-  <xs:simpleType name="graph.nodeids.type" final="#all">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.nodeids attribute of &lt;graph>.
-      graph.nodeids.type is final, that is, it may not be extended
-                          or restricted.
-      graph.nodeids.type is a restriction of xs:string
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="canonical"/>
-      <xs:enumeration value="free"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="graph.edgeids.type" final="#all">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.edgeids attribute of &lt;graph>.
-      graph.edgeids.type is final, that is, it may not be extended
-                          or restricted.
-      graph.edgeids.type is a restriction of xs:string
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="canonical"/>
-      <xs:enumeration value="free"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:attributeGroup name="graph.parseinfo.attrib">
-
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-     Definition of the attribute group graph.parseinfo.attrib.
-     This group consists of the seven attributes:
-     <ul>
-     <li><code>parse.nodeids</code></li> (fixed to 'canonical' meaning that the id attribute
-                      of &lt;node> follows the pattern 'n[number]),
-     <li><code>parse.edgeids</code></li> (fixed to 'canonical' meaning that the id attribute
-                      of &lt;edge> follows the pattern 'e[number]),
-     <li><code>parse.order</code></li> (required; one of the values 'nodesfirst', 
-                    'adjacencylist' or 'free'),
-     <li><code>parse.nodes</code></li> (required; number of nodes in this graph), 
-     <li><code>parse.edges</code></li> (required; number of edges in this graph), 
-     <li><code>parse.maxindegree</code></li> (optional; maximal indegree of a node in this graph),
-     <li><code>parse.maxoutdegree</code></li> (optional; maximal outdegree of a node in this graph)
-     </ul>
-    </xs:documentation>
-  </xs:annotation>
-
-    <xs:attribute name="parse.nodeids" type="graph.nodeids.type"/>
-    <xs:attribute name="parse.edgeids" type="graph.edgeids.type"/>
-    <xs:attribute name="parse.order" type="graph.order.type"/>
-    <xs:attribute name="parse.nodes" type="graph.nodes.type"/>
-    <xs:attribute name="parse.edges" type="graph.edges.type"/>
-    <xs:attribute name="parse.maxindegree" type="graph.maxindegree.type" use="optional"/>
-    <xs:attribute name="parse.maxoutdegree" type="graph.maxoutdegree.type" use="optional"/>
-  </xs:attributeGroup>
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""(""D""o""k""u""m""e""n""t""a""t""i""o""n"" ""d""e""r"" ""A""t""t""r""i""b""u""t""e""s"" ""E""r""w""e""i""t""e""r""u""n""g"";"" ""e""n""t""s""p""r""e""c""h""e""n""d""e"" ""S""t""e""l""l""e"".""h""t""m""l"")""""
+" "" "" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""a""t""t""r"".""n""a""m""e"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""k""e""y"">""."
+" "" "" "" "" "" "" "" ""k""e""y"".""n""a""m""e"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" "" "" ""k""e""y"".""n""a""m""e"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""N""M""T""O""K""E""N"
+" "" "" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")"
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N"""""/"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
 
 
-  <xs:simpleType name="node.indegree.type" final="#all">
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""k""e""y"".""t""y""p""e"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
 
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.indegree attribute of &lt;node>.
-      node.indegree.type is final, that is, it may not be extended
-                          or restricted.
-      node.indegree.type is a restriction of xs:nonNegativeInteger
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""(""D""o""k""u""m""e""n""t""a""t""i""o""n"" ""d""e""r"" ""A""t""t""r""i""b""u""t""e""s"" ""E""r""w""e""i""t""e""r""u""n""g"";"" ""e""n""t""s""p""r""e""c""h""e""n""d""e"" ""S""t""e""l""l""e"".""h""t""m""l"")""""
+" "" "" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""a""t""t""r"".""t""y""p""e"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""k""e""y"">""."
+" "" "" "" "" "" "" "" ""k""e""y"".""t""y""p""e"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" "" "" ""k""e""y"".""t""y""p""e"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""N""M""T""O""K""E""N"
+" "" "" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""b""o""o""l""e""a""n"","" ""i""n""t"","" ""l""o""n""g"","" ""f""l""o""a""t"","" ""d""o""u""b""l""e"","" ""s""t""r""i""n""g"","" ""c""o""m""p""l""e""x""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""b""o""o""l""e""a""n"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""i""n""t"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""l""o""n""g"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""f""l""o""a""t"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""d""o""u""b""l""e"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""s""t""r""i""n""g"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""c""o""m""p""l""e""x"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
 
-    <xs:restriction base="xs:nonNegativeInteger"/>
-  </xs:simpleType>
 
-  <xs:simpleType name="node.outdegree.type" final="#all">
+" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""k""e""y"".""a""t""t""r""i""b""u""t""e""s"".""a""t""t""r""i""b""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" "" "" ""D""e""f""i""n""i""t""i""o""n"" ""o""f"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""k""e""y"".""a""t""t""r""i""b""u""t""e""s"".""a""t""t""r""i""b""."
+" "" "" "" "" "" "" "" ""T""h""i""s"" ""g""r""o""u""p"" ""c""o""n""s""i""s""t""s"" ""o""f"" ""t""h""e"" ""t""w""o"" ""o""p""t""i""o""n""a""l"" ""a""t""t""r""i""b""u""t""e""s"
+" "" "" "" "" "" "" "" ""-"" ""a""t""t""r"".""n""a""m""e"" ""(""g""i""v""e""s"" ""t""h""e"" ""n""a""m""e"" ""f""o""r"" ""t""h""e"" ""d""a""t""a"" ""f""u""n""c""t""i""o""n"")"
+" "" "" "" "" "" "" "" ""-"" ""a""t""t""r"".""t""y""p""e"" ""(""d""e""c""l""a""r""e""s"" ""t""h""e"" ""r""a""n""g""e"" ""o""f"" ""v""a""l""u""e""s"" ""f""o""r"" ""t""h""e"" ""d""a""t""a"" ""f""u""n""c""t""i""o""n"")"
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""a""t""t""r"".""n""a""m""e""""" ""t""y""p""e""="""""k""e""y"".""n""a""m""e"".""t""y""p""e""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""a""t""t""r"".""t""y""p""e""""" ""t""y""p""e""="""""k""e""y"".""t""y""p""e"".""t""y""p""e""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
 
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-      Simple type for the parse.outdegree attribute of &lt;node>.
-      node.outdegree.type is final, that is, it may not be extended
-                          or restricted.
-      node.outdegree.type is a restriction of xs:nonNegativeInteger
-      Allowed values: (no restriction).
-    </xs:documentation>
-  </xs:annotation>
+" "" ""<""!""-""-""t""y""p""e""s"" ""a""s"" ""i""n"" ""g""r""a""p""h""m""l""-""p""a""r""s""e""i""n""f""o"".""x""s""d"" ""-""-"">"
 
-    <xs:restriction base="xs:nonNegativeInteger"/>
-  </xs:simpleType>
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""g""r""a""p""h"".""o""r""d""e""r"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
 
-  <xs:attributeGroup name="node.parseinfo.attrib">
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""o""r""d""e""r"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">""."
+" "" "" "" "" "" ""g""r""a""p""h"".""o""r""d""e""r"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""g""r""a""p""h"".""o""r""d""e""r"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""N""M""T""O""K""E""N"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""f""r""e""e"","" ""n""o""d""e""s""f""i""r""s""t"","" ""a""d""j""a""c""e""n""c""y""l""i""s""t""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
 
-  <xs:annotation>
-    <xs:documentation 
-        source="http://graphml.graphdrawing.org/"
-        xml:lang="en">
-     Definition of the attribute group node.parseinfo.attrib.
-     This group consists of two attributes
-     - parse.indegree (optional; indegree of this node),
-     - parse.outdegree (optional; outdegree of this node).
-    </xs:documentation>
-  </xs:annotation>
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""f""r""e""e"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""n""o""d""e""s""f""i""r""s""t"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""a""d""j""a""c""e""n""c""y""l""i""s""t"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
 
-    <xs:attribute name="parse.indegree" type="node.indegree.type" use="optional"/>
-    <xs:attribute name="parse.outdegree" type="node.outdegree.type" use="optional"/>
-  </xs:attributeGroup>
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""g""r""a""p""h"".""n""o""d""e""s"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
 
-</xs:schema>
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""n""o""d""e""s"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">""."
+" "" "" "" "" "" ""g""r""a""p""h"".""n""o""d""e""s"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""g""r""a""p""h"".""n""o""d""e""s"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"""""/"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""g""r""a""p""h"".""e""d""g""e""s"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""e""d""g""e""s"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">""."
+" "" "" "" "" "" ""g""r""a""p""h"".""e""d""g""e""s"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""g""r""a""p""h"".""e""d""g""e""s"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"""""/"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""g""r""a""p""h"".""m""a""x""i""n""d""e""g""r""e""e"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""m""a""x""i""n""d""e""g""r""e""e"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">""."
+" "" "" "" "" "" ""g""r""a""p""h"".""m""a""x""i""n""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""g""r""a""p""h"".""m""a""x""i""n""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"""""/"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""g""r""a""p""h"".""m""a""x""o""u""t""d""e""g""r""e""e"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""m""a""x""o""u""t""d""e""g""r""e""e"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">""."
+" "" "" "" "" "" ""g""r""a""p""h"".""m""a""x""o""u""t""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""g""r""a""p""h"".""m""a""x""o""u""t""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"""""/"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""g""r""a""p""h"".""n""o""d""e""i""d""s"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""n""o""d""e""i""d""s"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">""."
+" "" "" "" "" "" ""g""r""a""p""h"".""n""o""d""e""i""d""s"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""g""r""a""p""h"".""n""o""d""e""i""d""s"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""s""t""r""i""n""g"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""c""a""n""o""n""i""c""a""l"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""f""r""e""e"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""g""r""a""p""h"".""e""d""g""e""i""d""s"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""e""d""g""e""i""d""s"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""g""r""a""p""h"">""."
+" "" "" "" "" "" ""g""r""a""p""h"".""e""d""g""e""i""d""s"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""g""r""a""p""h"".""e""d""g""e""i""d""s"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""s""t""r""i""n""g"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""c""a""n""o""n""i""c""a""l"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""f""r""e""e"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""g""r""a""p""h"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" ""D""e""f""i""n""i""t""i""o""n"" ""o""f"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""g""r""a""p""h"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b""."
+" "" "" "" "" ""T""h""i""s"" ""g""r""o""u""p"" ""c""o""n""s""i""s""t""s"" ""o""f"" ""t""h""e"" ""s""e""v""e""n"" ""a""t""t""r""i""b""u""t""e""s"":"
+" "" "" "" "" ""<""u""l"">"
+" "" "" "" "" ""<""l""i"">""<""c""o""d""e"">""p""a""r""s""e"".""n""o""d""e""i""d""s""<""/""c""o""d""e"">""<""/""l""i"">"" ""(""f""i""x""e""d"" ""t""o"" ""'""c""a""n""o""n""i""c""a""l""'"" ""m""e""a""n""i""n""g"" ""t""h""a""t"" ""t""h""e"" ""i""d"" ""a""t""t""r""i""b""u""t""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f"" ""&""l""t"";""n""o""d""e"">"" ""f""o""l""l""o""w""s"" ""t""h""e"" ""p""a""t""t""e""r""n"" ""'""n""[""n""u""m""b""e""r""]"")"","
+" "" "" "" "" ""<""l""i"">""<""c""o""d""e"">""p""a""r""s""e"".""e""d""g""e""i""d""s""<""/""c""o""d""e"">""<""/""l""i"">"" ""(""f""i""x""e""d"" ""t""o"" ""'""c""a""n""o""n""i""c""a""l""'"" ""m""e""a""n""i""n""g"" ""t""h""a""t"" ""t""h""e"" ""i""d"" ""a""t""t""r""i""b""u""t""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f"" ""&""l""t"";""e""d""g""e"">"" ""f""o""l""l""o""w""s"" ""t""h""e"" ""p""a""t""t""e""r""n"" ""'""e""[""n""u""m""b""e""r""]"")"","
+" "" "" "" "" ""<""l""i"">""<""c""o""d""e"">""p""a""r""s""e"".""o""r""d""e""r""<""/""c""o""d""e"">""<""/""l""i"">"" ""(""r""e""q""u""i""r""e""d"";"" ""o""n""e"" ""o""f"" ""t""h""e"" ""v""a""l""u""e""s"" ""'""n""o""d""e""s""f""i""r""s""t""'"","" "
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""a""d""j""a""c""e""n""c""y""l""i""s""t""'"" ""o""r"" ""'""f""r""e""e""'"")"","
+" "" "" "" "" ""<""l""i"">""<""c""o""d""e"">""p""a""r""s""e"".""n""o""d""e""s""<""/""c""o""d""e"">""<""/""l""i"">"" ""(""r""e""q""u""i""r""e""d"";"" ""n""u""m""b""e""r"" ""o""f"" ""n""o""d""e""s"" ""i""n"" ""t""h""i""s"" ""g""r""a""p""h"")"","" "
+" "" "" "" "" ""<""l""i"">""<""c""o""d""e"">""p""a""r""s""e"".""e""d""g""e""s""<""/""c""o""d""e"">""<""/""l""i"">"" ""(""r""e""q""u""i""r""e""d"";"" ""n""u""m""b""e""r"" ""o""f"" ""e""d""g""e""s"" ""i""n"" ""t""h""i""s"" ""g""r""a""p""h"")"","" "
+" "" "" "" "" ""<""l""i"">""<""c""o""d""e"">""p""a""r""s""e"".""m""a""x""i""n""d""e""g""r""e""e""<""/""c""o""d""e"">""<""/""l""i"">"" ""(""o""p""t""i""o""n""a""l"";"" ""m""a""x""i""m""a""l"" ""i""n""d""e""g""r""e""e"" ""o""f"" ""a"" ""n""o""d""e"" ""i""n"" ""t""h""i""s"" ""g""r""a""p""h"")"","
+" "" "" "" "" ""<""l""i"">""<""c""o""d""e"">""p""a""r""s""e"".""m""a""x""o""u""t""d""e""g""r""e""e""<""/""c""o""d""e"">""<""/""l""i"">"" ""(""o""p""t""i""o""n""a""l"";"" ""m""a""x""i""m""a""l"" ""o""u""t""d""e""g""r""e""e"" ""o""f"" ""a"" ""n""o""d""e"" ""i""n"" ""t""h""i""s"" ""g""r""a""p""h"")"
+" "" "" "" "" ""<""/""u""l"">"
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""n""o""d""e""i""d""s""""" ""t""y""p""e""="""""g""r""a""p""h"".""n""o""d""e""i""d""s"".""t""y""p""e"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""e""d""g""e""i""d""s""""" ""t""y""p""e""="""""g""r""a""p""h"".""e""d""g""e""i""d""s"".""t""y""p""e"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""o""r""d""e""r""""" ""t""y""p""e""="""""g""r""a""p""h"".""o""r""d""e""r"".""t""y""p""e"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""n""o""d""e""s""""" ""t""y""p""e""="""""g""r""a""p""h"".""n""o""d""e""s"".""t""y""p""e"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""e""d""g""e""s""""" ""t""y""p""e""="""""g""r""a""p""h"".""e""d""g""e""s"".""t""y""p""e"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""m""a""x""i""n""d""e""g""r""e""e""""" ""t""y""p""e""="""""g""r""a""p""h"".""m""a""x""i""n""d""e""g""r""e""e"".""t""y""p""e""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""m""a""x""o""u""t""d""e""g""r""e""e""""" ""t""y""p""e""="""""g""r""a""p""h"".""m""a""x""o""u""t""d""e""g""r""e""e"".""t""y""p""e""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
+
+
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""n""o""d""e"".""i""n""d""e""g""r""e""e"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""i""n""d""e""g""r""e""e"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""n""o""d""e"">""."
+" "" "" "" "" "" ""n""o""d""e"".""i""n""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""n""o""d""e"".""i""n""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"""""/"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""n""o""d""e"".""o""u""t""d""e""g""r""e""e"".""t""y""p""e""""" ""f""i""n""a""l""="""""#""a""l""l""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" "" ""S""i""m""p""l""e"" ""t""y""p""e"" ""f""o""r"" ""t""h""e"" ""p""a""r""s""e"".""o""u""t""d""e""g""r""e""e"" ""a""t""t""r""i""b""u""t""e"" ""o""f"" ""&""l""t"";""n""o""d""e"">""."
+" "" "" "" "" "" ""n""o""d""e"".""o""u""t""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""f""i""n""a""l"","" ""t""h""a""t"" ""i""s"","" ""i""t"" ""m""a""y"" ""n""o""t"" ""b""e"" ""e""x""t""e""n""d""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r"" ""r""e""s""t""r""i""c""t""e""d""."
+" "" "" "" "" "" ""n""o""d""e"".""o""u""t""d""e""g""r""e""e"".""t""y""p""e"" ""i""s"" ""a"" ""r""e""s""t""r""i""c""t""i""o""n"" ""o""f"" ""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"
+" "" "" "" "" "" ""A""l""l""o""w""e""d"" ""v""a""l""u""e""s"":"" ""(""n""o"" ""r""e""s""t""r""i""c""t""i""o""n"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""n""o""n""N""e""g""a""t""i""v""e""I""n""t""e""g""e""r"""""/"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+
+" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""n""o""d""e"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b""""">"
+
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"" "
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""""
+" "" "" "" "" "" "" "" ""x""m""l"":""l""a""n""g""="""""e""n""""">"
+" "" "" "" "" ""D""e""f""i""n""i""t""i""o""n"" ""o""f"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""n""o""d""e"".""p""a""r""s""e""i""n""f""o"".""a""t""t""r""i""b""."
+" "" "" "" "" ""T""h""i""s"" ""g""r""o""u""p"" ""c""o""n""s""i""s""t""s"" ""o""f"" ""t""w""o"" ""a""t""t""r""i""b""u""t""e""s"
+" "" "" "" "" ""-"" ""p""a""r""s""e"".""i""n""d""e""g""r""e""e"" ""(""o""p""t""i""o""n""a""l"";"" ""i""n""d""e""g""r""e""e"" ""o""f"" ""t""h""i""s"" ""n""o""d""e"")"","
+" "" "" "" "" ""-"" ""p""a""r""s""e"".""o""u""t""d""e""g""r""e""e"" ""(""o""p""t""i""o""n""a""l"";"" ""o""u""t""d""e""g""r""e""e"" ""o""f"" ""t""h""i""s"" ""n""o""d""e"")""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""i""n""d""e""g""r""e""e""""" ""t""y""p""e""="""""n""o""d""e"".""i""n""d""e""g""r""e""e"".""t""y""p""e""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""p""a""r""s""e"".""o""u""t""d""e""g""r""e""e""""" ""t""y""p""e""="""""n""o""d""e"".""o""u""t""d""e""g""r""e""e"".""t""y""p""e""""" ""u""s""e""="""""o""p""t""i""o""n""a""l"""""/"">"
+" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
+
+"<""/""x""s"":""s""c""h""e""m""a"">"

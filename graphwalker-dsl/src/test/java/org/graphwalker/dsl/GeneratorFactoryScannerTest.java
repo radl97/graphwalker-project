@@ -1,13 +1,13 @@
-package org.graphwalker.dsl;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""d""s""l"";"
 
-import org.graphwalker.dsl.antlr.generator.GeneratorFactoryScanner;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""d""s""l"".""a""n""t""l""r"".""g""e""n""e""r""a""t""o""r"".""G""e""n""e""r""a""t""o""r""F""a""c""t""o""r""y""S""c""a""n""n""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-import static org.junit.Assert.assertNotNull;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""N""o""t""N""u""l""l"";"
 
-public class GeneratorFactoryScannerTest {
-  @Test
-  public void validPluginGenerator() {
-    assertNotNull(GeneratorFactoryScanner.get("PluginGenerator"));
-  }
-}
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""G""e""n""e""r""a""t""o""r""F""a""c""t""o""r""y""S""c""a""n""n""e""r""T""e""s""t"" ""{"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""a""l""i""d""P""l""u""g""i""n""G""e""n""e""r""a""t""o""r""("")"" ""{"
+" "" "" "" ""a""s""s""e""r""t""N""o""t""N""u""l""l""(""G""e""n""e""r""a""t""o""r""F""a""c""t""o""r""y""S""c""a""n""n""e""r"".""g""e""t""("""""P""l""u""g""i""n""G""e""n""e""r""a""t""o""r""""")"")"";"
+" "" ""}"
+"}"

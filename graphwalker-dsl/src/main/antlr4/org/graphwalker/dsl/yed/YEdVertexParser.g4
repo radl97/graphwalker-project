@@ -1,60 +1,60 @@
-parser grammar YEdVertexParser;
+"p""a""r""s""e""r"" ""g""r""a""m""m""a""r"" ""Y""E""d""V""e""r""t""e""x""P""a""r""s""e""r"";"
 
-options {
-	tokenVocab=YEdLabelLexer;
-}
+"o""p""t""i""o""n""s"" ""{"
+"	""t""o""k""e""n""V""o""c""a""b""=""Y""E""d""L""a""b""e""l""L""e""x""e""r"";"
+"}"
 
-parse
- locals [java.util.Set<String> fields = new java.util.HashSet<String>();]
- : start
- | field* EOF
- ;
+"p""a""r""s""e"
+" ""l""o""c""a""l""s"" ""[""j""a""v""a"".""u""t""i""l"".""S""e""t""<""S""t""r""i""n""g"">"" ""f""i""e""l""d""s"" ""="" ""n""e""w"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""S""e""t""<""S""t""r""i""n""g"">""("")"";""]"
+" "":"" ""s""t""a""r""t"
+" ""|"" ""f""i""e""l""d""*"" ""E""O""F"
+" "";"
 
-field
- : {!$parse::fields.contains("names")}? names {$parse::fields.add("names");}
- | {!$parse::fields.contains("shared")}? shared {$parse::fields.add("shared");}
- | {!$parse::fields.contains("blocked")}? blocked {$parse::fields.add("blocked");}
- | {!$parse::fields.contains("actions")}? actions {$parse::fields.add("actions");}
- | {!$parse::fields.contains("reqtags")}? reqtags {$parse::fields.add("reqtags");}
- | WHITESPACE
- ;
+"f""i""e""l""d"
+" "":"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""n""a""m""e""s""""")""}""?"" ""n""a""m""e""s"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""n""a""m""e""s""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""s""h""a""r""e""d""""")""}""?"" ""s""h""a""r""e""d"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""s""h""a""r""e""d""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""b""l""o""c""k""e""d""""")""}""?"" ""b""l""o""c""k""e""d"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""b""l""o""c""k""e""d""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""a""c""t""i""o""n""s""""")""}""?"" ""a""c""t""i""o""n""s"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""a""c""t""i""o""n""s""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""r""e""q""t""a""g""s""""")""}""?"" ""r""e""q""t""a""g""s"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""r""e""q""t""a""g""s""""")"";""}"
+" ""|"" ""W""H""I""T""E""S""P""A""C""E"
+" "";"
 
-start
- : WHITESPACE* (START) WHITESPACE*
- ;
+"s""t""a""r""t"
+" "":"" ""W""H""I""T""E""S""P""A""C""E""*"" ""(""S""T""A""R""T"")"" ""W""H""I""T""E""S""P""A""C""E""*"
+" "";"
 
-shared
- : SHARED WHITESPACE* COLON WHITESPACE* Identifier
- ;
+"s""h""a""r""e""d"
+" "":"" ""S""H""A""R""E""D"" ""W""H""I""T""E""S""P""A""C""E""*"" ""C""O""L""O""N"" ""W""H""I""T""E""S""P""A""C""E""*"" ""I""d""e""n""t""i""f""i""e""r"
+" "";"
 
-names
- : name (SEMICOLON name)*
- ;
+"n""a""m""e""s"
+" "":"" ""n""a""m""e"" ""(""S""E""M""I""C""O""L""O""N"" ""n""a""m""e"")""*"
+" "";"
 
-name
- : Identifier (DOT Identifier)*
- ;
+"n""a""m""e"
+" "":"" ""I""d""e""n""t""i""f""i""e""r"" ""(""D""O""T"" ""I""d""e""n""t""i""f""i""e""r"")""*"
+" "";"
 
-blocked
- : BLOCKED
- ;
+"b""l""o""c""k""e""d"
+" "":"" ""B""L""O""C""K""E""D"
+" "";"
 
-actions
- : INIT WHITESPACE* COLON WHITESPACE* (action)+
- ;
+"a""c""t""i""o""n""s"
+" "":"" ""I""N""I""T"" ""W""H""I""T""E""S""P""A""C""E""*"" ""C""O""L""O""N"" ""W""H""I""T""E""S""P""A""C""E""*"" ""(""a""c""t""i""o""n"")""+"
+" "";"
 
-action
- : .+ SEMICOLON
- ;
+"a""c""t""i""o""n"
+" "":"" "".""+"" ""S""E""M""I""C""O""L""O""N"
+" "";"
 
-reqtags
- : REQTAG WHITESPACE* (COLON | ASSIGN) WHITESPACE* reqtagList
- ;
+"r""e""q""t""a""g""s"
+" "":"" ""R""E""Q""T""A""G"" ""W""H""I""T""E""S""P""A""C""E""*"" ""(""C""O""L""O""N"" ""|"" ""A""S""S""I""G""N"")"" ""W""H""I""T""E""S""P""A""C""E""*"" ""r""e""q""t""a""g""L""i""s""t"
+" "";"
 
-reqtagList
- : (reqtag WHITESPACE* COMMA WHITESPACE*)* reqtag
- ;
+"r""e""q""t""a""g""L""i""s""t"
+" "":"" ""(""r""e""q""t""a""g"" ""W""H""I""T""E""S""P""A""C""E""*"" ""C""O""M""M""A"" ""W""H""I""T""E""S""P""A""C""E""*"")""*"" ""r""e""q""t""a""g"
+" "";"
 
-reqtag
- : ~(COMMA)+
- ;
+"r""e""q""t""a""g"
+" "":"" ""~""(""C""O""M""M""A"")""+"
+" "";"

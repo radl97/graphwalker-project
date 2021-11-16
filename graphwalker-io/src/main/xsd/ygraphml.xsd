@@ -1,105 +1,105 @@
-<?xml version="1.0"?>
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0"""""?"">"
 
-<!-- Header -->
-<xs:schema
-    targetNamespace="http://graphml.graphdrawing.org/xmlns"
+"<""!""-""-"" ""H""e""a""d""e""r"" ""-""-"">"
+"<""x""s"":""s""c""h""e""m""a"
+" "" "" "" ""t""a""r""g""e""t""N""a""m""e""s""p""a""c""e""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
 
-    xmlns="http://graphml.graphdrawing.org/xmlns"
-    xmlns:g="http://graphml.graphdrawing.org/xmlns"
-    xmlns:y="http://www.yworks.com/xml/graphml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+" "" "" "" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
+" "" "" "" ""x""m""l""n""s"":""g""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
+" "" "" "" ""x""m""l""n""s"":""y""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""
+" "" "" "" ""x""m""l""n""s"":""x""s""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""""
+" "" "" "" ""x""m""l""n""s"":""x""l""i""n""k""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""1""9""9""9""/""x""l""i""n""k""""
 
-    elementFormDefault="qualified"
-    attributeFormDefault="unqualified"
-    >
+" "" "" "" ""e""l""e""m""e""n""t""F""o""r""m""D""e""f""a""u""l""t""="""""q""u""a""l""i""f""i""e""d""""
+" "" "" "" ""a""t""t""r""i""b""u""t""e""F""o""r""m""D""e""f""a""u""l""t""="""""u""n""q""u""a""l""i""f""i""e""d""""
+" "" "" "" "">"
 
-  <xs:annotation>
-    <xs:documentation>
-      GraphML core language definitions including GraphML attributes and GraphML parseinfo.
-    </xs:documentation>
-  </xs:annotation>
-  <xs:import namespace="http://www.yworks.com/xml/graphml" schemaLocation="yfeatures.xsd"/>
+" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""G""r""a""p""h""M""L"" ""c""o""r""e"" ""l""a""n""g""u""a""g""e"" ""d""e""f""i""n""i""t""i""o""n""s"" ""i""n""c""l""u""d""i""n""g"" ""G""r""a""p""h""M""L"" ""a""t""t""r""i""b""u""t""e""s"" ""a""n""d"" ""G""r""a""p""h""M""L"" ""p""a""r""s""e""i""n""f""o""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" ""<""x""s"":""i""m""p""o""r""t"" ""n""a""m""e""s""p""a""c""e""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""" ""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""y""f""e""a""t""u""r""e""s"".""x""s""d"""""/"">"
 
-  <!--<xs:include schemaLocation="graphml-parseinfo.xsd"/>-->
+" "" ""<""!""-""-""<""x""s"":""i""n""c""l""u""d""e"" ""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""g""r""a""p""h""m""l""-""p""a""r""s""e""i""n""f""o"".""x""s""d"""""/"">""-""-"">"
 
-  <!-- Redefinition of the elements in the graphml-structure schema -->
-  <xs:redefine schemaLocation="graphml.xsd">
+" "" ""<""!""-""-"" ""R""e""d""e""f""i""n""i""t""i""o""n"" ""o""f"" ""t""h""e"" ""e""l""e""m""e""n""t""s"" ""i""n"" ""t""h""e"" ""g""r""a""p""h""m""l""-""s""t""r""u""c""t""u""r""e"" ""s""c""h""e""m""a"" ""-""-"">"
+" "" ""<""x""s"":""r""e""d""e""f""i""n""e"" ""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""g""r""a""p""h""m""l"".""x""s""d""""">"
 
-    <xs:attributeGroup name="key.extra.attrib">
-      <xs:annotation>
-        <xs:documentation>
-          Redefinition of file graphml-structure.xsd.
-          <p>Extends the attribute group key.extra.attrib (which takes
-            part in the attribute list of &lt;key>) by adding the
-            attribute yfiles.type which is defined below.
-          </p>
-        </xs:documentation>
-      </xs:annotation>
-      <xs:attributeGroup ref="key.extra.attrib"/>
-      <xs:attribute name="yfiles.type" type="xs:string" use="optional">
-        <xs:annotation>
-          <xs:documentation>
-            Custom yfiles specific attribute that allows to specify an additional data type.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:attributeGroup>
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""k""e""y"".""e""x""t""r""a"".""a""t""t""r""i""b""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""R""e""d""e""f""i""n""i""t""i""o""n"" ""o""f"" ""f""i""l""e"" ""g""r""a""p""h""m""l""-""s""t""r""u""c""t""u""r""e"".""x""s""d""."
+" "" "" "" "" "" "" "" "" "" ""<""p"">""E""x""t""e""n""d""s"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""k""e""y"".""e""x""t""r""a"".""a""t""t""r""i""b"" ""(""w""h""i""c""h"" ""t""a""k""e""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""p""a""r""t"" ""i""n"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""l""i""s""t"" ""o""f"" ""&""l""t"";""k""e""y"">"")"" ""b""y"" ""a""d""d""i""n""g"" ""t""h""e"
+" "" "" "" "" "" "" "" "" "" "" "" ""a""t""t""r""i""b""u""t""e"" ""y""f""i""l""e""s"".""t""y""p""e"" ""w""h""i""c""h"" ""i""s"" ""d""e""f""i""n""e""d"" ""b""e""l""o""w""."
+" "" "" "" "" "" "" "" "" "" ""<""/""p"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""k""e""y"".""e""x""t""r""a"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""y""f""i""l""e""s"".""t""y""p""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""C""u""s""t""o""m"" ""y""f""i""l""e""s"" ""s""p""e""c""i""f""i""c"" ""a""t""t""r""i""b""u""t""e"" ""t""h""a""t"" ""a""l""l""o""w""s"" ""t""o"" ""s""p""e""c""i""f""y"" ""a""n"" ""a""d""d""i""t""i""o""n""a""l"" ""d""a""t""a"" ""t""y""p""e""."
+" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
 
-    <!-- Definition of the different grouping types -->
-    <!-- The grouping type is stored as attribute at the node element -->
-    <xs:attributeGroup name="node.extra.attrib">
-      <xs:annotation>
-        <xs:documentation>
-          Redefinition of file graphml-structure.xsd.
-          <p>Extends the attribute group node.extra.attrib (which takes
-            part in the attribute list of &lt;node>) by adding a
-            yfiles specific attribute for the folder type.
-          </p>
-        </xs:documentation>
-      </xs:annotation>
-      <xs:attributeGroup ref="node.extra.attrib"/>
-      <xs:attribute name="yfiles.foldertype" type="yfiles.foldertype.type" use="optional">
-        <xs:annotation>
-          <xs:documentation>
-            The foldertype for group/folder nodes.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:attributeGroup>
+" "" "" "" ""<""!""-""-"" ""D""e""f""i""n""i""t""i""o""n"" ""o""f"" ""t""h""e"" ""d""i""f""f""e""r""e""n""t"" ""g""r""o""u""p""i""n""g"" ""t""y""p""e""s"" ""-""-"">"
+" "" "" "" ""<""!""-""-"" ""T""h""e"" ""g""r""o""u""p""i""n""g"" ""t""y""p""e"" ""i""s"" ""s""t""o""r""e""d"" ""a""s"" ""a""t""t""r""i""b""u""t""e"" ""a""t"" ""t""h""e"" ""n""o""d""e"" ""e""l""e""m""e""n""t"" ""-""-"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""n""a""m""e""="""""n""o""d""e"".""e""x""t""r""a"".""a""t""t""r""i""b""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""R""e""d""e""f""i""n""i""t""i""o""n"" ""o""f"" ""f""i""l""e"" ""g""r""a""p""h""m""l""-""s""t""r""u""c""t""u""r""e"".""x""s""d""."
+" "" "" "" "" "" "" "" "" "" ""<""p"">""E""x""t""e""n""d""s"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""g""r""o""u""p"" ""n""o""d""e"".""e""x""t""r""a"".""a""t""t""r""i""b"" ""(""w""h""i""c""h"" ""t""a""k""e""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""p""a""r""t"" ""i""n"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""l""i""s""t"" ""o""f"" ""&""l""t"";""n""o""d""e"">"")"" ""b""y"" ""a""d""d""i""n""g"" ""a"
+" "" "" "" "" "" "" "" "" "" "" "" ""y""f""i""l""e""s"" ""s""p""e""c""i""f""i""c"" ""a""t""t""r""i""b""u""t""e"" ""f""o""r"" ""t""h""e"" ""f""o""l""d""e""r"" ""t""y""p""e""."
+" "" "" "" "" "" "" "" "" "" ""<""/""p"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"" ""r""e""f""="""""n""o""d""e"".""e""x""t""r""a"".""a""t""t""r""i""b"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""y""f""i""l""e""s"".""f""o""l""d""e""r""t""y""p""e""""" ""t""y""p""e""="""""y""f""i""l""e""s"".""f""o""l""d""e""r""t""y""p""e"".""t""y""p""e""""" ""u""s""e""="""""o""p""t""i""o""n""a""l""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""T""h""e"" ""f""o""l""d""e""r""t""y""p""e"" ""f""o""r"" ""g""r""o""u""p""/""f""o""l""d""e""r"" ""n""o""d""e""s""."
+" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e""G""r""o""u""p"">"
 
-    <xs:complexType name="data-extension.type">
-      <xs:complexContent mixed="true">
-        <xs:extension base="data-extension.type">
-          <xs:sequence>
-            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="strict"/>
-          </xs:sequence>
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:redefine>
+" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"" ""n""a""m""e""="""""d""a""t""a""-""e""x""t""e""n""s""i""o""n"".""t""y""p""e""""">"
+" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""C""o""n""t""e""n""t"" ""m""i""x""e""d""="""""t""r""u""e""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""e""x""t""e""n""s""i""o""n"" ""b""a""s""e""="""""d""a""t""a""-""e""x""t""e""n""s""i""o""n"".""t""y""p""e""""">"
+" "" "" "" "" "" "" "" "" "" ""<""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""n""y"" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d""""" ""p""r""o""c""e""s""s""C""o""n""t""e""n""t""s""="""""s""t""r""i""c""t"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""e""x""t""e""n""s""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""C""o""n""t""e""n""t"">"
+" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" ""<""/""x""s"":""r""e""d""e""f""i""n""e"">"
 
-  <!-- Type of Grouping -->
-  <xs:simpleType name="yfiles.foldertype.type">
-    <xs:annotation>
-      <xs:documentation>
-        The valid folder types for a folder/group node.
-        <p>Valid values are
-          <ul>
-            <li><b>folder</b>: for folder nodes</li>
-            <li><b>group</b>: for group nodes</li>
-            <li><b>leaf</b>: for leaf nodes (this is the implied value)</li>
-          </ul>
-        </p>
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="folder"/>
-      <xs:enumeration value="group"/>
-      <xs:enumeration value="leaf"/>
-    </xs:restriction>
-  </xs:simpleType>
+" "" ""<""!""-""-"" ""T""y""p""e"" ""o""f"" ""G""r""o""u""p""i""n""g"" ""-""-"">"
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""y""f""i""l""e""s"".""f""o""l""d""e""r""t""y""p""e"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""T""h""e"" ""v""a""l""i""d"" ""f""o""l""d""e""r"" ""t""y""p""e""s"" ""f""o""r"" ""a"" ""f""o""l""d""e""r""/""g""r""o""u""p"" ""n""o""d""e""."
+" "" "" "" "" "" "" "" ""<""p"">""V""a""l""i""d"" ""v""a""l""u""e""s"" ""a""r""e"
+" "" "" "" "" "" "" "" "" "" ""<""u""l"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""f""o""l""d""e""r""<""/""b"">"":"" ""f""o""r"" ""f""o""l""d""e""r"" ""n""o""d""e""s""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""g""r""o""u""p""<""/""b"">"":"" ""f""o""r"" ""g""r""o""u""p"" ""n""o""d""e""s""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""l""e""a""f""<""/""b"">"":"" ""f""o""r"" ""l""e""a""f"" ""n""o""d""e""s"" ""(""t""h""i""s"" ""i""s"" ""t""h""e"" ""i""m""p""l""i""e""d"" ""v""a""l""u""e"")""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""u""l"">"
+" "" "" "" "" "" "" "" ""<""/""p"">"
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""f""o""l""d""e""r"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""g""r""o""u""p"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""l""e""a""f"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
 
-</xs:schema>
+"<""/""x""s"":""s""c""h""e""m""a"">"
 
 

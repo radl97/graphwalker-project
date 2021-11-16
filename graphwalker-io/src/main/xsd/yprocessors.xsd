@@ -1,87 +1,87 @@
-<?xml version="1.0"?>
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0"""""?"">"
 
-<!-- Header -->
-<xs:schema
-    targetNamespace="http://www.yworks.com/xml/graphml"
+"<""!""-""-"" ""H""e""a""d""e""r"" ""-""-"">"
+"<""x""s"":""s""c""h""e""m""a"
+" "" "" "" ""t""a""r""g""e""t""N""a""m""e""s""p""a""c""e""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""
 
-    xmlns="http://www.yworks.com/xml/graphml"
-    xmlns:g="http://graphml.graphdrawing.org/xmlns"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+" "" "" "" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""
+" "" "" "" ""x""m""l""n""s"":""g""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
+" "" "" "" ""x""m""l""n""s"":""x""s""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""""
+" "" "" "" ""x""m""l""n""s"":""x""l""i""n""k""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""1""9""9""9""/""x""l""i""n""k""""
 
-    elementFormDefault="qualified"
-    attributeFormDefault="unqualified"
-    >
+" "" "" "" ""e""l""e""m""e""n""t""F""o""r""m""D""e""f""a""u""l""t""="""""q""u""a""l""i""f""i""e""d""""
+" "" "" "" ""a""t""t""r""i""b""u""t""e""F""o""r""m""D""e""f""a""u""l""t""="""""u""n""q""u""a""l""i""f""i""e""d""""
+" "" "" "" "">"
 
-  <!-- Processor -->
-  <xs:complexType name="Processor.type">
-    <xs:annotation>
-      <xs:documentation>
-        Complex type definitions for a graphml postprocessor.
-        <p>Postprocessors are executed after the graph has been loaded.</p>
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Option" minOccurs="0" maxOccurs="unbounded">
-        <xs:annotation>
-          <xs:documentation>
-            Type definitions for the options for a graphml postprocessor.
-            <p>These options are the same as for xml serialized YModules.</p>
-          </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:attribute name="name" type="xs:string" use="required">
-            <xs:annotation>
-              <xs:documentation>
-                The name of the option.
-              </xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="value" type="xs:string" use="required">
-            <xs:annotation>
-              <xs:documentation>
-                The value of the option.
-              </xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="class" type="xs:string" use="required">
-      <xs:annotation>
-        <xs:documentation>
-          The class of the postprocessor.
-          <p>This must resolve to a subclass of y.option.yModule</p>
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:complexType>
+" "" ""<""!""-""-"" ""P""r""o""c""e""s""s""o""r"" ""-""-"">"
+" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"" ""n""a""m""e""="""""P""r""o""c""e""s""s""o""r"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""C""o""m""p""l""e""x"" ""t""y""p""e"" ""d""e""f""i""n""i""t""i""o""n""s"" ""f""o""r"" ""a"" ""g""r""a""p""h""m""l"" ""p""o""s""t""p""r""o""c""e""s""s""o""r""."
+" "" "" "" "" "" "" "" ""<""p"">""P""o""s""t""p""r""o""c""e""s""s""o""r""s"" ""a""r""e"" ""e""x""e""c""u""t""e""d"" ""a""f""t""e""r"" ""t""h""e"" ""g""r""a""p""h"" ""h""a""s"" ""b""e""e""n"" ""l""o""a""d""e""d"".""<""/""p"">"
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""O""p""t""i""o""n""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""T""y""p""e"" ""d""e""f""i""n""i""t""i""o""n""s"" ""f""o""r"" ""t""h""e"" ""o""p""t""i""o""n""s"" ""f""o""r"" ""a"" ""g""r""a""p""h""m""l"" ""p""o""s""t""p""r""o""c""e""s""s""o""r""."
+" "" "" "" "" "" "" "" "" "" "" "" ""<""p"">""T""h""e""s""e"" ""o""p""t""i""o""n""s"" ""a""r""e"" ""t""h""e"" ""s""a""m""e"" ""a""s"" ""f""o""r"" ""x""m""l"" ""s""e""r""i""a""l""i""z""e""d"" ""Y""M""o""d""u""l""e""s"".""<""/""p"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""n""a""m""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""T""h""e"" ""n""a""m""e"" ""o""f"" ""t""h""e"" ""o""p""t""i""o""n""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""v""a""l""u""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""T""h""e"" ""v""a""l""u""e"" ""o""f"" ""t""h""e"" ""o""p""t""i""o""n""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
+" "" "" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
+" "" "" "" ""<""/""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""c""l""a""s""s""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""r""e""q""u""i""r""e""d""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""T""h""e"" ""c""l""a""s""s"" ""o""f"" ""t""h""e"" ""p""o""s""t""p""r""o""c""e""s""s""o""r""."
+" "" "" "" "" "" "" "" "" "" ""<""p"">""T""h""i""s"" ""m""u""s""t"" ""r""e""s""o""l""v""e"" ""t""o"" ""a"" ""s""u""b""c""l""a""s""s"" ""o""f"" ""y"".""o""p""t""i""o""n"".""y""M""o""d""u""l""e""<""/""p"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
 
-  <!-- Postprocessors -->
-  <xs:complexType name="Postprocessors.type">
-    <xs:annotation>
-      <xs:documentation>
-        Complex type definitions for a list of graphml postprocessors.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="Processor" type="Processor.type" minOccurs="0" maxOccurs="unbounded">
-        <xs:annotation>
-          <xs:documentation>
-            Postprocessor element definition.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
+" "" ""<""!""-""-"" ""P""o""s""t""p""r""o""c""e""s""s""o""r""s"" ""-""-"">"
+" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"" ""n""a""m""e""="""""P""o""s""t""p""r""o""c""e""s""s""o""r""s"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""C""o""m""p""l""e""x"" ""t""y""p""e"" ""d""e""f""i""n""i""t""i""o""n""s"" ""f""o""r"" ""a"" ""l""i""s""t"" ""o""f"" ""g""r""a""p""h""m""l"" ""p""o""s""t""p""r""o""c""e""s""s""o""r""s""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" "" "" "" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""P""r""o""c""e""s""s""o""r""""" ""t""y""p""e""="""""P""r""o""c""e""s""s""o""r"".""t""y""p""e""""" ""m""i""n""O""c""c""u""r""s""="""""0""""" ""m""a""x""O""c""c""u""r""s""="""""u""n""b""o""u""n""d""e""d""""">"
+" "" "" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""P""o""s""t""p""r""o""c""e""s""s""o""r"" ""e""l""e""m""e""n""t"" ""d""e""f""i""n""i""t""i""o""n""."
+" "" "" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
+" "" "" "" ""<""/""x""s"":""s""e""q""u""e""n""c""e"">"
+" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
 
-  <!-- Element Definition for  Postprocessors -->
-  <xs:element name="Postprocessors" type="Postprocessors.type">
-    <xs:annotation>
-      <xs:documentation>
-        Postprocessors element definition.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
+" "" ""<""!""-""-"" ""E""l""e""m""e""n""t"" ""D""e""f""i""n""i""t""i""o""n"" ""f""o""r"" "" ""P""o""s""t""p""r""o""c""e""s""s""o""r""s"" ""-""-"">"
+" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""P""o""s""t""p""r""o""c""e""s""s""o""r""s""""" ""t""y""p""e""="""""P""o""s""t""p""r""o""c""e""s""s""o""r""s"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""P""o""s""t""p""r""o""c""e""s""s""o""r""s"" ""e""l""e""m""e""n""t"" ""d""e""f""i""n""i""t""i""o""n""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-</xs:schema>
+"<""/""x""s"":""s""c""h""e""m""a"">"

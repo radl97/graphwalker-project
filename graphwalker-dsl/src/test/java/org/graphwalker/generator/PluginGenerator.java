@@ -1,47 +1,47 @@
-package org.graphwalker.generator;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""g""e""n""e""r""a""t""o""r"";"
 
-import org.graphwalker.core.condition.StopCondition;
-import org.graphwalker.core.generator.NoPathFoundException;
-import org.graphwalker.core.generator.PathGeneratorBase;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.model.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""n""d""i""t""i""o""n"".""S""t""o""p""C""o""n""d""i""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""N""o""P""a""t""h""F""o""u""n""d""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""P""a""t""h""G""e""n""e""r""a""t""o""r""B""a""s""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r""F""a""c""t""o""r""y"";"
 
-import java.util.List;
-import java.util.Random;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""R""a""n""d""o""m"";"
 
-/**
- * A generator that is a code copy of the RandomPathGenerator.
- * It serves the purpose of verifying the runtime loading of an plugin generator
- */
-public class PluginGenerator extends PathGeneratorBase<StopCondition> {
+"/""*""*"
+" ""*"" ""A"" ""g""e""n""e""r""a""t""o""r"" ""t""h""a""t"" ""i""s"" ""a"" ""c""o""d""e"" ""c""o""p""y"" ""o""f"" ""t""h""e"" ""R""a""n""d""o""m""P""a""t""h""G""e""n""e""r""a""t""o""r""."
+" ""*"" ""I""t"" ""s""e""r""v""e""s"" ""t""h""e"" ""p""u""r""p""o""s""e"" ""o""f"" ""v""e""r""i""f""y""i""n""g"" ""t""h""e"" ""r""u""n""t""i""m""e"" ""l""o""a""d""i""n""g"" ""o""f"" ""a""n"" ""p""l""u""g""i""n"" ""g""e""n""e""r""a""t""o""r"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""P""l""u""g""i""n""G""e""n""e""r""a""t""o""r"" ""e""x""t""e""n""d""s"" ""P""a""t""h""G""e""n""e""r""a""t""o""r""B""a""s""e""<""S""t""o""p""C""o""n""d""i""t""i""o""n"">"" ""{"
 
-  private static final Logger LOG = LoggerFactory.getLogger(PluginGenerator.class);
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""L""o""g""g""e""r"" ""L""O""G"" ""="" ""L""o""g""g""e""r""F""a""c""t""o""r""y"".""g""e""t""L""o""g""g""e""r""(""P""l""u""g""i""n""G""e""n""e""r""a""t""o""r"".""c""l""a""s""s"")"";"
 
-  private final Random random = new Random(System.nanoTime());
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""R""a""n""d""o""m"" ""r""a""n""d""o""m"" ""="" ""n""e""w"" ""R""a""n""d""o""m""(""S""y""s""t""e""m"".""n""a""n""o""T""i""m""e""("")"")"";"
 
-  public PluginGenerator(StopCondition stopCondition) {
-    setStopCondition(stopCondition);
-  }
+" "" ""p""u""b""l""i""c"" ""P""l""u""g""i""n""G""e""n""e""r""a""t""o""r""(""S""t""o""p""C""o""n""d""i""t""i""o""n"" ""s""t""o""p""C""o""n""d""i""t""i""o""n"")"" ""{"
+" "" "" "" ""s""e""t""S""t""o""p""C""o""n""d""i""t""i""o""n""(""s""t""o""p""C""o""n""d""i""t""i""o""n"")"";"
+" "" ""}"
 
-  @Override
-  public Context getNextStep() {
-    Context context = super.getNextStep();
-    Element currentElement = context.getCurrentElement();
-    List<Element> elements = context.filter(context.getModel().getElements(currentElement));
-    if (elements.isEmpty()) {
-      LOG.error("currentElement: " + currentElement);
-      LOG.error("context.getModel().getElements(): " + context.getModel().getElements());
-      throw new NoPathFoundException(context.getCurrentElement());
-    }
-    context.setCurrentElement(elements.get(random.nextInt(elements.size())));
-    return context;
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""C""o""n""t""e""x""t"" ""g""e""t""N""e""x""t""S""t""e""p""("")"" ""{"
+" "" "" "" ""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" ""="" ""s""u""p""e""r"".""g""e""t""N""e""x""t""S""t""e""p""("")"";"
+" "" "" "" ""E""l""e""m""e""n""t"" ""c""u""r""r""e""n""t""E""l""e""m""e""n""t"" ""="" ""c""o""n""t""e""x""t"".""g""e""t""C""u""r""r""e""n""t""E""l""e""m""e""n""t""("")"";"
+" "" "" "" ""L""i""s""t""<""E""l""e""m""e""n""t"">"" ""e""l""e""m""e""n""t""s"" ""="" ""c""o""n""t""e""x""t"".""f""i""l""t""e""r""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""l""e""m""e""n""t""s""(""c""u""r""r""e""n""t""E""l""e""m""e""n""t"")"")"";"
+" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t""s"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" ""L""O""G"".""e""r""r""o""r""("""""c""u""r""r""e""n""t""E""l""e""m""e""n""t"":"" """"" ""+"" ""c""u""r""r""e""n""t""E""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" ""L""O""G"".""e""r""r""o""r""("""""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""l""e""m""e""n""t""s""("")"":"" """"" ""+"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""l""e""m""e""n""t""s""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""N""o""P""a""t""h""F""o""u""n""d""E""x""c""e""p""t""i""o""n""(""c""o""n""t""e""x""t"".""g""e""t""C""u""r""r""e""n""t""E""l""e""m""e""n""t""("")"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""C""u""r""r""e""n""t""E""l""e""m""e""n""t""(""e""l""e""m""e""n""t""s"".""g""e""t""(""r""a""n""d""o""m"".""n""e""x""t""I""n""t""(""e""l""e""m""e""n""t""s"".""s""i""z""e""("")"")"")"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""c""o""n""t""e""x""t"";"
+" "" ""}"
 
-  @Override
-  public boolean hasNextStep() {
-    return !getStopCondition().isFulfilled();
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""h""a""s""N""e""x""t""S""t""e""p""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""!""g""e""t""S""t""o""p""C""o""n""d""i""t""i""o""n""("")"".""i""s""F""u""l""f""i""l""l""e""d""("")"";"
+" "" ""}"
 
-}
+"}"

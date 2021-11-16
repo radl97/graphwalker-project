@@ -1,36 +1,36 @@
-parser grammar GeneratorParser;
+"p""a""r""s""e""r"" ""g""r""a""m""m""a""r"" ""G""e""n""e""r""a""t""o""r""P""a""r""s""e""r"";"
 
-options {
-	tokenVocab=LogicalLexer;
-}
+"o""p""t""i""o""n""s"" ""{"
+"	""t""o""k""e""n""V""o""c""a""b""=""L""o""g""i""c""a""l""L""e""x""e""r"";"
+"}"
 
-parse
- : (generator)* EOF
- ;
+"p""a""r""s""e"
+" "":"" ""(""g""e""n""e""r""a""t""o""r"")""*"" ""E""O""F"
+" "";"
 
-generator
- : Alphanumeric LPAREN logicalExpression RPAREN
- | Alphanumeric LPAREN logicalExpression RPAREN RPAREN {notifyErrorListeners("The generator has too many parentheses");}
- | Alphanumeric LPAREN logicalExpression {notifyErrorListeners("The generator is missing closing parentheses");}
- | Alphanumeric  {notifyErrorListeners("A generator needs parentheses");}
- ;
+"g""e""n""e""r""a""t""o""r"
+" "":"" ""A""l""p""h""a""n""u""m""e""r""i""c"" ""L""P""A""R""E""N"" ""l""o""g""i""c""a""l""E""x""p""r""e""s""s""i""o""n"" ""R""P""A""R""E""N"
+" ""|"" ""A""l""p""h""a""n""u""m""e""r""i""c"" ""L""P""A""R""E""N"" ""l""o""g""i""c""a""l""E""x""p""r""e""s""s""i""o""n"" ""R""P""A""R""E""N"" ""R""P""A""R""E""N"" ""{""n""o""t""i""f""y""E""r""r""o""r""L""i""s""t""e""n""e""r""s""("""""T""h""e"" ""g""e""n""e""r""a""t""o""r"" ""h""a""s"" ""t""o""o"" ""m""a""n""y"" ""p""a""r""e""n""t""h""e""s""e""s""""")"";""}"
+" ""|"" ""A""l""p""h""a""n""u""m""e""r""i""c"" ""L""P""A""R""E""N"" ""l""o""g""i""c""a""l""E""x""p""r""e""s""s""i""o""n"" ""{""n""o""t""i""f""y""E""r""r""o""r""L""i""s""t""e""n""e""r""s""("""""T""h""e"" ""g""e""n""e""r""a""t""o""r"" ""i""s"" ""m""i""s""s""i""n""g"" ""c""l""o""s""i""n""g"" ""p""a""r""e""n""t""h""e""s""e""s""""")"";""}"
+" ""|"" ""A""l""p""h""a""n""u""m""e""r""i""c"" "" ""{""n""o""t""i""f""y""E""r""r""o""r""L""i""s""t""e""n""e""r""s""("""""A"" ""g""e""n""e""r""a""t""o""r"" ""n""e""e""d""s"" ""p""a""r""e""n""t""h""e""s""e""s""""")"";""}"
+" "";"
 
-logicalExpression
- :  booleanAndExpression ( OR booleanAndExpression )*
- ;
+"l""o""g""i""c""a""l""E""x""p""r""e""s""s""i""o""n"
+" "":"" "" ""b""o""o""l""e""a""n""A""n""d""E""x""p""r""e""s""s""i""o""n"" ""("" ""O""R"" ""b""o""o""l""e""a""n""A""n""d""E""x""p""r""e""s""s""i""o""n"" "")""*"
+" "";"
 
-booleanAndExpression
- : primaryExpression ( AND primaryExpression )*
- ;
+"b""o""o""l""e""a""n""A""n""d""E""x""p""r""e""s""s""i""o""n"
+" "":"" ""p""r""i""m""a""r""y""E""x""p""r""e""s""s""i""o""n"" ""("" ""A""N""D"" ""p""r""i""m""a""r""y""E""x""p""r""e""s""s""i""o""n"" "")""*"
+" "";"
 
-primaryExpression
- : stopCondition
- | '(' logicalExpression ')'
- ;
+"p""r""i""m""a""r""y""E""x""p""r""e""s""s""i""o""n"
+" "":"" ""s""t""o""p""C""o""n""d""i""t""i""o""n"
+" ""|"" ""'""(""'"" ""l""o""g""i""c""a""l""E""x""p""r""e""s""s""i""o""n"" ""'"")""'"
+" "";"
 
-stopCondition
- : (Alphanumeric LPAREN Alphanumeric RPAREN
- | Alphanumeric LPAREN Number RPAREN
- | Alphanumeric)
- ;
+"s""t""o""p""C""o""n""d""i""t""i""o""n"
+" "":"" ""(""A""l""p""h""a""n""u""m""e""r""i""c"" ""L""P""A""R""E""N"" ""A""l""p""h""a""n""u""m""e""r""i""c"" ""R""P""A""R""E""N"
+" ""|"" ""A""l""p""h""a""n""u""m""e""r""i""c"" ""L""P""A""R""E""N"" ""N""u""m""b""e""r"" ""R""P""A""R""E""N"
+" ""|"" ""A""l""p""h""a""n""u""m""e""r""i""c"")"
+" "";"
 

@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema 
-  targetNamespace="http://www.yworks.com/xml/graphml"
-  
-  xmlns="http://www.yworks.com/xml/graphml" 
-  xmlns:g="http://graphml.graphdrawing.org/xmlns"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xlink="http://www.w3.org/1999/xlink" 
-  
-  elementFormDefault="qualified" 
-  attributeFormDefault="unqualified">
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0""""" ""e""n""c""o""d""i""n""g""="""""U""T""F""-""8"""""?"">"
+"<""x""s"":""s""c""h""e""m""a"" "
+" "" ""t""a""r""g""e""t""N""a""m""e""s""p""a""c""e""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""
+" "" "
+" "" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""" "
+" "" ""x""m""l""n""s"":""g""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
+" "" ""x""m""l""n""s"":""x""s""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""""
+" "" ""x""m""l""n""s"":""x""l""i""n""k""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""1""9""9""9""/""x""l""i""n""k""""" "
+" "" "
+" "" ""e""l""e""m""e""n""t""F""o""r""m""D""e""f""a""u""l""t""="""""q""u""a""l""i""f""i""e""d""""" "
+" "" ""a""t""t""r""i""b""u""t""e""F""o""r""m""D""e""f""a""u""l""t""="""""u""n""q""u""a""l""i""f""i""e""d""""">"
 
- <xs:annotation>
-    <xs:documentation>
-     Schema definitions for yFiles GraphML graphics and
-      postprocessor extensions.
-    </xs:documentation>
-  </xs:annotation>
-  <xs:include schemaLocation="ygraphics.xsd"/>
-  <xs:include schemaLocation="yprocessors.xsd"/>
-  <xs:include schemaLocation="portconstraints.xsd"/>
-</xs:schema>
+" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" ""S""c""h""e""m""a"" ""d""e""f""i""n""i""t""i""o""n""s"" ""f""o""r"" ""y""F""i""l""e""s"" ""G""r""a""p""h""M""L"" ""g""r""a""p""h""i""c""s"" ""a""n""d"
+" "" "" "" "" "" ""p""o""s""t""p""r""o""c""e""s""s""o""r"" ""e""x""t""e""n""s""i""o""n""s""."
+" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" ""<""x""s"":""i""n""c""l""u""d""e"" ""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""y""g""r""a""p""h""i""c""s"".""x""s""d"""""/"">"
+" "" ""<""x""s"":""i""n""c""l""u""d""e"" ""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""y""p""r""o""c""e""s""s""o""r""s"".""x""s""d"""""/"">"
+" "" ""<""x""s"":""i""n""c""l""u""d""e"" ""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""p""o""r""t""c""o""n""s""t""r""a""i""n""t""s"".""x""s""d"""""/"">"
+"<""/""x""s"":""s""c""h""e""m""a"">"
 

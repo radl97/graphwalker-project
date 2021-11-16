@@ -1,106 +1,106 @@
-<?xml version="1.0"?>
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0"""""?"">"
 
-<!-- Header -->
-<xs:schema
-    targetNamespace="http://www.yworks.com/xml/graphml"
+"<""!""-""-"" ""H""e""a""d""e""r"" ""-""-"">"
+"<""x""s"":""s""c""h""e""m""a"
+" "" "" "" ""t""a""r""g""e""t""N""a""m""e""s""p""a""c""e""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""
 
-    xmlns="http://www.yworks.com/xml/graphml"
-    xmlns:g="http://graphml.graphdrawing.org/xmlns"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
+" "" "" "" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""
+" "" "" "" ""x""m""l""n""s"":""g""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""
+" "" "" "" ""x""m""l""n""s"":""x""s""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""""
+" "" "" "" ""x""m""l""n""s"":""x""l""i""n""k""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""1""9""9""9""/""x""l""i""n""k""""
 
-    elementFormDefault="qualified"
-    attributeFormDefault="unqualified"
-    >
+" "" "" "" ""e""l""e""m""e""n""t""F""o""r""m""D""e""f""a""u""l""t""="""""q""u""a""l""i""f""i""e""d""""
+" "" "" "" ""a""t""t""r""i""b""u""t""e""F""o""r""m""D""e""f""a""u""l""t""="""""u""n""q""u""a""l""i""f""i""e""d""""
+" "" "" "" "">"
 
-  <xs:simpleType name="portConstraint.Endpoint.type">
-    <xs:annotation>
-      <xs:documentation>
-        The valid endpoint types of a port constraint.
-        <p>
-          Valid values are:
-          <ul>
-            <li><b>source</b>: for a source port constraint</li>
-            <li><b>target</b>: for a target port constraint</li>
-          </ul>
-        </p>
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="source"/>
-      <xs:enumeration value="target"/>
-    </xs:restriction>
-  </xs:simpleType>
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""p""o""r""t""C""o""n""s""t""r""a""i""n""t"".""E""n""d""p""o""i""n""t"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""T""h""e"" ""v""a""l""i""d"" ""e""n""d""p""o""i""n""t"" ""t""y""p""e""s"" ""o""f"" ""a"" ""p""o""r""t"" ""c""o""n""s""t""r""a""i""n""t""."
+" "" "" "" "" "" "" "" ""<""p"">"
+" "" "" "" "" "" "" "" "" "" ""V""a""l""i""d"" ""v""a""l""u""e""s"" ""a""r""e"":"
+" "" "" "" "" "" "" "" "" "" ""<""u""l"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""s""o""u""r""c""e""<""/""b"">"":"" ""f""o""r"" ""a"" ""s""o""u""r""c""e"" ""p""o""r""t"" ""c""o""n""s""t""r""a""i""n""t""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""t""a""r""g""e""t""<""/""b"">"":"" ""f""o""r"" ""a"" ""t""a""r""g""e""t"" ""p""o""r""t"" ""c""o""n""s""t""r""a""i""n""t""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""u""l"">"
+" "" "" "" "" "" "" "" ""<""/""p"">"
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""s""o""u""r""c""e"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""t""a""r""g""e""t"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
 
-  <xs:simpleType name="portConstraint.Side.type">
-    <xs:annotation>
-      <xs:documentation>
-        The valid locations of a port constraint.
-        <p>
-          Valid values are:
-          <ul>
-            <li><b>east</b>: for an east location</li>
-            <li><b>west</b>: for a west location</li>
-            <li><b>north</b>: for a north location</li>
-            <li><b>south</b>: for a south location</li>
-            <li><b>any</b>: for any location</li>
-          </ul>
-        </p>
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="east"/>
-      <xs:enumeration value="west"/>
-      <xs:enumeration value="north"/>
-      <xs:enumeration value="south"/>
-      <xs:enumeration value="any"/>
-    </xs:restriction>
-  </xs:simpleType>
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"" ""n""a""m""e""="""""p""o""r""t""C""o""n""s""t""r""a""i""n""t"".""S""i""d""e"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""T""h""e"" ""v""a""l""i""d"" ""l""o""c""a""t""i""o""n""s"" ""o""f"" ""a"" ""p""o""r""t"" ""c""o""n""s""t""r""a""i""n""t""."
+" "" "" "" "" "" "" "" ""<""p"">"
+" "" "" "" "" "" "" "" "" "" ""V""a""l""i""d"" ""v""a""l""u""e""s"" ""a""r""e"":"
+" "" "" "" "" "" "" "" "" "" ""<""u""l"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""e""a""s""t""<""/""b"">"":"" ""f""o""r"" ""a""n"" ""e""a""s""t"" ""l""o""c""a""t""i""o""n""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""w""e""s""t""<""/""b"">"":"" ""f""o""r"" ""a"" ""w""e""s""t"" ""l""o""c""a""t""i""o""n""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""n""o""r""t""h""<""/""b"">"":"" ""f""o""r"" ""a"" ""n""o""r""t""h"" ""l""o""c""a""t""i""o""n""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""s""o""u""t""h""<""/""b"">"":"" ""f""o""r"" ""a"" ""s""o""u""t""h"" ""l""o""c""a""t""i""o""n""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""l""i"">""<""b"">""a""n""y""<""/""b"">"":"" ""f""o""r"" ""a""n""y"" ""l""o""c""a""t""i""o""n""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""u""l"">"
+" "" "" "" "" "" "" "" ""<""/""p"">"
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""N""M""T""O""K""E""N""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""e""a""s""t"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""w""e""s""t"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""n""o""r""t""h"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""s""o""u""t""h"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""a""n""y"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
 
-  <!-- Processor -->
-  <xs:complexType name="PortConstraint.type">
-    <xs:annotation>
-      <xs:documentation>
-        Complex type definition for a portconstraint.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:attribute name="endpoint" type="portConstraint.Endpoint.type" use="required">
-      <xs:annotation>
-        <xs:documentation>
-          The type of the constraint (source or target).
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="side" type="portConstraint.Side.type" use="required">
-      <xs:annotation>
-        <xs:documentation>
-          The location of the constraint (source or target).
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="strong" type="xs:boolean" use="optional" default="false">
-      <xs:annotation>
-        <xs:documentation>
-          Whether this is a strong port constraint.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="groupid" type="xs:string" use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          An optional edge group id.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:complexType>
+" "" ""<""!""-""-"" ""P""r""o""c""e""s""s""o""r"" ""-""-"">"
+" "" ""<""x""s"":""c""o""m""p""l""e""x""T""y""p""e"" ""n""a""m""e""="""""P""o""r""t""C""o""n""s""t""r""a""i""n""t"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""C""o""m""p""l""e""x"" ""t""y""p""e"" ""d""e""f""i""n""i""t""i""o""n"" ""f""o""r"" ""a"" ""p""o""r""t""c""o""n""s""t""r""a""i""n""t""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""e""n""d""p""o""i""n""t""""" ""t""y""p""e""="""""p""o""r""t""C""o""n""s""t""r""a""i""n""t"".""E""n""d""p""o""i""n""t"".""t""y""p""e""""" ""u""s""e""="""""r""e""q""u""i""r""e""d""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""T""h""e"" ""t""y""p""e"" ""o""f"" ""t""h""e"" ""c""o""n""s""t""r""a""i""n""t"" ""(""s""o""u""r""c""e"" ""o""r"" ""t""a""r""g""e""t"")""."
+" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""s""i""d""e""""" ""t""y""p""e""="""""p""o""r""t""C""o""n""s""t""r""a""i""n""t"".""S""i""d""e"".""t""y""p""e""""" ""u""s""e""="""""r""e""q""u""i""r""e""d""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""T""h""e"" ""l""o""c""a""t""i""o""n"" ""o""f"" ""t""h""e"" ""c""o""n""s""t""r""a""i""n""t"" ""(""s""o""u""r""c""e"" ""o""r"" ""t""a""r""g""e""t"")""."
+" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""s""t""r""o""n""g""""" ""t""y""p""e""="""""x""s"":""b""o""o""l""e""a""n""""" ""u""s""e""="""""o""p""t""i""o""n""a""l""""" ""d""e""f""a""u""l""t""="""""f""a""l""s""e""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""W""h""e""t""h""e""r"" ""t""h""i""s"" ""i""s"" ""a"" ""s""t""r""o""n""g"" ""p""o""r""t"" ""c""o""n""s""t""r""a""i""n""t""."
+" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" "" "" ""<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""g""r""o""u""p""i""d""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""u""s""e""="""""o""p""t""i""o""n""a""l""""">"
+" "" "" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""A""n"" ""o""p""t""i""o""n""a""l"" ""e""d""g""e"" ""g""r""o""u""p"" ""i""d""."
+" "" "" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
+" "" ""<""/""x""s"":""c""o""m""p""l""e""x""T""y""p""e"">"
 
-  <!-- Element Definition for  Postprocessors -->
-  <xs:element name="PortConstraint" type="PortConstraint.type">
-    <xs:annotation>
-      <xs:documentation>
-        PortConstraint element definition.
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
+" "" ""<""!""-""-"" ""E""l""e""m""e""n""t"" ""D""e""f""i""n""i""t""i""o""n"" ""f""o""r"" "" ""P""o""s""t""p""r""o""c""e""s""s""o""r""s"" ""-""-"">"
+" "" ""<""x""s"":""e""l""e""m""e""n""t"" ""n""a""m""e""="""""P""o""r""t""C""o""n""s""t""r""a""i""n""t""""" ""t""y""p""e""="""""P""o""r""t""C""o""n""s""t""r""a""i""n""t"".""t""y""p""e""""">"
+" "" "" "" ""<""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" "" "" "" "" ""<""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""P""o""r""t""C""o""n""s""t""r""a""i""n""t"" ""e""l""e""m""e""n""t"" ""d""e""f""i""n""i""t""i""o""n""."
+" "" "" "" "" "" ""<""/""x""s"":""d""o""c""u""m""e""n""t""a""t""i""o""n"">"
+" "" "" "" ""<""/""x""s"":""a""n""n""o""t""a""t""i""o""n"">"
+" "" ""<""/""x""s"":""e""l""e""m""e""n""t"">"
 
-</xs:schema>
+"<""/""x""s"":""s""c""h""e""m""a"">"

@@ -1,74 +1,74 @@
-package org.graphwalker.dsl.antlr.dot;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""d""s""l"".""a""n""t""l""r"".""d""o""t"";"
 
-import org.graphwalker.core.model.Edge;
-import org.graphwalker.core.model.Model;
-import org.graphwalker.core.model.Vertex;
-import org.graphwalker.dsl.dot.DOTBaseListener;
-import org.graphwalker.dsl.dot.DOTParser;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""M""o""d""e""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""d""s""l"".""d""o""t"".""D""O""T""B""a""s""e""L""i""s""t""e""n""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""d""s""l"".""d""o""t"".""D""O""T""P""a""r""s""e""r"";"
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""M""a""p"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""M""a""p"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""s""t""r""e""a""m"".""C""o""l""l""e""c""t""o""r""s"";"
 
-public class DotModelListener extends DOTBaseListener {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""D""o""t""M""o""d""e""l""L""i""s""t""e""n""e""r"" ""e""x""t""e""n""d""s"" ""D""O""T""B""a""s""e""L""i""s""t""e""n""e""r"" ""{"
 
-  private Model model = new Model();
-  private Map<String, Vertex> vertices = new HashMap<>();
+" "" ""p""r""i""v""a""t""e"" ""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"";"
+" "" ""p""r""i""v""a""t""e"" ""M""a""p""<""S""t""r""i""n""g"","" ""V""e""r""t""e""x"">"" ""v""e""r""t""i""c""e""s"" ""="" ""n""e""w"" ""H""a""s""h""M""a""p""<"">""("")"";"
 
-  public Model getModel() {
-    return model;
-  }
+" "" ""p""u""b""l""i""c"" ""M""o""d""e""l"" ""g""e""t""M""o""d""e""l""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""m""o""d""e""l"";"
+" "" ""}"
 
-  private Vertex createVertex(String id, String label) {
-    id = id.replaceAll("^\"|\"$", "");
-    if ("Start".equalsIgnoreCase(id) || "Start".equalsIgnoreCase(label)) {
-      vertices.put(id, null);
-      return null;
-    }
-    if (!vertices.containsKey(id)) {
-      vertices.put(id, new Vertex().setId(id).setName(label != null ? label : id));
-      model.addVertex(vertices.get(id));
-    }
-    return vertices.get(id);
-  }
+" "" ""p""r""i""v""a""t""e"" ""V""e""r""t""e""x"" ""c""r""e""a""t""e""V""e""r""t""e""x""(""S""t""r""i""n""g"" ""i""d"","" ""S""t""r""i""n""g"" ""l""a""b""e""l"")"" ""{"
+" "" "" "" ""i""d"" ""="" ""i""d"".""r""e""p""l""a""c""e""A""l""l""("""""^""\"""""|""\"""""$""""","" """""""")"";"
+" "" "" "" ""i""f"" ""("""""S""t""a""r""t""""".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""(""i""d"")"" ""|""|"" """""S""t""a""r""t""""".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""(""l""a""b""e""l"")"")"" ""{"
+" "" "" "" "" "" ""v""e""r""t""i""c""e""s"".""p""u""t""(""i""d"","" ""n""u""l""l"")"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""n""u""l""l"";"
+" "" "" "" ""}"
+" "" "" "" ""i""f"" ""(""!""v""e""r""t""i""c""e""s"".""c""o""n""t""a""i""n""s""K""e""y""(""i""d"")"")"" ""{"
+" "" "" "" "" "" ""v""e""r""t""i""c""e""s"".""p""u""t""(""i""d"","" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""I""d""(""i""d"")"".""s""e""t""N""a""m""e""(""l""a""b""e""l"" ""!""="" ""n""u""l""l"" ""?"" ""l""a""b""e""l"" "":"" ""i""d"")"")"";"
+" "" "" "" "" "" ""m""o""d""e""l"".""a""d""d""V""e""r""t""e""x""(""v""e""r""t""i""c""e""s"".""g""e""t""(""i""d"")"")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""v""e""r""t""i""c""e""s"".""g""e""t""(""i""d"")"";"
+" "" ""}"
 
-  @Override
-  public void enterGraph(DOTParser.GraphContext context) {
-    model.setName(context.id().getText());
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""e""n""t""e""r""G""r""a""p""h""(""D""O""T""P""a""r""s""e""r"".""G""r""a""p""h""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"")"" ""{"
+" "" "" "" ""m""o""d""e""l"".""s""e""t""N""a""m""e""(""c""o""n""t""e""x""t"".""i""d""("")"".""g""e""t""T""e""x""t""("")"")"";"
+" "" ""}"
 
-  @Override
-  public void enterNode_stmt(DOTParser.Node_stmtContext context) {
-    if (context.attr_list() != null) {
-      Map<String, String> attributes = context.attr_list().a_list().stream()
-        .map(DOTParser.A_listContext::getText)
-        .map(item -> item.split("="))
-        .collect(Collectors.toMap(parts -> parts[0], parts -> parts[1].replace("\"", "")));
-      String label = attributes.get("label");
-      createVertex(context.node_id().id().getText(), label);
-    } else {
-      createVertex(context.node_id().id().getText(), null);
-    }
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""e""n""t""e""r""N""o""d""e""_""s""t""m""t""(""D""O""T""P""a""r""s""e""r"".""N""o""d""e""_""s""t""m""t""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"")"" ""{"
+" "" "" "" ""i""f"" ""(""c""o""n""t""e""x""t"".""a""t""t""r""_""l""i""s""t""("")"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" ""M""a""p""<""S""t""r""i""n""g"","" ""S""t""r""i""n""g"">"" ""a""t""t""r""i""b""u""t""e""s"" ""="" ""c""o""n""t""e""x""t"".""a""t""t""r""_""l""i""s""t""("")"".""a""_""l""i""s""t""("")"".""s""t""r""e""a""m""("")"
+" "" "" "" "" "" "" "" "".""m""a""p""(""D""O""T""P""a""r""s""e""r"".""A""_""l""i""s""t""C""o""n""t""e""x""t"":"":""g""e""t""T""e""x""t"")"
+" "" "" "" "" "" "" "" "".""m""a""p""(""i""t""e""m"" ""-"">"" ""i""t""e""m"".""s""p""l""i""t""("""""=""""")"")"
+" "" "" "" "" "" "" "" "".""c""o""l""l""e""c""t""(""C""o""l""l""e""c""t""o""r""s"".""t""o""M""a""p""(""p""a""r""t""s"" ""-"">"" ""p""a""r""t""s""[""0""]"","" ""p""a""r""t""s"" ""-"">"" ""p""a""r""t""s""[""1""]"".""r""e""p""l""a""c""e""("""""\"""""""","" """""""")"")"")"";"
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""l""a""b""e""l"" ""="" ""a""t""t""r""i""b""u""t""e""s"".""g""e""t""("""""l""a""b""e""l""""")"";"
+" "" "" "" "" "" ""c""r""e""a""t""e""V""e""r""t""e""x""(""c""o""n""t""e""x""t"".""n""o""d""e""_""i""d""("")"".""i""d""("")"".""g""e""t""T""e""x""t""("")"","" ""l""a""b""e""l"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""c""r""e""a""t""e""V""e""r""t""e""x""(""c""o""n""t""e""x""t"".""n""o""d""e""_""i""d""("")"".""i""d""("")"".""g""e""t""T""e""x""t""("")"","" ""n""u""l""l"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  @Override
-  public void enterEdge_stmt(DOTParser.Edge_stmtContext context) {
-    Vertex source = createVertex(context.node_id().id().getText(), null);
-    for (DOTParser.Node_idContext node_id: context.edgeRHS().node_id()) {
-      Vertex target = createVertex(node_id.getText(), null);
-      Edge edge = new Edge()
-        .setSourceVertex(source)
-        .setTargetVertex(target);
-      if (context.attr_list() != null) {
-        Map<String, String> attributes = context.attr_list().a_list().stream()
-          .map(DOTParser.A_listContext::getText)
-          .map(item -> item.split("="))
-          .collect(Collectors.toMap(parts -> parts[0], parts -> parts[1].replace("\"", "")));
-        String label = attributes.get("label");
-        edge.setId(label).setName(label);
-      }
-      model.addEdge(edge);
-      source = target;
-    }
-  }
-}
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""e""n""t""e""r""E""d""g""e""_""s""t""m""t""(""D""O""T""P""a""r""s""e""r"".""E""d""g""e""_""s""t""m""t""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"")"" ""{"
+" "" "" "" ""V""e""r""t""e""x"" ""s""o""u""r""c""e"" ""="" ""c""r""e""a""t""e""V""e""r""t""e""x""(""c""o""n""t""e""x""t"".""n""o""d""e""_""i""d""("")"".""i""d""("")"".""g""e""t""T""e""x""t""("")"","" ""n""u""l""l"")"";"
+" "" "" "" ""f""o""r"" ""(""D""O""T""P""a""r""s""e""r"".""N""o""d""e""_""i""d""C""o""n""t""e""x""t"" ""n""o""d""e""_""i""d"":"" ""c""o""n""t""e""x""t"".""e""d""g""e""R""H""S""("")"".""n""o""d""e""_""i""d""("")"")"" ""{"
+" "" "" "" "" "" ""V""e""r""t""e""x"" ""t""a""r""g""e""t"" ""="" ""c""r""e""a""t""e""V""e""r""t""e""x""(""n""o""d""e""_""i""d"".""g""e""t""T""e""x""t""("")"","" ""n""u""l""l"")"";"
+" "" "" "" "" "" ""E""d""g""e"" ""e""d""g""e"" ""="" ""n""e""w"" ""E""d""g""e""("")"
+" "" "" "" "" "" "" "" "".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""s""o""u""r""c""e"")"
+" "" "" "" "" "" "" "" "".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""t""a""r""g""e""t"")"";"
+" "" "" "" "" "" ""i""f"" ""(""c""o""n""t""e""x""t"".""a""t""t""r""_""l""i""s""t""("")"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" ""M""a""p""<""S""t""r""i""n""g"","" ""S""t""r""i""n""g"">"" ""a""t""t""r""i""b""u""t""e""s"" ""="" ""c""o""n""t""e""x""t"".""a""t""t""r""_""l""i""s""t""("")"".""a""_""l""i""s""t""("")"".""s""t""r""e""a""m""("")"
+" "" "" "" "" "" "" "" "" "" "".""m""a""p""(""D""O""T""P""a""r""s""e""r"".""A""_""l""i""s""t""C""o""n""t""e""x""t"":"":""g""e""t""T""e""x""t"")"
+" "" "" "" "" "" "" "" "" "" "".""m""a""p""(""i""t""e""m"" ""-"">"" ""i""t""e""m"".""s""p""l""i""t""("""""=""""")"")"
+" "" "" "" "" "" "" "" "" "" "".""c""o""l""l""e""c""t""(""C""o""l""l""e""c""t""o""r""s"".""t""o""M""a""p""(""p""a""r""t""s"" ""-"">"" ""p""a""r""t""s""[""0""]"","" ""p""a""r""t""s"" ""-"">"" ""p""a""r""t""s""[""1""]"".""r""e""p""l""a""c""e""("""""\"""""""","" """""""")"")"")"";"
+" "" "" "" "" "" "" "" ""S""t""r""i""n""g"" ""l""a""b""e""l"" ""="" ""a""t""t""r""i""b""u""t""e""s"".""g""e""t""("""""l""a""b""e""l""""")"";"
+" "" "" "" "" "" "" "" ""e""d""g""e"".""s""e""t""I""d""(""l""a""b""e""l"")"".""s""e""t""N""a""m""e""(""l""a""b""e""l"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""m""o""d""e""l"".""a""d""d""E""d""g""e""(""e""d""g""e"")"";"
+" "" "" "" "" "" ""s""o""u""r""c""e"" ""="" ""t""a""r""g""e""t"";"
+" "" "" "" ""}"
+" "" ""}"
+"}"

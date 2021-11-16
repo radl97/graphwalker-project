@@ -1,59 +1,59 @@
-<?xml version="1.0"?>
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0"""""?"">"
 
-<xs:schema 
-        targetNamespace="http://www.w3.org/1999/xlink" 
+"<""x""s"":""s""c""h""e""m""a"" "
+" "" "" "" "" "" "" "" ""t""a""r""g""e""t""N""a""m""e""s""p""a""c""e""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""1""9""9""9""/""x""l""i""n""k""""" "
 
-        xmlns:xlink="http://www.w3.org/1999/xlink" 
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+" "" "" "" "" "" "" "" ""x""m""l""n""s"":""x""l""i""n""k""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""1""9""9""9""/""x""l""i""n""k""""" "
+" "" "" "" "" "" "" "" ""x""m""l""n""s"":""x""s""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""""
 
-        elementFormDefault="qualified"
-        attributeFormDefault="unqualified"
->
+" "" "" "" "" "" "" "" ""e""l""e""m""e""n""t""F""o""r""m""D""e""f""a""u""l""t""="""""q""u""a""l""i""f""i""e""d""""
+" "" "" "" "" "" "" "" ""a""t""t""r""i""b""u""t""e""F""o""r""m""D""e""f""a""u""l""t""="""""u""n""q""u""a""l""i""f""i""e""d""""
+">"
 
-<xs:attribute name="type">
-  <xs:simpleType>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="simple"/>
-      <xs:enumeration value="extended"/>
-      <xs:enumeration value="locator"/>
-      <xs:enumeration value="arc"/>
-    </xs:restriction>
-  </xs:simpleType>
-</xs:attribute>
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""y""p""e""""">"
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""s""t""r""i""n""g""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""s""i""m""p""l""e"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""e""x""t""e""n""d""e""d"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""l""o""c""a""t""o""r"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""a""r""c"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+"<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
 
-<xs:attribute name="href" type="xs:anyURI" />
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""h""r""e""f""""" ""t""y""p""e""="""""x""s"":""a""n""y""U""R""I""""" ""/"">"
 
-<xs:attribute name="role" type="xs:string" />
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""r""o""l""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""/"">"
 
-<xs:attribute name="arcrole" type="xs:string" />
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""a""r""c""r""o""l""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""/"">"
 
-<xs:attribute name="title" type="xs:string" />
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""i""t""l""e""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""/"">"
 
-<xs:attribute name="show" default="embed">
-  <xs:simpleType>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="new"/>
-      <xs:enumeration value="replace"/>
-      <xs:enumeration value="embed"/>
-      <xs:enumeration value="other"/>
-      <xs:enumeration value="none"/>
-    </xs:restriction>
-  </xs:simpleType>
-</xs:attribute>
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""s""h""o""w""""" ""d""e""f""a""u""l""t""="""""e""m""b""e""d""""">"
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""s""t""r""i""n""g""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""n""e""w"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""r""e""p""l""a""c""e"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""e""m""b""e""d"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""o""t""h""e""r"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""n""o""n""e"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+"<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
 
-<xs:attribute name="actuate" default="onLoad">
-  <xs:simpleType>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="onLoad"/>
-      <xs:enumeration value="onRequest"/>
-      <xs:enumeration value="other"/>
-      <xs:enumeration value="none"/>
-    </xs:restriction>
-  </xs:simpleType>
-</xs:attribute>
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""a""c""t""u""a""t""e""""" ""d""e""f""a""u""l""t""="""""o""n""L""o""a""d""""">"
+" "" ""<""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+" "" "" "" ""<""x""s"":""r""e""s""t""r""i""c""t""i""o""n"" ""b""a""s""e""="""""x""s"":""s""t""r""i""n""g""""">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""o""n""L""o""a""d"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""o""n""R""e""q""u""e""s""t"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""o""t""h""e""r"""""/"">"
+" "" "" "" "" "" ""<""x""s"":""e""n""u""m""e""r""a""t""i""o""n"" ""v""a""l""u""e""="""""n""o""n""e"""""/"">"
+" "" "" "" ""<""/""x""s"":""r""e""s""t""r""i""c""t""i""o""n"">"
+" "" ""<""/""x""s"":""s""i""m""p""l""e""T""y""p""e"">"
+"<""/""x""s"":""a""t""t""r""i""b""u""t""e"">"
 
-<xs:attribute name="from" type="xs:string" />
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""f""r""o""m""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""/"">"
 
-<xs:attribute name="to" type="xs:string" />
+"<""x""s"":""a""t""t""r""i""b""u""t""e"" ""n""a""m""e""="""""t""o""""" ""t""y""p""e""="""""x""s"":""s""t""r""i""n""g""""" ""/"">"
 
-</xs:schema>
+"<""/""x""s"":""s""c""h""e""m""a"">"

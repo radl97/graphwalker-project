@@ -1,65 +1,65 @@
-parser grammar YEdEdgeParser;
+"p""a""r""s""e""r"" ""g""r""a""m""m""a""r"" ""Y""E""d""E""d""g""e""P""a""r""s""e""r"";"
 
-options {
-	tokenVocab=YEdLabelLexer;
-}
+"o""p""t""i""o""n""s"" ""{"
+"	""t""o""k""e""n""V""o""c""a""b""=""Y""E""d""L""a""b""e""l""L""e""x""e""r"";"
+"}"
 
-parse
- locals [java.util.Set<String> fields = new java.util.HashSet<String>();]
- : field* EOF
- ;
+"p""a""r""s""e"
+" ""l""o""c""a""l""s"" ""[""j""a""v""a"".""u""t""i""l"".""S""e""t""<""S""t""r""i""n""g"">"" ""f""i""e""l""d""s"" ""="" ""n""e""w"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""S""e""t""<""S""t""r""i""n""g"">""("")"";""]"
+" "":"" ""f""i""e""l""d""*"" ""E""O""F"
+" "";"
 
-field
- : {!$parse::fields.contains("names")}? names {$parse::fields.add("names");}
- | {!$parse::fields.contains("guard")}? guard {$parse::fields.add("guard");}
- | {!$parse::fields.contains("actions")}? actions {$parse::fields.add("actions");}
- | {!$parse::fields.contains("blocked")}? blocked {$parse::fields.add("blocked");}
- | {!$parse::fields.contains("reqtags")}? reqtags {$parse::fields.add("reqtags");}
- | {!$parse::fields.contains("weight")}? weight {$parse::fields.add("weight");}
- | {!$parse::fields.contains("dependency")}? dependency {$parse::fields.add("dependency");}
- | WHITESPACE
- ;
+"f""i""e""l""d"
+" "":"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""n""a""m""e""s""""")""}""?"" ""n""a""m""e""s"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""n""a""m""e""s""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""g""u""a""r""d""""")""}""?"" ""g""u""a""r""d"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""g""u""a""r""d""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""a""c""t""i""o""n""s""""")""}""?"" ""a""c""t""i""o""n""s"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""a""c""t""i""o""n""s""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""b""l""o""c""k""e""d""""")""}""?"" ""b""l""o""c""k""e""d"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""b""l""o""c""k""e""d""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""r""e""q""t""a""g""s""""")""}""?"" ""r""e""q""t""a""g""s"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""r""e""q""t""a""g""s""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""w""e""i""g""h""t""""")""}""?"" ""w""e""i""g""h""t"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""w""e""i""g""h""t""""")"";""}"
+" ""|"" ""{""!""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""c""o""n""t""a""i""n""s""("""""d""e""p""e""n""d""e""n""c""y""""")""}""?"" ""d""e""p""e""n""d""e""n""c""y"" ""{""$""p""a""r""s""e"":"":""f""i""e""l""d""s"".""a""d""d""("""""d""e""p""e""n""d""e""n""c""y""""")"";""}"
+" ""|"" ""W""H""I""T""E""S""P""A""C""E"
+" "";"
 
-actions
- : SLASH (action)+
- ;
+"a""c""t""i""o""n""s"
+" "":"" ""S""L""A""S""H"" ""(""a""c""t""i""o""n"")""+"
+" "";"
 
-action
- : .+ SEMICOLON
- ;
+"a""c""t""i""o""n"
+" "":"" "".""+"" ""S""E""M""I""C""O""L""O""N"
+" "";"
 
-reqtags
- : REQTAG WHITESPACE* (COLON | ASSIGN) WHITESPACE* reqtagList
- ;
+"r""e""q""t""a""g""s"
+" "":"" ""R""E""Q""T""A""G"" ""W""H""I""T""E""S""P""A""C""E""*"" ""(""C""O""L""O""N"" ""|"" ""A""S""S""I""G""N"")"" ""W""H""I""T""E""S""P""A""C""E""*"" ""r""e""q""t""a""g""L""i""s""t"
+" "";"
 
-reqtagList
- : (reqtag WHITESPACE* COMMA WHITESPACE*)* reqtag
- ;
+"r""e""q""t""a""g""L""i""s""t"
+" "":"" ""(""r""e""q""t""a""g"" ""W""H""I""T""E""S""P""A""C""E""*"" ""C""O""M""M""A"" ""W""H""I""T""E""S""P""A""C""E""*"")""*"" ""r""e""q""t""a""g"
+" "";"
 
-reqtag
- : ~(COMMA)+
- ;
+"r""e""q""t""a""g"
+" "":"" ""~""(""C""O""M""M""A"")""+"
+" "";"
 
-guard
- : NestedBrackets
- ;
+"g""u""a""r""d"
+" "":"" ""N""e""s""t""e""d""B""r""a""c""k""e""t""s"
+" "";"
 
-blocked
- : BLOCKED
- ;
+"b""l""o""c""k""e""d"
+" "":"" ""B""L""O""C""K""E""D"
+" "";"
 
-names
- : name (SEMICOLON name)*
- ;
+"n""a""m""e""s"
+" "":"" ""n""a""m""e"" ""(""S""E""M""I""C""O""L""O""N"" ""n""a""m""e"")""*"
+" "";"
 
-name
- : Identifier (DOT Identifier)*
- ;
+"n""a""m""e"
+" "":"" ""I""d""e""n""t""i""f""i""e""r"" ""(""D""O""T"" ""I""d""e""n""t""i""f""i""e""r"")""*"
+" "";"
 
-dependency
- : DEPENDENCY WHITESPACE* ASSIGN WHITESPACE* Value
- ;
- 
-weight
- : WEIGHT WHITESPACE* ASSIGN WHITESPACE* Value
- ;
+"d""e""p""e""n""d""e""n""c""y"
+" "":"" ""D""E""P""E""N""D""E""N""C""Y"" ""W""H""I""T""E""S""P""A""C""E""*"" ""A""S""S""I""G""N"" ""W""H""I""T""E""S""P""A""C""E""*"" ""V""a""l""u""e"
+" "";"
+" "
+"w""e""i""g""h""t"
+" "":"" ""W""E""I""G""H""T"" ""W""H""I""T""E""S""P""A""C""E""*"" ""A""S""S""I""G""N"" ""W""H""I""T""E""S""P""A""C""E""*"" ""V""a""l""u""e"
+" "";"
