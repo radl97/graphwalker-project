@@ -1,552 +1,552 @@
-package org.graphwalker.cli;
-
-/*
- * #%L
- * GraphWalker Command Line Interface
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
-
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.MissingCommandException;
-import com.beust.jcommander.ParameterException;
-import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
-import com.sun.jersey.api.core.DefaultResourceConfig;
-import com.sun.jersey.api.core.ResourceConfig;
-import org.apache.commons.lang3.StringUtils;
-import org.glassfish.grizzly.http.server.HttpServer;
-import org.graphwalker.cli.commands.*;
-import org.graphwalker.cli.util.LoggerUtil;
-import org.graphwalker.cli.util.UnsupportedFileFormat;
-import org.graphwalker.core.event.EventType;
-import org.graphwalker.core.generator.SingletonRandomGenerator;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.machine.MachineException;
-import org.graphwalker.core.machine.SimpleMachine;
-import org.graphwalker.core.model.Edge;
-import org.graphwalker.core.model.Element;
-import org.graphwalker.core.model.Requirement;
-import org.graphwalker.core.model.Vertex;
-import org.graphwalker.dsl.antlr.DslException;
-import org.graphwalker.dsl.antlr.generator.GeneratorFactory;
-import org.graphwalker.io.common.ResourceUtils;
-import org.graphwalker.io.factory.ContextFactory;
-import org.graphwalker.io.factory.dot.DotContextFactory;
-import org.graphwalker.io.factory.java.JavaContextFactory;
-import org.graphwalker.io.factory.json.JsonContextFactory;
-import org.graphwalker.io.factory.yed.YEdContextFactory;
-import org.graphwalker.java.test.TestExecutor;
-import org.graphwalker.modelchecker.ContextsChecker;
-import org.graphwalker.restful.Restful;
-import org.graphwalker.restful.Util;
-import org.graphwalker.websocket.WebSocketServer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static org.graphwalker.core.common.Objects.isNullOrEmpty;
-import static org.graphwalker.io.common.Util.printVersionInformation;
-
-public class CLI {
-
-  private static final Logger logger = LoggerFactory.getLogger(CLI.class);
-
-  private Offline offline;
-  private Online online;
-  private Methods methods;
-  private Requirements requirements;
-  private Convert convert;
-  private Source source;
-  private Check check;
-
-  enum Command {
-    NONE,
-    OFFLINE,
-    ONLINE,
-    METHODS,
-    REQUIREMENTS,
-    CONVERT,
-    SOURCE,
-    CHECK
-  }
-
-  private Command command = Command.NONE;
-
-  public static void main(String[] args) {
-    CLI cli = new CLI();
-    try {
-      cli.run(args);
-    } catch (Exception e) {
-      // We should have caught all exceptions up until here, but there
-      // might have been problems with the command parser for instance...
-      System.err.println(e + System.lineSeparator());
-      logger.error("An error occurred when running command: " + StringUtils.join(args, " "), e);
-    }
-  }
-
-  /**
-   * Parses the command line.
-   */
-  private void run(String[] args) {
-    Options options = new Options();
-    JCommander jc = new JCommander(options);
-    jc.setProgramName("java -jar graphwalker.jar");
-    try {
-      jc.parseWithoutValidation(args);
-    } catch (Exception e) {
-      // ignore
-    }
-
-    try {
-      setLogLevel(options);
-
-      if (options.help) {
-        options = new Options();
-        jc = new JCommander(options);
-        offline = new Offline();
-        jc.addCommand("offline", offline);
-
-        online = new Online();
-        jc.addCommand("online", online);
-
-        methods = new Methods();
-        jc.addCommand("methods", methods);
-
-        requirements = new Requirements();
-        jc.addCommand("requirements", requirements);
-
-        convert = new Convert();
-        jc.addCommand("convert", convert);
-
-        source = new Source();
-        jc.addCommand("source", source);
-
-        check = new Check();
-        jc.addCommand("check", check);
-
-        jc.parse(args);
-        jc.usage();
-        return;
-      } else if (options.version) {
-        System.out.println(printVersionInformation());
-        return;
-      }
-
-      // Need to instantiate options again to avoid
-      // ParameterException "Can only specify option --debug once."
-      options = new Options();
-      jc = new JCommander(options);
-      offline = new Offline();
-      jc.addCommand("offline", offline);
-
-      online = new Online();
-      jc.addCommand("online", online);
-
-      methods = new Methods();
-      jc.addCommand("methods", methods);
-
-      requirements = new Requirements();
-      jc.addCommand("requirements", requirements);
-
-      convert = new Convert();
-      jc.addCommand("convert", convert);
-
-      source = new Source();
-      jc.addCommand("source", source);
-
-      check = new Check();
-      jc.addCommand("check", check);
-
-      jc.parse(args);
-
-      // Parse for commands
-      if (jc.getParsedCommand() != null) {
-        if (jc.getParsedCommand().equalsIgnoreCase("offline")) {
-          command = Command.OFFLINE;
-          runCommandOffline();
-        } else if (jc.getParsedCommand().equalsIgnoreCase("online")) {
-          command = Command.ONLINE;
-          runCommandOnline();
-        } else if (jc.getParsedCommand().equalsIgnoreCase("methods")) {
-          command = Command.METHODS;
-          runCommandMethods();
-        } else if (jc.getParsedCommand().equalsIgnoreCase("requirements")) {
-          command = Command.REQUIREMENTS;
-          runCommandRequirements();
-        } else if (jc.getParsedCommand().equalsIgnoreCase("convert")) {
-          command = Command.CONVERT;
-          runCommandConvert();
-        } else if (jc.getParsedCommand().equalsIgnoreCase("source")) {
-          command = Command.SOURCE;
-          runCommandSource();
-        } else if (jc.getParsedCommand().equalsIgnoreCase("check")) {
-          command = Command.SOURCE;
-          runCommandCheck();
-        }
-      }
-
-      // No commands or options were found
-      else {
-        throw new MissingCommandException("Missing a command. Add '--help'");
-      }
-
-    } catch (UnsupportedFileFormat | MissingCommandException e) {
-      System.err.println(e.getMessage() + System.lineSeparator());
-    } catch (ParameterException e) {
-      System.err.println("An error occurred when running command: " + StringUtils.join(args, " "));
-      System.err.println(e.getMessage() + System.lineSeparator());
-      jc.usage();
-    } catch (Exception e) {
-      System.err.println("An error occurred when running command: " + StringUtils.join(args, " "));
-      System.err.println(e.getMessage() + System.lineSeparator());
-      logger.error("An error occurred when running command: " + StringUtils.join(args, " "), e);
-    }
-  }
-
-  private void setLogLevel(Options options) {
-    // OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
-    if (options.debug.equalsIgnoreCase("OFF")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.OFF);
-    } else if (options.debug.equalsIgnoreCase("ERROR")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.ERROR);
-    } else if (options.debug.equalsIgnoreCase("WARN")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.WARN);
-    } else if (options.debug.equalsIgnoreCase("INFO")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.INFO);
-    } else if (options.debug.equalsIgnoreCase("DEBUG")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.DEBUG);
-    } else if (options.debug.equalsIgnoreCase("TRACE")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.TRACE);
-    } else if (options.debug.equalsIgnoreCase("ALL")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.ALL);
-    } else {
-      throw new ParameterException("Incorrect argument to --debug");
-    }
-  }
-
-  private void runCommandCheck() throws Exception, UnsupportedFileFormat {
-    List<Context> contexts = getContextsWithPathGenerators(check.model.iterator());
-    if (check.blocked) {
-      org.graphwalker.io.common.Util.filterBlockedElements(contexts);
-    }
-
-    List<String> issues = ContextsChecker.hasIssues(contexts);
-    if (!issues.isEmpty()) {
-      for (String issue : issues) {
-        System.out.println(issue);
-      }
-    } else {
-      System.out.println("No issues found with the model(s).");
-    }
-  }
-
-  private void runCommandRequirements() throws Exception, UnsupportedFileFormat {
-    SortedSet<String> reqs = new TreeSet<>();
-    List<Context> contexts = getContexts(requirements.model.iterator());
-    if (requirements.blocked) {
-      org.graphwalker.io.common.Util.filterBlockedElements(contexts);
-    }
-
-    for (Context context : contexts) {
-      for (Requirement req : context.getRequirements()) {
-        reqs.add(req.getKey());
-      }
-    }
-    for (String req : reqs) {
-      System.out.println(req);
-    }
-  }
-
-  private void runCommandMethods() throws Exception, UnsupportedFileFormat {
-    SortedSet<String> names = new TreeSet<>();
-    List<Context> contexts = getContexts(methods.model.iterator());
-    if (methods.blocked) {
-      org.graphwalker.io.common.Util.filterBlockedElements(contexts);
-    }
-
-    for (Context context : contexts) {
-      for (Vertex.RuntimeVertex vertex : context.getModel().getVertices()) {
-        if (null != vertex.getName()) {
-          names.add(vertex.getName());
-        }
-      }
-      for (Edge.RuntimeEdge edge : context.getModel().getEdges()) {
-        if (edge.getName() != null) {
-          names.add(edge.getName());
-        }
-      }
-    }
-
-    for (String name : names) {
-      System.out.println(name);
-    }
-  }
-
-  private void runCommandOnline() throws Exception, UnsupportedFileFormat {
-    if (online.service.equalsIgnoreCase(Online.SERVICE_WEBSOCKET)) {
-      WebSocketServer GraphWalkerWebSocketServer = new WebSocketServer(online.port);
-      try {
-        GraphWalkerWebSocketServer.startService();
-      } catch (Exception e) {
-        logger.error("Something went wrong.", e);
-      }
-    } else if (online.service.equalsIgnoreCase(Online.SERVICE_RESTFUL)) {
-      ResourceConfig rc = new DefaultResourceConfig();
-      try {
-        List<Context> contexts = getContextsWithPathGenerators(online.model.iterator());
-
-        rc.getSingletons().add(new Restful(contexts, online.verbose, online.unvisited, online.blocked));
-      } catch (MachineException e) {
-        System.err.println("Was the argument --model correctly?");
-        throw e;
-      }
-
-      String url = "http://0.0.0.0:" + online.port;
-
-      HttpServer server = GrizzlyServerFactory.createHttpServer(url, rc);
-      System.out.println("Try http://localhost:"
-        + online.port
-        + "/graphwalker/hasNext or http://localhost:"
-        + online.port
-        + "/graphwalker/getNext");
-      System.out.println("Press Control+C to end...");
-      try {
-        server.start();
-        Thread.currentThread().join();
-      } catch (InterruptedException e) {
-        // Typically the user pressed Ctrl+C
-        ;
-      } catch (Exception e) {
-        logger.error("An error occurred when running command online: ", e);
-      } finally {
-        server.stop();
-      }
-    } else {
-      throw new ParameterException("--service expected either WEBSOCKET or RESTFUL");
-    }
-  }
-
-  private void runCommandConvert() throws Exception, UnsupportedFileFormat {
-    String inputFileName = convert.input;
-
-    ContextFactory inputFactory = getContextFactory(inputFileName);
-    List<Context> contexts;
-    try {
-      contexts = inputFactory.create(Paths.get(inputFileName));
-    } catch (DslException e) {
-      System.err.println("When parsing model: '" + inputFileName + "' " + e.getMessage() + System.lineSeparator());
-      throw new Exception("Model syntax error");
-    }
-
-    if (convert.blocked) {
-      org.graphwalker.io.common.Util.filterBlockedElements(contexts);
-    }
-
-    ContextFactory outputFactory = getContextFactory("foo." + convert.format);
-    System.out.println(outputFactory.getAsString(contexts));
-  }
-
-  private void runCommandSource() throws Exception, UnsupportedFileFormat {
-    String modelFileName = source.input.get(0);
-    String templateFileName = source.input.get(1);
-
-    // Read the model
-    ContextFactory inputFactory = getContextFactory(modelFileName);
-    List<Context> contexts;
-    try {
-      contexts = inputFactory.create(Paths.get(modelFileName));
-      if (isNullOrEmpty(contexts)) {
-        logger.error("No valid models found in: " + modelFileName);
-        throw new RuntimeException("No valid models found in: " + modelFileName);
-      }
-    } catch (DslException e) {
-      System.err.println("When parsing model: '" + modelFileName + "' " + e.getMessage() + System.lineSeparator());
-      throw new Exception("Model syntax error");
-    }
-
-    if (source.blocked) {
-      org.graphwalker.io.common.Util.filterBlockedElements(contexts);
-    }
-
-    for (Context context : contexts) {
-      SortedSet<String> names = new TreeSet<>();
-      for (Vertex.RuntimeVertex vertex : context.getModel().getVertices()) {
-        if (vertex.hasName()) {
-          names.add(vertex.getName());
-        }
-      }
-      for (Edge.RuntimeEdge edge : context.getModel().getEdges()) {
-        if (edge.hasName()) {
-          names.add(edge.getName());
-        }
-      }
-
-      // Read the template
-      StringBuilder templateStrBuilder = new StringBuilder();
-      String line;
-      try (BufferedReader reader = new BufferedReader(new InputStreamReader(ResourceUtils.getResourceAsStream(templateFileName)))) {
-        while ((line = reader.readLine()) != null) {
-          templateStrBuilder.append(line).append("\n");
-        }
-      } catch (IOException e) {
-        logger.error(e.getMessage());
-        throw new RuntimeException("Could not read the file: " + templateFileName);
-      }
-      String templateStr = templateStrBuilder.toString();
-
-      // Apply the template and generate the source code to std out
-      String header = "", body = "", footer = "";
-      Pattern p = Pattern.compile("HEADER<\\{\\{([.\\s\\S]+)\\}\\}>HEADER([.\\s\\S]+)FOOTER<\\{\\{([.\\s\\S]+)\\}\\}>FOOTER");
-      Matcher m = p.matcher(templateStr);
-      if (m.find()) {
-        header = m.group(1);
-        body = m.group(2);
-        footer = m.group(3);
-      }
-
-      System.out.println(header);
-      for (String name : names) {
-        System.out.println(body.replaceAll("\\{LABEL\\}", name));
-      }
-      System.out.println(footer);
-    }
-  }
-
-  private void runCommandOffline() throws Exception, UnsupportedFileFormat {
-    if (offline.model.size() > 0) {
-      List<Context> contexts = getContextsWithPathGenerators(offline.model.iterator());
-      if (offline.blocked) {
-        org.graphwalker.io.common.Util.filterBlockedElements(contexts);
-      }
-
-      TestExecutor executor = new TestExecutor(contexts);
-      executor.getMachine().addObserver((machine, element, type) -> {
-        if (EventType.BEFORE_ELEMENT.equals(type)) {
-          System.out.println(Util.getStepAsJSON(machine, offline.verbose, offline.unvisited).toString());
-        }
-      });
-
-      if (offline.seed != 0) {
-        SingletonRandomGenerator.setSeed(offline.seed);
-      }
-
-      executor.execute();
-    } else if (!offline.gw3.isEmpty()) {
-      //TODO Fix gw3. Should not be there
-      List<Context> contexts = new JsonContextFactory().create(Paths.get(offline.gw3));
-
-      if (offline.seed != 0) {
-        SingletonRandomGenerator.setSeed(offline.seed);
-      }
-
-      if (offline.blocked) {
-        org.graphwalker.io.common.Util.filterBlockedElements(contexts);
-      }
-
-      SimpleMachine machine = new SimpleMachine(contexts);
-      while (machine.hasNextStep()) {
-        machine.getNextStep();
-        System.out.println(Util.getStepAsJSON(machine, offline.verbose, offline.unvisited).toString());
-      }
-    }
-  }
-
-  public List<Context> getContextsWithPathGenerators(Iterator itr) throws Exception, UnsupportedFileFormat {
-    List<Context> executionContexts = new ArrayList<>();
-    boolean triggerOnce = true;
-    while (itr.hasNext()) {
-      String modelFileName = (String) itr.next();
-      ContextFactory factory = getContextFactory(modelFileName);
-      List<Context> contexts;
-      try {
-        contexts = factory.create(Paths.get(modelFileName));
-      } catch (DslException e) {
-        System.err.println("When parsing model: '" + modelFileName + "' " + e.getMessage() + System.lineSeparator());
-        throw new Exception("Model syntax error");
-      }
-      // TODO fix all occurences of get(0) is not safe
-      contexts.get(0).setPathGenerator(GeneratorFactory.parse((String) itr.next()));
-
-      if (triggerOnce &&
-        (!offline.startElement.isEmpty() || !online.startElement.isEmpty())) {
-        triggerOnce = false;
-
-        List<Element> elements = null;
-        if (command == Command.OFFLINE) {
-          elements = contexts.get(0).getModel().findElements(offline.startElement);
-        } else if (command == Command.ONLINE) {
-          elements = contexts.get(0).getModel().findElements(online.startElement);
-        }
-
-        if (elements == null) {
-          throw new ParameterException("--start-element Did not find matching element in the model: " + modelFileName);
-        } else if (elements.size() > 1) {
-          throw new ParameterException("--start-element There are more than one matching element in the model: " + modelFileName);
-        }
-        contexts.get(0).setNextElement(elements.get(0));
-      }
-
-      executionContexts.addAll(contexts);
-    }
-    return executionContexts;
-  }
-
-  private ContextFactory getContextFactory(String modelFileName) throws UnsupportedFileFormat {
-    ContextFactory factory;
-    if (new YEdContextFactory().accept(Paths.get(modelFileName))) {
-      factory = new YEdContextFactory();
-    } else if (new JsonContextFactory().accept(Paths.get(modelFileName))) {
-      factory = new JsonContextFactory();
-    } else if (new DotContextFactory().accept(Paths.get(modelFileName))) {
-      factory = new DotContextFactory();
-    } else if (new JavaContextFactory().accept(Paths.get(modelFileName))) {
-      factory = new JavaContextFactory();
-    } else {
-      throw new UnsupportedFileFormat(modelFileName);
-    }
-    return factory;
-  }
-
-  private List<Context> getContexts(Iterator itr) throws Exception, UnsupportedFileFormat {
-    List<Context> executionContexts = new ArrayList<>();
-    while (itr.hasNext()) {
-      String modelFileName = (String) itr.next();
-      ContextFactory factory = getContextFactory(modelFileName);
-      List<Context> contexts;
-      try {
-        contexts = factory.create(Paths.get(modelFileName));
-      } catch (DslException e) {
-        System.err.println("When parsing model: '" + modelFileName + "' " + e.getMessage() + System.lineSeparator());
-        throw new Exception("Model syntax error");
-      }
-      executionContexts.addAll(contexts);
-    }
-    return executionContexts;
-  }
-}
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""l""i"";"
+
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""m""m""a""n""d"" ""L""i""n""e"" ""I""n""t""e""r""f""a""c""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
+
+"i""m""p""o""r""t"" ""c""o""m"".""b""e""u""s""t"".""j""c""o""m""m""a""n""d""e""r"".""J""C""o""m""m""a""n""d""e""r"";"
+"i""m""p""o""r""t"" ""c""o""m"".""b""e""u""s""t"".""j""c""o""m""m""a""n""d""e""r"".""M""i""s""s""i""n""g""C""o""m""m""a""n""d""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""c""o""m"".""b""e""u""s""t"".""j""c""o""m""m""a""n""d""e""r"".""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""c""o""m"".""s""u""n"".""j""e""r""s""e""y"".""a""p""i"".""c""o""n""t""a""i""n""e""r"".""g""r""i""z""z""l""y""2"".""G""r""i""z""z""l""y""S""e""r""v""e""r""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""c""o""m"".""s""u""n"".""j""e""r""s""e""y"".""a""p""i"".""c""o""r""e"".""D""e""f""a""u""l""t""R""e""s""o""u""r""c""e""C""o""n""f""i""g"";"
+"i""m""p""o""r""t"" ""c""o""m"".""s""u""n"".""j""e""r""s""e""y"".""a""p""i"".""c""o""r""e"".""R""e""s""o""u""r""c""e""C""o""n""f""i""g"";"
+"i""m""p""o""r""t"" ""o""r""g"".""a""p""a""c""h""e"".""c""o""m""m""o""n""s"".""l""a""n""g""3"".""S""t""r""i""n""g""U""t""i""l""s"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""l""a""s""s""f""i""s""h"".""g""r""i""z""z""l""y"".""h""t""t""p"".""s""e""r""v""e""r"".""H""t""t""p""S""e""r""v""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""l""i"".""c""o""m""m""a""n""d""s"".""*"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""l""i"".""u""t""i""l"".""L""o""g""g""e""r""U""t""i""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""l""i"".""u""t""i""l"".""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""e""v""e""n""t"".""E""v""e""n""t""T""y""p""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""M""a""c""h""i""n""e""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""S""i""m""p""l""e""M""a""c""h""i""n""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""R""e""q""u""i""r""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""d""s""l"".""a""n""t""l""r"".""D""s""l""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""d""s""l"".""a""n""t""l""r"".""g""e""n""e""r""a""t""o""r"".""G""e""n""e""r""a""t""o""r""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""R""e""s""o""u""r""c""e""U""t""i""l""s"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""d""o""t"".""D""o""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""j""a""v""a"".""J""a""v""a""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""j""s""o""n"".""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""y""e""d"".""Y""E""d""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""t""e""s""t"".""T""e""s""t""E""x""e""c""u""t""o""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"".""C""o""n""t""e""x""t""s""C""h""e""c""k""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""r""e""s""t""f""u""l"".""R""e""s""t""f""u""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""r""e""s""t""f""u""l"".""U""t""i""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""w""e""b""s""o""c""k""e""t"".""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r""F""a""c""t""o""r""y"";"
+
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""B""u""f""f""e""r""e""d""R""e""a""d""e""r"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""n""p""u""t""S""t""r""e""a""m""R""e""a""d""e""r"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""*"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""r""e""g""e""x"".""M""a""t""c""h""e""r"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""r""e""g""e""x"".""P""a""t""t""e""r""n"";"
+
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"".""O""b""j""e""c""t""s"".""i""s""N""u""l""l""O""r""E""m""p""t""y"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""p""r""i""n""t""V""e""r""s""i""o""n""I""n""f""o""r""m""a""t""i""o""n"";"
+
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""C""L""I"" ""{"
+
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""L""o""g""g""e""r"" ""l""o""g""g""e""r"" ""="" ""L""o""g""g""e""r""F""a""c""t""o""r""y"".""g""e""t""L""o""g""g""e""r""(""C""L""I"".""c""l""a""s""s"")"";"
+
+" "" ""p""r""i""v""a""t""e"" ""O""f""f""l""i""n""e"" ""o""f""f""l""i""n""e"";"
+" "" ""p""r""i""v""a""t""e"" ""O""n""l""i""n""e"" ""o""n""l""i""n""e"";"
+" "" ""p""r""i""v""a""t""e"" ""M""e""t""h""o""d""s"" ""m""e""t""h""o""d""s"";"
+" "" ""p""r""i""v""a""t""e"" ""R""e""q""u""i""r""e""m""e""n""t""s"" ""r""e""q""u""i""r""e""m""e""n""t""s"";"
+" "" ""p""r""i""v""a""t""e"" ""C""o""n""v""e""r""t"" ""c""o""n""v""e""r""t"";"
+" "" ""p""r""i""v""a""t""e"" ""S""o""u""r""c""e"" ""s""o""u""r""c""e"";"
+" "" ""p""r""i""v""a""t""e"" ""C""h""e""c""k"" ""c""h""e""c""k"";"
+
+" "" ""e""n""u""m"" ""C""o""m""m""a""n""d"" ""{"
+" "" "" "" ""N""O""N""E"","
+" "" "" "" ""O""F""F""L""I""N""E"","
+" "" "" "" ""O""N""L""I""N""E"","
+" "" "" "" ""M""E""T""H""O""D""S"","
+" "" "" "" ""R""E""Q""U""I""R""E""M""E""N""T""S"","
+" "" "" "" ""C""O""N""V""E""R""T"","
+" "" "" "" ""S""O""U""R""C""E"","
+" "" "" "" ""C""H""E""C""K"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""C""o""m""m""a""n""d"" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""N""O""N""E"";"
+
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""v""o""i""d"" ""m""a""i""n""(""S""t""r""i""n""g""[""]"" ""a""r""g""s"")"" ""{"
+" "" "" "" ""C""L""I"" ""c""l""i"" ""="" ""n""e""w"" ""C""L""I""("")"";"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""c""l""i"".""r""u""n""(""a""r""g""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""/""/"" ""W""e"" ""s""h""o""u""l""d"" ""h""a""v""e"" ""c""a""u""g""h""t"" ""a""l""l"" ""e""x""c""e""p""t""i""o""n""s"" ""u""p"" ""u""n""t""i""l"" ""h""e""r""e"","" ""b""u""t"" ""t""h""e""r""e"
+" "" "" "" "" "" ""/""/"" ""m""i""g""h""t"" ""h""a""v""e"" ""b""e""e""n"" ""p""r""o""b""l""e""m""s"" ""w""i""t""h"" ""t""h""e"" ""c""o""m""m""a""n""d"" ""p""a""r""s""e""r"" ""f""o""r"" ""i""n""s""t""a""n""c""e""."".""."
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""(""e"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"","" ""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""/""*""*"
+" "" "" ""*"" ""P""a""r""s""e""s"" ""t""h""e"" ""c""o""m""m""a""n""d"" ""l""i""n""e""."
+" "" "" ""*""/"
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""(""S""t""r""i""n""g""[""]"" ""a""r""g""s"")"" ""{"
+" "" "" "" ""O""p""t""i""o""n""s"" ""o""p""t""i""o""n""s"" ""="" ""n""e""w"" ""O""p""t""i""o""n""s""("")"";"
+" "" "" "" ""J""C""o""m""m""a""n""d""e""r"" ""j""c"" ""="" ""n""e""w"" ""J""C""o""m""m""a""n""d""e""r""(""o""p""t""i""o""n""s"")"";"
+" "" "" "" ""j""c"".""s""e""t""P""r""o""g""r""a""m""N""a""m""e""("""""j""a""v""a"" ""-""j""a""r"" ""g""r""a""p""h""w""a""l""k""e""r"".""j""a""r""""")"";"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""j""c"".""p""a""r""s""e""W""i""t""h""o""u""t""V""a""l""i""d""a""t""i""o""n""(""a""r""g""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""/""/"" ""i""g""n""o""r""e"
+" "" "" "" ""}"
+
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""s""e""t""L""o""g""L""e""v""e""l""(""o""p""t""i""o""n""s"")"";"
+
+" "" "" "" "" "" ""i""f"" ""(""o""p""t""i""o""n""s"".""h""e""l""p"")"" ""{"
+" "" "" "" "" "" "" "" ""o""p""t""i""o""n""s"" ""="" ""n""e""w"" ""O""p""t""i""o""n""s""("")"";"
+" "" "" "" "" "" "" "" ""j""c"" ""="" ""n""e""w"" ""J""C""o""m""m""a""n""d""e""r""(""o""p""t""i""o""n""s"")"";"
+" "" "" "" "" "" "" "" ""o""f""f""l""i""n""e"" ""="" ""n""e""w"" ""O""f""f""l""i""n""e""("")"";"
+" "" "" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""o""f""f""l""i""n""e""""","" ""o""f""f""l""i""n""e"")"";"
+
+" "" "" "" "" "" "" "" ""o""n""l""i""n""e"" ""="" ""n""e""w"" ""O""n""l""i""n""e""("")"";"
+" "" "" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""o""n""l""i""n""e""""","" ""o""n""l""i""n""e"")"";"
+
+" "" "" "" "" "" "" "" ""m""e""t""h""o""d""s"" ""="" ""n""e""w"" ""M""e""t""h""o""d""s""("")"";"
+" "" "" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""m""e""t""h""o""d""s""""","" ""m""e""t""h""o""d""s"")"";"
+
+" "" "" "" "" "" "" "" ""r""e""q""u""i""r""e""m""e""n""t""s"" ""="" ""n""e""w"" ""R""e""q""u""i""r""e""m""e""n""t""s""("")"";"
+" "" "" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""r""e""q""u""i""r""e""m""e""n""t""s""""","" ""r""e""q""u""i""r""e""m""e""n""t""s"")"";"
+
+" "" "" "" "" "" "" "" ""c""o""n""v""e""r""t"" ""="" ""n""e""w"" ""C""o""n""v""e""r""t""("")"";"
+" "" "" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""c""o""n""v""e""r""t""""","" ""c""o""n""v""e""r""t"")"";"
+
+" "" "" "" "" "" "" "" ""s""o""u""r""c""e"" ""="" ""n""e""w"" ""S""o""u""r""c""e""("")"";"
+" "" "" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""s""o""u""r""c""e""""","" ""s""o""u""r""c""e"")"";"
+
+" "" "" "" "" "" "" "" ""c""h""e""c""k"" ""="" ""n""e""w"" ""C""h""e""c""k""("")"";"
+" "" "" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""c""h""e""c""k""""","" ""c""h""e""c""k"")"";"
+
+" "" "" "" "" "" "" "" ""j""c"".""p""a""r""s""e""(""a""r""g""s"")"";"
+" "" "" "" "" "" "" "" ""j""c"".""u""s""a""g""e""("")"";"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""v""e""r""s""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""p""r""i""n""t""V""e""r""s""i""o""n""I""n""f""o""r""m""a""t""i""o""n""("")"")"";"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""/""/"" ""N""e""e""d"" ""t""o"" ""i""n""s""t""a""n""t""i""a""t""e"" ""o""p""t""i""o""n""s"" ""a""g""a""i""n"" ""t""o"" ""a""v""o""i""d"
+" "" "" "" "" "" ""/""/"" ""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n"" """""C""a""n"" ""o""n""l""y"" ""s""p""e""c""i""f""y"" ""o""p""t""i""o""n"" ""-""-""d""e""b""u""g"" ""o""n""c""e"".""""
+" "" "" "" "" "" ""o""p""t""i""o""n""s"" ""="" ""n""e""w"" ""O""p""t""i""o""n""s""("")"";"
+" "" "" "" "" "" ""j""c"" ""="" ""n""e""w"" ""J""C""o""m""m""a""n""d""e""r""(""o""p""t""i""o""n""s"")"";"
+" "" "" "" "" "" ""o""f""f""l""i""n""e"" ""="" ""n""e""w"" ""O""f""f""l""i""n""e""("")"";"
+" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""o""f""f""l""i""n""e""""","" ""o""f""f""l""i""n""e"")"";"
+
+" "" "" "" "" "" ""o""n""l""i""n""e"" ""="" ""n""e""w"" ""O""n""l""i""n""e""("")"";"
+" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""o""n""l""i""n""e""""","" ""o""n""l""i""n""e"")"";"
+
+" "" "" "" "" "" ""m""e""t""h""o""d""s"" ""="" ""n""e""w"" ""M""e""t""h""o""d""s""("")"";"
+" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""m""e""t""h""o""d""s""""","" ""m""e""t""h""o""d""s"")"";"
+
+" "" "" "" "" "" ""r""e""q""u""i""r""e""m""e""n""t""s"" ""="" ""n""e""w"" ""R""e""q""u""i""r""e""m""e""n""t""s""("")"";"
+" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""r""e""q""u""i""r""e""m""e""n""t""s""""","" ""r""e""q""u""i""r""e""m""e""n""t""s"")"";"
+
+" "" "" "" "" "" ""c""o""n""v""e""r""t"" ""="" ""n""e""w"" ""C""o""n""v""e""r""t""("")"";"
+" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""c""o""n""v""e""r""t""""","" ""c""o""n""v""e""r""t"")"";"
+
+" "" "" "" "" "" ""s""o""u""r""c""e"" ""="" ""n""e""w"" ""S""o""u""r""c""e""("")"";"
+" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""s""o""u""r""c""e""""","" ""s""o""u""r""c""e"")"";"
+
+" "" "" "" "" "" ""c""h""e""c""k"" ""="" ""n""e""w"" ""C""h""e""c""k""("")"";"
+" "" "" "" "" "" ""j""c"".""a""d""d""C""o""m""m""a""n""d""("""""c""h""e""c""k""""","" ""c""h""e""c""k"")"";"
+
+" "" "" "" "" "" ""j""c"".""p""a""r""s""e""(""a""r""g""s"")"";"
+
+" "" "" "" "" "" ""/""/"" ""P""a""r""s""e"" ""f""o""r"" ""c""o""m""m""a""n""d""s"
+" "" "" "" "" "" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""o""f""f""l""i""n""e""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""O""F""F""L""I""N""E"";"
+" "" "" "" "" "" "" "" "" "" ""r""u""n""C""o""m""m""a""n""d""O""f""f""l""i""n""e""("")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""o""n""l""i""n""e""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""O""N""L""I""N""E"";"
+" "" "" "" "" "" "" "" "" "" ""r""u""n""C""o""m""m""a""n""d""O""n""l""i""n""e""("")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""m""e""t""h""o""d""s""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""M""E""T""H""O""D""S"";"
+" "" "" "" "" "" "" "" "" "" ""r""u""n""C""o""m""m""a""n""d""M""e""t""h""o""d""s""("")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""r""e""q""u""i""r""e""m""e""n""t""s""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""R""E""Q""U""I""R""E""M""E""N""T""S"";"
+" "" "" "" "" "" "" "" "" "" ""r""u""n""C""o""m""m""a""n""d""R""e""q""u""i""r""e""m""e""n""t""s""("")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""c""o""n""v""e""r""t""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""C""O""N""V""E""R""T"";"
+" "" "" "" "" "" "" "" "" "" ""r""u""n""C""o""m""m""a""n""d""C""o""n""v""e""r""t""("")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""s""o""u""r""c""e""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""S""O""U""R""C""E"";"
+" "" "" "" "" "" "" "" "" "" ""r""u""n""C""o""m""m""a""n""d""S""o""u""r""c""e""("")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""j""c"".""g""e""t""P""a""r""s""e""d""C""o""m""m""a""n""d""("")"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""c""h""e""c""k""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""c""o""m""m""a""n""d"" ""="" ""C""o""m""m""a""n""d"".""S""O""U""R""C""E"";"
+" "" "" "" "" "" "" "" "" "" ""r""u""n""C""o""m""m""a""n""d""C""h""e""c""k""("")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""/""/"" ""N""o"" ""c""o""m""m""a""n""d""s"" ""o""r"" ""o""p""t""i""o""n""s"" ""w""e""r""e"" ""f""o""u""n""d"
+" "" "" "" "" "" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""M""i""s""s""i""n""g""C""o""m""m""a""n""d""E""x""c""e""p""t""i""o""n""("""""M""i""s""s""i""n""g"" ""a"" ""c""o""m""m""a""n""d""."" ""A""d""d"" ""'""-""-""h""e""l""p""'""""")"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""|"" ""M""i""s""s""i""n""g""C""o""m""m""a""n""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"")"";"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""j""c"".""u""s""a""g""e""("")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"")"";"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"","" ""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""s""e""t""L""o""g""L""e""v""e""l""(""O""p""t""i""o""n""s"" ""o""p""t""i""o""n""s"")"" ""{"
+" "" "" "" ""/""/"" ""O""F""F"","" ""E""R""R""O""R"","" ""W""A""R""N"","" ""I""N""F""O"","" ""D""E""B""U""G"","" ""T""R""A""C""E"","" ""A""L""L"
+" "" "" "" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""O""F""F""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""O""F""F"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""E""R""R""O""R""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""E""R""R""O""R"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""W""A""R""N""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""W""A""R""N"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""I""N""F""O""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""I""N""F""O"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""D""E""B""U""G""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""D""E""B""U""G"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""T""R""A""C""E""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""T""R""A""C""E"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""A""L""L""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""A""L""L"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n""("""""I""n""c""o""r""r""e""c""t"" ""a""r""g""u""m""e""n""t"" ""t""o"" ""-""-""d""e""b""u""g""""")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""C""o""m""m""a""n""d""C""h""e""c""k""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""g""e""t""C""o""n""t""e""x""t""s""W""i""t""h""P""a""t""h""G""e""n""e""r""a""t""o""r""s""(""c""h""e""c""k"".""m""o""d""e""l"".""i""t""e""r""a""t""o""r""("")"")"";"
+" "" "" "" ""i""f"" ""(""c""h""e""c""k"".""b""l""o""c""k""e""d"")"" ""{"
+" "" "" "" "" "" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""f""i""l""t""e""r""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""}"
+
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""s""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""i""f"" ""(""!""i""s""s""u""e""s"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" ""f""o""r"" ""(""S""t""r""i""n""g"" ""i""s""s""u""e"" "":"" ""i""s""s""u""e""s"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""i""s""s""u""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""N""o"" ""i""s""s""u""e""s"" ""f""o""u""n""d"" ""w""i""t""h"" ""t""h""e"" ""m""o""d""e""l""(""s"")"".""""")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""C""o""m""m""a""n""d""R""e""q""u""i""r""e""m""e""n""t""s""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""S""o""r""t""e""d""S""e""t""<""S""t""r""i""n""g"">"" ""r""e""q""s"" ""="" ""n""e""w"" ""T""r""e""e""S""e""t""<"">""("")"";"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""g""e""t""C""o""n""t""e""x""t""s""(""r""e""q""u""i""r""e""m""e""n""t""s"".""m""o""d""e""l"".""i""t""e""r""a""t""o""r""("")"")"";"
+" "" "" "" ""i""f"" ""(""r""e""q""u""i""r""e""m""e""n""t""s"".""b""l""o""c""k""e""d"")"" ""{"
+" "" "" "" "" "" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""f""i""l""t""e""r""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""}"
+
+" "" "" "" ""f""o""r"" ""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" "":"" ""c""o""n""t""e""x""t""s"")"" ""{"
+" "" "" "" "" "" ""f""o""r"" ""(""R""e""q""u""i""r""e""m""e""n""t"" ""r""e""q"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""R""e""q""u""i""r""e""m""e""n""t""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""r""e""q""s"".""a""d""d""(""r""e""q"".""g""e""t""K""e""y""("")"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""f""o""r"" ""(""S""t""r""i""n""g"" ""r""e""q"" "":"" ""r""e""q""s"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""r""e""q"")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""C""o""m""m""a""n""d""M""e""t""h""o""d""s""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""S""o""r""t""e""d""S""e""t""<""S""t""r""i""n""g"">"" ""n""a""m""e""s"" ""="" ""n""e""w"" ""T""r""e""e""S""e""t""<"">""("")"";"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""g""e""t""C""o""n""t""e""x""t""s""(""m""e""t""h""o""d""s"".""m""o""d""e""l"".""i""t""e""r""a""t""o""r""("")"")"";"
+" "" "" "" ""i""f"" ""(""m""e""t""h""o""d""s"".""b""l""o""c""k""e""d"")"" ""{"
+" "" "" "" "" "" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""f""i""l""t""e""r""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""}"
+
+" "" "" "" ""f""o""r"" ""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" "":"" ""c""o""n""t""e""x""t""s"")"" ""{"
+" "" "" "" "" "" ""f""o""r"" ""(""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""V""e""r""t""i""c""e""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""n""u""l""l"" ""!""="" ""v""e""r""t""e""x"".""g""e""t""N""a""m""e""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""n""a""m""e""s"".""a""d""d""(""v""e""r""t""e""x"".""g""e""t""N""a""m""e""("")"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""f""o""r"" ""(""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""d""g""e""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""e""d""g""e"".""g""e""t""N""a""m""e""("")"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""n""a""m""e""s"".""a""d""d""(""e""d""g""e"".""g""e""t""N""a""m""e""("")"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+
+" "" "" "" ""f""o""r"" ""(""S""t""r""i""n""g"" ""n""a""m""e"" "":"" ""n""a""m""e""s"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""n""a""m""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""C""o""m""m""a""n""d""O""n""l""i""n""e""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""i""f"" ""(""o""n""l""i""n""e"".""s""e""r""v""i""c""e"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""(""O""n""l""i""n""e"".""S""E""R""V""I""C""E""_""W""E""B""S""O""C""K""E""T"")"")"" ""{"
+" "" "" "" "" "" ""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r"" ""G""r""a""p""h""W""a""l""k""e""r""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r"" ""="" ""n""e""w"" ""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r""(""o""n""l""i""n""e"".""p""o""r""t"")"";"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""G""r""a""p""h""W""a""l""k""e""r""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r"".""s""t""a""r""t""S""e""r""v""i""c""e""("")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""S""o""m""e""t""h""i""n""g"" ""w""e""n""t"" ""w""r""o""n""g"".""""","" ""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""n""l""i""n""e"".""s""e""r""v""i""c""e"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""(""O""n""l""i""n""e"".""S""E""R""V""I""C""E""_""R""E""S""T""F""U""L"")"")"" ""{"
+" "" "" "" "" "" ""R""e""s""o""u""r""c""e""C""o""n""f""i""g"" ""r""c"" ""="" ""n""e""w"" ""D""e""f""a""u""l""t""R""e""s""o""u""r""c""e""C""o""n""f""i""g""("")"";"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""g""e""t""C""o""n""t""e""x""t""s""W""i""t""h""P""a""t""h""G""e""n""e""r""a""t""o""r""s""(""o""n""l""i""n""e"".""m""o""d""e""l"".""i""t""e""r""a""t""o""r""("")"")"";"
+
+" "" "" "" "" "" "" "" ""r""c"".""g""e""t""S""i""n""g""l""e""t""o""n""s""("")"".""a""d""d""(""n""e""w"" ""R""e""s""t""f""u""l""(""c""o""n""t""e""x""t""s"","" ""o""n""l""i""n""e"".""v""e""r""b""o""s""e"","" ""o""n""l""i""n""e"".""u""n""v""i""s""i""t""e""d"","" ""o""n""l""i""n""e"".""b""l""o""c""k""e""d"")"")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""M""a""c""h""i""n""e""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""W""a""s"" ""t""h""e"" ""a""r""g""u""m""e""n""t"" ""-""-""m""o""d""e""l"" ""c""o""r""r""e""c""t""l""y""?""""")"";"
+" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""e"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""u""r""l"" ""="" """""h""t""t""p"":""/""/""0"".""0"".""0"".""0"":""""" ""+"" ""o""n""l""i""n""e"".""p""o""r""t"";"
+
+" "" "" "" "" "" ""H""t""t""p""S""e""r""v""e""r"" ""s""e""r""v""e""r"" ""="" ""G""r""i""z""z""l""y""S""e""r""v""e""r""F""a""c""t""o""r""y"".""c""r""e""a""t""e""H""t""t""p""S""e""r""v""e""r""(""u""r""l"","" ""r""c"")"";"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""T""r""y"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""""
+" "" "" "" "" "" "" "" ""+"" ""o""n""l""i""n""e"".""p""o""r""t"
+" "" "" "" "" "" "" "" ""+"" """""/""g""r""a""p""h""w""a""l""k""e""r""/""h""a""s""N""e""x""t"" ""o""r"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""""
+" "" "" "" "" "" "" "" ""+"" ""o""n""l""i""n""e"".""p""o""r""t"
+" "" "" "" "" "" "" "" ""+"" """""/""g""r""a""p""h""w""a""l""k""e""r""/""g""e""t""N""e""x""t""""")"";"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""P""r""e""s""s"" ""C""o""n""t""r""o""l""+""C"" ""t""o"" ""e""n""d"".""."".""""")"";"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""s""e""r""v""e""r"".""s""t""a""r""t""("")"";"
+" "" "" "" "" "" "" "" ""T""h""r""e""a""d"".""c""u""r""r""e""n""t""T""h""r""e""a""d""("")"".""j""o""i""n""("")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""n""t""e""r""r""u""p""t""e""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""/""/"" ""T""y""p""i""c""a""l""l""y"" ""t""h""e"" ""u""s""e""r"" ""p""r""e""s""s""e""d"" ""C""t""r""l""+""C"
+" "" "" "" "" "" "" "" "";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"" ""o""n""l""i""n""e"":"" """"","" ""e"")"";"
+" "" "" "" "" "" ""}"" ""f""i""n""a""l""l""y"" ""{"
+" "" "" "" "" "" "" "" ""s""e""r""v""e""r"".""s""t""o""p""("")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n""("""""-""-""s""e""r""v""i""c""e"" ""e""x""p""e""c""t""e""d"" ""e""i""t""h""e""r"" ""W""E""B""S""O""C""K""E""T"" ""o""r"" ""R""E""S""T""F""U""L""""")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""C""o""m""m""a""n""d""C""o""n""v""e""r""t""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""i""n""p""u""t""F""i""l""e""N""a""m""e"" ""="" ""c""o""n""v""e""r""t"".""i""n""p""u""t"";"
+
+" "" "" "" ""C""o""n""t""e""x""t""F""a""c""t""o""r""y"" ""i""n""p""u""t""F""a""c""t""o""r""y"" ""="" ""g""e""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""(""i""n""p""u""t""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"";"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""c""o""n""t""e""x""t""s"" ""="" ""i""n""p""u""t""F""a""c""t""o""r""y"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""(""i""n""p""u""t""F""i""l""e""N""a""m""e"")"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""D""s""l""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""W""h""e""n"" ""p""a""r""s""i""n""g"" ""m""o""d""e""l"":"" ""'""""" ""+"" ""i""n""p""u""t""F""i""l""e""N""a""m""e"" ""+"" """""'"" """"" ""+"" ""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""x""c""e""p""t""i""o""n""("""""M""o""d""e""l"" ""s""y""n""t""a""x"" ""e""r""r""o""r""""")"";"
+" "" "" "" ""}"
+
+" "" "" "" ""i""f"" ""(""c""o""n""v""e""r""t"".""b""l""o""c""k""e""d"")"" ""{"
+" "" "" "" "" "" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""f""i""l""t""e""r""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""}"
+
+" "" "" "" ""C""o""n""t""e""x""t""F""a""c""t""o""r""y"" ""o""u""t""p""u""t""F""a""c""t""o""r""y"" ""="" ""g""e""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("""""f""o""o"".""""" ""+"" ""c""o""n""v""e""r""t"".""f""o""r""m""a""t"")"";"
+" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""o""u""t""p""u""t""F""a""c""t""o""r""y"".""g""e""t""A""s""S""t""r""i""n""g""(""c""o""n""t""e""x""t""s"")"")"";"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""C""o""m""m""a""n""d""S""o""u""r""c""e""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"" ""="" ""s""o""u""r""c""e"".""i""n""p""u""t"".""g""e""t""(""0"")"";"
+" "" "" "" ""S""t""r""i""n""g"" ""t""e""m""p""l""a""t""e""F""i""l""e""N""a""m""e"" ""="" ""s""o""u""r""c""e"".""i""n""p""u""t"".""g""e""t""(""1"")"";"
+
+" "" "" "" ""/""/"" ""R""e""a""d"" ""t""h""e"" ""m""o""d""e""l"
+" "" "" "" ""C""o""n""t""e""x""t""F""a""c""t""o""r""y"" ""i""n""p""u""t""F""a""c""t""o""r""y"" ""="" ""g""e""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"";"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""c""o""n""t""e""x""t""s"" ""="" ""i""n""p""u""t""F""a""c""t""o""r""y"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"")"";"
+" "" "" "" "" "" ""i""f"" ""(""i""s""N""u""l""l""O""r""E""m""p""t""y""(""c""o""n""t""e""x""t""s"")"")"" ""{"
+" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""N""o"" ""v""a""l""i""d"" ""m""o""d""e""l""s"" ""f""o""u""n""d"" ""i""n"":"" """"" ""+"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""("""""N""o"" ""v""a""l""i""d"" ""m""o""d""e""l""s"" ""f""o""u""n""d"" ""i""n"":"" """"" ""+"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""D""s""l""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""W""h""e""n"" ""p""a""r""s""i""n""g"" ""m""o""d""e""l"":"" ""'""""" ""+"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"" ""+"" """""'"" """"" ""+"" ""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""x""c""e""p""t""i""o""n""("""""M""o""d""e""l"" ""s""y""n""t""a""x"" ""e""r""r""o""r""""")"";"
+" "" "" "" ""}"
+
+" "" "" "" ""i""f"" ""(""s""o""u""r""c""e"".""b""l""o""c""k""e""d"")"" ""{"
+" "" "" "" "" "" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""f""i""l""t""e""r""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""}"
+
+" "" "" "" ""f""o""r"" ""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" "":"" ""c""o""n""t""e""x""t""s"")"" ""{"
+" "" "" "" "" "" ""S""o""r""t""e""d""S""e""t""<""S""t""r""i""n""g"">"" ""n""a""m""e""s"" ""="" ""n""e""w"" ""T""r""e""e""S""e""t""<"">""("")"";"
+" "" "" "" "" "" ""f""o""r"" ""(""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""V""e""r""t""i""c""e""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""v""e""r""t""e""x"".""h""a""s""N""a""m""e""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""n""a""m""e""s"".""a""d""d""(""v""e""r""t""e""x"".""g""e""t""N""a""m""e""("")"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""f""o""r"" ""(""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""d""g""e""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""e""d""g""e"".""h""a""s""N""a""m""e""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""n""a""m""e""s"".""a""d""d""(""e""d""g""e"".""g""e""t""N""a""m""e""("")"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""/""/"" ""R""e""a""d"" ""t""h""e"" ""t""e""m""p""l""a""t""e"
+" "" "" "" "" "" ""S""t""r""i""n""g""B""u""i""l""d""e""r"" ""t""e""m""p""l""a""t""e""S""t""r""B""u""i""l""d""e""r"" ""="" ""n""e""w"" ""S""t""r""i""n""g""B""u""i""l""d""e""r""("")"";"
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""l""i""n""e"";"
+" "" "" "" "" "" ""t""r""y"" ""(""B""u""f""f""e""r""e""d""R""e""a""d""e""r"" ""r""e""a""d""e""r"" ""="" ""n""e""w"" ""B""u""f""f""e""r""e""d""R""e""a""d""e""r""(""n""e""w"" ""I""n""p""u""t""S""t""r""e""a""m""R""e""a""d""e""r""(""R""e""s""o""u""r""c""e""U""t""i""l""s"".""g""e""t""R""e""s""o""u""r""c""e""A""s""S""t""r""e""a""m""(""t""e""m""p""l""a""t""e""F""i""l""e""N""a""m""e"")"")"")"")"" ""{"
+" "" "" "" "" "" "" "" ""w""h""i""l""e"" ""(""(""l""i""n""e"" ""="" ""r""e""a""d""e""r"".""r""e""a""d""L""i""n""e""("")"")"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""t""e""m""p""l""a""t""e""S""t""r""B""u""i""l""d""e""r"".""a""p""p""e""n""d""(""l""i""n""e"")"".""a""p""p""e""n""d""("""""\""n""""")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""O""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""("""""C""o""u""l""d"" ""n""o""t"" ""r""e""a""d"" ""t""h""e"" ""f""i""l""e"":"" """"" ""+"" ""t""e""m""p""l""a""t""e""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""t""e""m""p""l""a""t""e""S""t""r"" ""="" ""t""e""m""p""l""a""t""e""S""t""r""B""u""i""l""d""e""r"".""t""o""S""t""r""i""n""g""("")"";"
+
+" "" "" "" "" "" ""/""/"" ""A""p""p""l""y"" ""t""h""e"" ""t""e""m""p""l""a""t""e"" ""a""n""d"" ""g""e""n""e""r""a""t""e"" ""t""h""e"" ""s""o""u""r""c""e"" ""c""o""d""e"" ""t""o"" ""s""t""d"" ""o""u""t"
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""h""e""a""d""e""r"" ""="" """""""","" ""b""o""d""y"" ""="" """""""","" ""f""o""o""t""e""r"" ""="" """""""";"
+" "" "" "" "" "" ""P""a""t""t""e""r""n"" ""p"" ""="" ""P""a""t""t""e""r""n"".""c""o""m""p""i""l""e""("""""H""E""A""D""E""R""<""\""\""{""\""\""{""(""["".""\""\""s""\""\""S""]""+"")""\""\""}""\""\""}"">""H""E""A""D""E""R""(""["".""\""\""s""\""\""S""]""+"")""F""O""O""T""E""R""<""\""\""{""\""\""{""(""["".""\""\""s""\""\""S""]""+"")""\""\""}""\""\""}"">""F""O""O""T""E""R""""")"";"
+" "" "" "" "" "" ""M""a""t""c""h""e""r"" ""m"" ""="" ""p"".""m""a""t""c""h""e""r""(""t""e""m""p""l""a""t""e""S""t""r"")"";"
+" "" "" "" "" "" ""i""f"" ""(""m"".""f""i""n""d""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""h""e""a""d""e""r"" ""="" ""m"".""g""r""o""u""p""(""1"")"";"
+" "" "" "" "" "" "" "" ""b""o""d""y"" ""="" ""m"".""g""r""o""u""p""(""2"")"";"
+" "" "" "" "" "" "" "" ""f""o""o""t""e""r"" ""="" ""m"".""g""r""o""u""p""(""3"")"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""h""e""a""d""e""r"")"";"
+" "" "" "" "" "" ""f""o""r"" ""(""S""t""r""i""n""g"" ""n""a""m""e"" "":"" ""n""a""m""e""s"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""b""o""d""y"".""r""e""p""l""a""c""e""A""l""l""("""""\""\""{""L""A""B""E""L""\""\""}""""","" ""n""a""m""e"")"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""f""o""o""t""e""r"")"";"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""C""o""m""m""a""n""d""O""f""f""l""i""n""e""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""i""f"" ""(""o""f""f""l""i""n""e"".""m""o""d""e""l"".""s""i""z""e""("")"" "">"" ""0"")"" ""{"
+" "" "" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""g""e""t""C""o""n""t""e""x""t""s""W""i""t""h""P""a""t""h""G""e""n""e""r""a""t""o""r""s""(""o""f""f""l""i""n""e"".""m""o""d""e""l"".""i""t""e""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""i""f"" ""(""o""f""f""l""i""n""e"".""b""l""o""c""k""e""d"")"" ""{"
+" "" "" "" "" "" "" "" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""f""i""l""t""e""r""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""T""e""s""t""E""x""e""c""u""t""o""r"" ""e""x""e""c""u""t""o""r"" ""="" ""n""e""w"" ""T""e""s""t""E""x""e""c""u""t""o""r""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" "" "" ""e""x""e""c""u""t""o""r"".""g""e""t""M""a""c""h""i""n""e""("")"".""a""d""d""O""b""s""e""r""v""e""r""(""(""m""a""c""h""i""n""e"","" ""e""l""e""m""e""n""t"","" ""t""y""p""e"")"" ""-"">"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""E""v""e""n""t""T""y""p""e"".""B""E""F""O""R""E""_""E""L""E""M""E""N""T"".""e""q""u""a""l""s""(""t""y""p""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""U""t""i""l"".""g""e""t""S""t""e""p""A""s""J""S""O""N""(""m""a""c""h""i""n""e"","" ""o""f""f""l""i""n""e"".""v""e""r""b""o""s""e"","" ""o""f""f""l""i""n""e"".""u""n""v""i""s""i""t""e""d"")"".""t""o""S""t""r""i""n""g""("")"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" ""i""f"" ""(""o""f""f""l""i""n""e"".""s""e""e""d"" ""!""="" ""0"")"" ""{"
+" "" "" "" "" "" "" "" ""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""s""e""t""S""e""e""d""(""o""f""f""l""i""n""e"".""s""e""e""d"")"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""e""x""e""c""u""t""o""r"".""e""x""e""c""u""t""e""("")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""!""o""f""f""l""i""n""e"".""g""w""3"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" ""/""/""T""O""D""O"" ""F""i""x"" ""g""w""3""."" ""S""h""o""u""l""d"" ""n""o""t"" ""b""e"" ""t""h""e""r""e"
+" "" "" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""(""o""f""f""l""i""n""e"".""g""w""3"")"")"";"
+
+" "" "" "" "" "" ""i""f"" ""(""o""f""f""l""i""n""e"".""s""e""e""d"" ""!""="" ""0"")"" ""{"
+" "" "" "" "" "" "" "" ""S""i""n""g""l""e""t""o""n""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r"".""s""e""t""S""e""e""d""(""o""f""f""l""i""n""e"".""s""e""e""d"")"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""i""f"" ""(""o""f""f""l""i""n""e"".""b""l""o""c""k""e""d"")"" ""{"
+" "" "" "" "" "" "" "" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""f""i""l""t""e""r""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""S""i""m""p""l""e""M""a""c""h""i""n""e"" ""m""a""c""h""i""n""e"" ""="" ""n""e""w"" ""S""i""m""p""l""e""M""a""c""h""i""n""e""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" "" "" ""w""h""i""l""e"" ""(""m""a""c""h""i""n""e"".""h""a""s""N""e""x""t""S""t""e""p""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""m""a""c""h""i""n""e"".""g""e""t""N""e""x""t""S""t""e""p""("")"";"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""U""t""i""l"".""g""e""t""S""t""e""p""A""s""J""S""O""N""(""m""a""c""h""i""n""e"","" ""o""f""f""l""i""n""e"".""v""e""r""b""o""s""e"","" ""o""f""f""l""i""n""e"".""u""n""v""i""s""i""t""e""d"")"".""t""o""S""t""r""i""n""g""("")"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
+
+" "" ""p""u""b""l""i""c"" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""g""e""t""C""o""n""t""e""x""t""s""W""i""t""h""P""a""t""h""G""e""n""e""r""a""t""o""r""s""(""I""t""e""r""a""t""o""r"" ""i""t""r"")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""e""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" "" "" ""b""o""o""l""e""a""n"" ""t""r""i""g""g""e""r""O""n""c""e"" ""="" ""t""r""u""e"";"
+" "" "" "" ""w""h""i""l""e"" ""(""i""t""r"".""h""a""s""N""e""x""t""("")"")"" ""{"
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"" ""="" ""(""S""t""r""i""n""g"")"" ""i""t""r"".""n""e""x""t""("")"";"
+" "" "" "" "" "" ""C""o""n""t""e""x""t""F""a""c""t""o""r""y"" ""f""a""c""t""o""r""y"" ""="" ""g""e""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"";"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""c""o""n""t""e""x""t""s"" ""="" ""f""a""c""t""o""r""y"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""D""s""l""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""W""h""e""n"" ""p""a""r""s""i""n""g"" ""m""o""d""e""l"":"" ""'""""" ""+"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"" ""+"" """""'"" """"" ""+"" ""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""x""c""e""p""t""i""o""n""("""""M""o""d""e""l"" ""s""y""n""t""a""x"" ""e""r""r""o""r""""")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""/""/"" ""T""O""D""O"" ""f""i""x"" ""a""l""l"" ""o""c""c""u""r""e""n""c""e""s"" ""o""f"" ""g""e""t""(""0"")"" ""i""s"" ""n""o""t"" ""s""a""f""e"
+" "" "" "" "" "" ""c""o""n""t""e""x""t""s"".""g""e""t""(""0"")"".""s""e""t""P""a""t""h""G""e""n""e""r""a""t""o""r""(""G""e""n""e""r""a""t""o""r""F""a""c""t""o""r""y"".""p""a""r""s""e""(""(""S""t""r""i""n""g"")"" ""i""t""r"".""n""e""x""t""("")"")"")"";"
+
+" "" "" "" "" "" ""i""f"" ""(""t""r""i""g""g""e""r""O""n""c""e"" ""&""&"
+" "" "" "" "" "" "" "" ""(""!""o""f""f""l""i""n""e"".""s""t""a""r""t""E""l""e""m""e""n""t"".""i""s""E""m""p""t""y""("")"" ""|""|"" ""!""o""n""l""i""n""e"".""s""t""a""r""t""E""l""e""m""e""n""t"".""i""s""E""m""p""t""y""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" ""t""r""i""g""g""e""r""O""n""c""e"" ""="" ""f""a""l""s""e"";"
+
+" "" "" "" "" "" "" "" ""L""i""s""t""<""E""l""e""m""e""n""t"">"" ""e""l""e""m""e""n""t""s"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" ""i""f"" ""(""c""o""m""m""a""n""d"" ""=""="" ""C""o""m""m""a""n""d"".""O""F""F""L""I""N""E"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""e""l""e""m""e""n""t""s"" ""="" ""c""o""n""t""e""x""t""s"".""g""e""t""(""0"")"".""g""e""t""M""o""d""e""l""("")"".""f""i""n""d""E""l""e""m""e""n""t""s""(""o""f""f""l""i""n""e"".""s""t""a""r""t""E""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""c""o""m""m""a""n""d"" ""=""="" ""C""o""m""m""a""n""d"".""O""N""L""I""N""E"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""e""l""e""m""e""n""t""s"" ""="" ""c""o""n""t""e""x""t""s"".""g""e""t""(""0"")"".""g""e""t""M""o""d""e""l""("")"".""f""i""n""d""E""l""e""m""e""n""t""s""(""o""n""l""i""n""e"".""s""t""a""r""t""E""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t""s"" ""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n""("""""-""-""s""t""a""r""t""-""e""l""e""m""e""n""t"" ""D""i""d"" ""n""o""t"" ""f""i""n""d"" ""m""a""t""c""h""i""n""g"" ""e""l""e""m""e""n""t"" ""i""n"" ""t""h""e"" ""m""o""d""e""l"":"" """"" ""+"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""e""l""e""m""e""n""t""s"".""s""i""z""e""("")"" "">"" ""1"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n""("""""-""-""s""t""a""r""t""-""e""l""e""m""e""n""t"" ""T""h""e""r""e"" ""a""r""e"" ""m""o""r""e"" ""t""h""a""n"" ""o""n""e"" ""m""a""t""c""h""i""n""g"" ""e""l""e""m""e""n""t"" ""i""n"" ""t""h""e"" ""m""o""d""e""l"":"" """"" ""+"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""c""o""n""t""e""x""t""s"".""g""e""t""(""0"")"".""s""e""t""N""e""x""t""E""l""e""m""e""n""t""(""e""l""e""m""e""n""t""s"".""g""e""t""(""0"")"")"";"
+" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" ""e""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t""s"".""a""d""d""A""l""l""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""e""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t""s"";"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""C""o""n""t""e""x""t""F""a""c""t""o""r""y"" ""g""e""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""(""S""t""r""i""n""g"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"")"" ""t""h""r""o""w""s"" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""C""o""n""t""e""x""t""F""a""c""t""o""r""y"" ""f""a""c""t""o""r""y"";"
+" "" "" "" ""i""f"" ""(""n""e""w"" ""Y""E""d""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""a""c""c""e""p""t""(""P""a""t""h""s"".""g""e""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"")"")"" ""{"
+" "" "" "" "" "" ""f""a""c""t""o""r""y"" ""="" ""n""e""w"" ""Y""E""d""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""a""c""c""e""p""t""(""P""a""t""h""s"".""g""e""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"")"")"" ""{"
+" "" "" "" "" "" ""f""a""c""t""o""r""y"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""n""e""w"" ""D""o""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""a""c""c""e""p""t""(""P""a""t""h""s"".""g""e""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"")"")"" ""{"
+" "" "" "" "" "" ""f""a""c""t""o""r""y"" ""="" ""n""e""w"" ""D""o""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""n""e""w"" ""J""a""v""a""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""a""c""c""e""p""t""(""P""a""t""h""s"".""g""e""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"")"")"" ""{"
+" "" "" "" "" "" ""f""a""c""t""o""r""y"" ""="" ""n""e""w"" ""J""a""v""a""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""f""a""c""t""o""r""y"";"
+" "" ""}"
+
+" "" ""p""r""i""v""a""t""e"" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""g""e""t""C""o""n""t""e""x""t""s""(""I""t""e""r""a""t""o""r"" ""i""t""r"")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"","" ""U""n""s""u""p""p""o""r""t""e""d""F""i""l""e""F""o""r""m""a""t"" ""{"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""e""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" "" "" ""w""h""i""l""e"" ""(""i""t""r"".""h""a""s""N""e""x""t""("")"")"" ""{"
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"" ""="" ""(""S""t""r""i""n""g"")"" ""i""t""r"".""n""e""x""t""("")"";"
+" "" "" "" "" "" ""C""o""n""t""e""x""t""F""a""c""t""o""r""y"" ""f""a""c""t""o""r""y"" ""="" ""g""e""t""C""o""n""t""e""x""t""F""a""c""t""o""r""y""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"";"
+" "" "" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"";"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""c""o""n""t""e""x""t""s"" ""="" ""f""a""c""t""o""r""y"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""(""m""o""d""e""l""F""i""l""e""N""a""m""e"")"")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""D""s""l""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""W""h""e""n"" ""p""a""r""s""i""n""g"" ""m""o""d""e""l"":"" ""'""""" ""+"" ""m""o""d""e""l""F""i""l""e""N""a""m""e"" ""+"" """""'"" """"" ""+"" ""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""x""c""e""p""t""i""o""n""("""""M""o""d""e""l"" ""s""y""n""t""a""x"" ""e""r""r""o""r""""")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""e""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t""s"".""a""d""d""A""l""l""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""e""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t""s"";"
+" "" ""}"
+"}"

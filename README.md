@@ -1,47 +1,47 @@
-[![Java CI with Maven](https://github.com/GraphWalker/graphwalker-project/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/GraphWalker/graphwalker-project/actions/workflows/maven.yml)
-[![CodeQL](https://github.com/GraphWalker/graphwalker-project/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/GraphWalker/graphwalker-project/actions/workflows/codeql-analysis.yml)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-project/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-project)
+"[""!""[""J""a""v""a"" ""C""I"" ""w""i""t""h"" ""M""a""v""e""n""]""(""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""/""a""c""t""i""o""n""s""/""w""o""r""k""f""l""o""w""s""/""m""a""v""e""n"".""y""m""l""/""b""a""d""g""e"".""s""v""g""?""b""r""a""n""c""h""=""m""a""s""t""e""r"")""]""(""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""/""a""c""t""i""o""n""s""/""w""o""r""k""f""l""o""w""s""/""m""a""v""e""n"".""y""m""l"")"
+"[""!""[""C""o""d""e""Q""L""]""(""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""/""a""c""t""i""o""n""s""/""w""o""r""k""f""l""o""w""s""/""c""o""d""e""q""l""-""a""n""a""l""y""s""i""s"".""y""m""l""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""/""a""c""t""i""o""n""s""/""w""o""r""k""f""l""o""w""s""/""c""o""d""e""q""l""-""a""n""a""l""y""s""i""s"".""y""m""l"")"
+"[""!""[""M""a""v""e""n"" ""C""e""n""t""r""a""l""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"")"
 
-# GraphWalker
+"#"" ""G""r""a""p""h""W""a""l""k""e""r"
 
-Documentation on http://graphwalker.org/
+"D""o""c""u""m""e""n""t""a""t""i""o""n"" ""o""n"" ""h""t""t""p"":""/""/""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g""/"
 
-## Get the source code and build all modules
+"#""#"" ""G""e""t"" ""t""h""e"" ""s""o""u""r""c""e"" ""c""o""d""e"" ""a""n""d"" ""b""u""i""l""d"" ""a""l""l"" ""m""o""d""u""l""e""s"
 
-```bash
-git clone https://github.com/GraphWalker/graphwalker-project.git
-cd graphwalker-project
-mvn install
-```
+"`""`""`""b""a""s""h"
+"g""i""t"" ""c""l""o""n""e"" ""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"".""g""i""t"
+"c""d"" ""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"
+"m""v""n"" ""i""n""s""t""a""l""l"
+"`""`""`"
 
-## Build the stand command-line tool
+"#""#"" ""B""u""i""l""d"" ""t""h""e"" ""s""t""a""n""d"" ""c""o""m""m""a""n""d""-""l""i""n""e"" ""t""o""o""l"
 
-```bash
-mvn package -pl graphwalker-cli -am
-```
+"`""`""`""b""a""s""h"
+"m""v""n"" ""p""a""c""k""a""g""e"" ""-""p""l"" ""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i"" ""-""a""m"
+"`""`""`"
 
-The jar is in:
-```bash
-graphwalker-cli/target/graphwalker-cli-<VERSION>.jar
-```
+"T""h""e"" ""j""a""r"" ""i""s"" ""i""n"":"
+"`""`""`""b""a""s""h"
+"g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""/""t""a""r""g""e""t""/""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""-""<""V""E""R""S""I""O""N"">"".""j""a""r"
+"`""`""`"
 
-Run it like:
-```bash
-java -jar graphwalker-cli/target/graphwalker-cli-<VERSION>.jar
-```
+"R""u""n"" ""i""t"" ""l""i""k""e"":"
+"`""`""`""b""a""s""h"
+"j""a""v""a"" ""-""j""a""r"" ""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""/""t""a""r""g""e""t""/""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""-""<""V""E""R""S""I""O""N"">"".""j""a""r"
+"`""`""`"
 
-## Build Studio
+"#""#"" ""B""u""i""l""d"" ""S""t""u""d""i""o"
 
-```bash
-mvn package -pl graphwalker-studio -am
-```
+"`""`""`""b""a""s""h"
+"m""v""n"" ""p""a""c""k""a""g""e"" ""-""p""l"" ""g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o"" ""-""a""m"
+"`""`""`"
 
-The jar is in:
-```bash
-graphwalker-studio/target/
-```
- 
-Run it like:
-```bash
-java -jar graphwalker-studio/target/graphwalker-studio-<VERSION>.jar
-```
+"T""h""e"" ""j""a""r"" ""i""s"" ""i""n"":"
+"`""`""`""b""a""s""h"
+"g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o""/""t""a""r""g""e""t""/"
+"`""`""`"
+" "
+"R""u""n"" ""i""t"" ""l""i""k""e"":"
+"`""`""`""b""a""s""h"
+"j""a""v""a"" ""-""j""a""r"" ""g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o""/""t""a""r""g""e""t""/""g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o""-""<""V""E""R""S""I""O""N"">"".""j""a""r"
+"`""`""`"

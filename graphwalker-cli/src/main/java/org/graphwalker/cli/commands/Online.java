@@ -1,67 +1,67 @@
-package org.graphwalker.cli.commands;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""l""i"".""c""o""m""m""a""n""d""s"";"
 
-/*
- * #%L
- * GraphWalker Command Line Interface
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""m""m""a""n""d"" ""L""i""n""e"" ""I""n""t""e""r""f""a""c""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import com.beust.jcommander.Parameter;
-import com.beust.jcommander.Parameters;
-import java.util.ArrayList;
-import java.util.List;
+"i""m""p""o""r""t"" ""c""o""m"".""b""e""u""s""t"".""j""c""o""m""m""a""n""d""e""r"".""P""a""r""a""m""e""t""e""r"";"
+"i""m""p""o""r""t"" ""c""o""m"".""b""e""u""s""t"".""j""c""o""m""m""a""n""d""e""r"".""P""a""r""a""m""e""t""e""r""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
 
-@Parameters(commandDescription = "Starts GraphWalker as a WebSocket server. See http://graphwalker.org/docs/websocket_api")
-public class Online {
+"@""P""a""r""a""m""e""t""e""r""s""(""c""o""m""m""a""n""d""D""e""s""c""r""i""p""t""i""o""n"" ""="" """""S""t""a""r""t""s"" ""G""r""a""p""h""W""a""l""k""e""r"" ""a""s"" ""a"" ""W""e""b""S""o""c""k""e""t"" ""s""e""r""v""e""r""."" ""S""e""e"" ""h""t""t""p"":""/""/""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g""/""d""o""c""s""/""w""e""b""s""o""c""k""e""t""_""a""p""i""""")"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""O""n""l""i""n""e"" ""{"
 
-  public static final String SERVICE_RESTFUL = "RESTFUL";
-  public static final String SERVICE_WEBSOCKET = "WEBSOCKET";
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""S""E""R""V""I""C""E""_""R""E""S""T""F""U""L"" ""="" """""R""E""S""T""F""U""L""""";"
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""S""E""R""V""I""C""E""_""W""E""B""S""O""C""K""E""T"" ""="" """""W""E""B""S""O""C""K""E""T""""";"
 
-  @Parameter(names = {"--verbose", "-o"}, required = false,
-    description = "Will print more details")
-  public boolean verbose = false;
+" "" ""@""P""a""r""a""m""e""t""e""r""(""n""a""m""e""s"" ""="" ""{"""""-""-""v""e""r""b""o""s""e""""","" """""-""o"""""}"","" ""r""e""q""u""i""r""e""d"" ""="" ""f""a""l""s""e"","
+" "" "" "" ""d""e""s""c""r""i""p""t""i""o""n"" ""="" """""W""i""l""l"" ""p""r""i""n""t"" ""m""o""r""e"" ""d""e""t""a""i""l""s""""")"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""v""e""r""b""o""s""e"" ""="" ""f""a""l""s""e"";"
 
-  @Parameter(names = {"--unvisited", "-u"}, required = false,
-    description = "Will also print the remaining unvisited elements in the model.")
-  public boolean unvisited = false;
+" "" ""@""P""a""r""a""m""e""t""e""r""(""n""a""m""e""s"" ""="" ""{"""""-""-""u""n""v""i""s""i""t""e""d""""","" """""-""u"""""}"","" ""r""e""q""u""i""r""e""d"" ""="" ""f""a""l""s""e"","
+" "" "" "" ""d""e""s""c""r""i""p""t""i""o""n"" ""="" """""W""i""l""l"" ""a""l""s""o"" ""p""r""i""n""t"" ""t""h""e"" ""r""e""m""a""i""n""i""n""g"" ""u""n""v""i""s""i""t""e""d"" ""e""l""e""m""e""n""t""s"" ""i""n"" ""t""h""e"" ""m""o""d""e""l"".""""")"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""u""n""v""i""s""i""t""e""d"" ""="" ""f""a""l""s""e"";"
 
-  @Parameter(names = {"--model", "-m"}, required = false, arity = 2,
-    description = "The model, as a graphml file followed by generator with stop condition. " +
-                  "The format is GENERATOR(STOP_CONDITION) See http://graphwalker.org/docs/path_generators_and_stop_conditions")
-  public List<String> model = new ArrayList<>();
+" "" ""@""P""a""r""a""m""e""t""e""r""(""n""a""m""e""s"" ""="" ""{"""""-""-""m""o""d""e""l""""","" """""-""m"""""}"","" ""r""e""q""u""i""r""e""d"" ""="" ""f""a""l""s""e"","" ""a""r""i""t""y"" ""="" ""2"","
+" "" "" "" ""d""e""s""c""r""i""p""t""i""o""n"" ""="" """""T""h""e"" ""m""o""d""e""l"","" ""a""s"" ""a"" ""g""r""a""p""h""m""l"" ""f""i""l""e"" ""f""o""l""l""o""w""e""d"" ""b""y"" ""g""e""n""e""r""a""t""o""r"" ""w""i""t""h"" ""s""t""o""p"" ""c""o""n""d""i""t""i""o""n""."" """"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""T""h""e"" ""f""o""r""m""a""t"" ""i""s"" ""G""E""N""E""R""A""T""O""R""(""S""T""O""P""_""C""O""N""D""I""T""I""O""N"")"" ""S""e""e"" ""h""t""t""p"":""/""/""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g""/""d""o""c""s""/""p""a""t""h""_""g""e""n""e""r""a""t""o""r""s""_""a""n""d""_""s""t""o""p""_""c""o""n""d""i""t""i""o""n""s""""")"
+" "" ""p""u""b""l""i""c"" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
 
-  @Parameter(names = {"--service", "-s"}, required = false, arity = 1,
-    description = "Selects which kind of service to start. Either WEBSOCKET [default], or RESTFUL")
-  public String service = SERVICE_WEBSOCKET;
+" "" ""@""P""a""r""a""m""e""t""e""r""(""n""a""m""e""s"" ""="" ""{"""""-""-""s""e""r""v""i""c""e""""","" """""-""s"""""}"","" ""r""e""q""u""i""r""e""d"" ""="" ""f""a""l""s""e"","" ""a""r""i""t""y"" ""="" ""1"","
+" "" "" "" ""d""e""s""c""r""i""p""t""i""o""n"" ""="" """""S""e""l""e""c""t""s"" ""w""h""i""c""h"" ""k""i""n""d"" ""o""f"" ""s""e""r""v""i""c""e"" ""t""o"" ""s""t""a""r""t""."" ""E""i""t""h""e""r"" ""W""E""B""S""O""C""K""E""T"" ""[""d""e""f""a""u""l""t""]"","" ""o""r"" ""R""E""S""T""F""U""L""""")"
+" "" ""p""u""b""l""i""c"" ""S""t""r""i""n""g"" ""s""e""r""v""i""c""e"" ""="" ""S""E""R""V""I""C""E""_""W""E""B""S""O""C""K""E""T"";"
 
-  @Parameter(names = {"--port", "-p"}, description = "Sets the port of the service")
-  public int port = 8887;
+" "" ""@""P""a""r""a""m""e""t""e""r""(""n""a""m""e""s"" ""="" ""{"""""-""-""p""o""r""t""""","" """""-""p"""""}"","" ""d""e""s""c""r""i""p""t""i""o""n"" ""="" """""S""e""t""s"" ""t""h""e"" ""p""o""r""t"" ""o""f"" ""t""h""e"" ""s""e""r""v""i""c""e""""")"
+" "" ""p""u""b""l""i""c"" ""i""n""t"" ""p""o""r""t"" ""="" ""8""8""8""7"";"
 
-  @Parameter(names = {"--start-element", "-e"}, required = false,
-    description = "Sets the starting element in the [first] model.")
-  public String startElement = "";
+" "" ""@""P""a""r""a""m""e""t""e""r""(""n""a""m""e""s"" ""="" ""{"""""-""-""s""t""a""r""t""-""e""l""e""m""e""n""t""""","" """""-""e"""""}"","" ""r""e""q""u""i""r""e""d"" ""="" ""f""a""l""s""e"","
+" "" "" "" ""d""e""s""c""r""i""p""t""i""o""n"" ""="" """""S""e""t""s"" ""t""h""e"" ""s""t""a""r""t""i""n""g"" ""e""l""e""m""e""n""t"" ""i""n"" ""t""h""e"" ""[""f""i""r""s""t""]"" ""m""o""d""e""l"".""""")"
+" "" ""p""u""b""l""i""c"" ""S""t""r""i""n""g"" ""s""t""a""r""t""E""l""e""m""e""n""t"" ""="" """""""";"
 
-  @Parameter(names = {"--blocked",
-                      "-b"}, arity = 1, description = "This option enables or disables the BLOCKED feature. When \"-b true\" GraphWalker will filter out elements in models with the keyword BLOCKED. When \"-b false\" GraphWalker will not filter out any elements in models with the keyword BLOCKED.")
-  public boolean blocked = true;
-}
+" "" ""@""P""a""r""a""m""e""t""e""r""(""n""a""m""e""s"" ""="" ""{"""""-""-""b""l""o""c""k""e""d""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""-""b"""""}"","" ""a""r""i""t""y"" ""="" ""1"","" ""d""e""s""c""r""i""p""t""i""o""n"" ""="" """""T""h""i""s"" ""o""p""t""i""o""n"" ""e""n""a""b""l""e""s"" ""o""r"" ""d""i""s""a""b""l""e""s"" ""t""h""e"" ""B""L""O""C""K""E""D"" ""f""e""a""t""u""r""e""."" ""W""h""e""n"" ""\"""""-""b"" ""t""r""u""e""\""""" ""G""r""a""p""h""W""a""l""k""e""r"" ""w""i""l""l"" ""f""i""l""t""e""r"" ""o""u""t"" ""e""l""e""m""e""n""t""s"" ""i""n"" ""m""o""d""e""l""s"" ""w""i""t""h"" ""t""h""e"" ""k""e""y""w""o""r""d"" ""B""L""O""C""K""E""D""."" ""W""h""e""n"" ""\"""""-""b"" ""f""a""l""s""e""\""""" ""G""r""a""p""h""W""a""l""k""e""r"" ""w""i""l""l"" ""n""o""t"" ""f""i""l""t""e""r"" ""o""u""t"" ""a""n""y"" ""e""l""e""m""e""n""t""s"" ""i""n"" ""m""o""d""e""l""s"" ""w""i""t""h"" ""t""h""e"" ""k""e""y""w""o""r""d"" ""B""L""O""C""K""E""D"".""""")"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""b""l""o""c""k""e""d"" ""="" ""t""r""u""e"";"
+"}"

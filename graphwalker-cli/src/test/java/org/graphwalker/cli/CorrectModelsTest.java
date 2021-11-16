@@ -1,196 +1,196 @@
-/*
- * #%L
- * GraphWalker Command Line Interface
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
-// This file is part of the GraphWalker java package
-// The MIT License
-//
-// Copyright (c) 2010 graphwalker.org
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""m""m""a""n""d"" ""L""i""n""e"" ""I""n""t""e""r""f""a""c""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
+"/""/"" ""T""h""i""s"" ""f""i""l""e"" ""i""s"" ""p""a""r""t"" ""o""f"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""j""a""v""a"" ""p""a""c""k""a""g""e"
+"/""/"" ""T""h""e"" ""M""I""T"" ""L""i""c""e""n""s""e"
+"/""/"
+"/""/"" ""C""o""p""y""r""i""g""h""t"" ""(""c"")"" ""2""0""1""0"" ""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g"
+"/""/"
+"/""/"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+"/""/"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+"/""/"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+"/""/"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+"/""/"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+"/""/"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+"/""/"
+"/""/"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+"/""/"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+"/""/"
+"/""/"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+"/""/"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+"/""/"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+"/""/"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+"/""/"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+"/""/"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+"/""/"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
 
-package org.graphwalker.cli;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""l""i"";"
 
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.Is.is;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""M""a""t""c""h""e""r""s"".""h""a""s""I""t""e""m""s"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""M""a""t""c""h""e""r""s"".""n""o""t"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""I""s"".""i""s"";"
 
-import java.util.Arrays;
-import org.junit.Assert;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""s"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
 
-public class CorrectModelsTest extends CLITestRoot {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""C""o""r""r""e""c""t""M""o""d""e""l""s""T""e""s""t"" ""e""x""t""e""n""d""s"" ""C""L""I""T""e""s""t""R""o""o""t"" ""{"
 
-  /**
-   * Simplest model
-   */
-  @Test
-  public void simplestModel() {
-    String args[] = {"offline", "-m", "graphml/CorrectModels/simplestModel.graphml", "random(vertex_coverage(100))"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-    Assert.assertThat(result.getOutput(), is("{\"currentElementName\":\"e1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v1\"}" + System.lineSeparator()));
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""S""i""m""p""l""e""s""t"" ""m""o""d""e""l"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""i""m""p""l""e""s""t""M""o""d""e""l""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""m""""","" """""g""r""a""p""h""m""l""/""C""o""r""r""e""c""t""M""o""d""e""l""s""/""s""i""m""p""l""e""s""t""M""o""d""e""l"".""g""r""a""p""h""m""l""""","" """""r""a""n""d""o""m""(""v""e""r""t""e""x""_""c""o""v""e""r""a""g""e""(""1""0""0"")"")"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"","" ""i""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"";"
+" "" ""}"
 
-  /**
-   * shortest All Paths Vertex Coverage
-   */
-  @Test
-  public void shortestAllPathsVertexCoverage() {
-    String args[] = {"offline", "-m", "graphml/CorrectModels/shortestAllPathsVertexCoverage.graphml", "shortest_all_paths(vertex_coverage(100))"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-    Assert.assertThat(result.getOutput(), is("{\"currentElementName\":\"e1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"e2\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v2\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"e4\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v4\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"e6\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"e3\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v3\"}" + System.lineSeparator()));
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""s""h""o""r""t""e""s""t"" ""A""l""l"" ""P""a""t""h""s"" ""V""e""r""t""e""x"" ""C""o""v""e""r""a""g""e"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""h""o""r""t""e""s""t""A""l""l""P""a""t""h""s""V""e""r""t""e""x""C""o""v""e""r""a""g""e""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""m""""","" """""g""r""a""p""h""m""l""/""C""o""r""r""e""c""t""M""o""d""e""l""s""/""s""h""o""r""t""e""s""t""A""l""l""P""a""t""h""s""V""e""r""t""e""x""C""o""v""e""r""a""g""e"".""g""r""a""p""h""m""l""""","" """""s""h""o""r""t""e""s""t""_""a""l""l""_""p""a""t""h""s""(""v""e""r""t""e""x""_""c""o""v""e""r""a""g""e""(""1""0""0"")"")"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"","" ""i""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""2""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""2""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""4""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""4""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""6""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""3""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""3""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"";"
+" "" ""}"
 
-  /**
-   * shortest All Paths Vertex Coverage
-   */
-  @Test
-  public void loginNoErrors() {
-    String args[] = {"offline", "-o", "-m", "graphml/Login.graphml", "random(edge_coverage(100))"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""s""h""o""r""t""e""s""t"" ""A""l""l"" ""P""a""t""h""s"" ""V""e""r""t""e""x"" ""C""o""v""e""r""a""g""e"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""l""o""g""i""n""N""o""E""r""r""o""r""s""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""o""""","" """""-""m""""","" """""g""r""a""p""h""m""l""/""L""o""g""i""n"".""g""r""a""p""h""m""l""""","" """""r""a""n""d""o""m""(""e""d""g""e""_""c""o""v""e""r""a""g""e""(""1""0""0"")"")"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" ""}"
 
-  /**
-   * No start vertex
-   */
-  @Test
-  public void noStartVertex() {
-    String args[] = {"offline", "-e", "v1", "-m", "graphml/CorrectModels/modelWithNoStartVertex.graphml", "a_star(reached_edge(e4))"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-    Assert.assertThat(result.getOutput(), is("{\"currentElementName\":\"v1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"e2\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v2\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"e4\"}" + System.lineSeparator()));
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""N""o"" ""s""t""a""r""t"" ""v""e""r""t""e""x"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""n""o""S""t""a""r""t""V""e""r""t""e""x""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""e""""","" """""v""1""""","" """""-""m""""","" """""g""r""a""p""h""m""l""/""C""o""r""r""e""c""t""M""o""d""e""l""s""/""m""o""d""e""l""W""i""t""h""N""o""S""t""a""r""t""V""e""r""t""e""x"".""g""r""a""p""h""m""l""""","" """""a""_""s""t""a""r""(""r""e""a""c""h""e""d""_""e""d""g""e""(""e""4"")"")"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"","" ""i""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""2""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""2""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""4""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"";"
+" "" ""}"
 
-  /**
-   * Don't use blocked feature
-   */
-  @Test
-  public void dontUseBlocked() {
-    String args[] = {"offline", "-b", "false", "-m", "graphml/CorrectModels/blockedVertex.graphml", "random(edge_coverage(100))"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-    Assert.assertThat(result.getOutput(), is("{\"currentElementName\":\"e1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"e2\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v2\"}" + System.lineSeparator()));
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""D""o""n""'""t"" ""u""s""e"" ""b""l""o""c""k""e""d"" ""f""e""a""t""u""r""e"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""d""o""n""t""U""s""e""B""l""o""c""k""e""d""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""b""""","" """""f""a""l""s""e""""","" """""-""m""""","" """""g""r""a""p""h""m""l""/""C""o""r""r""e""c""t""M""o""d""e""l""s""/""b""l""o""c""k""e""d""V""e""r""t""e""x"".""g""r""a""p""h""m""l""""","" """""r""a""n""d""o""m""(""e""d""g""e""_""c""o""v""e""r""a""g""e""(""1""0""0"")"")"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"","" ""i""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""2""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""2""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"";"
+" "" ""}"
 
-  /**
-   * Use blocked feature
-   */
-  @Test
-  public void useBlocked() {
-    String args[] = {"offline", "-m", "graphml/CorrectModels/blockedVertex.graphml", "random(edge_coverage(100))"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-    Assert.assertThat(result.getOutput(), is("{\"currentElementName\":\"e1\"}" + System.lineSeparator() +
-                                             "{\"currentElementName\":\"v1\"}" + System.lineSeparator()));
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""U""s""e"" ""b""l""o""c""k""e""d"" ""f""e""a""t""u""r""e"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""u""s""e""B""l""o""c""k""e""d""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""m""""","" """""g""r""a""p""h""m""l""/""C""o""r""r""e""c""t""M""o""d""e""l""s""/""b""l""o""c""k""e""d""V""e""r""t""e""x"".""g""r""a""p""h""m""l""""","" """""r""a""n""d""o""m""(""e""d""g""e""_""c""o""v""e""r""a""g""e""(""1""0""0"")"")"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"","" ""i""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"";"
+" "" ""}"
 
-  /**
-   * Don't use blocked feature with a json file
-   */
-  @Test
-  public void dontUseBlockedJson() {
-    String args[] = {"offline", "-b", "false", "-g", "json/graphWithBlockedElements.json"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-    Assert.assertThat(Arrays.asList(result.getOutput().split(System.lineSeparator())),
-                      hasItems("{\"currentElementName\":\"e1\"}",
-                               "{\"currentElementName\":\"e2\"}",
-                               "{\"currentElementName\":\"e3\"}",
-                               "{\"currentElementName\":\"e4\"}",
-                               "{\"currentElementName\":\"e5\"}",
-                               "{\"currentElementName\":\"e6\"}",
-                               "{\"currentElementName\":\"e7\"}",
-                               "{\"currentElementName\":\"e8\"}",
-                               "{\"currentElementName\":\"e9\"}",
-                               "{\"currentElementName\":\"e10\"}",
-                               "{\"currentElementName\":\"v1\"}",
-                               "{\"currentElementName\":\"v2\"}",
-                               "{\"currentElementName\":\"v3\"}",
-                               "{\"currentElementName\":\"v4\"}",
-                               "{\"currentElementName\":\"v5\"}"));
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""D""o""n""'""t"" ""u""s""e"" ""b""l""o""c""k""e""d"" ""f""e""a""t""u""r""e"" ""w""i""t""h"" ""a"" ""j""s""o""n"" ""f""i""l""e"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""d""o""n""t""U""s""e""B""l""o""c""k""e""d""J""s""o""n""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""b""""","" """""f""a""l""s""e""""","" """""-""g""""","" """""j""s""o""n""/""g""r""a""p""h""W""i""t""h""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s"".""j""s""o""n"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""A""r""r""a""y""s"".""a""s""L""i""s""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"".""s""p""l""i""t""(""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""s""I""t""e""m""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""1""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""2""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""3""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""4""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""5""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""6""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""7""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""8""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""9""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""1""0""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""2""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""3""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""4""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""5""\"""""}""""")"")"";"
+" "" ""}"
 
-  /**
-   * Use blocked feature with a json file
-   */
-  @Test
-  public void useBlockedJson() {
-    String args[] = {"offline", "-g", "json/graphWithBlockedElements.json"};
-    Result result = runCommand(args);
-    Assert.assertThat(result.getError(), is(""));
-    Assert.assertThat(Arrays.asList(result.getOutput().split(System.lineSeparator())),
-                      hasItems("{\"currentElementName\":\"e1\"}",
-                               "{\"currentElementName\":\"e2\"}",
-                               "{\"currentElementName\":\"e3\"}",
-                               "{\"currentElementName\":\"e4\"}",
-                               "{\"currentElementName\":\"e7\"}",
-                               "{\"currentElementName\":\"e8\"}",
-                               "{\"currentElementName\":\"e9\"}",
-                               "{\"currentElementName\":\"v1\"}",
-                               "{\"currentElementName\":\"v2\"}",
-                               "{\"currentElementName\":\"v3\"}",
-                               "{\"currentElementName\":\"v4\"}"));
+" "" ""/""*""*"
+" "" "" ""*"" ""U""s""e"" ""b""l""o""c""k""e""d"" ""f""e""a""t""u""r""e"" ""w""i""t""h"" ""a"" ""j""s""o""n"" ""f""i""l""e"
+" "" "" ""*""/"
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""u""s""e""B""l""o""c""k""e""d""J""s""o""n""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""a""r""g""s""[""]"" ""="" ""{"""""o""f""f""l""i""n""e""""","" """""-""g""""","" """""j""s""o""n""/""g""r""a""p""h""W""i""t""h""B""l""o""c""k""e""d""E""l""e""m""e""n""t""s"".""j""s""o""n"""""}"";"
+" "" "" "" ""R""e""s""u""l""t"" ""r""e""s""u""l""t"" ""="" ""r""u""n""C""o""m""m""a""n""d""(""a""r""g""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""r""e""s""u""l""t"".""g""e""t""E""r""r""o""r""("")"","" ""i""s""("""""""")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""A""r""r""a""y""s"".""a""s""L""i""s""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"".""s""p""l""i""t""(""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""s""I""t""e""m""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""1""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""2""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""3""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""4""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""7""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""8""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""9""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""1""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""2""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""3""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""4""\"""""}""""")"")"";"
 
-    Assert.assertThat(Arrays.asList(result.getOutput().split(System.lineSeparator())),
-                      not(hasItems("{\"currentElementName\":\"e5\"}",
-                                   "{\"currentElementName\":\"e6\"}",
-                                   "{\"currentElementName\":\"v5\"}")));
-  }
-}
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""A""r""r""a""y""s"".""a""s""L""i""s""t""(""r""e""s""u""l""t"".""g""e""t""O""u""t""p""u""t""("")"".""s""p""l""i""t""(""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""o""t""(""h""a""s""I""t""e""m""s""("""""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""5""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""e""6""\"""""}""""","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""{""\"""""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""\""""":""\"""""v""5""\"""""}""""")"")"")"";"
+" "" ""}"
+"}"

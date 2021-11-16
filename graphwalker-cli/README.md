@@ -1,19 +1,19 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-cli/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-cli) 
-GraphWalker CLI
-===================
+"[""!""[""M""a""v""e""n"" ""C""e""n""t""r""a""l""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i"")"" "
+"G""r""a""p""h""W""a""l""k""e""r"" ""C""L""I"
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-======
-Documentation at http://graphwalker.org/docs/command_line_syntax
+"=""=""=""=""=""="
+"D""o""c""u""m""e""n""t""a""t""i""o""n"" ""a""t"" ""h""t""t""p"":""/""/""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g""/""d""o""c""s""/""c""o""m""m""a""n""d""_""l""i""n""e""_""s""y""n""t""a""x"
 
-### How to build the standalone jar of graphwalker-cli
-```bash
-git clone https://github.com/GraphWalker/graphwalker-project.git
-cd graphwalker-project
-mvn package -pl graphwalker-cli -am
-```
+"#""#""#"" ""H""o""w"" ""t""o"" ""b""u""i""l""d"" ""t""h""e"" ""s""t""a""n""d""a""l""o""n""e"" ""j""a""r"" ""o""f"" ""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i"
+"`""`""`""b""a""s""h"
+"g""i""t"" ""c""l""o""n""e"" ""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"".""g""i""t"
+"c""d"" ""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"
+"m""v""n"" ""p""a""c""k""a""g""e"" ""-""p""l"" ""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i"" ""-""a""m"
+"`""`""`"
 
-The jar is in:
-```bash
-graphwalker-cli/target/graphwalker-cli-3.2.1.jar
-```
+"T""h""e"" ""j""a""r"" ""i""s"" ""i""n"":"
+"`""`""`""b""a""s""h"
+"g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""/""t""a""r""g""e""t""/""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""-""3"".""2"".""1"".""j""a""r"
+"`""`""`"
 

@@ -1,12 +1,12 @@
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
-  <servers>
-    <server>
-      <id>ossrh</id>
-      <username>${env.CI_DEPLOY_USERNAME}</username>
-      <password>${env.CI_DEPLOY_PASSWORD}</password>
-    </server>
-  </servers>
-</settings>
+"<""s""e""t""t""i""n""g""s"" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""S""E""T""T""I""N""G""S""/""1"".""0"".""0""""
+" "" "" "" "" "" "" "" "" "" ""x""m""l""n""s"":""x""s""i""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""-""i""n""s""t""a""n""c""e""""
+" "" "" "" "" "" "" "" "" "" ""x""s""i"":""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""h""t""t""p"":""/""/""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""S""E""T""T""I""N""G""S""/""1"".""0"".""0"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""t""t""p"":""/""/""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""x""s""d""/""s""e""t""t""i""n""g""s""-""1"".""0"".""0"".""x""s""d""""">"
+" "" ""<""s""e""r""v""e""r""s"">"
+" "" "" "" ""<""s""e""r""v""e""r"">"
+" "" "" "" "" "" ""<""i""d"">""o""s""s""r""h""<""/""i""d"">"
+" "" "" "" "" "" ""<""u""s""e""r""n""a""m""e"">""$""{""e""n""v"".""C""I""_""D""E""P""L""O""Y""_""U""S""E""R""N""A""M""E""}""<""/""u""s""e""r""n""a""m""e"">"
+" "" "" "" "" "" ""<""p""a""s""s""w""o""r""d"">""$""{""e""n""v"".""C""I""_""D""E""P""L""O""Y""_""P""A""S""S""W""O""R""D""}""<""/""p""a""s""s""w""o""r""d"">"
+" "" "" "" ""<""/""s""e""r""v""e""r"">"
+" "" ""<""/""s""e""r""v""e""r""s"">"
+"<""/""s""e""t""t""i""n""g""s"">"

@@ -1,117 +1,117 @@
-/*
- * Copyright 2007-present the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import java.net.*;
-import java.io.*;
-import java.nio.channels.*;
-import java.util.Properties;
+"/""*"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""2""0""0""7""-""p""r""e""s""e""n""t"" ""t""h""e"" ""o""r""i""g""i""n""a""l"" ""a""u""t""h""o""r"" ""o""r"" ""a""u""t""h""o""r""s""."
+" ""*"
+" ""*"" ""L""i""c""e""n""s""e""d"" ""u""n""d""e""r"" ""t""h""e"" ""A""p""a""c""h""e"" ""L""i""c""e""n""s""e"","" ""V""e""r""s""i""o""n"" ""2"".""0"" ""(""t""h""e"" """""L""i""c""e""n""s""e""""")"";"
+" ""*"" ""y""o""u"" ""m""a""y"" ""n""o""t"" ""u""s""e"" ""t""h""i""s"" ""f""i""l""e"" ""e""x""c""e""p""t"" ""i""n"" ""c""o""m""p""l""i""a""n""c""e"" ""w""i""t""h"" ""t""h""e"" ""L""i""c""e""n""s""e""."
+" ""*"" ""Y""o""u"" ""m""a""y"" ""o""b""t""a""i""n"" ""a"" ""c""o""p""y"" ""o""f"" ""t""h""e"" ""L""i""c""e""n""s""e"" ""a""t"
+" ""*"
+" ""*"" "" "" "" "" "" ""h""t""t""p"":""/""/""w""w""w"".""a""p""a""c""h""e"".""o""r""g""/""l""i""c""e""n""s""e""s""/""L""I""C""E""N""S""E""-""2"".""0"
+" ""*"
+" ""*"" ""U""n""l""e""s""s"" ""r""e""q""u""i""r""e""d"" ""b""y"" ""a""p""p""l""i""c""a""b""l""e"" ""l""a""w"" ""o""r"" ""a""g""r""e""e""d"" ""t""o"" ""i""n"" ""w""r""i""t""i""n""g"","" ""s""o""f""t""w""a""r""e"
+" ""*"" ""d""i""s""t""r""i""b""u""t""e""d"" ""u""n""d""e""r"" ""t""h""e"" ""L""i""c""e""n""s""e"" ""i""s"" ""d""i""s""t""r""i""b""u""t""e""d"" ""o""n"" ""a""n"" """""A""S"" ""I""S""""" ""B""A""S""I""S"","
+" ""*"" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""I""E""S"" ""O""R"" ""C""O""N""D""I""T""I""O""N""S"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""e""i""t""h""e""r"" ""e""x""p""r""e""s""s"" ""o""r"" ""i""m""p""l""i""e""d""."
+" ""*"" ""S""e""e"" ""t""h""e"" ""L""i""c""e""n""s""e"" ""f""o""r"" ""t""h""e"" ""s""p""e""c""i""f""i""c"" ""l""a""n""g""u""a""g""e"" ""g""o""v""e""r""n""i""n""g"" ""p""e""r""m""i""s""s""i""o""n""s"" ""a""n""d"
+" ""*"" ""l""i""m""i""t""a""t""i""o""n""s"" ""u""n""d""e""r"" ""t""h""e"" ""L""i""c""e""n""s""e""."
+" ""*""/"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""e""t"".""*"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""*"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""c""h""a""n""n""e""l""s"".""*"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""P""r""o""p""e""r""t""i""e""s"";"
 
-public class MavenWrapperDownloader {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""M""a""v""e""n""W""r""a""p""p""e""r""D""o""w""n""l""o""a""d""e""r"" ""{"
 
-    private static final String WRAPPER_VERSION = "0.5.6";
-    /**
-     * Default URL to download the maven-wrapper.jar from, if no 'downloadUrl' is provided.
-     */
-    private static final String DEFAULT_DOWNLOAD_URL = "https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/"
-        + WRAPPER_VERSION + "/maven-wrapper-" + WRAPPER_VERSION + ".jar";
+" "" "" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""W""R""A""P""P""E""R""_""V""E""R""S""I""O""N"" ""="" """""0"".""5"".""6""""";"
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""D""e""f""a""u""l""t"" ""U""R""L"" ""t""o"" ""d""o""w""n""l""o""a""d"" ""t""h""e"" ""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r"" ""f""r""o""m"","" ""i""f"" ""n""o"" ""'""d""o""w""n""l""o""a""d""U""r""l""'"" ""i""s"" ""p""r""o""v""i""d""e""d""."
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""D""E""F""A""U""L""T""_""D""O""W""N""L""O""A""D""_""U""R""L"" ""="" """""h""t""t""p""s"":""/""/""r""e""p""o"".""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""m""a""v""e""n""2""/""i""o""/""t""a""k""a""r""i""/""m""a""v""e""n""-""w""r""a""p""p""e""r""/""""
+" "" "" "" "" "" "" "" ""+"" ""W""R""A""P""P""E""R""_""V""E""R""S""I""O""N"" ""+"" """""/""m""a""v""e""n""-""w""r""a""p""p""e""r""-""""" ""+"" ""W""R""A""P""P""E""R""_""V""E""R""S""I""O""N"" ""+"" """"".""j""a""r""""";"
 
-    /**
-     * Path to the maven-wrapper.properties file, which might contain a downloadUrl property to
-     * use instead of the default one.
-     */
-    private static final String MAVEN_WRAPPER_PROPERTIES_PATH =
-            ".mvn/wrapper/maven-wrapper.properties";
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""P""a""t""h"" ""t""o"" ""t""h""e"" ""m""a""v""e""n""-""w""r""a""p""p""e""r"".""p""r""o""p""e""r""t""i""e""s"" ""f""i""l""e"","" ""w""h""i""c""h"" ""m""i""g""h""t"" ""c""o""n""t""a""i""n"" ""a"" ""d""o""w""n""l""o""a""d""U""r""l"" ""p""r""o""p""e""r""t""y"" ""t""o"
+" "" "" "" "" ""*"" ""u""s""e"" ""i""n""s""t""e""a""d"" ""o""f"" ""t""h""e"" ""d""e""f""a""u""l""t"" ""o""n""e""."
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""M""A""V""E""N""_""W""R""A""P""P""E""R""_""P""R""O""P""E""R""T""I""E""S""_""P""A""T""H"" ""="
+" "" "" "" "" "" "" "" "" "" "" "" """"".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""p""r""o""p""e""r""t""i""e""s""""";"
 
-    /**
-     * Path where the maven-wrapper.jar will be saved to.
-     */
-    private static final String MAVEN_WRAPPER_JAR_PATH =
-            ".mvn/wrapper/maven-wrapper.jar";
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""P""a""t""h"" ""w""h""e""r""e"" ""t""h""e"" ""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r"" ""w""i""l""l"" ""b""e"" ""s""a""v""e""d"" ""t""o""."
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""M""A""V""E""N""_""W""R""A""P""P""E""R""_""J""A""R""_""P""A""T""H"" ""="
+" "" "" "" "" "" "" "" "" "" "" "" """"".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r""""";"
 
-    /**
-     * Name of the property which should be used to override the default download url for the wrapper.
-     */
-    private static final String PROPERTY_NAME_WRAPPER_URL = "wrapperUrl";
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""N""a""m""e"" ""o""f"" ""t""h""e"" ""p""r""o""p""e""r""t""y"" ""w""h""i""c""h"" ""s""h""o""u""l""d"" ""b""e"" ""u""s""e""d"" ""t""o"" ""o""v""e""r""r""i""d""e"" ""t""h""e"" ""d""e""f""a""u""l""t"" ""d""o""w""n""l""o""a""d"" ""u""r""l"" ""f""o""r"" ""t""h""e"" ""w""r""a""p""p""e""r""."
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""P""R""O""P""E""R""T""Y""_""N""A""M""E""_""W""R""A""P""P""E""R""_""U""R""L"" ""="" """""w""r""a""p""p""e""r""U""r""l""""";"
 
-    public static void main(String args[]) {
-        System.out.println("- Downloader started");
-        File baseDirectory = new File(args[0]);
-        System.out.println("- Using base directory: " + baseDirectory.getAbsolutePath());
+" "" "" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""v""o""i""d"" ""m""a""i""n""(""S""t""r""i""n""g"" ""a""r""g""s""[""]"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""-"" ""D""o""w""n""l""o""a""d""e""r"" ""s""t""a""r""t""e""d""""")"";"
+" "" "" "" "" "" "" "" ""F""i""l""e"" ""b""a""s""e""D""i""r""e""c""t""o""r""y"" ""="" ""n""e""w"" ""F""i""l""e""(""a""r""g""s""[""0""]"")"";"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""-"" ""U""s""i""n""g"" ""b""a""s""e"" ""d""i""r""e""c""t""o""r""y"":"" """"" ""+"" ""b""a""s""e""D""i""r""e""c""t""o""r""y"".""g""e""t""A""b""s""o""l""u""t""e""P""a""t""h""("")"")"";"
 
-        // If the maven-wrapper.properties exists, read it and check if it contains a custom
-        // wrapperUrl parameter.
-        File mavenWrapperPropertyFile = new File(baseDirectory, MAVEN_WRAPPER_PROPERTIES_PATH);
-        String url = DEFAULT_DOWNLOAD_URL;
-        if(mavenWrapperPropertyFile.exists()) {
-            FileInputStream mavenWrapperPropertyFileInputStream = null;
-            try {
-                mavenWrapperPropertyFileInputStream = new FileInputStream(mavenWrapperPropertyFile);
-                Properties mavenWrapperProperties = new Properties();
-                mavenWrapperProperties.load(mavenWrapperPropertyFileInputStream);
-                url = mavenWrapperProperties.getProperty(PROPERTY_NAME_WRAPPER_URL, url);
-            } catch (IOException e) {
-                System.out.println("- ERROR loading '" + MAVEN_WRAPPER_PROPERTIES_PATH + "'");
-            } finally {
-                try {
-                    if(mavenWrapperPropertyFileInputStream != null) {
-                        mavenWrapperPropertyFileInputStream.close();
-                    }
-                } catch (IOException e) {
-                    // Ignore ...
-                }
-            }
-        }
-        System.out.println("- Downloading from: " + url);
+" "" "" "" "" "" "" "" ""/""/"" ""I""f"" ""t""h""e"" ""m""a""v""e""n""-""w""r""a""p""p""e""r"".""p""r""o""p""e""r""t""i""e""s"" ""e""x""i""s""t""s"","" ""r""e""a""d"" ""i""t"" ""a""n""d"" ""c""h""e""c""k"" ""i""f"" ""i""t"" ""c""o""n""t""a""i""n""s"" ""a"" ""c""u""s""t""o""m"
+" "" "" "" "" "" "" "" ""/""/"" ""w""r""a""p""p""e""r""U""r""l"" ""p""a""r""a""m""e""t""e""r""."
+" "" "" "" "" "" "" "" ""F""i""l""e"" ""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e"" ""="" ""n""e""w"" ""F""i""l""e""(""b""a""s""e""D""i""r""e""c""t""o""r""y"","" ""M""A""V""E""N""_""W""R""A""P""P""E""R""_""P""R""O""P""E""R""T""I""E""S""_""P""A""T""H"")"";"
+" "" "" "" "" "" "" "" ""S""t""r""i""n""g"" ""u""r""l"" ""="" ""D""E""F""A""U""L""T""_""D""O""W""N""L""O""A""D""_""U""R""L"";"
+" "" "" "" "" "" "" "" ""i""f""(""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e"".""e""x""i""s""t""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""F""i""l""e""I""n""p""u""t""S""t""r""e""a""m"" ""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e""I""n""p""u""t""S""t""r""e""a""m"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e""I""n""p""u""t""S""t""r""e""a""m"" ""="" ""n""e""w"" ""F""i""l""e""I""n""p""u""t""S""t""r""e""a""m""(""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""P""r""o""p""e""r""t""i""e""s"" ""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""i""e""s"" ""="" ""n""e""w"" ""P""r""o""p""e""r""t""i""e""s""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""i""e""s"".""l""o""a""d""(""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e""I""n""p""u""t""S""t""r""e""a""m"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""u""r""l"" ""="" ""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""i""e""s"".""g""e""t""P""r""o""p""e""r""t""y""(""P""R""O""P""E""R""T""Y""_""N""A""M""E""_""W""R""A""P""P""E""R""_""U""R""L"","" ""u""r""l"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""O""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""-"" ""E""R""R""O""R"" ""l""o""a""d""i""n""g"" ""'""""" ""+"" ""M""A""V""E""N""_""W""R""A""P""P""E""R""_""P""R""O""P""E""R""T""I""E""S""_""P""A""T""H"" ""+"" """""'""""")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""f""i""n""a""l""l""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e""I""n""p""u""t""S""t""r""e""a""m"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""a""v""e""n""W""r""a""p""p""e""r""P""r""o""p""e""r""t""y""F""i""l""e""I""n""p""u""t""S""t""r""e""a""m"".""c""l""o""s""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""O""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""g""n""o""r""e"" ""."".""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""-"" ""D""o""w""n""l""o""a""d""i""n""g"" ""f""r""o""m"":"" """"" ""+"" ""u""r""l"")"";"
 
-        File outputFile = new File(baseDirectory.getAbsolutePath(), MAVEN_WRAPPER_JAR_PATH);
-        if(!outputFile.getParentFile().exists()) {
-            if(!outputFile.getParentFile().mkdirs()) {
-                System.out.println(
-                        "- ERROR creating output directory '" + outputFile.getParentFile().getAbsolutePath() + "'");
-            }
-        }
-        System.out.println("- Downloading to: " + outputFile.getAbsolutePath());
-        try {
-            downloadFileFromURL(url, outputFile);
-            System.out.println("Done");
-            System.exit(0);
-        } catch (Throwable e) {
-            System.out.println("- Error downloading");
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
+" "" "" "" "" "" "" "" ""F""i""l""e"" ""o""u""t""p""u""t""F""i""l""e"" ""="" ""n""e""w"" ""F""i""l""e""(""b""a""s""e""D""i""r""e""c""t""o""r""y"".""g""e""t""A""b""s""o""l""u""t""e""P""a""t""h""("")"","" ""M""A""V""E""N""_""W""R""A""P""P""E""R""_""J""A""R""_""P""A""T""H"")"";"
+" "" "" "" "" "" "" "" ""i""f""(""!""o""u""t""p""u""t""F""i""l""e"".""g""e""t""P""a""r""e""n""t""F""i""l""e""("")"".""e""x""i""s""t""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""!""o""u""t""p""u""t""F""i""l""e"".""g""e""t""P""a""r""e""n""t""F""i""l""e""("")"".""m""k""d""i""r""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""-"" ""E""R""R""O""R"" ""c""r""e""a""t""i""n""g"" ""o""u""t""p""u""t"" ""d""i""r""e""c""t""o""r""y"" ""'""""" ""+"" ""o""u""t""p""u""t""F""i""l""e"".""g""e""t""P""a""r""e""n""t""F""i""l""e""("")"".""g""e""t""A""b""s""o""l""u""t""e""P""a""t""h""("")"" ""+"" """""'""""")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""-"" ""D""o""w""n""l""o""a""d""i""n""g"" ""t""o"":"" """"" ""+"" ""o""u""t""p""u""t""F""i""l""e"".""g""e""t""A""b""s""o""l""u""t""e""P""a""t""h""("")"")"";"
+" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""d""o""w""n""l""o""a""d""F""i""l""e""F""r""o""m""U""R""L""(""u""r""l"","" ""o""u""t""p""u""t""F""i""l""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""D""o""n""e""""")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""e""x""i""t""(""0"")"";"
+" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""T""h""r""o""w""a""b""l""e"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("""""-"" ""E""r""r""o""r"" ""d""o""w""n""l""o""a""d""i""n""g""""")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""e""x""i""t""(""1"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    private static void downloadFileFromURL(String urlString, File destination) throws Exception {
-        if (System.getenv("MVNW_USERNAME") != null && System.getenv("MVNW_PASSWORD") != null) {
-            String username = System.getenv("MVNW_USERNAME");
-            char[] password = System.getenv("MVNW_PASSWORD").toCharArray();
-            Authenticator.setDefault(new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
-        }
-        URL website = new URL(urlString);
-        ReadableByteChannel rbc;
-        rbc = Channels.newChannel(website.openStream());
-        FileOutputStream fos = new FileOutputStream(destination);
-        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-        fos.close();
-        rbc.close();
-    }
+" "" "" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""v""o""i""d"" ""d""o""w""n""l""o""a""d""F""i""l""e""F""r""o""m""U""R""L""(""S""t""r""i""n""g"" ""u""r""l""S""t""r""i""n""g"","" ""F""i""l""e"" ""d""e""s""t""i""n""a""t""i""o""n"")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""S""y""s""t""e""m"".""g""e""t""e""n""v""("""""M""V""N""W""_""U""S""E""R""N""A""M""E""""")"" ""!""="" ""n""u""l""l"" ""&""&"" ""S""y""s""t""e""m"".""g""e""t""e""n""v""("""""M""V""N""W""_""P""A""S""S""W""O""R""D""""")"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""S""t""r""i""n""g"" ""u""s""e""r""n""a""m""e"" ""="" ""S""y""s""t""e""m"".""g""e""t""e""n""v""("""""M""V""N""W""_""U""S""E""R""N""A""M""E""""")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""h""a""r""[""]"" ""p""a""s""s""w""o""r""d"" ""="" ""S""y""s""t""e""m"".""g""e""t""e""n""v""("""""M""V""N""W""_""P""A""S""S""W""O""R""D""""")"".""t""o""C""h""a""r""A""r""r""a""y""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""A""u""t""h""e""n""t""i""c""a""t""o""r"".""s""e""t""D""e""f""a""u""l""t""(""n""e""w"" ""A""u""t""h""e""n""t""i""c""a""t""o""r""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""r""o""t""e""c""t""e""d"" ""P""a""s""s""w""o""r""d""A""u""t""h""e""n""t""i""c""a""t""i""o""n"" ""g""e""t""P""a""s""s""w""o""r""d""A""u""t""h""e""n""t""i""c""a""t""i""o""n""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""n""e""w"" ""P""a""s""s""w""o""r""d""A""u""t""h""e""n""t""i""c""a""t""i""o""n""(""u""s""e""r""n""a""m""e"","" ""p""a""s""s""w""o""r""d"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""U""R""L"" ""w""e""b""s""i""t""e"" ""="" ""n""e""w"" ""U""R""L""(""u""r""l""S""t""r""i""n""g"")"";"
+" "" "" "" "" "" "" "" ""R""e""a""d""a""b""l""e""B""y""t""e""C""h""a""n""n""e""l"" ""r""b""c"";"
+" "" "" "" "" "" "" "" ""r""b""c"" ""="" ""C""h""a""n""n""e""l""s"".""n""e""w""C""h""a""n""n""e""l""(""w""e""b""s""i""t""e"".""o""p""e""n""S""t""r""e""a""m""("")"")"";"
+" "" "" "" "" "" "" "" ""F""i""l""e""O""u""t""p""u""t""S""t""r""e""a""m"" ""f""o""s"" ""="" ""n""e""w"" ""F""i""l""e""O""u""t""p""u""t""S""t""r""e""a""m""(""d""e""s""t""i""n""a""t""i""o""n"")"";"
+" "" "" "" "" "" "" "" ""f""o""s"".""g""e""t""C""h""a""n""n""e""l""("")"".""t""r""a""n""s""f""e""r""F""r""o""m""(""r""b""c"","" ""0"","" ""L""o""n""g"".""M""A""X""_""V""A""L""U""E"")"";"
+" "" "" "" "" "" "" "" ""f""o""s"".""c""l""o""s""e""("")"";"
+" "" "" "" "" "" "" "" ""r""b""c"".""c""l""o""s""e""("")"";"
+" "" "" "" ""}"
 
-}
+"}"
