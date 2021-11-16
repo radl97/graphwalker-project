@@ -1,54 +1,54 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.model.Element;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""S""e""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""S""e""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class ContextsChecker {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""C""o""n""t""e""x""t""s""C""h""e""c""k""e""r"" ""{"
 
-  /**
-   * Checks the context for problems or any possible errors.
-   * Any findings will be added to a list of strings.
-   * <p/>
-   * TODO: Implement a rule framework so that organisations and projects can create their own rule set (think model based code convention)
-   *
-   * @return A list of issues found in the context
-   */
-  static public List<String> hasIssues(List<Context> contexts) {
-    List<String> issues = new ArrayList<>();
+" "" ""/""*""*"
+" "" "" ""*"" ""C""h""e""c""k""s"" ""t""h""e"" ""c""o""n""t""e""x""t"" ""f""o""r"" ""p""r""o""b""l""e""m""s"" ""o""r"" ""a""n""y"" ""p""o""s""s""i""b""l""e"" ""e""r""r""o""r""s""."
+" "" "" ""*"" ""A""n""y"" ""f""i""n""d""i""n""g""s"" ""w""i""l""l"" ""b""e"" ""a""d""d""e""d"" ""t""o"" ""a"" ""l""i""s""t"" ""o""f"" ""s""t""r""i""n""g""s""."
+" "" "" ""*"" ""<""p""/"">"
+" "" "" ""*"" ""T""O""D""O"":"" ""I""m""p""l""e""m""e""n""t"" ""a"" ""r""u""l""e"" ""f""r""a""m""e""w""o""r""k"" ""s""o"" ""t""h""a""t"" ""o""r""g""a""n""i""s""a""t""i""o""n""s"" ""a""n""d"" ""p""r""o""j""e""c""t""s"" ""c""a""n"" ""c""r""e""a""t""e"" ""t""h""e""i""r"" ""o""w""n"" ""r""u""l""e"" ""s""e""t"" ""(""t""h""i""n""k"" ""m""o""d""e""l"" ""b""a""s""e""d"" ""c""o""d""e"" ""c""o""n""v""e""n""t""i""o""n"")"
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""A"" ""l""i""s""t"" ""o""f"" ""i""s""s""u""e""s"" ""f""o""u""n""d"" ""i""n"" ""t""h""e"" ""c""o""n""t""e""x""t"
+" "" "" ""*""/"
+" "" ""s""t""a""t""i""c"" ""p""u""b""l""i""c"" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""h""a""s""I""s""s""u""e""s""(""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"")"" ""{"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
 
-    // Check that individual contexts are valid
-    for (Context context : contexts) {
-      issues.addAll(ContextChecker.hasIssues(context));
-    }
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""t""h""a""t"" ""i""n""d""i""v""i""d""u""a""l"" ""c""o""n""t""e""x""t""s"" ""a""r""e"" ""v""a""l""i""d"
+" "" "" "" ""f""o""r"" ""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" "":"" ""c""o""n""t""e""x""t""s"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""A""l""l""(""C""o""n""t""e""x""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"")"")"";"
+" "" "" "" ""}"
 
-    // Check that ids are unique
-    Set<String> ids = new HashSet<>();
-    for (Context context : contexts) {
-      if (!ids.add(context.getModel().getId())) {
-        issues.add("Id of the model is not unique: " + context.getModel().getId());
-      }
-    }
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""t""h""a""t"" ""i""d""s"" ""a""r""e"" ""u""n""i""q""u""e"
+" "" "" "" ""S""e""t""<""S""t""r""i""n""g"">"" ""i""d""s"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" "":"" ""c""o""n""t""e""x""t""s"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""i""d""s"".""a""d""d""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""I""d""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""I""d"" ""o""f"" ""t""h""e"" ""m""o""d""e""l"" ""i""s"" ""n""o""t"" ""u""n""i""q""u""e"":"" """"" ""+"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""I""d""("")"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    // Check that all internal ids are unique
-    Set<Element> elements = new HashSet<>();
-    for (Context context : contexts) {
-      if (!elements.add(context.getModel())) {
-        issues.add("Internal id of the model is not unique: " + context);
-      }
-      for (Element element : context.getModel().getElements()) {
-        if (!elements.add(element)) {
-          issues.add("Internal id of the element is not unique: " + element);
-        }
-      }
-    }
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""t""h""a""t"" ""a""l""l"" ""i""n""t""e""r""n""a""l"" ""i""d""s"" ""a""r""e"" ""u""n""i""q""u""e"
+" "" "" "" ""S""e""t""<""E""l""e""m""e""n""t"">"" ""e""l""e""m""e""n""t""s"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" "":"" ""c""o""n""t""e""x""t""s"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""e""l""e""m""e""n""t""s"".""a""d""d""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""I""n""t""e""r""n""a""l"" ""i""d"" ""o""f"" ""t""h""e"" ""m""o""d""e""l"" ""i""s"" ""n""o""t"" ""u""n""i""q""u""e"":"" """"" ""+"" ""c""o""n""t""e""x""t"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""f""o""r"" ""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""l""e""m""e""n""t""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""!""e""l""e""m""e""n""t""s"".""a""d""d""(""e""l""e""m""e""n""t"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""I""n""t""e""r""n""a""l"" ""i""d"" ""o""f"" ""t""h""e"" ""e""l""e""m""e""n""t"" ""i""s"" ""n""o""t"" ""u""n""i""q""u""e"":"" """"" ""+"" ""e""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    return issues;
-  }
-}
+" "" "" "" ""r""e""t""u""r""n"" ""i""s""s""u""e""s"";"
+" "" ""}"
+"}"

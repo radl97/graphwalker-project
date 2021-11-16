@@ -1,60 +1,60 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { FormGroup, InputGroup, Switch, TextArea } from "@blueprintjs/core";
-import { updateElement, setStartElement } from "../../redux/actions";
-import Group from "./group";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""c""o""n""n""e""c""t"" ""}"" ""f""r""o""m"" """""r""e""a""c""t""-""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""{"" ""F""o""r""m""G""r""o""u""p"","" ""I""n""p""u""t""G""r""o""u""p"","" ""S""w""i""t""c""h"","" ""T""e""x""t""A""r""e""a"" ""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""{"" ""u""p""d""a""t""e""E""l""e""m""e""n""t"","" ""s""e""t""S""t""a""r""t""E""l""e""m""e""n""t"" ""}"" ""f""r""o""m"" """""."".""/""."".""/""r""e""d""u""x""/""a""c""t""i""o""n""s""""";"
+"i""m""p""o""r""t"" ""G""r""o""u""p"" ""f""r""o""m"" """"".""/""g""r""o""u""p""""";"
 
-class ElementGroup extends Component {
-  render() {
-    const { id, name, sharedState, guard, weight, actions, requirements, updateElement, isStartElement, setStartElement, isVertex, disabled } = this.props;
-    return (
-      <Group name="Element" isOpen={true}>
-        <FormGroup label="Name" disabled={disabled}>
-          <InputGroup disabled={disabled} value={name} onChange={({ target: { value }}) => updateElement('name', value ? value : undefined)}/>
-        </FormGroup>
-        <FormGroup label="Shared Name" disabled={disabled || !isVertex}>
-          <InputGroup disabled={disabled || !isVertex} value={sharedState} onChange={({ target: { value }}) => updateElement('sharedState', value ? value : undefined)}/>
-        </FormGroup>
-        <FormGroup label="Guard" disabled={disabled || isVertex}>
-          <InputGroup disabled={disabled || isVertex} value={guard} onChange={({ target: { value }}) => updateElement('guard', value ? value : undefined)}/>
-        </FormGroup>
-        <FormGroup label="Weight" disabled={disabled || isVertex}>
-          <InputGroup disabled={disabled || isVertex} value={weight} onChange={({ target: { value }}) => updateElement('weight', value ? value : undefined)}/>
-        </FormGroup>
-        <FormGroup label="Actions" disabled={disabled}>
-          <div className="bp3-input-group">
-            <TextArea disabled={disabled} value={actions.join("\n")} onChange={({ target: { value }}) => updateElement('actions', value ? value.split("\n") : undefined)}/>
-          </div>
-        </FormGroup>
-        <FormGroup label="Requirements" disabled={disabled}>
-          <div className="bp3-input-group">
-            <TextArea disabled={disabled} value={requirements.join("\n")} onChange={({ target: { value }}) => updateElement('requirements', value ? value.split("\n") : undefin)}/>
-          </div>
-        </FormGroup>
-        <Switch disabled={disabled} label="Start element" checked={isStartElement} onChange={({ target: { checked }}) => setStartElement(id)}/>
-      </Group>
-    )
-  }
-}
+"c""l""a""s""s"" ""E""l""e""m""e""n""t""G""r""o""u""p"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""c""o""n""s""t"" ""{"" ""i""d"","" ""n""a""m""e"","" ""s""h""a""r""e""d""S""t""a""t""e"","" ""g""u""a""r""d"","" ""w""e""i""g""h""t"","" ""a""c""t""i""o""n""s"","" ""r""e""q""u""i""r""e""m""e""n""t""s"","" ""u""p""d""a""t""e""E""l""e""m""e""n""t"","" ""i""s""S""t""a""r""t""E""l""e""m""e""n""t"","" ""s""e""t""S""t""a""r""t""E""l""e""m""e""n""t"","" ""i""s""V""e""r""t""e""x"","" ""d""i""s""a""b""l""e""d"" ""}"" ""="" ""t""h""i""s"".""p""r""o""p""s"";"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""G""r""o""u""p"" ""n""a""m""e""="""""E""l""e""m""e""n""t""""" ""i""s""O""p""e""n""=""{""t""r""u""e""}"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""N""a""m""e""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"">"
+" "" "" "" "" "" "" "" "" "" ""<""I""n""p""u""t""G""r""o""u""p"" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"" ""v""a""l""u""e""=""{""n""a""m""e""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""v""a""l""u""e"" ""}""}"")"" ""="">"" ""u""p""d""a""t""e""E""l""e""m""e""n""t""(""'""n""a""m""e""'"","" ""v""a""l""u""e"" ""?"" ""v""a""l""u""e"" "":"" ""u""n""d""e""f""i""n""e""d"")""}""/"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""S""h""a""r""e""d"" ""N""a""m""e""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""!""i""s""V""e""r""t""e""x""}"">"
+" "" "" "" "" "" "" "" "" "" ""<""I""n""p""u""t""G""r""o""u""p"" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""!""i""s""V""e""r""t""e""x""}"" ""v""a""l""u""e""=""{""s""h""a""r""e""d""S""t""a""t""e""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""v""a""l""u""e"" ""}""}"")"" ""="">"" ""u""p""d""a""t""e""E""l""e""m""e""n""t""(""'""s""h""a""r""e""d""S""t""a""t""e""'"","" ""v""a""l""u""e"" ""?"" ""v""a""l""u""e"" "":"" ""u""n""d""e""f""i""n""e""d"")""}""/"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""G""u""a""r""d""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""i""s""V""e""r""t""e""x""}"">"
+" "" "" "" "" "" "" "" "" "" ""<""I""n""p""u""t""G""r""o""u""p"" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""i""s""V""e""r""t""e""x""}"" ""v""a""l""u""e""=""{""g""u""a""r""d""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""v""a""l""u""e"" ""}""}"")"" ""="">"" ""u""p""d""a""t""e""E""l""e""m""e""n""t""(""'""g""u""a""r""d""'"","" ""v""a""l""u""e"" ""?"" ""v""a""l""u""e"" "":"" ""u""n""d""e""f""i""n""e""d"")""}""/"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""W""e""i""g""h""t""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""i""s""V""e""r""t""e""x""}"">"
+" "" "" "" "" "" "" "" "" "" ""<""I""n""p""u""t""G""r""o""u""p"" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""i""s""V""e""r""t""e""x""}"" ""v""a""l""u""e""=""{""w""e""i""g""h""t""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""v""a""l""u""e"" ""}""}"")"" ""="">"" ""u""p""d""a""t""e""E""l""e""m""e""n""t""(""'""w""e""i""g""h""t""'"","" ""v""a""l""u""e"" ""?"" ""v""a""l""u""e"" "":"" ""u""n""d""e""f""i""n""e""d"")""}""/"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""A""c""t""i""o""n""s""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"">"
+" "" "" "" "" "" "" "" "" "" ""<""d""i""v"" ""c""l""a""s""s""N""a""m""e""="""""b""p""3""-""i""n""p""u""t""-""g""r""o""u""p""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""T""e""x""t""A""r""e""a"" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"" ""v""a""l""u""e""=""{""a""c""t""i""o""n""s"".""j""o""i""n""("""""\""n""""")""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""v""a""l""u""e"" ""}""}"")"" ""="">"" ""u""p""d""a""t""e""E""l""e""m""e""n""t""(""'""a""c""t""i""o""n""s""'"","" ""v""a""l""u""e"" ""?"" ""v""a""l""u""e"".""s""p""l""i""t""("""""\""n""""")"" "":"" ""u""n""d""e""f""i""n""e""d"")""}""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""R""e""q""u""i""r""e""m""e""n""t""s""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"">"
+" "" "" "" "" "" "" "" "" "" ""<""d""i""v"" ""c""l""a""s""s""N""a""m""e""="""""b""p""3""-""i""n""p""u""t""-""g""r""o""u""p""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""T""e""x""t""A""r""e""a"" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"" ""v""a""l""u""e""=""{""r""e""q""u""i""r""e""m""e""n""t""s"".""j""o""i""n""("""""\""n""""")""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""v""a""l""u""e"" ""}""}"")"" ""="">"" ""u""p""d""a""t""e""E""l""e""m""e""n""t""(""'""r""e""q""u""i""r""e""m""e""n""t""s""'"","" ""v""a""l""u""e"" ""?"" ""v""a""l""u""e"".""s""p""l""i""t""("""""\""n""""")"" "":"" ""u""n""d""e""f""i""n"")""}""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" ""<""S""w""i""t""c""h"" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"" ""l""a""b""e""l""="""""S""t""a""r""t"" ""e""l""e""m""e""n""t""""" ""c""h""e""c""k""e""d""=""{""i""s""S""t""a""r""t""E""l""e""m""e""n""t""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""c""h""e""c""k""e""d"" ""}""}"")"" ""="">"" ""s""e""t""S""t""a""r""t""E""l""e""m""e""n""t""(""i""d"")""}""/"">"
+" "" "" "" "" "" ""<""/""G""r""o""u""p"">"
+" "" "" "" "")"
+" "" ""}"
+"}"
 
-const mapStateToProps = ({ test: { models, selectedModelIndex, selectedElementId }}) => {
-  const model = models[selectedModelIndex];
-  const elements = [...model.vertices, ...model.edges];
-  const isVertex = model.vertices.filter( e => e.id == selectedElementId).length == 1;
-  const element = elements.filter(element => element.id === selectedElementId)[0] || {};
-  const { id = "", name = "", sharedState = "", guard = "", weight = "", actions = [], requirements = [] } = element;
-  return {
-    id,
-    name,
-    sharedState,
-    guard,
-    weight,
-    actions,
-    requirements,
-    isStartElement: model.startElementId === selectedElementId,
-    isVertex,
-    disabled: selectedElementId === null
-  }
-};
+"c""o""n""s""t"" ""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"" ""="" ""(""{"" ""t""e""s""t"":"" ""{"" ""m""o""d""e""l""s"","" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"","" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"" ""}""}"")"" ""="">"" ""{"
+" "" ""c""o""n""s""t"" ""m""o""d""e""l"" ""="" ""m""o""d""e""l""s""[""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"";"
+" "" ""c""o""n""s""t"" ""e""l""e""m""e""n""t""s"" ""="" ""["".""."".""m""o""d""e""l"".""v""e""r""t""i""c""e""s"","" "".""."".""m""o""d""e""l"".""e""d""g""e""s""]"";"
+" "" ""c""o""n""s""t"" ""i""s""V""e""r""t""e""x"" ""="" ""m""o""d""e""l"".""v""e""r""t""i""c""e""s"".""f""i""l""t""e""r""("" ""e"" ""="">"" ""e"".""i""d"" ""=""="" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"")"".""l""e""n""g""t""h"" ""=""="" ""1"";"
+" "" ""c""o""n""s""t"" ""e""l""e""m""e""n""t"" ""="" ""e""l""e""m""e""n""t""s"".""f""i""l""t""e""r""(""e""l""e""m""e""n""t"" ""="">"" ""e""l""e""m""e""n""t"".""i""d"" ""=""=""="" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"")""[""0""]"" ""|""|"" ""{""}"";"
+" "" ""c""o""n""s""t"" ""{"" ""i""d"" ""="" """""""","" ""n""a""m""e"" ""="" """""""","" ""s""h""a""r""e""d""S""t""a""t""e"" ""="" """""""","" ""g""u""a""r""d"" ""="" """""""","" ""w""e""i""g""h""t"" ""="" """""""","" ""a""c""t""i""o""n""s"" ""="" ""[""]"","" ""r""e""q""u""i""r""e""m""e""n""t""s"" ""="" ""[""]"" ""}"" ""="" ""e""l""e""m""e""n""t"";"
+" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" ""i""d"","
+" "" "" "" ""n""a""m""e"","
+" "" "" "" ""s""h""a""r""e""d""S""t""a""t""e"","
+" "" "" "" ""g""u""a""r""d"","
+" "" "" "" ""w""e""i""g""h""t"","
+" "" "" "" ""a""c""t""i""o""n""s"","
+" "" "" "" ""r""e""q""u""i""r""e""m""e""n""t""s"","
+" "" "" "" ""i""s""S""t""a""r""t""E""l""e""m""e""n""t"":"" ""m""o""d""e""l"".""s""t""a""r""t""E""l""e""m""e""n""t""I""d"" ""=""=""="" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"","
+" "" "" "" ""i""s""V""e""r""t""e""x"","
+" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"" ""=""=""="" ""n""u""l""l"
+" "" ""}"
+"}"";"
 
-export default connect(mapStateToProps, { updateElement, setStartElement })(ElementGroup);
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""o""n""n""e""c""t""(""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"","" ""{"" ""u""p""d""a""t""e""E""l""e""m""e""n""t"","" ""s""e""t""S""t""a""r""t""E""l""e""m""e""n""t"" ""}"")""(""E""l""e""m""e""n""t""G""r""o""u""p"")"";"

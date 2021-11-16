@@ -1,41 +1,41 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import com.google.common.base.CharMatcher;
-import java.util.ArrayList;
-import java.util.List;
-import org.graphwalker.core.model.Edge;
+"i""m""p""o""r""t"" ""c""o""m"".""g""o""o""g""l""e"".""c""o""m""m""o""n"".""b""a""s""e"".""C""h""a""r""M""a""t""c""h""e""r"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class EdgeChecker {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""E""d""g""e""C""h""e""c""k""e""r"" ""{"
 
-  private EdgeChecker() {
-  }
+" "" ""p""r""i""v""a""t""e"" ""E""d""g""e""C""h""e""c""k""e""r""("")"" ""{"
+" "" ""}"
 
-  /**
-   * Checks the edge for problems or any possible errors.
-   * Any findings will be added to a list of strings.
-   * <p/>
-   * TODO: Implement a rule framework so that organisations and projects can create their own rule set (think model based code convention)
-   *
-   * @return A list of issues found in the edge
-   */
-  static public List<String> hasIssues(Edge.RuntimeEdge edge) {
-    List<String> issues = new ArrayList<>(ElementChecker.hasIssues(edge));
+" "" ""/""*""*"
+" "" "" ""*"" ""C""h""e""c""k""s"" ""t""h""e"" ""e""d""g""e"" ""f""o""r"" ""p""r""o""b""l""e""m""s"" ""o""r"" ""a""n""y"" ""p""o""s""s""i""b""l""e"" ""e""r""r""o""r""s""."
+" "" "" ""*"" ""A""n""y"" ""f""i""n""d""i""n""g""s"" ""w""i""l""l"" ""b""e"" ""a""d""d""e""d"" ""t""o"" ""a"" ""l""i""s""t"" ""o""f"" ""s""t""r""i""n""g""s""."
+" "" "" ""*"" ""<""p""/"">"
+" "" "" ""*"" ""T""O""D""O"":"" ""I""m""p""l""e""m""e""n""t"" ""a"" ""r""u""l""e"" ""f""r""a""m""e""w""o""r""k"" ""s""o"" ""t""h""a""t"" ""o""r""g""a""n""i""s""a""t""i""o""n""s"" ""a""n""d"" ""p""r""o""j""e""c""t""s"" ""c""a""n"" ""c""r""e""a""t""e"" ""t""h""e""i""r"" ""o""w""n"" ""r""u""l""e"" ""s""e""t"" ""(""t""h""i""n""k"" ""m""o""d""e""l"" ""b""a""s""e""d"" ""c""o""d""e"" ""c""o""n""v""e""n""t""i""o""n"")"
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""A"" ""l""i""s""t"" ""o""f"" ""i""s""s""u""e""s"" ""f""o""u""n""d"" ""i""n"" ""t""h""e"" ""e""d""g""e"
+" "" "" ""*""/"
+" "" ""s""t""a""t""i""c"" ""p""u""b""l""i""c"" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""h""a""s""I""s""s""u""e""s""(""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"")"" ""{"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""(""E""l""e""m""e""n""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""e""d""g""e"")"")"";"
 
-    if (edge.getTargetVertex() == null) {
-      issues.add("Edge must have a target vertex.");
-    }
+" "" "" "" ""i""f"" ""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"" ""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""E""d""g""e"" ""m""u""s""t"" ""h""a""v""e"" ""a"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x"".""""")"";"
+" "" "" "" ""}"
 
-    if (edge.hasName() && CharMatcher.whitespace().matchesAnyOf(edge.getName())) {
-      issues.add("Name of edge cannot have any white spaces.");
-    }
+" "" "" "" ""i""f"" ""(""e""d""g""e"".""h""a""s""N""a""m""e""("")"" ""&""&"" ""C""h""a""r""M""a""t""c""h""e""r"".""w""h""i""t""e""s""p""a""c""e""("")"".""m""a""t""c""h""e""s""A""n""y""O""f""(""e""d""g""e"".""g""e""t""N""a""m""e""("")"")"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""N""a""m""e"" ""o""f"" ""e""d""g""e"" ""c""a""n""n""o""t"" ""h""a""v""e"" ""a""n""y"" ""w""h""i""t""e"" ""s""p""a""c""e""s"".""""")"";"
+" "" "" "" ""}"
 
-    if (edge.getWeight() < 0 || edge.getWeight() > 1) {
-      issues.add("The weight must be a value between 0 and 1.");
-    }
+" "" "" "" ""i""f"" ""(""e""d""g""e"".""g""e""t""W""e""i""g""h""t""("")"" ""<"" ""0"" ""|""|"" ""e""d""g""e"".""g""e""t""W""e""i""g""h""t""("")"" "">"" ""1"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""T""h""e"" ""w""e""i""g""h""t"" ""m""u""s""t"" ""b""e"" ""a"" ""v""a""l""u""e"" ""b""e""t""w""e""e""n"" ""0"" ""a""n""d"" ""1"".""""")"";"
+" "" "" "" ""}"
 
-    return issues;
-  }
-}
+" "" "" "" ""r""e""t""u""r""n"" ""i""s""s""u""e""s"";"
+" "" ""}"
+"}"

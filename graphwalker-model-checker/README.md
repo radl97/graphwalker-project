@@ -1,43 +1,43 @@
-GraphWalker Model Checker
-===================
+"G""r""a""p""h""W""a""l""k""e""r"" ""M""o""d""e""l"" ""C""h""e""c""k""e""r"
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-Documentation on http://graphwalker.org/
+"D""o""c""u""m""e""n""t""a""t""i""o""n"" ""o""n"" ""h""t""t""p"":""/""/""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g""/"
 
-### The Model Checker
+"#""#""#"" ""T""h""e"" ""M""o""d""e""l"" ""C""h""e""c""k""e""r"
 
-Analyzes Contexts, Models, Edges and Vertices, and returns a list of found issues. For example, a vertex without a name is not a valid vertex:
+"A""n""a""l""y""z""e""s"" ""C""o""n""t""e""x""t""s"","" ""M""o""d""e""l""s"","" ""E""d""g""e""s"" ""a""n""d"" ""V""e""r""t""i""c""e""s"","" ""a""n""d"" ""r""e""t""u""r""n""s"" ""a"" ""l""i""s""t"" ""o""f"" ""f""o""u""n""d"" ""i""s""s""u""e""s""."" ""F""o""r"" ""e""x""a""m""p""l""e"","" ""a"" ""v""e""r""t""e""x"" ""w""i""t""h""o""u""t"" ""a"" ""n""a""m""e"" ""i""s"" ""n""o""t"" ""a"" ""v""a""l""i""d"" ""v""e""r""t""e""x"":"
 
-```java
- List<String> issues = VertexChecker.hasIssues(new Vertex().build());
-```
-The check above will return a list containing 1 string saying: _Name of vertex cannot be null_
+"`""`""`""j""a""v""a"
+" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""V""e""r""t""e""x""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""n""e""w"" ""V""e""r""t""e""x""("")"".""b""u""i""l""d""("")"")"";"
+"`""`""`"
+"T""h""e"" ""c""h""e""c""k"" ""a""b""o""v""e"" ""w""i""l""l"" ""r""e""t""u""r""n"" ""a"" ""l""i""s""t"" ""c""o""n""t""a""i""n""i""n""g"" ""1"" ""s""t""r""i""n""g"" ""s""a""y""i""n""g"":"" ""_""N""a""m""e"" ""o""f"" ""v""e""r""t""e""x"" ""c""a""n""n""o""t"" ""b""e"" ""n""u""l""l""_"
 
-Or like in the example below. All elements (edges and vertices) must have unique ids:
-```java
-Model model = new Model();
-model.addVertex(new Vertex().setId("NOTUNIQUEID").setName("SomeName"));
-model.addVertex(new Vertex().setId("NOTUNIQUEID").setName("SomeOtherName"));
-List<String> issues = ModelChecker.hasIssues(model.build());
-```
-The check will return: _Id of the vertex is not unique: NOTUNIQUEID_
+"O""r"" ""l""i""k""e"" ""i""n"" ""t""h""e"" ""e""x""a""m""p""l""e"" ""b""e""l""o""w""."" ""A""l""l"" ""e""l""e""m""e""n""t""s"" ""(""e""d""g""e""s"" ""a""n""d"" ""v""e""r""t""i""c""e""s"")"" ""m""u""s""t"" ""h""a""v""e"" ""u""n""i""q""u""e"" ""i""d""s"":"
+"`""`""`""j""a""v""a"
+"M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"";"
+"m""o""d""e""l"".""a""d""d""V""e""r""t""e""x""(""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""I""d""("""""N""O""T""U""N""I""Q""U""E""I""D""""")"".""s""e""t""N""a""m""e""("""""S""o""m""e""N""a""m""e""""")"")"";"
+"m""o""d""e""l"".""a""d""d""V""e""r""t""e""x""(""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""I""d""("""""N""O""T""U""N""I""Q""U""E""I""D""""")"".""s""e""t""N""a""m""e""("""""S""o""m""e""O""t""h""e""r""N""a""m""e""""")"")"";"
+"L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""M""o""d""e""l""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""m""o""d""e""l"".""b""u""i""l""d""("")"")"";"
+"`""`""`"
+"T""h""e"" ""c""h""e""c""k"" ""w""i""l""l"" ""r""e""t""u""r""n"":"" ""_""I""d"" ""o""f"" ""t""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""n""o""t"" ""u""n""i""q""u""e"":"" ""N""O""T""U""N""I""Q""U""E""I""D""_"
 
-Another more elaborate check can be done on the a Context object:
-```java
-Vertex v1 = new Vertex().setName("v1").setId("v1");
-Vertex v2 = new Vertex().setName("v2").setId("v2");
-Vertex v3 = new Vertex().setName("v3").setId("v3");
-Vertex v4 = new Vertex().setName("v4").setId("v4");
+"A""n""o""t""h""e""r"" ""m""o""r""e"" ""e""l""a""b""o""r""a""t""e"" ""c""h""e""c""k"" ""c""a""n"" ""b""e"" ""d""o""n""e"" ""o""n"" ""t""h""e"" ""a"" ""C""o""n""t""e""x""t"" ""o""b""j""e""c""t"":"
+"`""`""`""j""a""v""a"
+"V""e""r""t""e""x"" ""v""1"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""1""""")"".""s""e""t""I""d""("""""v""1""""")"";"
+"V""e""r""t""e""x"" ""v""2"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""2""""")"".""s""e""t""I""d""("""""v""2""""")"";"
+"V""e""r""t""e""x"" ""v""3"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""3""""")"".""s""e""t""I""d""("""""v""3""""")"";"
+"V""e""r""t""e""x"" ""v""4"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""4""""")"".""s""e""t""I""d""("""""v""4""""")"";"
 
-Model model = new Model();
-model.addEdge(new Edge().setSourceVertex(v1).setTargetVertex(v2).setName("e1").setId("e1"));
-model.addEdge(new Edge().setSourceVertex(v2).setTargetVertex(v3).setName("e2").setId("e2"));
-model.addEdge(new Edge().setSourceVertex(v2).setTargetVertex(v4).setName("e3").setId("e3"));
-model.addEdge(new Edge().setTargetVertex(v1).setName("e0").setId("e0"));
+"M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"";"
+"m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""1"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""2"")"".""s""e""t""N""a""m""e""("""""e""1""""")"".""s""e""t""I""d""("""""e""1""""")"")"";"
+"m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""2"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""3"")"".""s""e""t""N""a""m""e""("""""e""2""""")"".""s""e""t""I""d""("""""e""2""""")"")"";"
+"m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""2"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""4"")"".""s""e""t""N""a""m""e""("""""e""3""""")"".""s""e""t""I""d""("""""e""3""""")"")"";"
+"m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""1"")"".""s""e""t""N""a""m""e""("""""e""0""""")"".""s""e""t""I""d""("""""e""0""""")"")"";"
 
-Context context = new JsonContext();
-context.setModel(model.build()).setPathGenerator(new RandomPath(new EdgeCoverage(100)));
-context.setNextElement(context.getModel().findElements("e0").get(0));
+"C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""("")"";"
+"c""o""n""t""e""x""t"".""s""e""t""M""o""d""e""l""(""m""o""d""e""l"".""b""u""i""l""d""("")"")"".""s""e""t""P""a""t""h""G""e""n""e""r""a""t""o""r""(""n""e""w"" ""R""a""n""d""o""m""P""a""t""h""(""n""e""w"" ""E""d""g""e""C""o""v""e""r""a""g""e""(""1""0""0"")"")"")"";"
+"c""o""n""t""e""x""t"".""s""e""t""N""e""x""t""E""l""e""m""e""n""t""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""f""i""n""d""E""l""e""m""e""n""t""s""("""""e""0""""")"".""g""e""t""(""0"")"")"";"
 
-List<String> issues = ContextChecker.hasIssues(context);
-```
-The check will detect that the path generator in combination with the stop coverage and the design of the model will not work: _The model has multiple cul-de-sacs, and is requested to run using a random path generator and 100% edge coverage. That will not work._
+"L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"")"";"
+"`""`""`"
+"T""h""e"" ""c""h""e""c""k"" ""w""i""l""l"" ""d""e""t""e""c""t"" ""t""h""a""t"" ""t""h""e"" ""p""a""t""h"" ""g""e""n""e""r""a""t""o""r"" ""i""n"" ""c""o""m""b""i""n""a""t""i""o""n"" ""w""i""t""h"" ""t""h""e"" ""s""t""o""p"" ""c""o""v""e""r""a""g""e"" ""a""n""d"" ""t""h""e"" ""d""e""s""i""g""n"" ""o""f"" ""t""h""e"" ""m""o""d""e""l"" ""w""i""l""l"" ""n""o""t"" ""w""o""r""k"":"" ""_""T""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""m""u""l""t""i""p""l""e"" ""c""u""l""-""d""e""-""s""a""c""s"","" ""a""n""d"" ""i""s"" ""r""e""q""u""e""s""t""e""d"" ""t""o"" ""r""u""n"" ""u""s""i""n""g"" ""a"" ""r""a""n""d""o""m"" ""p""a""t""h"" ""g""e""n""e""r""a""t""o""r"" ""a""n""d"" ""1""0""0""%"" ""e""d""g""e"" ""c""o""v""e""r""a""g""e""."" ""T""h""a""t"" ""w""i""l""l"" ""n""o""t"" ""w""o""r""k"".""_"

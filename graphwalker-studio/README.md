@@ -1,21 +1,21 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-studio/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-studio)
-GraphWalker Studio
-==================
+"[""!""[""M""a""v""e""n"" ""C""e""n""t""r""a""l""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o"")"
+"G""r""a""p""h""W""a""l""k""e""r"" ""S""t""u""d""i""o"
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-## Build Studio
+"#""#"" ""B""u""i""l""d"" ""S""t""u""d""i""o"
 
-```bash
-mvn package
-```
+"`""`""`""b""a""s""h"
+"m""v""n"" ""p""a""c""k""a""g""e"
+"`""`""`"
 
-The jar is in:
-```bash
-target/graphwalker-studio-4.0.1.jar
-```
+"T""h""e"" ""j""a""r"" ""i""s"" ""i""n"":"
+"`""`""`""b""a""s""h"
+"t""a""r""g""e""t""/""g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o""-""4"".""0"".""1"".""j""a""r"
+"`""`""`"
 
-Run it like:
-```bash
-java -jar target/graphwalker-studio-4.0.1.jar
-```
+"R""u""n"" ""i""t"" ""l""i""k""e"":"
+"`""`""`""b""a""s""h"
+"j""a""v""a"" ""-""j""a""r"" ""t""a""r""g""e""t""/""g""r""a""p""h""w""a""l""k""e""r""-""s""t""u""d""i""o""-""4"".""0"".""1"".""j""a""r"
+"`""`""`"
 
-Open it in a browser: http://localhost:9090/studio.html
+"O""p""e""n"" ""i""t"" ""i""n"" ""a"" ""b""r""o""w""s""e""r"":"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""9""0""9""0""/""s""t""u""d""i""o"".""h""t""m""l"

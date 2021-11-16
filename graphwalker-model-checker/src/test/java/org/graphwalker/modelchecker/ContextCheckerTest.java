@@ -1,75 +1,75 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import static org.hamcrest.core.Is.is;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""I""s"".""i""s"";"
 
-import java.util.List;
-import org.graphwalker.core.condition.EdgeCoverage;
-import org.graphwalker.core.generator.RandomPath;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.model.Edge;
-import org.graphwalker.core.model.Model;
-import org.graphwalker.core.model.Vertex;
-import org.graphwalker.io.factory.json.JsonContext;
-import org.junit.Assert;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""n""d""i""t""i""o""n"".""E""d""g""e""C""o""v""e""r""a""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""R""a""n""d""o""m""P""a""t""h"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""M""o""d""e""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""j""s""o""n"".""J""s""o""n""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class ContextCheckerTest {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r""T""e""s""t"" ""{"
 
-  @Test
-  public void testDefault() {
-    Context context = new JsonContext();
-    List<String> issues = ContextChecker.hasIssues(context);
-    Assert.assertThat(issues.size(), is(1));
-    Assert.assertThat(issues.get(0), is("No model found in context"));
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""D""e""f""a""u""l""t""("")"" ""{"
+" "" "" "" ""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""("")"";"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""g""e""t""(""0"")"","" ""i""s""("""""N""o"" ""m""o""d""e""l"" ""f""o""u""n""d"" ""i""n"" ""c""o""n""t""e""x""t""""")"")"";"
 
-    Model model = new Model();
-    context.setModel(model.build());
-    issues = ContextChecker.hasIssues(context);
-    Assert.assertThat(issues.size(), is(1));
-    Assert.assertThat(issues.get(0), is("The model has neither a start element or a defined shared state."));
+" "" "" "" ""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"";"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""M""o""d""e""l""(""m""o""d""e""l"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""g""e""t""(""0"")"","" ""i""s""("""""T""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""n""e""i""t""h""e""r"" ""a"" ""s""t""a""r""t"" ""e""l""e""m""e""n""t"" ""o""r"" ""a"" ""d""e""f""i""n""e""d"" ""s""h""a""r""e""d"" ""s""t""a""t""e"".""""")"")"";"
 
-    Vertex v1 = new Vertex().setName("v1").setId("v1");
-    Vertex v2 = new Vertex().setName("v2").setId("v2");
-    model.addVertex(v1).addEdge(new Edge().setSourceVertex(v1).setTargetVertex(v2));
-    context.setNextElement(v1);
-    context.setModel(model.build());
-    issues = ContextChecker.hasIssues(context);
-    Assert.assertThat(issues.size(), is(0));
-  }
+" "" "" "" ""V""e""r""t""e""x"" ""v""1"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""1""""")"".""s""e""t""I""d""("""""v""1""""")"";"
+" "" "" "" ""V""e""r""t""e""x"" ""v""2"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""2""""")"".""s""e""t""I""d""("""""v""2""""")"";"
+" "" "" "" ""m""o""d""e""l"".""a""d""d""V""e""r""t""e""x""(""v""1"")"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""1"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""2"")"")"";"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""N""e""x""t""E""l""e""m""e""n""t""(""v""1"")"";"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""M""o""d""e""l""(""m""o""d""e""l"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""0"")"")"";"
+" "" ""}"
 
-  @Test
-  public void testRandomGeneratorFullEdgeCoverageNonStronglyConnectedGraph() {
-    Vertex v1 = new Vertex().setName("v1").setId("v1");
-    Vertex v2 = new Vertex().setName("v2").setId("v2");
-    Vertex v3 = new Vertex().setName("v3").setId("v3");
-    Vertex v4 = new Vertex().setName("v4").setId("v4");
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""R""a""n""d""o""m""G""e""n""e""r""a""t""o""r""F""u""l""l""E""d""g""e""C""o""v""e""r""a""g""e""N""o""n""S""t""r""o""n""g""l""y""C""o""n""n""e""c""t""e""d""G""r""a""p""h""("")"" ""{"
+" "" "" "" ""V""e""r""t""e""x"" ""v""1"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""1""""")"".""s""e""t""I""d""("""""v""1""""")"";"
+" "" "" "" ""V""e""r""t""e""x"" ""v""2"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""2""""")"".""s""e""t""I""d""("""""v""2""""")"";"
+" "" "" "" ""V""e""r""t""e""x"" ""v""3"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""3""""")"".""s""e""t""I""d""("""""v""3""""")"";"
+" "" "" "" ""V""e""r""t""e""x"" ""v""4"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""v""4""""")"".""s""e""t""I""d""("""""v""4""""")"";"
 
-    Model model = new Model();
-    model.addEdge(new Edge().setSourceVertex(v1).setTargetVertex(v2).setName("e1").setId("e1"));
-    model.addEdge(new Edge().setSourceVertex(v2).setTargetVertex(v3).setName("e2").setId("e2"));
-    model.addEdge(new Edge().setSourceVertex(v2).setTargetVertex(v4).setName("e3").setId("e3"));
-    model.addEdge(new Edge().setTargetVertex(v1).setName("e0").setId("e0"));
+" "" "" "" ""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"";"
+" "" "" "" ""m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""1"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""2"")"".""s""e""t""N""a""m""e""("""""e""1""""")"".""s""e""t""I""d""("""""e""1""""")"")"";"
+" "" "" "" ""m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""2"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""3"")"".""s""e""t""N""a""m""e""("""""e""2""""")"".""s""e""t""I""d""("""""e""2""""")"")"";"
+" "" "" "" ""m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""2"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""4"")"".""s""e""t""N""a""m""e""("""""e""3""""")"".""s""e""t""I""d""("""""e""3""""")"")"";"
+" "" "" "" ""m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""1"")"".""s""e""t""N""a""m""e""("""""e""0""""")"".""s""e""t""I""d""("""""e""0""""")"")"";"
 
-    Context context = new JsonContext();
-    context.setModel(model.build()).setPathGenerator(new RandomPath(new EdgeCoverage(100)));
-    context.setNextElement(context.getModel().findElements("e0").get(0));
+" "" "" "" ""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""("")"";"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""M""o""d""e""l""(""m""o""d""e""l"".""b""u""i""l""d""("")"")"".""s""e""t""P""a""t""h""G""e""n""e""r""a""t""o""r""(""n""e""w"" ""R""a""n""d""o""m""P""a""t""h""(""n""e""w"" ""E""d""g""e""C""o""v""e""r""a""g""e""(""1""0""0"")"")"")"";"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""N""e""x""t""E""l""e""m""e""n""t""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""f""i""n""d""E""l""e""m""e""n""t""s""("""""e""0""""")"".""g""e""t""(""0"")"")"";"
 
-    List<String> issues = ContextChecker.hasIssues(context);
-    Assert.assertThat(issues.size(), is(1));
-    Assert.assertThat(issues.get(0), is("The model has multiple cul-de-sacs, and is requested to run using a random " +
-                                        "path generator and 100% edge coverage. That will not work."));
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""g""e""t""(""0"")"","" ""i""s""("""""T""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""m""u""l""t""i""p""l""e"" ""c""u""l""-""d""e""-""s""a""c""s"","" ""a""n""d"" ""i""s"" ""r""e""q""u""e""s""t""e""d"" ""t""o"" ""r""u""n"" ""u""s""i""n""g"" ""a"" ""r""a""n""d""o""m"" """"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""p""a""t""h"" ""g""e""n""e""r""a""t""o""r"" ""a""n""d"" ""1""0""0""%"" ""e""d""g""e"" ""c""o""v""e""r""a""g""e""."" ""T""h""a""t"" ""w""i""l""l"" ""n""o""t"" ""w""o""r""k"".""""")"")"";"
 
-    model.addEdge(new Edge().setSourceVertex(v4).setTargetVertex(v2).setName("e4").setId("e4"));
-    context = new JsonContext();
-    context.setModel(model.build()).setPathGenerator(new RandomPath(new EdgeCoverage(100)));
-    context.setNextElement(context.getModel().findElements("e0").get(0));
+" "" "" "" ""m""o""d""e""l"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""v""4"")"".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""v""2"")"".""s""e""t""N""a""m""e""("""""e""4""""")"".""s""e""t""I""d""("""""e""4""""")"")"";"
+" "" "" "" ""c""o""n""t""e""x""t"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""("")"";"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""M""o""d""e""l""(""m""o""d""e""l"".""b""u""i""l""d""("")"")"".""s""e""t""P""a""t""h""G""e""n""e""r""a""t""o""r""(""n""e""w"" ""R""a""n""d""o""m""P""a""t""h""(""n""e""w"" ""E""d""g""e""C""o""v""e""r""a""g""e""(""1""0""0"")"")"")"";"
+" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""N""e""x""t""E""l""e""m""e""n""t""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""f""i""n""d""E""l""e""m""e""n""t""s""("""""e""0""""")"".""g""e""t""(""0"")"")"";"
 
-    issues = ContextChecker.hasIssues(context);
-    Assert.assertThat(issues.size(), is(1));
-    Assert.assertThat(issues.get(0), is("The model has one cul-de-sacs, and is requested to run using a random " +
-                                        "path generator and 100% edge coverage. That might not work."));
-  }
-}
+" "" "" "" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""g""e""t""(""0"")"","" ""i""s""("""""T""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""o""n""e"" ""c""u""l""-""d""e""-""s""a""c""s"","" ""a""n""d"" ""i""s"" ""r""e""q""u""e""s""t""e""d"" ""t""o"" ""r""u""n"" ""u""s""i""n""g"" ""a"" ""r""a""n""d""o""m"" """"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""p""a""t""h"" ""g""e""n""e""r""a""t""o""r"" ""a""n""d"" ""1""0""0""%"" ""e""d""g""e"" ""c""o""v""e""r""a""g""e""."" ""T""h""a""t"" ""m""i""g""h""t"" ""n""o""t"" ""w""o""r""k"".""""")"")"";"
+" "" ""}"
+"}"

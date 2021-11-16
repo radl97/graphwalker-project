@@ -1,124 +1,124 @@
-package org.graphwalker.studio;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"";"
 
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.ParameterException;
-import org.apache.commons.lang3.StringUtils;
-import org.graphwalker.studio.util.LoggerUtil;
-import org.graphwalker.websocket.WebSocketServer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.env.Environment;
+"i""m""p""o""r""t"" ""c""o""m"".""b""e""u""s""t"".""j""c""o""m""m""a""n""d""e""r"".""J""C""o""m""m""a""n""d""e""r"";"
+"i""m""p""o""r""t"" ""c""o""m"".""b""e""u""s""t"".""j""c""o""m""m""a""n""d""e""r"".""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""a""p""a""c""h""e"".""c""o""m""m""o""n""s"".""l""a""n""g""3"".""S""t""r""i""n""g""U""t""i""l""s"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""u""t""i""l"".""L""o""g""g""e""r""U""t""i""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""w""e""b""s""o""c""k""e""t"".""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""p""r""i""n""g""f""r""a""m""e""w""o""r""k"".""b""o""o""t"".""S""p""r""i""n""g""A""p""p""l""i""c""a""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""p""r""i""n""g""f""r""a""m""e""w""o""r""k"".""b""o""o""t"".""a""u""t""o""c""o""n""f""i""g""u""r""e"".""E""n""a""b""l""e""A""u""t""o""C""o""n""f""i""g""u""r""a""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""p""r""i""n""g""f""r""a""m""e""w""o""r""k"".""c""o""n""t""e""x""t"".""a""n""n""o""t""a""t""i""o""n"".""C""o""m""p""o""n""e""n""t""S""c""a""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""p""r""i""n""g""f""r""a""m""e""w""o""r""k"".""c""o""r""e"".""e""n""v"".""E""n""v""i""r""o""n""m""e""n""t"";"
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Properties;
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""e""t"".""I""n""e""t""A""d""d""r""e""s""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""e""t"".""U""n""k""n""o""w""n""H""o""s""t""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""P""r""o""p""e""r""t""i""e""s"";"
 
-import static org.graphwalker.io.common.Util.getVersionString;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""U""t""i""l"".""g""e""t""V""e""r""s""i""o""n""S""t""r""i""n""g"";"
 
-/**
- * @author Nils Olsson
- */
-@ComponentScan
-@EnableAutoConfiguration
-public class Application {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"@""C""o""m""p""o""n""e""n""t""S""c""a""n"
+"@""E""n""a""b""l""e""A""u""t""o""C""o""n""f""i""g""u""r""a""t""i""o""n"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""A""p""p""l""i""c""a""t""i""o""n"" ""{"
 
-  private static final Logger logger = LoggerFactory.getLogger(Application.class);
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""L""o""g""g""e""r"" ""l""o""g""g""e""r"" ""="" ""L""o""g""g""e""r""F""a""c""t""o""r""y"".""g""e""t""L""o""g""g""e""r""(""A""p""p""l""i""c""a""t""i""o""n"".""c""l""a""s""s"")"";"
 
-  public static void main(String[] args) throws UnknownHostException {
-    Application app = new Application();
-    try {
-      app.run(args);
-    } catch (Exception e) {
-      // We should have caught all exceptions up until here, but there
-      // might have been problems with the command parser for instance...
-      System.err.println(e + System.lineSeparator());
-      logger.error("An error occurred when running command: " + StringUtils.join(args, " "), e);
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""v""o""i""d"" ""m""a""i""n""(""S""t""r""i""n""g""[""]"" ""a""r""g""s"")"" ""t""h""r""o""w""s"" ""U""n""k""n""o""w""n""H""o""s""t""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""A""p""p""l""i""c""a""t""i""o""n"" ""a""p""p"" ""="" ""n""e""w"" ""A""p""p""l""i""c""a""t""i""o""n""("")"";"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""a""p""p"".""r""u""n""(""a""r""g""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""/""/"" ""W""e"" ""s""h""o""u""l""d"" ""h""a""v""e"" ""c""a""u""g""h""t"" ""a""l""l"" ""e""x""c""e""p""t""i""o""n""s"" ""u""p"" ""u""n""t""i""l"" ""h""e""r""e"","" ""b""u""t"" ""t""h""e""r""e"
+" "" "" "" "" "" ""/""/"" ""m""i""g""h""t"" ""h""a""v""e"" ""b""e""e""n"" ""p""r""o""b""l""e""m""s"" ""w""i""t""h"" ""t""h""e"" ""c""o""m""m""a""n""d"" ""p""a""r""s""e""r"" ""f""o""r"" ""i""n""s""t""a""n""c""e""."".""."
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""(""e"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"","" ""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  private void run(String[] args) {
-    Options options = new Options();
-    JCommander jc = new JCommander(options);
-    jc.setProgramName("java -jar graphwalker.jar");
-    try {
-      jc.parseWithoutValidation(args);
-    } catch (Exception e) {
-      // ignore
-    }
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""u""n""(""S""t""r""i""n""g""[""]"" ""a""r""g""s"")"" ""{"
+" "" "" "" ""O""p""t""i""o""n""s"" ""o""p""t""i""o""n""s"" ""="" ""n""e""w"" ""O""p""t""i""o""n""s""("")"";"
+" "" "" "" ""J""C""o""m""m""a""n""d""e""r"" ""j""c"" ""="" ""n""e""w"" ""J""C""o""m""m""a""n""d""e""r""(""o""p""t""i""o""n""s"")"";"
+" "" "" "" ""j""c"".""s""e""t""P""r""o""g""r""a""m""N""a""m""e""("""""j""a""v""a"" ""-""j""a""r"" ""g""r""a""p""h""w""a""l""k""e""r"".""j""a""r""""")"";"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""j""c"".""p""a""r""s""e""W""i""t""h""o""u""t""V""a""l""i""d""a""t""i""o""n""(""a""r""g""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""/""/"" ""i""g""n""o""r""e"
+" "" "" "" ""}"
 
-    try {
-      setLogLevel(options);
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""s""e""t""L""o""g""L""e""v""e""l""(""o""p""t""i""o""n""s"")"";"
 
-      if (options.help) {
-        options = new Options();
-        jc = new JCommander(options);
-        jc.parse(args);
-        jc.usage();
-        return;
-      } else if (options.version) {
-        System.out.println(printVersionInformation());
-        return;
-      }
+" "" "" "" "" "" ""i""f"" ""(""o""p""t""i""o""n""s"".""h""e""l""p"")"" ""{"
+" "" "" "" "" "" "" "" ""o""p""t""i""o""n""s"" ""="" ""n""e""w"" ""O""p""t""i""o""n""s""("")"";"
+" "" "" "" "" "" "" "" ""j""c"" ""="" ""n""e""w"" ""J""C""o""m""m""a""n""d""e""r""(""o""p""t""i""o""n""s"")"";"
+" "" "" "" "" "" "" "" ""j""c"".""p""a""r""s""e""(""a""r""g""s"")"";"
+" "" "" "" "" "" "" "" ""j""c"".""u""s""a""g""e""("")"";"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""v""e""r""s""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""(""p""r""i""n""t""V""e""r""s""i""o""n""I""n""f""o""r""m""a""t""i""o""n""("")"")"";"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" ""}"
 
-      WebSocketServer gwSocketServer = new WebSocketServer(options.wsPort);
-      gwSocketServer.start();
+" "" "" "" "" "" ""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r"" ""g""w""S""o""c""k""e""t""S""e""r""v""e""r"" ""="" ""n""e""w"" ""W""e""b""S""o""c""k""e""t""S""e""r""v""e""r""(""o""p""t""i""o""n""s"".""w""s""P""o""r""t"")"";"
+" "" "" "" "" "" ""g""w""S""o""c""k""e""t""S""e""r""v""e""r"".""s""t""a""r""t""("")"";"
 
-      Properties props = System.getProperties();
-      props.setProperty("server.port", String.valueOf(options.browserPort));
+" "" "" "" "" "" ""P""r""o""p""e""r""t""i""e""s"" ""p""r""o""p""s"" ""="" ""S""y""s""t""e""m"".""g""e""t""P""r""o""p""e""r""t""i""e""s""("")"";"
+" "" "" "" "" "" ""p""r""o""p""s"".""s""e""t""P""r""o""p""e""r""t""y""("""""s""e""r""v""e""r"".""p""o""r""t""""","" ""S""t""r""i""n""g"".""v""a""l""u""e""O""f""(""o""p""t""i""o""n""s"".""b""r""o""w""s""e""r""P""o""r""t"")"")"";"
 
-      SpringApplication application = new SpringApplication(Application.class);
-      Environment environment = application.run(args).getEnvironment();
-      logger.info("Access URLs:\n----------------------------------------------------------\n" +
-        "  Local web service:          http://127.0.0.1:" + options.browserPort + "\n" +
-        "  External web service:       http://" + InetAddress.getLocalHost().getHostAddress() + ":" + options.browserPort + "\n" +
-        "  Local websocket service:    http://127.0.0.1:" + options.wsPort + "\n" +
-        "  External websocket service: http://" + InetAddress.getLocalHost().getHostAddress() + ":" + options.wsPort
-        + "\n----------------------------------------------------------");
+" "" "" "" "" "" ""S""p""r""i""n""g""A""p""p""l""i""c""a""t""i""o""n"" ""a""p""p""l""i""c""a""t""i""o""n"" ""="" ""n""e""w"" ""S""p""r""i""n""g""A""p""p""l""i""c""a""t""i""o""n""(""A""p""p""l""i""c""a""t""i""o""n"".""c""l""a""s""s"")"";"
+" "" "" "" "" "" ""E""n""v""i""r""o""n""m""e""n""t"" ""e""n""v""i""r""o""n""m""e""n""t"" ""="" ""a""p""p""l""i""c""a""t""i""o""n"".""r""u""n""(""a""r""g""s"")"".""g""e""t""E""n""v""i""r""o""n""m""e""n""t""("")"";"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""i""n""f""o""("""""A""c""c""e""s""s"" ""U""R""L""s"":""\""n""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""\""n""""" ""+"
+" "" "" "" "" "" "" "" """"" "" ""L""o""c""a""l"" ""w""e""b"" ""s""e""r""v""i""c""e"":"" "" "" "" "" "" "" "" "" "" ""h""t""t""p"":""/""/""1""2""7"".""0"".""0"".""1"":""""" ""+"" ""o""p""t""i""o""n""s"".""b""r""o""w""s""e""r""P""o""r""t"" ""+"" """""\""n""""" ""+"
+" "" "" "" "" "" "" "" """"" "" ""E""x""t""e""r""n""a""l"" ""w""e""b"" ""s""e""r""v""i""c""e"":"" "" "" "" "" "" "" ""h""t""t""p"":""/""/""""" ""+"" ""I""n""e""t""A""d""d""r""e""s""s"".""g""e""t""L""o""c""a""l""H""o""s""t""("")"".""g""e""t""H""o""s""t""A""d""d""r""e""s""s""("")"" ""+"" """"":""""" ""+"" ""o""p""t""i""o""n""s"".""b""r""o""w""s""e""r""P""o""r""t"" ""+"" """""\""n""""" ""+"
+" "" "" "" "" "" "" "" """"" "" ""L""o""c""a""l"" ""w""e""b""s""o""c""k""e""t"" ""s""e""r""v""i""c""e"":"" "" "" "" ""h""t""t""p"":""/""/""1""2""7"".""0"".""0"".""1"":""""" ""+"" ""o""p""t""i""o""n""s"".""w""s""P""o""r""t"" ""+"" """""\""n""""" ""+"
+" "" "" "" "" "" "" "" """"" "" ""E""x""t""e""r""n""a""l"" ""w""e""b""s""o""c""k""e""t"" ""s""e""r""v""i""c""e"":"" ""h""t""t""p"":""/""/""""" ""+"" ""I""n""e""t""A""d""d""r""e""s""s"".""g""e""t""L""o""c""a""l""H""o""s""t""("")"".""g""e""t""H""o""s""t""A""d""d""r""e""s""s""("")"" ""+"" """"":""""" ""+"" ""o""p""t""i""o""n""s"".""w""s""P""o""r""t"
+" "" "" "" "" "" "" "" ""+"" """""\""n""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""""")"";"
 
-    } catch (ParameterException e) {
-      System.err.println("An error occurred when running command: " + StringUtils.join(args, " "));
-      System.err.println(e.getMessage() + System.lineSeparator());
-      jc.usage();
-    } catch (Exception e) {
-      System.err.println("An error occurred when running command: " + StringUtils.join(args, " "));
-      System.err.println(e.getMessage() + System.lineSeparator());
-      logger.error("An error occurred when running command: " + StringUtils.join(args, " "), e);
-    }
-  }
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"")"";"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""j""c"".""u""s""a""g""e""("")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"")"";"
+" "" "" "" "" "" ""S""y""s""t""e""m"".""e""r""r"".""p""r""i""n""t""l""n""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"")"";"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""A""n"" ""e""r""r""o""r"" ""o""c""c""u""r""r""e""d"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""c""o""m""m""a""n""d"":"" """"" ""+"" ""S""t""r""i""n""g""U""t""i""l""s"".""j""o""i""n""(""a""r""g""s"","" """"" """"")"","" ""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  private void setLogLevel(Options options) {
-    // OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL
-    if (options.debug.equalsIgnoreCase("OFF")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.OFF);
-    } else if (options.debug.equalsIgnoreCase("ERROR")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.ERROR);
-    } else if (options.debug.equalsIgnoreCase("WARN")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.WARN);
-    } else if (options.debug.equalsIgnoreCase("INFO")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.INFO);
-    } else if (options.debug.equalsIgnoreCase("DEBUG")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.DEBUG);
-    } else if (options.debug.equalsIgnoreCase("TRACE")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.TRACE);
-    } else if (options.debug.equalsIgnoreCase("ALL")) {
-      LoggerUtil.setLogLevel(LoggerUtil.Level.ALL);
-    } else {
-      throw new ParameterException("Incorrect argument to --debug");
-    }
-  }
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""s""e""t""L""o""g""L""e""v""e""l""(""O""p""t""i""o""n""s"" ""o""p""t""i""o""n""s"")"" ""{"
+" "" "" "" ""/""/"" ""O""F""F"","" ""E""R""R""O""R"","" ""W""A""R""N"","" ""I""N""F""O"","" ""D""E""B""U""G"","" ""T""R""A""C""E"","" ""A""L""L"
+" "" "" "" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""O""F""F""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""O""F""F"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""E""R""R""O""R""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""E""R""R""O""R"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""W""A""R""N""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""W""A""R""N"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""I""N""F""O""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""I""N""F""O"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""D""E""B""U""G""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""D""E""B""U""G"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""T""R""A""C""E""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""T""R""A""C""E"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"".""d""e""b""u""g"".""e""q""u""a""l""s""I""g""n""o""r""e""C""a""s""e""("""""A""L""L""""")"")"" ""{"
+" "" "" "" "" "" ""L""o""g""g""e""r""U""t""i""l"".""s""e""t""L""o""g""L""e""v""e""l""(""L""o""g""g""e""r""U""t""i""l"".""L""e""v""e""l"".""A""L""L"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""P""a""r""a""m""e""t""e""r""E""x""c""e""p""t""i""o""n""("""""I""n""c""o""r""r""e""c""t"" ""a""r""g""u""m""e""n""t"" ""t""o"" ""-""-""d""e""b""u""g""""")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  private String printVersionInformation() {
-    String version = "org.graphwalker version: " + getVersionString() + System.lineSeparator();
-    version += System.lineSeparator();
+" "" ""p""r""i""v""a""t""e"" ""S""t""r""i""n""g"" ""p""r""i""n""t""V""e""r""s""i""o""n""I""n""f""o""r""m""a""t""i""o""n""("")"" ""{"
+" "" "" "" ""S""t""r""i""n""g"" ""v""e""r""s""i""o""n"" ""="" """""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"" ""v""e""r""s""i""o""n"":"" """"" ""+"" ""g""e""t""V""e""r""s""i""o""n""S""t""r""i""n""g""("")"" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"";"
+" "" "" "" ""v""e""r""s""i""o""n"" ""+""="" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"";"
 
-    version += "org.graphwalker is open source software licensed under MIT license" + System.lineSeparator();
-    version += "The software (and it's source) can be downloaded from http://graphwalker.org" + System.lineSeparator();
-    version +=
-      "For a complete list of this package software dependencies, see http://graphwalker.org/archive/site/graphwalker-cli/dependencies.html" + System.lineSeparator();
+" "" "" "" ""v""e""r""s""i""o""n"" ""+""="" """""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"" ""i""s"" ""o""p""e""n"" ""s""o""u""r""c""e"" ""s""o""f""t""w""a""r""e"" ""l""i""c""e""n""s""e""d"" ""u""n""d""e""r"" ""M""I""T"" ""l""i""c""e""n""s""e""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"";"
+" "" "" "" ""v""e""r""s""i""o""n"" ""+""="" """""T""h""e"" ""s""o""f""t""w""a""r""e"" ""(""a""n""d"" ""i""t""'""s"" ""s""o""u""r""c""e"")"" ""c""a""n"" ""b""e"" ""d""o""w""n""l""o""a""d""e""d"" ""f""r""o""m"" ""h""t""t""p"":""/""/""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"";"
+" "" "" "" ""v""e""r""s""i""o""n"" ""+""="
+" "" "" "" "" "" """""F""o""r"" ""a"" ""c""o""m""p""l""e""t""e"" ""l""i""s""t"" ""o""f"" ""t""h""i""s"" ""p""a""c""k""a""g""e"" ""s""o""f""t""w""a""r""e"" ""d""e""p""e""n""d""e""n""c""i""e""s"","" ""s""e""e"" ""h""t""t""p"":""/""/""g""r""a""p""h""w""a""l""k""e""r"".""o""r""g""/""a""r""c""h""i""v""e""/""s""i""t""e""/""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i""/""d""e""p""e""n""d""e""n""c""i""e""s"".""h""t""m""l""""" ""+"" ""S""y""s""t""e""m"".""l""i""n""e""S""e""p""a""r""a""t""o""r""("")"";"
 
-    return version;
-  }
-}
+" "" "" "" ""r""e""t""u""r""n"" ""v""e""r""s""i""o""n"";"
+" "" ""}"
+"}"

@@ -1,36 +1,36 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import static org.hamcrest.core.Is.is;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""I""s"".""i""s"";"
 
-import java.util.List;
-import org.graphwalker.core.model.Vertex;
-import org.junit.Assert;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class VertexCheckerTest {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""V""e""r""t""e""x""C""h""e""c""k""e""r""T""e""s""t"" ""{"
 
-  @Test
-  public void testDefault() {
-    List<String> issues = VertexChecker.hasIssues(new Vertex().build());
-    Assert.assertThat(issues.size(), is(1));
-    Assert.assertThat(issues.get(0), is("Name of vertex cannot be null"));
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""D""e""f""a""u""l""t""("")"" ""{"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""V""e""r""t""e""x""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""n""e""w"" ""V""e""r""t""e""x""("")"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""g""e""t""(""0"")"","" ""i""s""("""""N""a""m""e"" ""o""f"" ""v""e""r""t""e""x"" ""c""a""n""n""o""t"" ""b""e"" ""n""u""l""l""""")"")"";"
 
-    issues = VertexChecker.hasIssues(new Vertex().setName("name").build());
-    Assert.assertThat(issues.size(), is(0));
-  }
+" "" "" "" ""i""s""s""u""e""s"" ""="" ""V""e""r""t""e""x""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""n""a""m""e""""")"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""0"")"")"";"
+" "" ""}"
 
-  @Test
-  public void testName() {
-    Vertex vertex = new Vertex();
-    List<String> issues = VertexChecker.hasIssues(vertex.setName("").build());
-    Assert.assertThat(issues.size(), is(1));
-    Assert.assertThat(issues.get(0), is("Name of vertex cannot be an empty string"));
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""N""a""m""e""("")"" ""{"
+" "" "" "" ""V""e""r""t""e""x"" ""v""e""r""t""e""x"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"";"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""V""e""r""t""e""x""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""v""e""r""t""e""x"".""s""e""t""N""a""m""e""("""""""")"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""g""e""t""(""0"")"","" ""i""s""("""""N""a""m""e"" ""o""f"" ""v""e""r""t""e""x"" ""c""a""n""n""o""t"" ""b""e"" ""a""n"" ""e""m""p""t""y"" ""s""t""r""i""n""g""""")"")"";"
 
-    issues = VertexChecker.hasIssues(vertex.setName("spaces in name").build());
-    Assert.assertThat(issues.size(), is(1));
-    Assert.assertThat(issues.get(0), is("Name of vertex cannot have any white spaces."));
-  }
-}
+" "" "" "" ""i""s""s""u""e""s"" ""="" ""V""e""r""t""e""x""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""v""e""r""t""e""x"".""s""e""t""N""a""m""e""("""""s""p""a""c""e""s"" ""i""n"" ""n""a""m""e""""")"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""1"")"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""g""e""t""(""0"")"","" ""i""s""("""""N""a""m""e"" ""o""f"" ""v""e""r""t""e""x"" ""c""a""n""n""o""t"" ""h""a""v""e"" ""a""n""y"" ""w""h""i""t""e"" ""s""p""a""c""e""s"".""""")"")"";"
+" "" ""}"
+"}"

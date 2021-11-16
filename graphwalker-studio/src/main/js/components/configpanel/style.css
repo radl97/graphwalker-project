@@ -1,13 +1,13 @@
 
-.bp3-input-group.bp3-disabled, input.bp3-input[disabled], textarea.bp3-input[disabled],
-.bp3-control.bp3-switch.bp3-disabled, .bp3-control.bp3-switch.bp3-disabled > .bp3-control-indicator {
-  cursor: default !important;
-}
+".""b""p""3""-""i""n""p""u""t""-""g""r""o""u""p"".""b""p""3""-""d""i""s""a""b""l""e""d"","" ""i""n""p""u""t"".""b""p""3""-""i""n""p""u""t""[""d""i""s""a""b""l""e""d""]"","" ""t""e""x""t""a""r""e""a"".""b""p""3""-""i""n""p""u""t""[""d""i""s""a""b""l""e""d""]"","
+".""b""p""3""-""c""o""n""t""r""o""l"".""b""p""3""-""s""w""i""t""c""h"".""b""p""3""-""d""i""s""a""b""l""e""d"","" "".""b""p""3""-""c""o""n""t""r""o""l"".""b""p""3""-""s""w""i""t""c""h"".""b""p""3""-""d""i""s""a""b""l""e""d"" "">"" "".""b""p""3""-""c""o""n""t""r""o""l""-""i""n""d""i""c""a""t""o""r"" ""{"
+" "" ""c""u""r""s""o""r"":"" ""d""e""f""a""u""l""t"" ""!""i""m""p""o""r""t""a""n""t"";"
+"}"
 
-textarea.bp3-input {
-  resize: none;
-}
+"t""e""x""t""a""r""e""a"".""b""p""3""-""i""n""p""u""t"" ""{"
+" "" ""r""e""s""i""z""e"":"" ""n""o""n""e"";"
+"}"
 
-.bp3-switch > .bp3-control-indicator, .bp3-slider > * {
-  outline: none !important;
-}
+".""b""p""3""-""s""w""i""t""c""h"" "">"" "".""b""p""3""-""c""o""n""t""r""o""l""-""i""n""d""i""c""a""t""o""r"","" "".""b""p""3""-""s""l""i""d""e""r"" "">"" ""*"" ""{"
+" "" ""o""u""t""l""i""n""e"":"" ""n""o""n""e"" ""!""i""m""p""o""r""t""a""n""t"";"
+"}"

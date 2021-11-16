@@ -1,99 +1,99 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+"<""p""r""o""j""e""c""t"" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""P""O""M""/""4"".""0"".""0""""
+" "" "" "" "" "" "" "" "" ""x""m""l""n""s"":""x""s""i""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""-""i""n""s""t""a""n""c""e""""
+" "" "" "" "" "" "" "" "" ""x""s""i"":""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""h""t""t""p"":""/""/""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""P""O""M""/""4"".""0"".""0"" ""h""t""t""p"":""/""/""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""x""s""d""/""m""a""v""e""n""-""4"".""0"".""0"".""x""s""d""""">"
 
-  <modelVersion>4.0.0</modelVersion>
+" "" ""<""m""o""d""e""l""V""e""r""s""i""o""n"">""4"".""0"".""0""<""/""m""o""d""e""l""V""e""r""s""i""o""n"">"
 
-  <parent>
-    <groupId>org.graphwalker</groupId>
-    <artifactId>graphwalker-project</artifactId>
-    <version>4.3.2-SNAPSHOT</version>
-  </parent>
+" "" ""<""p""a""r""e""n""t"">"
+" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""v""e""r""s""i""o""n"">""4"".""3"".""2""-""S""N""A""P""S""H""O""T""<""/""v""e""r""s""i""o""n"">"
+" "" ""<""/""p""a""r""e""n""t"">"
 
-  <artifactId>graphwalker-restful</artifactId>
-  <name>GraphWalker Restful Service</name>
+" "" ""<""a""r""t""i""f""a""c""t""I""d"">""g""r""a""p""h""w""a""l""k""e""r""-""r""e""s""t""f""u""l""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" ""<""n""a""m""e"">""G""r""a""p""h""W""a""l""k""e""r"" ""R""e""s""t""f""u""l"" ""S""e""r""v""i""c""e""<""/""n""a""m""e"">"
 
-  <scm>
-    <url>https://github.com/GraphWalker/graphwalker-project</url>
-    <connection>scm:git:git://github.com:GraphWalker/graphwalker-project.git</connection>
-    <developerConnection>scm:git:git@github.com:GraphWalker/graphwalker-project.git
-    </developerConnection>
-  </scm>
+" "" ""<""s""c""m"">"
+" "" "" "" ""<""u""r""l"">""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""<""/""u""r""l"">"
+" "" "" "" ""<""c""o""n""n""e""c""t""i""o""n"">""s""c""m"":""g""i""t"":""g""i""t"":""/""/""g""i""t""h""u""b"".""c""o""m"":""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"".""g""i""t""<""/""c""o""n""n""e""c""t""i""o""n"">"
+" "" "" "" ""<""d""e""v""e""l""o""p""e""r""C""o""n""n""e""c""t""i""o""n"">""s""c""m"":""g""i""t"":""g""i""t""@""g""i""t""h""u""b"".""c""o""m"":""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"".""g""i""t"
+" "" "" "" ""<""/""d""e""v""e""l""o""p""e""r""C""o""n""n""e""c""t""i""o""n"">"
+" "" ""<""/""s""c""m"">"
 
-  <dependencies>
-    <dependency>
-      <groupId>org.graphwalker</groupId>
-      <artifactId>graphwalker-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.graphwalker</groupId>
-      <artifactId>graphwalker-io</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.graphwalker</groupId>
-      <artifactId>graphwalker-java</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-grizzly2</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-impl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.javassist</groupId>
-      <artifactId>javassist</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-all</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.skyscreamer</groupId>
-      <artifactId>jsonassert</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+" "" ""<""d""e""p""e""n""d""e""n""c""i""e""s"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""g""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""g""r""a""p""h""w""a""l""k""e""r""-""i""o""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""g""r""a""p""h""w""a""l""k""e""r""-""j""a""v""a""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""c""o""m"".""s""u""n"".""j""e""r""s""e""y""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""j""e""r""s""e""y""-""g""r""i""z""z""l""y""2""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""j""s""o""n""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""j""s""o""n""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""c""o""m""m""o""n""s""-""i""o""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""c""o""m""m""o""n""s""-""i""o""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""c""o""m"".""s""u""n"".""x""m""l"".""b""i""n""d""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""j""a""x""b""-""c""o""r""e""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""j""a""v""a""x"".""x""m""l"".""b""i""n""d""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""j""a""x""b""-""a""p""i""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""c""o""m"".""s""u""n"".""x""m""l"".""b""i""n""d""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""j""a""x""b""-""i""m""p""l""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""j""a""v""a""s""s""i""s""t""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""j""a""v""a""s""s""i""s""t""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""a""p""a""c""h""e"".""h""t""t""p""c""o""m""p""o""n""e""n""t""s""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""h""t""t""p""c""l""i""e""n""t""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" "" "" ""<""s""c""o""p""e"">""t""e""s""t""<""/""s""c""o""p""e"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""h""a""m""c""r""e""s""t""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""h""a""m""c""r""e""s""t""-""a""l""l""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" "" "" ""<""s""c""o""p""e"">""t""e""s""t""<""/""s""c""o""p""e"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""s""k""y""s""c""r""e""a""m""e""r""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""j""s""o""n""a""s""s""e""r""t""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" "" "" ""<""s""c""o""p""e"">""t""e""s""t""<""/""s""c""o""p""e"">"
+" "" "" "" ""<""/""d""e""p""e""n""d""e""n""c""y"">"
+" "" ""<""/""d""e""p""e""n""d""e""n""c""i""e""s"">"
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.graphwalker</groupId>
-        <artifactId>graphwalker-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>generate-test-sources</id>
-            <phase>generate-test-sources</phase>
-            <goals>
-              <goal>generate-test-sources</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+" "" ""<""b""u""i""l""d"">"
+" "" "" "" ""<""p""l""u""g""i""n""s"">"
+" "" "" "" "" "" ""<""p""l""u""g""i""n"">"
+" "" "" "" "" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" "" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""g""r""a""p""h""w""a""l""k""e""r""-""m""a""v""e""n""-""p""l""u""g""i""n""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" "" "" "" "" ""<""e""x""e""c""u""t""i""o""n""s"">"
+" "" "" "" "" "" "" "" "" "" ""<""e""x""e""c""u""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""i""d"">""g""e""n""e""r""a""t""e""-""t""e""s""t""-""s""o""u""r""c""e""s""<""/""i""d"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""p""h""a""s""e"">""g""e""n""e""r""a""t""e""-""t""e""s""t""-""s""o""u""r""c""e""s""<""/""p""h""a""s""e"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""g""o""a""l""s"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""g""o""a""l"">""g""e""n""e""r""a""t""e""-""t""e""s""t""-""s""o""u""r""c""e""s""<""/""g""o""a""l"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""/""g""o""a""l""s"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""e""x""e""c""u""t""i""o""n"">"
+" "" "" "" "" "" "" "" ""<""/""e""x""e""c""u""t""i""o""n""s"">"
+" "" "" "" "" "" ""<""/""p""l""u""g""i""n"">"
+" "" "" "" ""<""/""p""l""u""g""i""n""s"">"
+" "" ""<""/""b""u""i""l""d"">"
 
-</project>
+"<""/""p""r""o""j""e""c""t"">"

@@ -1,49 +1,49 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import {Divider, Icon} from "@blueprintjs/core";
-import ModelGroup from "./model-group";
-import ElementGroup from "./element-group";
-import "./style.css"
-import ExecutionGroup from "./execution-group";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""s""t""y""l""e""d"" ""f""r""o""m"" ""'""s""t""y""l""e""d""-""c""o""m""p""o""n""e""n""t""s""'"";"
+"i""m""p""o""r""t"" ""{""D""i""v""i""d""e""r"","" ""I""c""o""n""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""M""o""d""e""l""G""r""o""u""p"" ""f""r""o""m"" """"".""/""m""o""d""e""l""-""g""r""o""u""p""""";"
+"i""m""p""o""r""t"" ""E""l""e""m""e""n""t""G""r""o""u""p"" ""f""r""o""m"" """"".""/""e""l""e""m""e""n""t""-""g""r""o""u""p""""";"
+"i""m""p""o""r""t"" """"".""/""s""t""y""l""e"".""c""s""s""""
+"i""m""p""o""r""t"" ""E""x""e""c""u""t""i""o""n""G""r""o""u""p"" ""f""r""o""m"" """"".""/""e""x""e""c""u""t""i""o""n""-""g""r""o""u""p""""";"
 
-const PanelContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: #F3F3F3;
-  color: #6F6F6F;
-`;
+"c""o""n""s""t"" ""P""a""n""e""l""C""o""n""t""a""i""n""e""r"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""f""l""e""x""-""d""i""r""e""c""t""i""o""n"":"" ""c""o""l""u""m""n"";"
+" "" ""h""e""i""g""h""t"":"" ""1""0""0""%"";"
+" "" ""w""i""d""t""h"":"" ""1""0""0""%"";"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""F""3""F""3""F""3"";"
+" "" ""c""o""l""o""r"":"" ""#""6""F""6""F""6""F"";"
+"`"";"
 
-const PanelHeader = styled.div`
-  display: flex;
-  align-items: center;
-  min-height: 30px;
-  padding-left: 0.5rem;
-`;
+"c""o""n""s""t"" ""P""a""n""e""l""H""e""a""d""e""r"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""a""l""i""g""n""-""i""t""e""m""s"":"" ""c""e""n""t""e""r"";"
+" "" ""m""i""n""-""h""e""i""g""h""t"":"" ""3""0""p""x"";"
+" "" ""p""a""d""d""i""n""g""-""l""e""f""t"":"" ""0"".""5""r""e""m"";"
+"`"";"
 
-const PanelLabel = styled.span`
-  padding-left: 0.5rem;
-  padding-right: 0.75rem;
-`;
+"c""o""n""s""t"" ""P""a""n""e""l""L""a""b""e""l"" ""="" ""s""t""y""l""e""d"".""s""p""a""n""`"
+" "" ""p""a""d""d""i""n""g""-""l""e""f""t"":"" ""0"".""5""r""e""m"";"
+" "" ""p""a""d""d""i""n""g""-""r""i""g""h""t"":"" ""0"".""7""5""r""e""m"";"
+"`"";"
 
-const PanelContent = styled.div`
-  overflow-y: auto;
-`;
+"c""o""n""s""t"" ""P""a""n""e""l""C""o""n""t""e""n""t"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""o""v""e""r""f""l""o""w""-""y"":"" ""a""u""t""o"";"
+"`"";"
 
-export default class ConfigPanel extends Component {
-  render() {
-    return (
-      <PanelContainer>
-        <PanelHeader>
-          <PanelLabel>PROPERTIES</PanelLabel>
-        </PanelHeader>
-        <PanelContent>
-          <ModelGroup/>
-          <ElementGroup/>
-          <ExecutionGroup/>
-        </PanelContent>
-      </PanelContainer>
-    );
-  }
-}
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""l""a""s""s"" ""C""o""n""f""i""g""P""a""n""e""l"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""P""a""n""e""l""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" ""<""P""a""n""e""l""H""e""a""d""e""r"">"
+" "" "" "" "" "" "" "" "" "" ""<""P""a""n""e""l""L""a""b""e""l"">""P""R""O""P""E""R""T""I""E""S""<""/""P""a""n""e""l""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" ""<""/""P""a""n""e""l""H""e""a""d""e""r"">"
+" "" "" "" "" "" "" "" ""<""P""a""n""e""l""C""o""n""t""e""n""t"">"
+" "" "" "" "" "" "" "" "" "" ""<""M""o""d""e""l""G""r""o""u""p""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""E""l""e""m""e""n""t""G""r""o""u""p""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""E""x""e""c""u""t""i""o""n""G""r""o""u""p""/"">"
+" "" "" "" "" "" "" "" ""<""/""P""a""n""e""l""C""o""n""t""e""n""t"">"
+" "" "" "" "" "" ""<""/""P""a""n""e""l""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "")"";"
+" "" ""}"
+"}"

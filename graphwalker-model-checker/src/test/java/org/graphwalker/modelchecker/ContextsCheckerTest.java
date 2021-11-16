@@ -1,24 +1,24 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import static org.hamcrest.core.Is.is;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""h""a""m""c""r""e""s""t"".""c""o""r""e"".""I""s"".""i""s"";"
 
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.List;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.io.factory.json.JsonContextFactory;
-import org.junit.Assert;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""f""a""c""t""o""r""y"".""j""s""o""n"".""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class ContextsCheckerTest {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""C""o""n""t""e""x""t""s""C""h""e""c""k""e""r""T""e""s""t"" ""{"
 
-  @Test
-  public void testDefault() throws IOException {
-    List<Context> contexts = new JsonContextFactory().create(Paths.get("json/petClinic.json"));
-    List<String> issues = ContextsChecker.hasIssues(contexts);
-    Assert.assertThat(issues.size(), is(0));
-  }
-}
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""e""s""t""D""e""f""a""u""l""t""("")"" ""t""h""r""o""w""s"" ""I""O""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""J""s""o""n""C""o""n""t""e""x""t""F""a""c""t""o""r""y""("")"".""c""r""e""a""t""e""(""P""a""t""h""s"".""g""e""t""("""""j""s""o""n""/""p""e""t""C""l""i""n""i""c"".""j""s""o""n""""")"")"";"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""C""o""n""t""e""x""t""s""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t""s"")"";"
+" "" "" "" ""A""s""s""e""r""t"".""a""s""s""e""r""t""T""h""a""t""(""i""s""s""u""e""s"".""s""i""z""e""("")"","" ""i""s""(""0"")"")"";"
+" "" ""}"
+"}"

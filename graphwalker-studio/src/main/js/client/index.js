@@ -1,54 +1,54 @@
 
 
-export default class WebSocketClient {
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""l""a""s""s"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t"" ""{"
 
-  constructor(url) {
-    this.url = url;
-  }
+" "" ""c""o""n""s""t""r""u""c""t""o""r""(""u""r""l"")"" ""{"
+" "" "" "" ""t""h""i""s"".""u""r""l"" ""="" ""u""r""l"";"
+" "" ""}"
 
-  async connect() {
-    // make sure there is no connection
-    await this.close();
-    // create a new connection
-    return new Promise((resolve, reject) => {
-      this.socket = new WebSocket(this.url);
-      this.socket.onerror = reject;
-      this.socket.onopen = (event) => {
-        resolve(event);
-      }
-    })
-  }
+" "" ""a""s""y""n""c"" ""c""o""n""n""e""c""t""("")"" ""{"
+" "" "" "" ""/""/"" ""m""a""k""e"" ""s""u""r""e"" ""t""h""e""r""e"" ""i""s"" ""n""o"" ""c""o""n""n""e""c""t""i""o""n"
+" "" "" "" ""a""w""a""i""t"" ""t""h""i""s"".""c""l""o""s""e""("")"";"
+" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""a"" ""n""e""w"" ""c""o""n""n""e""c""t""i""o""n"
+" "" "" "" ""r""e""t""u""r""n"" ""n""e""w"" ""P""r""o""m""i""s""e""(""(""r""e""s""o""l""v""e"","" ""r""e""j""e""c""t"")"" ""="">"" ""{"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"" ""="" ""n""e""w"" ""W""e""b""S""o""c""k""e""t""(""t""h""i""s"".""u""r""l"")"";"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""o""n""e""r""r""o""r"" ""="" ""r""e""j""e""c""t"";"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""o""n""o""p""e""n"" ""="" ""(""e""v""e""n""t"")"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""r""e""s""o""l""v""e""(""e""v""e""n""t"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"")"
+" "" ""}"
 
-  async send(message) {
-    return new Promise((resolve, reject) => {
-      this.socket.onerror = reject;
-      this.socket.onmessage = (event) => {
-        const response = JSON.parse(event.data);
-        if (message.command === "getNext" && response.command === 'visitedElement') {
-          resolve(JSON.parse(event.data));
-        } else if (response.command === 'issues') {
-          reject(JSON.parse(event.data));
-        } else if (message.command !== "getNext" && message.command === response.command) {
-          resolve(JSON.parse(event.data));
-        } 
-      }
-      this.socket.send(JSON.stringify(message));
-    })
-  }
+" "" ""a""s""y""n""c"" ""s""e""n""d""(""m""e""s""s""a""g""e"")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""n""e""w"" ""P""r""o""m""i""s""e""(""(""r""e""s""o""l""v""e"","" ""r""e""j""e""c""t"")"" ""="">"" ""{"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""o""n""e""r""r""o""r"" ""="" ""r""e""j""e""c""t"";"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""o""n""m""e""s""s""a""g""e"" ""="" ""(""e""v""e""n""t"")"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""c""o""n""s""t"" ""r""e""s""p""o""n""s""e"" ""="" ""J""S""O""N"".""p""a""r""s""e""(""e""v""e""n""t"".""d""a""t""a"")"";"
+" "" "" "" "" "" "" "" ""i""f"" ""(""m""e""s""s""a""g""e"".""c""o""m""m""a""n""d"" ""=""=""="" """""g""e""t""N""e""x""t""""" ""&""&"" ""r""e""s""p""o""n""s""e"".""c""o""m""m""a""n""d"" ""=""=""="" ""'""v""i""s""i""t""e""d""E""l""e""m""e""n""t""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""r""e""s""o""l""v""e""(""J""S""O""N"".""p""a""r""s""e""(""e""v""e""n""t"".""d""a""t""a"")"")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""r""e""s""p""o""n""s""e"".""c""o""m""m""a""n""d"" ""=""=""="" ""'""i""s""s""u""e""s""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""r""e""j""e""c""t""(""J""S""O""N"".""p""a""r""s""e""(""e""v""e""n""t"".""d""a""t""a"")"")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""m""e""s""s""a""g""e"".""c""o""m""m""a""n""d"" ""!""=""="" """""g""e""t""N""e""x""t""""" ""&""&"" ""m""e""s""s""a""g""e"".""c""o""m""m""a""n""d"" ""=""=""="" ""r""e""s""p""o""n""s""e"".""c""o""m""m""a""n""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""r""e""s""o""l""v""e""(""J""S""O""N"".""p""a""r""s""e""(""e""v""e""n""t"".""d""a""t""a"")"")"";"
+" "" "" "" "" "" "" "" ""}"" "
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""s""e""n""d""(""J""S""O""N"".""s""t""r""i""n""g""i""f""y""(""m""e""s""s""a""g""e"")"")"";"
+" "" "" "" ""}"")"
+" "" ""}"
 
-  async close() {
-    // return if the connection is already closed
-    if (this.socket == null) {
-      return Promise.resolve();
-    }
-    // close the current connection
-    return new Promise((resolve, reject) => {
-      this.socket.onerror = reject;
-      this.socket.onclose = (event) => {
-        this.socket = null;
-        resolve(event);
-      }
-      this.socket.close();
-    })
-  }
-}
+" "" ""a""s""y""n""c"" ""c""l""o""s""e""("")"" ""{"
+" "" "" "" ""/""/"" ""r""e""t""u""r""n"" ""i""f"" ""t""h""e"" ""c""o""n""n""e""c""t""i""o""n"" ""i""s"" ""a""l""r""e""a""d""y"" ""c""l""o""s""e""d"
+" "" "" "" ""i""f"" ""(""t""h""i""s"".""s""o""c""k""e""t"" ""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""P""r""o""m""i""s""e"".""r""e""s""o""l""v""e""("")"";"
+" "" "" "" ""}"
+" "" "" "" ""/""/"" ""c""l""o""s""e"" ""t""h""e"" ""c""u""r""r""e""n""t"" ""c""o""n""n""e""c""t""i""o""n"
+" "" "" "" ""r""e""t""u""r""n"" ""n""e""w"" ""P""r""o""m""i""s""e""(""(""r""e""s""o""l""v""e"","" ""r""e""j""e""c""t"")"" ""="">"" ""{"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""o""n""e""r""r""o""r"" ""="" ""r""e""j""e""c""t"";"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""o""n""c""l""o""s""e"" ""="" ""(""e""v""e""n""t"")"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" ""r""e""s""o""l""v""e""(""e""v""e""n""t"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""c""k""e""t"".""c""l""o""s""e""("")"";"
+" "" "" "" ""}"")"
+" "" ""}"
+"}"

@@ -1,118 +1,118 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-restful/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-restful)
-GraphWalker WebSocket Service
-==================
+"[""!""[""M""a""v""e""n"" ""C""e""n""t""r""a""l""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""r""e""s""t""f""u""l""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""r""e""s""t""f""u""l"")"
+"G""r""a""p""h""W""a""l""k""e""r"" ""W""e""b""S""o""c""k""e""t"" ""S""e""r""v""i""c""e"
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-# The RESTFUL module
+"#"" ""T""h""e"" ""R""E""S""T""F""U""L"" ""m""o""d""u""l""e"
 
-The module provides a restful api, tha facilitates the usage of GraphWalker for any other
-tool or programming language that kan do HTTP.
+"T""h""e"" ""m""o""d""u""l""e"" ""p""r""o""v""i""d""e""s"" ""a"" ""r""e""s""t""f""u""l"" ""a""p""i"","" ""t""h""a"" ""f""a""c""i""l""i""t""a""t""e""s"" ""t""h""e"" ""u""s""a""g""e"" ""o""f"" ""G""r""a""p""h""W""a""l""k""e""r"" ""f""o""r"" ""a""n""y"" ""o""t""h""e""r"
+"t""o""o""l"" ""o""r"" ""p""r""o""g""r""a""m""m""i""n""g"" ""l""a""n""g""u""a""g""e"" ""t""h""a""t"" ""k""a""n"" ""d""o"" ""H""T""T""P""."
 
-| Name          | Type | Description |Input | Output |
-|:------------- |:-----|:------------|:-----|:----|
-| load          | POST  | Upload model(s) to the service |The format is json, using the GW3 notation |A json string with **result: ok**, or an error mesage|
-| hasNext       | GET  | Query the service if the execution of the model(s) is done. | No indata | A json string with hasNext resturning true or false, or an error message |
-| getNext       | GET  | Retrieve the next element to be executed. | No indata | A json string with the next element to execute, or an error message |
-| getData       | GET  | Get the data of the current model | No indata | A json string with the all the attributs and their values |
-| setData       | PUT  | Executes a java script statement | The java script statement | A json string returning **result: ok**, or an error message |
-| restart       | PUT  | Restarts the service | No indata | A json string returning **result: ok**, or an error message |
-| fail          | PUT  | Fails the execution | The reason for the failure as a string |A json string returning **result: ok**, or an error message |
-| getStatistics | GET  | Retreives statistics of the execution| No indata |A json string with current execution statistics , or an error message |
+"|"" ""N""a""m""e"" "" "" "" "" "" "" "" "" "" ""|"" ""T""y""p""e"" ""|"" ""D""e""s""c""r""i""p""t""i""o""n"" ""|""I""n""p""u""t"" ""|"" ""O""u""t""p""u""t"" ""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"":""-""-""-""-""-""-""-""-""-""-""-""-""|"":""-""-""-""-""-""|"":""-""-""-""-""|"
+"|"" ""l""o""a""d"" "" "" "" "" "" "" "" "" "" ""|"" ""P""O""S""T"" "" ""|"" ""U""p""l""o""a""d"" ""m""o""d""e""l""(""s"")"" ""t""o"" ""t""h""e"" ""s""e""r""v""i""c""e"" ""|""T""h""e"" ""f""o""r""m""a""t"" ""i""s"" ""j""s""o""n"","" ""u""s""i""n""g"" ""t""h""e"" ""G""W""3"" ""n""o""t""a""t""i""o""n"" ""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""a""g""e""|"
+"|"" ""h""a""s""N""e""x""t"" "" "" "" "" "" "" ""|"" ""G""E""T"" "" ""|"" ""Q""u""e""r""y"" ""t""h""e"" ""s""e""r""v""i""c""e"" ""i""f"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n"" ""o""f"" ""t""h""e"" ""m""o""d""e""l""(""s"")"" ""i""s"" ""d""o""n""e""."" ""|"" ""N""o"" ""i""n""d""a""t""a"" ""|"" ""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""h""a""s""N""e""x""t"" ""r""e""s""t""u""r""n""i""n""g"" ""t""r""u""e"" ""o""r"" ""f""a""l""s""e"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e"" ""|"
+"|"" ""g""e""t""N""e""x""t"" "" "" "" "" "" "" ""|"" ""G""E""T"" "" ""|"" ""R""e""t""r""i""e""v""e"" ""t""h""e"" ""n""e""x""t"" ""e""l""e""m""e""n""t"" ""t""o"" ""b""e"" ""e""x""e""c""u""t""e""d""."" ""|"" ""N""o"" ""i""n""d""a""t""a"" ""|"" ""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""t""h""e"" ""n""e""x""t"" ""e""l""e""m""e""n""t"" ""t""o"" ""e""x""e""c""u""t""e"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e"" ""|"
+"|"" ""g""e""t""D""a""t""a"" "" "" "" "" "" "" ""|"" ""G""E""T"" "" ""|"" ""G""e""t"" ""t""h""e"" ""d""a""t""a"" ""o""f"" ""t""h""e"" ""c""u""r""r""e""n""t"" ""m""o""d""e""l"" ""|"" ""N""o"" ""i""n""d""a""t""a"" ""|"" ""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""t""h""e"" ""a""l""l"" ""t""h""e"" ""a""t""t""r""i""b""u""t""s"" ""a""n""d"" ""t""h""e""i""r"" ""v""a""l""u""e""s"" ""|"
+"|"" ""s""e""t""D""a""t""a"" "" "" "" "" "" "" ""|"" ""P""U""T"" "" ""|"" ""E""x""e""c""u""t""e""s"" ""a"" ""j""a""v""a"" ""s""c""r""i""p""t"" ""s""t""a""t""e""m""e""n""t"" ""|"" ""T""h""e"" ""j""a""v""a"" ""s""c""r""i""p""t"" ""s""t""a""t""e""m""e""n""t"" ""|"" ""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""r""e""t""u""r""n""i""n""g"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e"" ""|"
+"|"" ""r""e""s""t""a""r""t"" "" "" "" "" "" "" ""|"" ""P""U""T"" "" ""|"" ""R""e""s""t""a""r""t""s"" ""t""h""e"" ""s""e""r""v""i""c""e"" ""|"" ""N""o"" ""i""n""d""a""t""a"" ""|"" ""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""r""e""t""u""r""n""i""n""g"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e"" ""|"
+"|"" ""f""a""i""l"" "" "" "" "" "" "" "" "" "" ""|"" ""P""U""T"" "" ""|"" ""F""a""i""l""s"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n"" ""|"" ""T""h""e"" ""r""e""a""s""o""n"" ""f""o""r"" ""t""h""e"" ""f""a""i""l""u""r""e"" ""a""s"" ""a"" ""s""t""r""i""n""g"" ""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""r""e""t""u""r""n""i""n""g"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e"" ""|"
+"|"" ""g""e""t""S""t""a""t""i""s""t""i""c""s"" ""|"" ""G""E""T"" "" ""|"" ""R""e""t""r""e""i""v""e""s"" ""s""t""a""t""i""s""t""i""c""s"" ""o""f"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n""|"" ""N""o"" ""i""n""d""a""t""a"" ""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""c""u""r""r""e""n""t"" ""e""x""e""c""u""t""i""o""n"" ""s""t""a""t""i""s""t""i""c""s"" "","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e"" ""|"
 
 
-## load
+"#""#"" ""l""o""a""d"
 
-|||
-|:------------ |:-----|
-|**Name**|load|
-|**Type**|POST|
-|**Description**|Will upload model(s) to the service. It will replace anything previously loaded in the service.|
-|**Input**|A json string, using the GW3 notation.|
-|**Input example**|__curl -i -H "Content-Type: text/plain;charset=UTF-8" -X POST -d @petClinic.gw3 http://localhost:8887/graphwalker/__|
-|**Output**|A json string with **result: ok**, or an error mesage|
-|**Output example**|If the file is loaded ok: __{"result":"ok"}__|
-|**Output example**|If the file failed: __{"result":"nok","error":"java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 4 path $"}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""l""o""a""d""|"
+"|""*""*""T""y""p""e""*""*""|""P""O""S""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""W""i""l""l"" ""u""p""l""o""a""d"" ""m""o""d""e""l""(""s"")"" ""t""o"" ""t""h""e"" ""s""e""r""v""i""c""e""."" ""I""t"" ""w""i""l""l"" ""r""e""p""l""a""c""e"" ""a""n""y""t""h""i""n""g"" ""p""r""e""v""i""o""u""s""l""y"" ""l""o""a""d""e""d"" ""i""n"" ""t""h""e"" ""s""e""r""v""i""c""e"".""|"
+"|""*""*""I""n""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"","" ""u""s""i""n""g"" ""t""h""e"" ""G""W""3"" ""n""o""t""a""t""i""o""n"".""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""c""u""r""l"" ""-""i"" ""-""H"" """""C""o""n""t""e""n""t""-""T""y""p""e"":"" ""t""e""x""t""/""p""l""a""i""n"";""c""h""a""r""s""e""t""=""U""T""F""-""8""""" ""-""X"" ""P""O""S""T"" ""-""d"" ""@""p""e""t""C""l""i""n""i""c"".""g""w""3"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""I""f"" ""t""h""e"" ""f""i""l""e"" ""i""s"" ""l""o""a""d""e""d"" ""o""k"":"" ""_""_""{"""""r""e""s""u""l""t""""":"""""o""k"""""}""_""_""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""I""f"" ""t""h""e"" ""f""i""l""e"" ""f""a""i""l""e""d"":"" ""_""_""{"""""r""e""s""u""l""t""""":"""""n""o""k""""","""""e""r""r""o""r""""":"""""j""a""v""a"".""l""a""n""g"".""I""l""l""e""g""a""l""S""t""a""t""e""E""x""c""e""p""t""i""o""n"":"" ""E""x""p""e""c""t""e""d"" ""B""E""G""I""N""_""O""B""J""E""C""T"" ""b""u""t"" ""w""a""s"" ""S""T""R""I""N""G"" ""a""t"" ""l""i""n""e"" ""1"" ""c""o""l""u""m""n"" ""4"" ""p""a""t""h"" ""$"""""}""_""_""|"
 
-## hasNext
+"#""#"" ""h""a""s""N""e""x""t"
 
-|||
-|:------------ |:-----|
-|**Name**|hasNext|
-|**Type**|GET|
-|**Description**|Query the service if the execution of the model(s) is done.|
-|**Input**|No indata|
-|**Input example**|Ask the servcie if we have more steps to get: __curl -i  http://localhost:8887/graphwalker/hasNext__|
-|**Output**|A json string with **result: ok** and the value of the attribte, or an error mesage|
-|**Output example**|__{"result":"ok","hasNext":"true"}__|
-|**Output example**|If the attribute is not defined in the context: __{"result":"ok"}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""h""a""s""N""e""x""t""|"
+"|""*""*""T""y""p""e""*""*""|""G""E""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""Q""u""e""r""y"" ""t""h""e"" ""s""e""r""v""i""c""e"" ""i""f"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n"" ""o""f"" ""t""h""e"" ""m""o""d""e""l""(""s"")"" ""i""s"" ""d""o""n""e"".""|"
+"|""*""*""I""n""p""u""t""*""*""|""N""o"" ""i""n""d""a""t""a""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""A""s""k"" ""t""h""e"" ""s""e""r""v""c""i""e"" ""i""f"" ""w""e"" ""h""a""v""e"" ""m""o""r""e"" ""s""t""e""p""s"" ""t""o"" ""g""e""t"":"" ""_""_""c""u""r""l"" ""-""i"" "" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""h""a""s""N""e""x""t""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"" ""a""n""d"" ""t""h""e"" ""v""a""l""u""e"" ""o""f"" ""t""h""e"" ""a""t""t""r""i""b""t""e"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""{"""""r""e""s""u""l""t""""":"""""o""k""""","""""h""a""s""N""e""x""t""""":"""""t""r""u""e"""""}""_""_""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""I""f"" ""t""h""e"" ""a""t""t""r""i""b""u""t""e"" ""i""s"" ""n""o""t"" ""d""e""f""i""n""e""d"" ""i""n"" ""t""h""e"" ""c""o""n""t""e""x""t"":"" ""_""_""{"""""r""e""s""u""l""t""""":"""""o""k"""""}""_""_""|"
 
-## getNext
+"#""#"" ""g""e""t""N""e""x""t"
 
-|||
-|:------------ |:-----|
-|**Name**|getNext|
-|**Type**|GET|
-|**Description**|Retrieve the next element to be executed.|
-|**Input**|No indata|
-|**Input example**|Get the next step: __curl -i  http://localhost:8887/graphwalker/getNext__|
-|**Output**|A json string with the next element to execute, or an error message|
-|**Output example**|__{"result":"ok","CurrentElementName":"e_StartBrowser"}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""g""e""t""N""e""x""t""|"
+"|""*""*""T""y""p""e""*""*""|""G""E""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""R""e""t""r""i""e""v""e"" ""t""h""e"" ""n""e""x""t"" ""e""l""e""m""e""n""t"" ""t""o"" ""b""e"" ""e""x""e""c""u""t""e""d"".""|"
+"|""*""*""I""n""p""u""t""*""*""|""N""o"" ""i""n""d""a""t""a""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""G""e""t"" ""t""h""e"" ""n""e""x""t"" ""s""t""e""p"":"" ""_""_""c""u""r""l"" ""-""i"" "" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""g""e""t""N""e""x""t""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""t""h""e"" ""n""e""x""t"" ""e""l""e""m""e""n""t"" ""t""o"" ""e""x""e""c""u""t""e"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""{"""""r""e""s""u""l""t""""":"""""o""k""""","""""C""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""""":"""""e""_""S""t""a""r""t""B""r""o""w""s""e""r"""""}""_""_""|"
 
-## getData
+"#""#"" ""g""e""t""D""a""t""a"
 
-|||
-|:------------ |:-----|
-|**Name**|getData|
-|**Type**|GET|
-|**Description**|Get the values of the current model|
-|**Input**|No indata|
-|**Input example**|Retrieves all values atrributes in current model: __curl -i  http://localhost:8887/graphwalker/getData__|
-|**Output**|A json string with the all the attributs and their values. Or an error message|
-|**Output example**|__{"result":"ok","data":{"num_of_books":"0","MAX_BOOKS":"5"}}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""g""e""t""D""a""t""a""|"
+"|""*""*""T""y""p""e""*""*""|""G""E""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""G""e""t"" ""t""h""e"" ""v""a""l""u""e""s"" ""o""f"" ""t""h""e"" ""c""u""r""r""e""n""t"" ""m""o""d""e""l""|"
+"|""*""*""I""n""p""u""t""*""*""|""N""o"" ""i""n""d""a""t""a""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""R""e""t""r""i""e""v""e""s"" ""a""l""l"" ""v""a""l""u""e""s"" ""a""t""r""r""i""b""u""t""e""s"" ""i""n"" ""c""u""r""r""e""n""t"" ""m""o""d""e""l"":"" ""_""_""c""u""r""l"" ""-""i"" "" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""g""e""t""D""a""t""a""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""t""h""e"" ""a""l""l"" ""t""h""e"" ""a""t""t""r""i""b""u""t""s"" ""a""n""d"" ""t""h""e""i""r"" ""v""a""l""u""e""s""."" ""O""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""{"""""r""e""s""u""l""t""""":"""""o""k""""","""""d""a""t""a""""":""{"""""n""u""m""_""o""f""_""b""o""o""k""s""""":"""""0""""","""""M""A""X""_""B""O""O""K""S""""":"""""5"""""}""}""_""_""|"
 
-## setData
+"#""#"" ""s""e""t""D""a""t""a"
 
-|||
-|:------------ |:-----|
-|**Name**|setData|
-|**Type**|PUT|
-|**Description**|Executes a java script statement|
-|**Input**|A java script statement|
-|**Input example**|Set the value for atrribute x: __curl -i -X PUT http://localhost:8887/graphwalker/setData/x=123;__|
-|**Output**|A json string with **result: ok**, or an error mesage|
-|**Output example**|__{"result":"ok"}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""s""e""t""D""a""t""a""|"
+"|""*""*""T""y""p""e""*""*""|""P""U""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""E""x""e""c""u""t""e""s"" ""a"" ""j""a""v""a"" ""s""c""r""i""p""t"" ""s""t""a""t""e""m""e""n""t""|"
+"|""*""*""I""n""p""u""t""*""*""|""A"" ""j""a""v""a"" ""s""c""r""i""p""t"" ""s""t""a""t""e""m""e""n""t""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""S""e""t"" ""t""h""e"" ""v""a""l""u""e"" ""f""o""r"" ""a""t""r""r""i""b""u""t""e"" ""x"":"" ""_""_""c""u""r""l"" ""-""i"" ""-""X"" ""P""U""T"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""s""e""t""D""a""t""a""/""x""=""1""2""3"";""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""{"""""r""e""s""u""l""t""""":"""""o""k"""""}""_""_""|"
 
-## restart
+"#""#"" ""r""e""s""t""a""r""t"
 
-|||
-|:------------ |:-----|
-|**Name**|restart|
-|**Type**|PUT|
-|**Description**|Restarts the service|
-|**Input**|No indata|
-|**Input example**|Restarts the machine: __curl -i -X PUT http://localhost:8887/graphwalker/restart__|
-|**Output**|A json string with **result: ok**, or an error mesage|
-|**Output example**|__{"result":"ok"}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""r""e""s""t""a""r""t""|"
+"|""*""*""T""y""p""e""*""*""|""P""U""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""R""e""s""t""a""r""t""s"" ""t""h""e"" ""s""e""r""v""i""c""e""|"
+"|""*""*""I""n""p""u""t""*""*""|""N""o"" ""i""n""d""a""t""a""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""R""e""s""t""a""r""t""s"" ""t""h""e"" ""m""a""c""h""i""n""e"":"" ""_""_""c""u""r""l"" ""-""i"" ""-""X"" ""P""U""T"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""r""e""s""t""a""r""t""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""{"""""r""e""s""u""l""t""""":"""""o""k"""""}""_""_""|"
 
-## fail
+"#""#"" ""f""a""i""l"
 
-|||
-|:------------ |:-----|
-|**Name**|fail|
-|**Type**|PUT|
-|**Description**|Fails the execution|
-|**Input**|The reason for the failure as a string|
-|**Input example**|The the service to fail the execution: __curl -i -X PUT http://localhost:8887/graphwalker/fail/assertionFailed__|
-|**Output**|A json string with **result: ok**, or an error mesage|
-|**Output example**|__{"result":"ok"}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""f""a""i""l""|"
+"|""*""*""T""y""p""e""*""*""|""P""U""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""F""a""i""l""s"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n""|"
+"|""*""*""I""n""p""u""t""*""*""|""T""h""e"" ""r""e""a""s""o""n"" ""f""o""r"" ""t""h""e"" ""f""a""i""l""u""r""e"" ""a""s"" ""a"" ""s""t""r""i""n""g""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""T""h""e"" ""t""h""e"" ""s""e""r""v""i""c""e"" ""t""o"" ""f""a""i""l"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n"":"" ""_""_""c""u""r""l"" ""-""i"" ""-""X"" ""P""U""T"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""f""a""i""l""/""a""s""s""e""r""t""i""o""n""F""a""i""l""e""d""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""{"""""r""e""s""u""l""t""""":"""""o""k"""""}""_""_""|"
 
-## getStatistics
+"#""#"" ""g""e""t""S""t""a""t""i""s""t""i""c""s"
 
-|||
-|:------------ |:-----|
-|**Name**|getStatistics|
-|**Type**|GET|
-|**Description**|Retreives statistics of the execution|
-|**Input**|No indata|
-|**Input example**|The the service to fail the execution: __curl -i http://localhost:8887/graphwalker/fail/getStatistics__|
-|**Output**|A json string with **result: ok** and the statistics, or an error mesage|
-|**Output example**|__{"result":"ok","EdgeCoverage":0,"TotalNumberOfVisitedEdges":0,"TotalNumberOfVisitedVertices":1,"TotalNumberOfVertices":5,"TotalNumberOfEdges":9,"TotalNumberOfUnvisitedVertices":4,"VertexCoverage":20,"TotalNumberOfUnvisitedEdges":9}__|
+"|""|""|"
+"|"":""-""-""-""-""-""-""-""-""-""-""-""-"" ""|"":""-""-""-""-""-""|"
+"|""*""*""N""a""m""e""*""*""|""g""e""t""S""t""a""t""i""s""t""i""c""s""|"
+"|""*""*""T""y""p""e""*""*""|""G""E""T""|"
+"|""*""*""D""e""s""c""r""i""p""t""i""o""n""*""*""|""R""e""t""r""e""i""v""e""s"" ""s""t""a""t""i""s""t""i""c""s"" ""o""f"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n""|"
+"|""*""*""I""n""p""u""t""*""*""|""N""o"" ""i""n""d""a""t""a""|"
+"|""*""*""I""n""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""T""h""e"" ""t""h""e"" ""s""e""r""v""i""c""e"" ""t""o"" ""f""a""i""l"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n"":"" ""_""_""c""u""r""l"" ""-""i"" ""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""/""f""a""i""l""/""g""e""t""S""t""a""t""i""s""t""i""c""s""_""_""|"
+"|""*""*""O""u""t""p""u""t""*""*""|""A"" ""j""s""o""n"" ""s""t""r""i""n""g"" ""w""i""t""h"" ""*""*""r""e""s""u""l""t"":"" ""o""k""*""*"" ""a""n""d"" ""t""h""e"" ""s""t""a""t""i""s""t""i""c""s"","" ""o""r"" ""a""n"" ""e""r""r""o""r"" ""m""e""s""a""g""e""|"
+"|""*""*""O""u""t""p""u""t"" ""e""x""a""m""p""l""e""*""*""|""_""_""{"""""r""e""s""u""l""t""""":"""""o""k""""","""""E""d""g""e""C""o""v""e""r""a""g""e""""":""0"","""""T""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""E""d""g""e""s""""":""0"","""""T""o""t""a""l""N""u""m""b""e""r""O""f""V""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""":""1"","""""T""o""t""a""l""N""u""m""b""e""r""O""f""V""e""r""t""i""c""e""s""""":""5"","""""T""o""t""a""l""N""u""m""b""e""r""O""f""E""d""g""e""s""""":""9"","""""T""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""V""e""r""t""i""c""e""s""""":""4"","""""V""e""r""t""e""x""C""o""v""e""r""a""g""e""""":""2""0"","""""T""o""t""a""l""N""u""m""b""e""r""O""f""U""n""v""i""s""i""t""e""d""E""d""g""e""s""""":""9""}""_""_""|"

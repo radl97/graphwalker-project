@@ -1,110 +1,110 @@
 
-## Chain multiple modifications on the same element
+"#""#"" ""C""h""a""i""n"" ""m""u""l""t""i""p""l""e"" ""m""o""d""i""f""i""c""a""t""i""o""n""s"" ""o""n"" ""t""h""e"" ""s""a""m""e"" ""e""l""e""m""e""n""t"
 
-```
-// No:
-$('#requirements').val("");
-$('#requirements').textinput('disable');
+"`""`""`"
+"/""/"" ""N""o"":"
+"$""(""'""#""r""e""q""u""i""r""e""m""e""n""t""s""'"")"".""v""a""l""("""""""")"";"
+"$""(""'""#""r""e""q""u""i""r""e""m""e""n""t""s""'"")"".""t""e""x""t""i""n""p""u""t""(""'""d""i""s""a""b""l""e""'"")"";"
 
-// Yes:
-$('#requirements').val("").textinput('disable');
-```
+"/""/"" ""Y""e""s"":"
+"$""(""'""#""r""e""q""u""i""r""e""m""e""n""t""s""'"")"".""v""a""l""("""""""")"".""t""e""x""t""i""n""p""u""t""(""'""d""i""s""a""b""l""e""'"")"";"
+"`""`""`"
 
-This saves an element lookup.
+"T""h""i""s"" ""s""a""v""e""s"" ""a""n"" ""e""l""e""m""e""n""t"" ""l""o""o""k""u""p""."
 
-## Don't use global scope
+"#""#"" ""D""o""n""'""t"" ""u""s""e"" ""g""l""o""b""a""l"" ""s""c""o""p""e"
 
-Everything is in the global scope. This makes the app _very_ vulnerable to conflicts with 3rd-party code.
+"E""v""e""r""y""t""h""i""n""g"" ""i""s"" ""i""n"" ""t""h""e"" ""g""l""o""b""a""l"" ""s""c""o""p""e""."" ""T""h""i""s"" ""m""a""k""e""s"" ""t""h""e"" ""a""p""p"" ""_""v""e""r""y""_"" ""v""u""l""n""e""r""a""b""l""e"" ""t""o"" ""c""o""n""f""l""i""c""t""s"" ""w""i""t""h"" ""3""r""d""-""p""a""r""t""y"" ""c""o""d""e""."
 
-## Save reference to elements instead of doing DOM lookups every time you need them
+"#""#"" ""S""a""v""e"" ""r""e""f""e""r""e""n""c""e"" ""t""o"" ""e""l""e""m""e""n""t""s"" ""i""n""s""t""e""a""d"" ""o""f"" ""d""o""i""n""g"" ""D""O""M"" ""l""o""o""k""u""p""s"" ""e""v""e""r""y"" ""t""i""m""e"" ""y""o""u"" ""n""e""e""d"" ""t""h""e""m"
 
-```
-// No:
-document.getElementById("runModel").disabled = true;
-document.getElementById("pausePlayExecution").disabled = false;
-document.getElementById("pausePlayExecution").innerHTML = "Pause";
+"`""`""`"
+"/""/"" ""N""o"":"
+"d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""("""""r""u""n""M""o""d""e""l""""")"".""d""i""s""a""b""l""e""d"" ""="" ""t""r""u""e"";"
+"d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""("""""p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n""""")"".""d""i""s""a""b""l""e""d"" ""="" ""f""a""l""s""e"";"
+"d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""("""""p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n""""")"".""i""n""n""e""r""H""T""M""L"" ""="" """""P""a""u""s""e""""";"
 
-// Yes:
-var runModel = document.getElementById("runModel");
-var pausePlayExecution = document.getElementById("pausePlayExecution");
-var pausePlayExecution = document.getElementById("pausePlayExecution");
+"/""/"" ""Y""e""s"":"
+"v""a""r"" ""r""u""n""M""o""d""e""l"" ""="" ""d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""("""""r""u""n""M""o""d""e""l""""")"";"
+"v""a""r"" ""p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n"" ""="" ""d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""("""""p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n""""")"";"
+"v""a""r"" ""p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n"" ""="" ""d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""("""""p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n""""")"";"
 
-runModel.disabled = true;
-pausePlayExecution.disabled = false;
-pausePlayExecution.innerHTML = "Pause";
-```
+"r""u""n""M""o""d""e""l"".""d""i""s""a""b""l""e""d"" ""="" ""t""r""u""e"";"
+"p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n"".""d""i""s""a""b""l""e""d"" ""="" ""f""a""l""s""e"";"
+"p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n"".""i""n""n""e""r""H""T""M""L"" ""="" """""P""a""u""s""e""""";"
+"`""`""`"
 
-- Now you can re-use those variables as many times as you want without doing another DOM lookup
-- If the element ID changes, you only need to update it in one place
-- Less code :)
+"-"" ""N""o""w"" ""y""o""u"" ""c""a""n"" ""r""e""-""u""s""e"" ""t""h""o""s""e"" ""v""a""r""i""a""b""l""e""s"" ""a""s"" ""m""a""n""y"" ""t""i""m""e""s"" ""a""s"" ""y""o""u"" ""w""a""n""t"" ""w""i""t""h""o""u""t"" ""d""o""i""n""g"" ""a""n""o""t""h""e""r"" ""D""O""M"" ""l""o""o""k""u""p"
+"-"" ""I""f"" ""t""h""e"" ""e""l""e""m""e""n""t"" ""I""D"" ""c""h""a""n""g""e""s"","" ""y""o""u"" ""o""n""l""y"" ""n""e""e""d"" ""t""o"" ""u""p""d""a""t""e"" ""i""t"" ""i""n"" ""o""n""e"" ""p""l""a""c""e"
+"-"" ""L""e""s""s"" ""c""o""d""e"" "":"")"
 
-## jQuery vs native code
+"#""#"" ""j""Q""u""e""r""y"" ""v""s"" ""n""a""t""i""v""e"" ""c""o""d""e"
 
-Be consistent in how you code; The same things are done in both jQuery and vanilla JS.
+"B""e"" ""c""o""n""s""i""s""t""e""n""t"" ""i""n"" ""h""o""w"" ""y""o""u"" ""c""o""d""e"";"" ""T""h""e"" ""s""a""m""e"" ""t""h""i""n""g""s"" ""a""r""e"" ""d""o""n""e"" ""i""n"" ""b""o""t""h"" ""j""Q""u""e""r""y"" ""a""n""d"" ""v""a""n""i""l""l""a"" ""J""S""."
 
-Examples: DOM lookups (`$('#foo')` vs `document.getElementById('foo')`), event handlers
+"E""x""a""m""p""l""e""s"":"" ""D""O""M"" ""l""o""o""k""u""p""s"" ""(""`""$""(""'""#""f""o""o""'"")""`"" ""v""s"" ""`""d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""(""'""f""o""o""'"")""`"")"","" ""e""v""e""n""t"" ""h""a""n""d""l""e""r""s"
 
-## Break down into external JS files
+"#""#"" ""B""r""e""a""k"" ""d""o""w""n"" ""i""n""t""o"" ""e""x""t""e""r""n""a""l"" ""J""S"" ""f""i""l""e""s"
 
-- JS should be in `.js` files
-- Break down into different modules would make the code more maintainable (and unit-testable)
+"-"" ""J""S"" ""s""h""o""u""l""d"" ""b""e"" ""i""n"" ""`"".""j""s""`"" ""f""i""l""e""s"
+"-"" ""B""r""e""a""k"" ""d""o""w""n"" ""i""n""t""o"" ""d""i""f""f""e""r""e""n""t"" ""m""o""d""u""l""e""s"" ""w""o""u""l""d"" ""m""a""k""e"" ""t""h""e"" ""c""o""d""e"" ""m""o""r""e"" ""m""a""i""n""t""a""i""n""a""b""l""e"" ""(""a""n""d"" ""u""n""i""t""-""t""e""s""t""a""b""l""e"")"
 
-## Use strict comparisons
+"#""#"" ""U""s""e"" ""s""t""r""i""c""t"" ""c""o""m""p""a""r""i""s""o""n""s"
 
-```
-// No:
-if (foo == 'bar') {
-// Yes:
-if (foo === 'bar') {
-```
+"`""`""`"
+"/""/"" ""N""o"":"
+"i""f"" ""(""f""o""o"" ""=""="" ""'""b""a""r""'"")"" ""{"
+"/""/"" ""Y""e""s"":"
+"i""f"" ""(""f""o""o"" ""=""=""="" ""'""b""a""r""'"")"" ""{"
+"`""`""`"
 
-This prevents JS from doing type conversions before comparing, which you usually don't need. More info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Using_the_Equality_Operators
+"T""h""i""s"" ""p""r""e""v""e""n""t""s"" ""J""S"" ""f""r""o""m"" ""d""o""i""n""g"" ""t""y""p""e"" ""c""o""n""v""e""r""s""i""o""n""s"" ""b""e""f""o""r""e"" ""c""o""m""p""a""r""i""n""g"","" ""w""h""i""c""h"" ""y""o""u"" ""u""s""u""a""l""l""y"" ""d""o""n""'""t"" ""n""e""e""d""."" ""M""o""r""e"" ""i""n""f""o"":"" ""h""t""t""p""s"":""/""/""d""e""v""e""l""o""p""e""r"".""m""o""z""i""l""l""a"".""o""r""g""/""e""n""-""U""S""/""d""o""c""s""/""W""e""b""/""J""a""v""a""S""c""r""i""p""t""/""R""e""f""e""r""e""n""c""e""/""O""p""e""r""a""t""o""r""s""/""C""o""m""p""a""r""i""s""o""n""_""O""p""e""r""a""t""o""r""s""#""U""s""i""n""g""_""t""h""e""_""E""q""u""a""l""i""t""y""_""O""p""e""r""a""t""o""r""s"
 
-## Don't initialize variables with `undefined` value
+"#""#"" ""D""o""n""'""t"" ""i""n""i""t""i""a""l""i""z""e"" ""v""a""r""i""a""b""l""e""s"" ""w""i""t""h"" ""`""u""n""d""e""f""i""n""e""d""`"" ""v""a""l""u""e"
 
-```
-// No:
-var foo = undefined;
-// Yes:
-var foo;
-```
+"`""`""`"
+"/""/"" ""N""o"":"
+"v""a""r"" ""f""o""o"" ""="" ""u""n""d""e""f""i""n""e""d"";"
+"/""/"" ""Y""e""s"":"
+"v""a""r"" ""f""o""o"";"
+"`""`""`"
 
-Declaring a variable but _not_ assigning it a value will initialize it with the value `undefined`, so there's no need to specify it.
+"D""e""c""l""a""r""i""n""g"" ""a"" ""v""a""r""i""a""b""l""e"" ""b""u""t"" ""_""n""o""t""_"" ""a""s""s""i""g""n""i""n""g"" ""i""t"" ""a"" ""v""a""l""u""e"" ""w""i""l""l"" ""i""n""i""t""i""a""l""i""z""e"" ""i""t"" ""w""i""t""h"" ""t""h""e"" ""v""a""l""u""e"" ""`""u""n""d""e""f""i""n""e""d""`"","" ""s""o"" ""t""h""e""r""e""'""s"" ""n""o"" ""n""e""e""d"" ""t""o"" ""s""p""e""c""i""f""y"" ""i""t""."
 
-## Store reference to re-used object data
+"#""#"" ""S""t""o""r""e"" ""r""e""f""e""r""e""n""c""e"" ""t""o"" ""r""e""-""u""s""e""d"" ""o""b""j""e""c""t"" ""d""a""t""a"
 
-This is done in a few places. Here's one:
+"T""h""i""s"" ""i""s"" ""d""o""n""e"" ""i""n"" ""a"" ""f""e""w"" ""p""l""a""c""e""s""."" ""H""e""r""e""'""s"" ""o""n""e"":"
 
-```
-// No:
-var edge = {
-    id: edge.data().id,
-    name: edge.data().label,
-    guard: edge.data().guard,
-    actions: actions,
-    requirements: requirements,
-    properties: edge.data().properties,
-    sourceVertexId: edge.data().source,
-    targetVertexId: edge.data().target
-};
+"`""`""`"
+"/""/"" ""N""o"":"
+"v""a""r"" ""e""d""g""e"" ""="" ""{"
+" "" "" "" ""i""d"":"" ""e""d""g""e"".""d""a""t""a""("")"".""i""d"","
+" "" "" "" ""n""a""m""e"":"" ""e""d""g""e"".""d""a""t""a""("")"".""l""a""b""e""l"","
+" "" "" "" ""g""u""a""r""d"":"" ""e""d""g""e"".""d""a""t""a""("")"".""g""u""a""r""d"","
+" "" "" "" ""a""c""t""i""o""n""s"":"" ""a""c""t""i""o""n""s"","
+" "" "" "" ""r""e""q""u""i""r""e""m""e""n""t""s"":"" ""r""e""q""u""i""r""e""m""e""n""t""s"","
+" "" "" "" ""p""r""o""p""e""r""t""i""e""s"":"" ""e""d""g""e"".""d""a""t""a""("")"".""p""r""o""p""e""r""t""i""e""s"","
+" "" "" "" ""s""o""u""r""c""e""V""e""r""t""e""x""I""d"":"" ""e""d""g""e"".""d""a""t""a""("")"".""s""o""u""r""c""e"","
+" "" "" "" ""t""a""r""g""e""t""V""e""r""t""e""x""I""d"":"" ""e""d""g""e"".""d""a""t""a""("")"".""t""a""r""g""e""t"
+"}"";"
 
-// Yes:
-var data = edge.data();
-var edge = {
-    id: data.id,
-    name: data.label,
-    guard: data.guard,
-    actions: actions,
-    requirements: requirements,
-    properties: data.properties,
-    sourceVertexId: data.source,
-    targetVertexId: data.target
-};
-```
+"/""/"" ""Y""e""s"":"
+"v""a""r"" ""d""a""t""a"" ""="" ""e""d""g""e"".""d""a""t""a""("")"";"
+"v""a""r"" ""e""d""g""e"" ""="" ""{"
+" "" "" "" ""i""d"":"" ""d""a""t""a"".""i""d"","
+" "" "" "" ""n""a""m""e"":"" ""d""a""t""a"".""l""a""b""e""l"","
+" "" "" "" ""g""u""a""r""d"":"" ""d""a""t""a"".""g""u""a""r""d"","
+" "" "" "" ""a""c""t""i""o""n""s"":"" ""a""c""t""i""o""n""s"","
+" "" "" "" ""r""e""q""u""i""r""e""m""e""n""t""s"":"" ""r""e""q""u""i""r""e""m""e""n""t""s"","
+" "" "" "" ""p""r""o""p""e""r""t""i""e""s"":"" ""d""a""t""a"".""p""r""o""p""e""r""t""i""e""s"","
+" "" "" "" ""s""o""u""r""c""e""V""e""r""t""e""x""I""d"":"" ""d""a""t""a"".""s""o""u""r""c""e"","
+" "" "" "" ""t""a""r""g""e""t""V""e""r""t""e""x""I""d"":"" ""d""a""t""a"".""t""a""r""g""e""t"
+"}"";"
+"`""`""`"
 
-This is a micro-optimisation. But as you don't expect the result of `edge.data()` to change between calls you might as well run it once and re-use the result.
+"T""h""i""s"" ""i""s"" ""a"" ""m""i""c""r""o""-""o""p""t""i""m""i""s""a""t""i""o""n""."" ""B""u""t"" ""a""s"" ""y""o""u"" ""d""o""n""'""t"" ""e""x""p""e""c""t"" ""t""h""e"" ""r""e""s""u""l""t"" ""o""f"" ""`""e""d""g""e"".""d""a""t""a""("")""`"" ""t""o"" ""c""h""a""n""g""e"" ""b""e""t""w""e""e""n"" ""c""a""l""l""s"" ""y""o""u"" ""m""i""g""h""t"" ""a""s"" ""w""e""l""l"" ""r""u""n"" ""i""t"" ""o""n""c""e"" ""a""n""d"" ""r""e""-""u""s""e"" ""t""h""e"" ""r""e""s""u""l""t""."
 
-## Use a linter for consistent styling
+"#""#"" ""U""s""e"" ""a"" ""l""i""n""t""e""r"" ""f""o""r"" ""c""o""n""s""i""s""t""e""n""t"" ""s""t""y""l""i""n""g"
 
-I recommend http://eslint.org/
+"I"" ""r""e""c""o""m""m""e""n""d"" ""h""t""t""p"":""/""/""e""s""l""i""n""t"".""o""r""g""/"
 

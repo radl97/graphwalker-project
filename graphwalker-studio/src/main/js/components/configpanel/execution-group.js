@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import {FormGroup, InputGroup, Slider} from "@blueprintjs/core";
-import { setExecutionDelay, updateModel } from "../../redux/actions";
-import Group from "./group";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""c""o""n""n""e""c""t"" ""}"" ""f""r""o""m"" """""r""e""a""c""t""-""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""{""F""o""r""m""G""r""o""u""p"","" ""I""n""p""u""t""G""r""o""u""p"","" ""S""l""i""d""e""r""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""{"" ""s""e""t""E""x""e""c""u""t""i""o""n""D""e""l""a""y"","" ""u""p""d""a""t""e""M""o""d""e""l"" ""}"" ""f""r""o""m"" """""."".""/""."".""/""r""e""d""u""x""/""a""c""t""i""o""n""s""""";"
+"i""m""p""o""r""t"" ""G""r""o""u""p"" ""f""r""o""m"" """"".""/""g""r""o""u""p""""";"
 
-class ExecutionGroup extends Component {
-  render() {
-    const { delay, generator, setExecutionDelay, updateModel } = this.props;
-    return (
-      <Group name="Execution" isOpen={true}>
-        <FormGroup label="Generator">
-          <InputGroup placeholder="Model Generator" value={generator} onChange={({ target: { value }}) => updateModel('generator', value)}/>
-        </FormGroup>
-        <FormGroup label="Delay" labelInfo="(ms)">
-          <div>
-            <Slider min={0} max={500} stepSize={1} labelRenderer={false} value={delay} onChange={setExecutionDelay}/>
-          </div>
-        </FormGroup>
-      </Group>
-    )
-  }
-}
+"c""l""a""s""s"" ""E""x""e""c""u""t""i""o""n""G""r""o""u""p"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""c""o""n""s""t"" ""{"" ""d""e""l""a""y"","" ""g""e""n""e""r""a""t""o""r"","" ""s""e""t""E""x""e""c""u""t""i""o""n""D""e""l""a""y"","" ""u""p""d""a""t""e""M""o""d""e""l"" ""}"" ""="" ""t""h""i""s"".""p""r""o""p""s"";"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""G""r""o""u""p"" ""n""a""m""e""="""""E""x""e""c""u""t""i""o""n""""" ""i""s""O""p""e""n""=""{""t""r""u""e""}"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""G""e""n""e""r""a""t""o""r""""">"
+" "" "" "" "" "" "" "" "" "" ""<""I""n""p""u""t""G""r""o""u""p"" ""p""l""a""c""e""h""o""l""d""e""r""="""""M""o""d""e""l"" ""G""e""n""e""r""a""t""o""r""""" ""v""a""l""u""e""=""{""g""e""n""e""r""a""t""o""r""}"" ""o""n""C""h""a""n""g""e""=""{""(""{"" ""t""a""r""g""e""t"":"" ""{"" ""v""a""l""u""e"" ""}""}"")"" ""="">"" ""u""p""d""a""t""e""M""o""d""e""l""(""'""g""e""n""e""r""a""t""o""r""'"","" ""v""a""l""u""e"")""}""/"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" ""<""F""o""r""m""G""r""o""u""p"" ""l""a""b""e""l""="""""D""e""l""a""y""""" ""l""a""b""e""l""I""n""f""o""="""""(""m""s"")""""">"
+" "" "" "" "" "" "" "" "" "" ""<""d""i""v"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""S""l""i""d""e""r"" ""m""i""n""=""{""0""}"" ""m""a""x""=""{""5""0""0""}"" ""s""t""e""p""S""i""z""e""=""{""1""}"" ""l""a""b""e""l""R""e""n""d""e""r""e""r""=""{""f""a""l""s""e""}"" ""v""a""l""u""e""=""{""d""e""l""a""y""}"" ""o""n""C""h""a""n""g""e""=""{""s""e""t""E""x""e""c""u""t""i""o""n""D""e""l""a""y""}""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "" "" "" "" ""<""/""F""o""r""m""G""r""o""u""p"">"
+" "" "" "" "" "" ""<""/""G""r""o""u""p"">"
+" "" "" "" "")"
+" "" ""}"
+"}"
 
-const mapStateToProps = ({ test: { models, selectedModelIndex }, execution: { delay } }) => {
-  const { generator } = models[selectedModelIndex];
-  return {
-    delay,
-    generator
-  }
-};
+"c""o""n""s""t"" ""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"" ""="" ""(""{"" ""t""e""s""t"":"" ""{"" ""m""o""d""e""l""s"","" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"" ""}"","" ""e""x""e""c""u""t""i""o""n"":"" ""{"" ""d""e""l""a""y"" ""}"" ""}"")"" ""="">"" ""{"
+" "" ""c""o""n""s""t"" ""{"" ""g""e""n""e""r""a""t""o""r"" ""}"" ""="" ""m""o""d""e""l""s""[""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"";"
+" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" ""d""e""l""a""y"","
+" "" "" "" ""g""e""n""e""r""a""t""o""r"
+" "" ""}"
+"}"";"
 
-export default connect(mapStateToProps, { setExecutionDelay, updateModel })(ExecutionGroup);
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""o""n""n""e""c""t""(""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"","" ""{"" ""s""e""t""E""x""e""c""u""t""i""o""n""D""e""l""a""y"","" ""u""p""d""a""t""e""M""o""d""e""l"" ""}"")""(""E""x""e""c""u""t""i""o""n""G""r""o""u""p"")"";"

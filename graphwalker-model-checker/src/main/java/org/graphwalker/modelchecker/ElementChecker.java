@@ -1,48 +1,48 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import java.util.ArrayList;
-import java.util.List;
-import org.graphwalker.core.model.Action;
-import org.graphwalker.core.model.Element;
-import org.graphwalker.core.model.Requirement;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""A""c""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""R""e""q""u""i""r""e""m""e""n""t"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class ElementChecker {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""E""l""e""m""e""n""t""C""h""e""c""k""e""r"" ""{"
 
-  private ElementChecker() {
-  }
+" "" ""p""r""i""v""a""t""e"" ""E""l""e""m""e""n""t""C""h""e""c""k""e""r""("")"" ""{"
+" "" ""}"
 
-  /**
-   * Checks for problems or any possible errors.
-   * Any findings will be added to a list of strings.
-   * <p/>
-   * TODO: Implement a rule framework so that organisations and projects can create their own rule set (think model based code convention)
-   *
-   * @return A list of issues found
-   */
-  static public List<String> hasIssues(Element element) {
-    List<String> issues = new ArrayList<>();
+" "" ""/""*""*"
+" "" "" ""*"" ""C""h""e""c""k""s"" ""f""o""r"" ""p""r""o""b""l""e""m""s"" ""o""r"" ""a""n""y"" ""p""o""s""s""i""b""l""e"" ""e""r""r""o""r""s""."
+" "" "" ""*"" ""A""n""y"" ""f""i""n""d""i""n""g""s"" ""w""i""l""l"" ""b""e"" ""a""d""d""e""d"" ""t""o"" ""a"" ""l""i""s""t"" ""o""f"" ""s""t""r""i""n""g""s""."
+" "" "" ""*"" ""<""p""/"">"
+" "" "" ""*"" ""T""O""D""O"":"" ""I""m""p""l""e""m""e""n""t"" ""a"" ""r""u""l""e"" ""f""r""a""m""e""w""o""r""k"" ""s""o"" ""t""h""a""t"" ""o""r""g""a""n""i""s""a""t""i""o""n""s"" ""a""n""d"" ""p""r""o""j""e""c""t""s"" ""c""a""n"" ""c""r""e""a""t""e"" ""t""h""e""i""r"" ""o""w""n"" ""r""u""l""e"" ""s""e""t"" ""(""t""h""i""n""k"" ""m""o""d""e""l"" ""b""a""s""e""d"" ""c""o""d""e"" ""c""o""n""v""e""n""t""i""o""n"")"
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""A"" ""l""i""s""t"" ""o""f"" ""i""s""s""u""e""s"" ""f""o""u""n""d"
+" "" "" ""*""/"
+" "" ""s""t""a""t""i""c"" ""p""u""b""l""i""c"" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""h""a""s""I""s""s""u""e""s""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
 
-    if (element.getId() == null) {
-      issues.add("Id cannot be null");
-    }
-    if (element.hasRequirements()) {
-      for (Requirement requirement : element.getRequirements()) {
-        if (requirement.getKey().isEmpty()) {
-          issues.add("Requirement cannot be an empty string");
-        }
-      }
-    }
-    if (element.hasActions()) {
-      for (Action action : element.getActions()) {
-        if (action.getScript().isEmpty()) {
-          issues.add("Script statement cannot be an empty string");
-        }
-      }
-    }
+" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"".""g""e""t""I""d""("")"" ""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""I""d"" ""c""a""n""n""o""t"" ""b""e"" ""n""u""l""l""""")"";"
+" "" "" "" ""}"
+" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"".""h""a""s""R""e""q""u""i""r""e""m""e""n""t""s""("")"")"" ""{"
+" "" "" "" "" "" ""f""o""r"" ""(""R""e""q""u""i""r""e""m""e""n""t"" ""r""e""q""u""i""r""e""m""e""n""t"" "":"" ""e""l""e""m""e""n""t"".""g""e""t""R""e""q""u""i""r""e""m""e""n""t""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""r""e""q""u""i""r""e""m""e""n""t"".""g""e""t""K""e""y""("")"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""R""e""q""u""i""r""e""m""e""n""t"" ""c""a""n""n""o""t"" ""b""e"" ""a""n"" ""e""m""p""t""y"" ""s""t""r""i""n""g""""")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"".""h""a""s""A""c""t""i""o""n""s""("")"")"" ""{"
+" "" "" "" "" "" ""f""o""r"" ""(""A""c""t""i""o""n"" ""a""c""t""i""o""n"" "":"" ""e""l""e""m""e""n""t"".""g""e""t""A""c""t""i""o""n""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""a""c""t""i""o""n"".""g""e""t""S""c""r""i""p""t""("")"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""S""c""r""i""p""t"" ""s""t""a""t""e""m""e""n""t"" ""c""a""n""n""o""t"" ""b""e"" ""a""n"" ""e""m""p""t""y"" ""s""t""r""i""n""g""""")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    return issues;
-  }
-}
+" "" "" "" ""r""e""t""u""r""n"" ""i""s""s""u""e""s"";"
+" "" ""}"
+"}"

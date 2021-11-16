@@ -1,62 +1,62 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import org.graphwalker.core.model.Edge;
-import org.graphwalker.core.model.Element;
-import org.graphwalker.core.model.Model;
-import org.graphwalker.core.model.Vertex;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""S""e""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""S""e""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""M""o""d""e""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class ModelChecker {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""M""o""d""e""l""C""h""e""c""k""e""r"" ""{"
 
-  private ModelChecker() {
-  }
+" "" ""p""r""i""v""a""t""e"" ""M""o""d""e""l""C""h""e""c""k""e""r""("")"" ""{"
+" "" ""}"
 
-  /**
-   * Checks the model for problems or any possible errors.
-   * Any findings will be added to a list of strings.
-   * <p/>
-   * TODO: Implement a rule framework so that organisations and projects can create their own rule set (think model based code convention)
-   *
-   * @return A list of issues found in the runtime model
-   */
-  static public List<String> hasIssues(Model.RuntimeModel model) {
-    List<String> issues = new ArrayList<>(ElementChecker.hasIssues(model));
+" "" ""/""*""*"
+" "" "" ""*"" ""C""h""e""c""k""s"" ""t""h""e"" ""m""o""d""e""l"" ""f""o""r"" ""p""r""o""b""l""e""m""s"" ""o""r"" ""a""n""y"" ""p""o""s""s""i""b""l""e"" ""e""r""r""o""r""s""."
+" "" "" ""*"" ""A""n""y"" ""f""i""n""d""i""n""g""s"" ""w""i""l""l"" ""b""e"" ""a""d""d""e""d"" ""t""o"" ""a"" ""l""i""s""t"" ""o""f"" ""s""t""r""i""n""g""s""."
+" "" "" ""*"" ""<""p""/"">"
+" "" "" ""*"" ""T""O""D""O"":"" ""I""m""p""l""e""m""e""n""t"" ""a"" ""r""u""l""e"" ""f""r""a""m""e""w""o""r""k"" ""s""o"" ""t""h""a""t"" ""o""r""g""a""n""i""s""a""t""i""o""n""s"" ""a""n""d"" ""p""r""o""j""e""c""t""s"" ""c""a""n"" ""c""r""e""a""t""e"" ""t""h""e""i""r"" ""o""w""n"" ""r""u""l""e"" ""s""e""t"" ""(""t""h""i""n""k"" ""m""o""d""e""l"" ""b""a""s""e""d"" ""c""o""d""e"" ""c""o""n""v""e""n""t""i""o""n"")"
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""A"" ""l""i""s""t"" ""o""f"" ""i""s""s""u""e""s"" ""f""o""u""n""d"" ""i""n"" ""t""h""e"" ""r""u""n""t""i""m""e"" ""m""o""d""e""l"
+" "" "" ""*""/"
+" "" ""s""t""a""t""i""c"" ""p""u""b""l""i""c"" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""h""a""s""I""s""s""u""e""s""(""M""o""d""e""l"".""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"")"" ""{"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""(""E""l""e""m""e""n""t""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""m""o""d""e""l"")"")"";"
 
-    // Check that individual elements are valid
-    for (Vertex.RuntimeVertex vertex : model.getVertices()) {
-      issues.addAll(VertexChecker.hasIssues(vertex));
-    }
-    for (Edge.RuntimeEdge edge : model.getEdges()) {
-      issues.addAll(EdgeChecker.hasIssues(edge));
-    }
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""t""h""a""t"" ""i""n""d""i""v""i""d""u""a""l"" ""e""l""e""m""e""n""t""s"" ""a""r""e"" ""v""a""l""i""d"
+" "" "" "" ""f""o""r"" ""(""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"" "":"" ""m""o""d""e""l"".""g""e""t""V""e""r""t""i""c""e""s""("")"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""A""l""l""(""V""e""r""t""e""x""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""v""e""r""t""e""x"")"")"";"
+" "" "" "" ""}"
+" "" "" "" ""f""o""r"" ""(""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""m""o""d""e""l"".""g""e""t""E""d""g""e""s""("")"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""A""l""l""(""E""d""g""e""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""e""d""g""e"")"")"";"
+" "" "" "" ""}"
 
-    // Check that ids are unique
-    Set<String> ids = new HashSet<>();
-    for (Element element : model.getElements()) {
-      if (!ids.add(element.getId())) {
-        if (element instanceof Edge.RuntimeEdge) {
-          issues.add("Id of the edge is not unique: " + element.getId());
-        } else {
-          issues.add("Id of the vertex is not unique: " + element.getId());
-        }
-      }
-    }
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""t""h""a""t"" ""i""d""s"" ""a""r""e"" ""u""n""i""q""u""e"
+" "" "" "" ""S""e""t""<""S""t""r""i""n""g"">"" ""i""d""s"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"" "":"" ""m""o""d""e""l"".""g""e""t""E""l""e""m""e""n""t""s""("")"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""i""d""s"".""a""d""d""(""e""l""e""m""e""n""t"".""g""e""t""I""d""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""I""d"" ""o""f"" ""t""h""e"" ""e""d""g""e"" ""i""s"" ""n""o""t"" ""u""n""i""q""u""e"":"" """"" ""+"" ""e""l""e""m""e""n""t"".""g""e""t""I""d""("")"")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""I""d"" ""o""f"" ""t""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""n""o""t"" ""u""n""i""q""u""e"":"" """"" ""+"" ""e""l""e""m""e""n""t"".""g""e""t""I""d""("")"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    // Check for unnamed selfloop edges.
-    for (Edge.RuntimeEdge edge : model.getEdges()) {
-      if (!edge.hasName() &&
-          null != edge.getSourceVertex() &&
-          null != edge.getTargetVertex() &&
-          edge.getSourceVertex().equals(edge.getTargetVertex())) {
-        issues.add("Vertex: " + edge.getSourceVertex() + ", have a unnamed self loop edge.");
-      }
-    }
-    return issues;
-  }
-}
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""f""o""r"" ""u""n""n""a""m""e""d"" ""s""e""l""f""l""o""o""p"" ""e""d""g""e""s""."
+" "" "" "" ""f""o""r"" ""(""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""m""o""d""e""l"".""g""e""t""E""d""g""e""s""("")"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""e""d""g""e"".""h""a""s""N""a""m""e""("")"" ""&""&"
+" "" "" "" "" "" "" "" "" "" ""n""u""l""l"" ""!""="" ""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"" ""&""&"
+" "" "" "" "" "" "" "" "" "" ""n""u""l""l"" ""!""="" ""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"" ""&""&"
+" "" "" "" "" "" "" "" "" "" ""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"".""e""q""u""a""l""s""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""V""e""r""t""e""x"":"" """"" ""+"" ""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"" ""+"" """"","" ""h""a""v""e"" ""a"" ""u""n""n""a""m""e""d"" ""s""e""l""f"" ""l""o""o""p"" ""e""d""g""e"".""""")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""i""s""s""u""e""s"";"
+" "" ""}"
+"}"

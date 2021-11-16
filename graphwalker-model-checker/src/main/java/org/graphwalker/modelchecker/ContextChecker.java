@@ -1,73 +1,73 @@
-package org.graphwalker.modelchecker;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""m""o""d""e""l""c""h""e""c""k""e""r"";"
 
-import java.util.ArrayList;
-import java.util.List;
-import org.graphwalker.core.condition.EdgeCoverage;
-import org.graphwalker.core.generator.RandomPath;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.model.Vertex;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""n""d""i""t""i""o""n"".""E""d""g""e""C""o""v""e""r""a""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""R""a""n""d""o""m""P""a""t""h"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"";"
 
-/**
- * Created by krikar on 2015-11-08.
- */
-public class ContextChecker {
+"/""*""*"
+" ""*"" ""C""r""e""a""t""e""d"" ""b""y"" ""k""r""i""k""a""r"" ""o""n"" ""2""0""1""5""-""1""1""-""0""8""."
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r"" ""{"
 
-  private ContextChecker() {
-  }
+" "" ""p""r""i""v""a""t""e"" ""C""o""n""t""e""x""t""C""h""e""c""k""e""r""("")"" ""{"
+" "" ""}"
 
-  /**
-   * Checks the context for problems or any possible errors.
-   * Any findings will be added to a list of strings.
-   * <p/>
-   * TODO: Implement a rule framework so that organisations and projects can create their own rule set (think model based code convention)
-   *
-   * @return A list of issues found in the context
-   */
-  static public List<String> hasIssues(Context context) {
-    List<String> issues = new ArrayList<>();
+" "" ""/""*""*"
+" "" "" ""*"" ""C""h""e""c""k""s"" ""t""h""e"" ""c""o""n""t""e""x""t"" ""f""o""r"" ""p""r""o""b""l""e""m""s"" ""o""r"" ""a""n""y"" ""p""o""s""s""i""b""l""e"" ""e""r""r""o""r""s""."
+" "" "" ""*"" ""A""n""y"" ""f""i""n""d""i""n""g""s"" ""w""i""l""l"" ""b""e"" ""a""d""d""e""d"" ""t""o"" ""a"" ""l""i""s""t"" ""o""f"" ""s""t""r""i""n""g""s""."
+" "" "" ""*"" ""<""p""/"">"
+" "" "" ""*"" ""T""O""D""O"":"" ""I""m""p""l""e""m""e""n""t"" ""a"" ""r""u""l""e"" ""f""r""a""m""e""w""o""r""k"" ""s""o"" ""t""h""a""t"" ""o""r""g""a""n""i""s""a""t""i""o""n""s"" ""a""n""d"" ""p""r""o""j""e""c""t""s"" ""c""a""n"" ""c""r""e""a""t""e"" ""t""h""e""i""r"" ""o""w""n"" ""r""u""l""e"" ""s""e""t"" ""(""t""h""i""n""k"" ""m""o""d""e""l"" ""b""a""s""e""d"" ""c""o""d""e"" ""c""o""n""v""e""n""t""i""o""n"")"
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""A"" ""l""i""s""t"" ""o""f"" ""i""s""s""u""e""s"" ""f""o""u""n""d"" ""i""n"" ""t""h""e"" ""c""o""n""t""e""x""t"
+" "" "" ""*""/"
+" "" ""s""t""a""t""i""c"" ""p""u""b""l""i""c"" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""h""a""s""I""s""s""u""e""s""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"")"" ""{"
+" "" "" "" ""L""i""s""t""<""S""t""r""i""n""g"">"" ""i""s""s""u""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
 
-    if (context.getModel() == null) {
-      issues.add("No model found in context");
-      return issues;
-    }
+" "" "" "" ""i""f"" ""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"" ""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""N""o"" ""m""o""d""e""l"" ""f""o""u""n""d"" ""i""n"" ""c""o""n""t""e""x""t""""")"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""i""s""s""u""e""s"";"
+" "" "" "" ""}"
 
-    // Check the model
-    issues.addAll(ModelChecker.hasIssues(context.getModel()));
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""t""h""e"" ""m""o""d""e""l"
+" "" "" "" ""i""s""s""u""e""s"".""a""d""d""A""l""l""(""M""o""d""e""l""C""h""e""c""k""e""r"".""h""a""s""I""s""s""u""e""s""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"")"")"";"
 
-    // Check for start element (or shared state)
-    if (context.getNextElement() == null && !context.getModel().hasSharedStates()) {
-      issues.add("The model has neither a start element or a defined shared state.");
-      return issues;
-    }
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""f""o""r"" ""s""t""a""r""t"" ""e""l""e""m""e""n""t"" ""(""o""r"" ""s""h""a""r""e""d"" ""s""t""a""t""e"")"
+" "" "" "" ""i""f"" ""(""c""o""n""t""e""x""t"".""g""e""t""N""e""x""t""E""l""e""m""e""n""t""("")"" ""=""="" ""n""u""l""l"" ""&""&"" ""!""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""h""a""s""S""h""a""r""e""d""S""t""a""t""e""s""("")"")"" ""{"
+" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""T""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""n""e""i""t""h""e""r"" ""a"" ""s""t""a""r""t"" ""e""l""e""m""e""n""t"" ""o""r"" ""a"" ""d""e""f""i""n""e""d"" ""s""h""a""r""e""d"" ""s""t""a""t""e"".""""")"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""i""s""s""u""e""s"";"
+" "" "" "" ""}"
 
-    // Check for a non-strongly connected graph and in combination with
-    // random generator with full edge coverage.
-    if (context.getPathGenerator() instanceof RandomPath) {
-      if (context.getPathGenerator().getStopCondition() instanceof EdgeCoverage) {
-        EdgeCoverage edgeCoverage = (EdgeCoverage) context.getPathGenerator().getStopCondition();
-        if (edgeCoverage.getPercent() == 100) {
-          int countNumOfCulDeSac = 0;
-          for (Vertex.RuntimeVertex vertex : context.getModel().getVertices()) {
-            if (context.getModel().getOutEdges(vertex).size() == 0) {
+" "" "" "" ""/""/"" ""C""h""e""c""k"" ""f""o""r"" ""a"" ""n""o""n""-""s""t""r""o""n""g""l""y"" ""c""o""n""n""e""c""t""e""d"" ""g""r""a""p""h"" ""a""n""d"" ""i""n"" ""c""o""m""b""i""n""a""t""i""o""n"" ""w""i""t""h"
+" "" "" "" ""/""/"" ""r""a""n""d""o""m"" ""g""e""n""e""r""a""t""o""r"" ""w""i""t""h"" ""f""u""l""l"" ""e""d""g""e"" ""c""o""v""e""r""a""g""e""."
+" "" "" "" ""i""f"" ""(""c""o""n""t""e""x""t"".""g""e""t""P""a""t""h""G""e""n""e""r""a""t""o""r""("")"" ""i""n""s""t""a""n""c""e""o""f"" ""R""a""n""d""o""m""P""a""t""h"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""c""o""n""t""e""x""t"".""g""e""t""P""a""t""h""G""e""n""e""r""a""t""o""r""("")"".""g""e""t""S""t""o""p""C""o""n""d""i""t""i""o""n""("")"" ""i""n""s""t""a""n""c""e""o""f"" ""E""d""g""e""C""o""v""e""r""a""g""e"")"" ""{"
+" "" "" "" "" "" "" "" ""E""d""g""e""C""o""v""e""r""a""g""e"" ""e""d""g""e""C""o""v""e""r""a""g""e"" ""="" ""(""E""d""g""e""C""o""v""e""r""a""g""e"")"" ""c""o""n""t""e""x""t"".""g""e""t""P""a""t""h""G""e""n""e""r""a""t""o""r""("")"".""g""e""t""S""t""o""p""C""o""n""d""i""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" ""i""f"" ""(""e""d""g""e""C""o""v""e""r""a""g""e"".""g""e""t""P""e""r""c""e""n""t""("")"" ""=""="" ""1""0""0"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""n""t"" ""c""o""u""n""t""N""u""m""O""f""C""u""l""D""e""S""a""c"" ""="" ""0"";"
+" "" "" "" "" "" "" "" "" "" ""f""o""r"" ""(""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""V""e""r""t""i""c""e""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""O""u""t""E""d""g""e""s""(""v""e""r""t""e""x"")"".""s""i""z""e""("")"" ""=""="" ""0"")"" ""{"
 
-              // Check if the vertex with no out-edges is a shared vertex.
-              // if so, it shall not to be calculated as a cul-de-sac
-              if (!vertex.hasSharedState()) {
-                countNumOfCulDeSac++;
-              }
-            }
-          }
-          if (countNumOfCulDeSac > 1) {
-            issues.add("The model has multiple cul-de-sacs, and is requested to run using a random " +
-                       "path generator and 100% edge coverage. That will not work.");
-          } else if (countNumOfCulDeSac == 1) {
-            issues.add("The model has one cul-de-sacs, and is requested to run using a random " +
-                       "path generator and 100% edge coverage. That might not work.");
-          }
-        }
-      }
-    }
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""C""h""e""c""k"" ""i""f"" ""t""h""e"" ""v""e""r""t""e""x"" ""w""i""t""h"" ""n""o"" ""o""u""t""-""e""d""g""e""s"" ""i""s"" ""a"" ""s""h""a""r""e""d"" ""v""e""r""t""e""x""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""f"" ""s""o"","" ""i""t"" ""s""h""a""l""l"" ""n""o""t"" ""t""o"" ""b""e"" ""c""a""l""c""u""l""a""t""e""d"" ""a""s"" ""a"" ""c""u""l""-""d""e""-""s""a""c"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""v""e""r""t""e""x"".""h""a""s""S""h""a""r""e""d""S""t""a""t""e""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""u""n""t""N""u""m""O""f""C""u""l""D""e""S""a""c""+""+"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""c""o""u""n""t""N""u""m""O""f""C""u""l""D""e""S""a""c"" "">"" ""1"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""T""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""m""u""l""t""i""p""l""e"" ""c""u""l""-""d""e""-""s""a""c""s"","" ""a""n""d"" ""i""s"" ""r""e""q""u""e""s""t""e""d"" ""t""o"" ""r""u""n"" ""u""s""i""n""g"" ""a"" ""r""a""n""d""o""m"" """"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""p""a""t""h"" ""g""e""n""e""r""a""t""o""r"" ""a""n""d"" ""1""0""0""%"" ""e""d""g""e"" ""c""o""v""e""r""a""g""e""."" ""T""h""a""t"" ""w""i""l""l"" ""n""o""t"" ""w""o""r""k"".""""")"";"
+" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""c""o""u""n""t""N""u""m""O""f""C""u""l""D""e""S""a""c"" ""=""="" ""1"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""s""s""u""e""s"".""a""d""d""("""""T""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""o""n""e"" ""c""u""l""-""d""e""-""s""a""c""s"","" ""a""n""d"" ""i""s"" ""r""e""q""u""e""s""t""e""d"" ""t""o"" ""r""u""n"" ""u""s""i""n""g"" ""a"" ""r""a""n""d""o""m"" """"" ""+"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """""p""a""t""h"" ""g""e""n""e""r""a""t""o""r"" ""a""n""d"" ""1""0""0""%"" ""e""d""g""e"" ""c""o""v""e""r""a""g""e""."" ""T""h""a""t"" ""m""i""g""h""t"" ""n""o""t"" ""w""o""r""k"".""""")"";"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    return issues;
-  }
-}
+" "" "" "" ""r""e""t""u""r""n"" ""i""s""s""u""e""s"";"
+" "" ""}"
+"}"

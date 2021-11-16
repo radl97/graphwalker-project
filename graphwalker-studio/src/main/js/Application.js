@@ -1,55 +1,55 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import Container from "./components/container";
-import StatusBar from "./components/statusbar";
-import SideMenu from "./components/sidemenu";
-import Editor from "./components/editor";
-import ConfigPanel from "./components/configpanel";
-import { Divider } from "@blueprintjs/core";
-import Banner from "./graphwalker.inline.svg";
-import PanelGroup from "react-panelgroup";
-import './style.css';
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""c""o""n""n""e""c""t"" ""}"" ""f""r""o""m"" """""r""e""a""c""t""-""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""C""o""n""t""a""i""n""e""r"" ""f""r""o""m"" """"".""/""c""o""m""p""o""n""e""n""t""s""/""c""o""n""t""a""i""n""e""r""""";"
+"i""m""p""o""r""t"" ""S""t""a""t""u""s""B""a""r"" ""f""r""o""m"" """"".""/""c""o""m""p""o""n""e""n""t""s""/""s""t""a""t""u""s""b""a""r""""";"
+"i""m""p""o""r""t"" ""S""i""d""e""M""e""n""u"" ""f""r""o""m"" """"".""/""c""o""m""p""o""n""e""n""t""s""/""s""i""d""e""m""e""n""u""""";"
+"i""m""p""o""r""t"" ""E""d""i""t""o""r"" ""f""r""o""m"" """"".""/""c""o""m""p""o""n""e""n""t""s""/""e""d""i""t""o""r""""";"
+"i""m""p""o""r""t"" ""C""o""n""f""i""g""P""a""n""e""l"" ""f""r""o""m"" """"".""/""c""o""m""p""o""n""e""n""t""s""/""c""o""n""f""i""g""p""a""n""e""l""""";"
+"i""m""p""o""r""t"" ""{"" ""D""i""v""i""d""e""r"" ""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""B""a""n""n""e""r"" ""f""r""o""m"" """"".""/""g""r""a""p""h""w""a""l""k""e""r"".""i""n""l""i""n""e"".""s""v""g""""";"
+"i""m""p""o""r""t"" ""P""a""n""e""l""G""r""o""u""p"" ""f""r""o""m"" """""r""e""a""c""t""-""p""a""n""e""l""g""r""o""u""p""""";"
+"i""m""p""o""r""t"" ""'"".""/""s""t""y""l""e"".""c""s""s""'"";"
 
-class Application extends Component {
+"c""l""a""s""s"" ""A""p""p""l""i""c""a""t""i""o""n"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
 
-  render() {
-    if (this.props.showBanner) {
-      return (
-        <Container column>
-          <Container>
-            <SideMenu/>
-            <Banner className="banner"/>
-          </Container>
-        </Container>
-      )
-    } else {
-      return (
-        <Container column>
-          <Container>
-            <SideMenu/>
-            {this.props.showProperties ?
-              <PanelGroup borderColor="#F3F3F3" panelWidths={[{ size: 400, resize: "dynamic" }, { resize: "stretch" }]}>
-                <ConfigPanel/>
-                <Editor/>
-              </PanelGroup>
-              :
-              <PanelGroup borderColor="#F3F3F3" panelWidths={[{ resize: "stretch" }]}>
-                <Editor/>
-              </PanelGroup>
-            }
-          </Container>
-          <StatusBar/>
-        </Container>
-      )
-    }
-  }
-}
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""i""f"" ""(""t""h""i""s"".""p""r""o""p""s"".""s""h""o""w""B""a""n""n""e""r"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" "" "" ""<""C""o""n""t""a""i""n""e""r"" ""c""o""l""u""m""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""S""i""d""e""M""e""n""u""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""B""a""n""n""e""r"" ""c""l""a""s""s""N""a""m""e""="""""b""a""n""n""e""r"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" ""<""/""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "")"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" "" "" ""<""C""o""n""t""a""i""n""e""r"" ""c""o""l""u""m""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""S""i""d""e""M""e""n""u""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""{""t""h""i""s"".""p""r""o""p""s"".""s""h""o""w""P""r""o""p""e""r""t""i""e""s"" ""?"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""P""a""n""e""l""G""r""o""u""p"" ""b""o""r""d""e""r""C""o""l""o""r""="""""#""F""3""F""3""F""3""""" ""p""a""n""e""l""W""i""d""t""h""s""=""{""[""{"" ""s""i""z""e"":"" ""4""0""0"","" ""r""e""s""i""z""e"":"" """""d""y""n""a""m""i""c""""" ""}"","" ""{"" ""r""e""s""i""z""e"":"" """""s""t""r""e""t""c""h""""" ""}""]""}"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""C""o""n""f""i""g""P""a""n""e""l""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""E""d""i""t""o""r""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""/""P""a""n""e""l""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""P""a""n""e""l""G""r""o""u""p"" ""b""o""r""d""e""r""C""o""l""o""r""="""""#""F""3""F""3""F""3""""" ""p""a""n""e""l""W""i""d""t""h""s""=""{""[""{"" ""r""e""s""i""z""e"":"" """""s""t""r""e""t""c""h""""" ""}""]""}"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""E""d""i""t""o""r""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""<""/""P""a""n""e""l""G""r""o""u""p"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" ""<""/""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" "" "" ""<""S""t""a""t""u""s""B""a""r""/"">"
+" "" "" "" "" "" "" "" ""<""/""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "")"
+" "" "" "" ""}"
+" "" ""}"
+"}"
 
-const mapStateToProps = ({ test: { models }, editor: { showProperties }}) => {
-  return {
-    showBanner: models.length === 0,
-    showProperties
-  }
-};
+"c""o""n""s""t"" ""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"" ""="" ""(""{"" ""t""e""s""t"":"" ""{"" ""m""o""d""e""l""s"" ""}"","" ""e""d""i""t""o""r"":"" ""{"" ""s""h""o""w""P""r""o""p""e""r""t""i""e""s"" ""}""}"")"" ""="">"" ""{"
+" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" ""s""h""o""w""B""a""n""n""e""r"":"" ""m""o""d""e""l""s"".""l""e""n""g""t""h"" ""=""=""="" ""0"","
+" "" "" "" ""s""h""o""w""P""r""o""p""e""r""t""i""e""s"
+" "" ""}"
+"}"";"
 
-export default connect(mapStateToProps)(Application);
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""o""n""n""e""c""t""(""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"")""(""A""p""p""l""i""c""a""t""i""o""n"")"";"
