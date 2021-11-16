@@ -1,42 +1,42 @@
-/**
- * ReactDOM v15.1.0
- *
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-// Based off https://github.com/ForbesLindesay/umd/blob/master/template.js
-;(function(f) {
-  // CommonJS
-  if (typeof exports === "object" && typeof module !== "undefined") {
-    module.exports = f(require('react'));
+"/""*""*"
+" ""*"" ""R""e""a""c""t""D""O""M"" ""v""1""5"".""1"".""0"
+" ""*"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""2""0""1""3""-""p""r""e""s""e""n""t"","" ""F""a""c""e""b""o""o""k"","" ""I""n""c""."
+" ""*"" ""A""l""l"" ""r""i""g""h""t""s"" ""r""e""s""e""r""v""e""d""."
+" ""*"
+" ""*"" ""T""h""i""s"" ""s""o""u""r""c""e"" ""c""o""d""e"" ""i""s"" ""l""i""c""e""n""s""e""d"" ""u""n""d""e""r"" ""t""h""e"" ""B""S""D""-""s""t""y""l""e"" ""l""i""c""e""n""s""e"" ""f""o""u""n""d"" ""i""n"" ""t""h""e"
+" ""*"" ""L""I""C""E""N""S""E"" ""f""i""l""e"" ""i""n"" ""t""h""e"" ""r""o""o""t"" ""d""i""r""e""c""t""o""r""y"" ""o""f"" ""t""h""i""s"" ""s""o""u""r""c""e"" ""t""r""e""e""."" ""A""n"" ""a""d""d""i""t""i""o""n""a""l"" ""g""r""a""n""t"
+" ""*"" ""o""f"" ""p""a""t""e""n""t"" ""r""i""g""h""t""s"" ""c""a""n"" ""b""e"" ""f""o""u""n""d"" ""i""n"" ""t""h""e"" ""P""A""T""E""N""T""S"" ""f""i""l""e"" ""i""n"" ""t""h""e"" ""s""a""m""e"" ""d""i""r""e""c""t""o""r""y""."
+" ""*"
+" ""*""/"
+"/""/"" ""B""a""s""e""d"" ""o""f""f"" ""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""F""o""r""b""e""s""L""i""n""d""e""s""a""y""/""u""m""d""/""b""l""o""b""/""m""a""s""t""e""r""/""t""e""m""p""l""a""t""e"".""j""s"
+";""(""f""u""n""c""t""i""o""n""(""f"")"" ""{"
+" "" ""/""/"" ""C""o""m""m""o""n""J""S"
+" "" ""i""f"" ""(""t""y""p""e""o""f"" ""e""x""p""o""r""t""s"" ""=""=""="" """""o""b""j""e""c""t""""" ""&""&"" ""t""y""p""e""o""f"" ""m""o""d""u""l""e"" ""!""=""="" """""u""n""d""e""f""i""n""e""d""""")"" ""{"
+" "" "" "" ""m""o""d""u""l""e"".""e""x""p""o""r""t""s"" ""="" ""f""(""r""e""q""u""i""r""e""(""'""r""e""a""c""t""'"")"")"";"
 
-  // RequireJS
-  } else if (typeof define === "function" && define.amd) {
-    define(['react'], f);
+" "" ""/""/"" ""R""e""q""u""i""r""e""J""S"
+" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""d""e""f""i""n""e"" ""=""=""="" """""f""u""n""c""t""i""o""n""""" ""&""&"" ""d""e""f""i""n""e"".""a""m""d"")"" ""{"
+" "" "" "" ""d""e""f""i""n""e""(""[""'""r""e""a""c""t""'""]"","" ""f"")"";"
 
-  // <script>
-  } else {
-    var g;
-    if (typeof window !== "undefined") {
-      g = window;
-    } else if (typeof global !== "undefined") {
-      g = global;
-    } else if (typeof self !== "undefined") {
-      g = self;
-    } else {
-      // works providing we're not in "use strict";
-      // needed for Java 8 Nashorn
-      // see https://github.com/facebook/react/issues/3037
-      g = this;
-    }
-    g.ReactDOM = f(g.React);
-  }
+" "" ""/""/"" ""<""s""c""r""i""p""t"">"
+" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" ""v""a""r"" ""g"";"
+" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""w""i""n""d""o""w"" ""!""=""="" """""u""n""d""e""f""i""n""e""d""""")"" ""{"
+" "" "" "" "" "" ""g"" ""="" ""w""i""n""d""o""w"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""g""l""o""b""a""l"" ""!""=""="" """""u""n""d""e""f""i""n""e""d""""")"" ""{"
+" "" "" "" "" "" ""g"" ""="" ""g""l""o""b""a""l"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""s""e""l""f"" ""!""=""="" """""u""n""d""e""f""i""n""e""d""""")"" ""{"
+" "" "" "" "" "" ""g"" ""="" ""s""e""l""f"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""/""/"" ""w""o""r""k""s"" ""p""r""o""v""i""d""i""n""g"" ""w""e""'""r""e"" ""n""o""t"" ""i""n"" """""u""s""e"" ""s""t""r""i""c""t""""";"
+" "" "" "" "" "" ""/""/"" ""n""e""e""d""e""d"" ""f""o""r"" ""J""a""v""a"" ""8"" ""N""a""s""h""o""r""n"
+" "" "" "" "" "" ""/""/"" ""s""e""e"" ""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""f""a""c""e""b""o""o""k""/""r""e""a""c""t""/""i""s""s""u""e""s""/""3""0""3""7"
+" "" "" "" "" "" ""g"" ""="" ""t""h""i""s"";"
+" "" "" "" ""}"
+" "" "" "" ""g"".""R""e""a""c""t""D""O""M"" ""="" ""f""(""g"".""R""e""a""c""t"")"";"
+" "" ""}"
 
-})(function(React) {
-  return React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-});
+"}"")""(""f""u""n""c""t""i""o""n""(""R""e""a""c""t"")"" ""{"
+" "" ""r""e""t""u""r""n"" ""R""e""a""c""t"".""_""_""S""E""C""R""E""T""_""D""O""M""_""D""O""_""N""O""T""_""U""S""E""_""O""R""_""Y""O""U""_""W""I""L""L""_""B""E""_""F""I""R""E""D"";"
+"}"")"";"
