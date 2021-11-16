@@ -1,19 +1,19 @@
-import {EDITOR_PROPERTIES_TOGGLE} from "../actionTypes";
+"i""m""p""o""r""t"" ""{""E""D""I""T""O""R""_""P""R""O""P""E""R""T""I""E""S""_""T""O""G""G""L""E""}"" ""f""r""o""m"" """""."".""/""a""c""t""i""o""n""T""y""p""e""s""""";"
 
-const initialState = {
-  showProperties: false
-}
+"c""o""n""s""t"" ""i""n""i""t""i""a""l""S""t""a""t""e"" ""="" ""{"
+" "" ""s""h""o""w""P""r""o""p""e""r""t""i""e""s"":"" ""f""a""l""s""e"
+"}"
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    case EDITOR_PROPERTIES_TOGGLE: {
-      return {
-        ...state,
-        showProperties: !state.showProperties
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""f""u""n""c""t""i""o""n""(""s""t""a""t""e"" ""="" ""i""n""i""t""i""a""l""S""t""a""t""e"","" ""a""c""t""i""o""n"")"" ""{"
+" "" ""s""w""i""t""c""h"" ""(""a""c""t""i""o""n"".""t""y""p""e"")"" ""{"
+" "" "" "" ""c""a""s""e"" ""E""D""I""T""O""R""_""P""R""O""P""E""R""T""I""E""S""_""T""O""G""G""L""E"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" "" "" "" "" "".""."".""s""t""a""t""e"","
+" "" "" "" "" "" "" "" ""s""h""o""w""P""r""o""p""e""r""t""i""e""s"":"" ""!""s""t""a""t""e"".""s""h""o""w""P""r""o""p""e""r""t""i""e""s"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""d""e""f""a""u""l""t"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""s""t""a""t""e"";"
+" "" "" "" ""}"
+" "" ""}"
+"}"

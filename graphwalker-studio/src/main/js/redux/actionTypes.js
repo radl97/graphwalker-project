@@ -1,30 +1,30 @@
-export const TEST_LOAD = "TEST_LOAD";
-export const TEST_NEW = "TEST_NEW";
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""T""E""S""T""_""L""O""A""D"" ""="" """""T""E""S""T""_""L""O""A""D""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""T""E""S""T""_""N""E""W"" ""="" """""T""E""S""T""_""N""E""W""""";"
 
-export const EDITOR_SAVE_STATE = "EDITOR_SAVE_STATE";
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""D""I""T""O""R""_""S""A""V""E""_""S""T""A""T""E"" ""="" """""E""D""I""T""O""R""_""S""A""V""E""_""S""T""A""T""E""""";"
 
-export const MODEL_ADD = "MODEL_ADD";
-export const MODEL_CLOSE = "MODEL_CLOSE";
-export const MODEL_CLOSE_ALL = "MODEL_CLOSE_ALL";
-export const MODEL_SELECT = "MODEL_SELECT";
-export const MODEL_UPDATE = "MODEL_UPDATE";
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""M""O""D""E""L""_""A""D""D"" ""="" """""M""O""D""E""L""_""A""D""D""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""M""O""D""E""L""_""C""L""O""S""E"" ""="" """""M""O""D""E""L""_""C""L""O""S""E""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""M""O""D""E""L""_""C""L""O""S""E""_""A""L""L"" ""="" """""M""O""D""E""L""_""C""L""O""S""E""_""A""L""L""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""M""O""D""E""L""_""S""E""L""E""C""T"" ""="" """""M""O""D""E""L""_""S""E""L""E""C""T""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""M""O""D""E""L""_""U""P""D""A""T""E"" ""="" """""M""O""D""E""L""_""U""P""D""A""T""E""""";"
 
-export const ELEMENT_CREATE = "ELEMENT_CREATE";
-export const ELEMENT_DELETE = "ELEMENT_DELETE";
-export const ELEMENT_SELECT = "ELEMENT_SELECT";
-export const ELEMENT_START = "ELEMENT_START";
-export const ELEMENT_UPDATE = "ELEMENT_UPDATE";
-export const ELEMENT_UPDATE_POSITION = "ELEMENT_UPDATE_POSITION";
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""L""E""M""E""N""T""_""C""R""E""A""T""E"" ""="" """""E""L""E""M""E""N""T""_""C""R""E""A""T""E""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""L""E""M""E""N""T""_""D""E""L""E""T""E"" ""="" """""E""L""E""M""E""N""T""_""D""E""L""E""T""E""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""L""E""M""E""N""T""_""S""E""L""E""C""T"" ""="" """""E""L""E""M""E""N""T""_""S""E""L""E""C""T""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""L""E""M""E""N""T""_""S""T""A""R""T"" ""="" """""E""L""E""M""E""N""T""_""S""T""A""R""T""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""L""E""M""E""N""T""_""U""P""D""A""T""E"" ""="" """""E""L""E""M""E""N""T""_""U""P""D""A""T""E""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""L""E""M""E""N""T""_""U""P""D""A""T""E""_""P""O""S""I""T""I""O""N"" ""="" """""E""L""E""M""E""N""T""_""U""P""D""A""T""E""_""P""O""S""I""T""I""O""N""""";"
 
-export const EXECUTION_BREAKPOINT_TOGGLE = "EXECUTION_BREAKPOINT_TOGGLE";
-export const EXECUTION_CONNECT = "EXECUTION_CONNECT";
-export const EXECUTION_DELAY = "EXECUTION_DELAY";
-export const EXECUTION_FAILED = "EXECUTION_FAILED";
-export const EXECUTION_FULFILLED = "EXECUTION_FULFILLED";
-export const EXECUTION_LOAD = "EXECUTION_LOAD";
-export const EXECUTION_PAUSE = "EXECUTION_PAUSE";
-export const EXECUTION_RUN = "EXECUTION_RUN";
-export const EXECUTION_STEP = "EXECUTION_STEP";
-export const EXECUTION_STOP = "EXECUTION_STOP";
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""B""R""E""A""K""P""O""I""N""T""_""T""O""G""G""L""E"" ""="" """""E""X""E""C""U""T""I""O""N""_""B""R""E""A""K""P""O""I""N""T""_""T""O""G""G""L""E""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""C""O""N""N""E""C""T"" ""="" """""E""X""E""C""U""T""I""O""N""_""C""O""N""N""E""C""T""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""D""E""L""A""Y"" ""="" """""E""X""E""C""U""T""I""O""N""_""D""E""L""A""Y""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""F""A""I""L""E""D"" ""="" """""E""X""E""C""U""T""I""O""N""_""F""A""I""L""E""D""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""F""U""L""F""I""L""L""E""D"" ""="" """""E""X""E""C""U""T""I""O""N""_""F""U""L""F""I""L""L""E""D""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""L""O""A""D"" ""="" """""E""X""E""C""U""T""I""O""N""_""L""O""A""D""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""P""A""U""S""E"" ""="" """""E""X""E""C""U""T""I""O""N""_""P""A""U""S""E""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""R""U""N"" ""="" """""E""X""E""C""U""T""I""O""N""_""R""U""N""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""S""T""E""P"" ""="" """""E""X""E""C""U""T""I""O""N""_""S""T""E""P""""";"
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""X""E""C""U""T""I""O""N""_""S""T""O""P"" ""="" """""E""X""E""C""U""T""I""O""N""_""S""T""O""P""""";"
 
-export const EDITOR_PROPERTIES_TOGGLE = "EDITOR_PROPERTIES_TOGGLE";
+"e""x""p""o""r""t"" ""c""o""n""s""t"" ""E""D""I""T""O""R""_""P""R""O""P""E""R""T""I""E""S""_""T""O""G""G""L""E"" ""="" """""E""D""I""T""O""R""_""P""R""O""P""E""R""T""I""E""S""_""T""O""G""G""L""E""""";"

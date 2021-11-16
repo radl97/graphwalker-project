@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import EditorTabs from './editor-tabs';
-import EditorPanel from "./editor-panel";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""s""t""y""l""e""d"" ""f""r""o""m"" ""'""s""t""y""l""e""d""-""c""o""m""p""o""n""e""n""t""s""'"";"
+"i""m""p""o""r""t"" ""E""d""i""t""o""r""T""a""b""s"" ""f""r""o""m"" ""'"".""/""e""d""i""t""o""r""-""t""a""b""s""'"";"
+"i""m""p""o""r""t"" ""E""d""i""t""o""r""P""a""n""e""l"" ""f""r""o""m"" """"".""/""e""d""i""t""o""r""-""p""a""n""e""l""""";"
 
-const EditorContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: #FFFFFF;
-`;
+"c""o""n""s""t"" ""E""d""i""t""o""r""C""o""n""t""a""i""n""e""r"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""f""l""e""x""-""d""i""r""e""c""t""i""o""n"":"" ""c""o""l""u""m""n"";"
+" "" ""h""e""i""g""h""t"":"" ""1""0""0""%"";"
+" "" ""w""i""d""t""h"":"" ""1""0""0""%"";"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""F""F""F""F""F""F"";"
+"`"";"
 
-export default class Editor extends Component {
-  render() {
-    return (
-      <EditorContainer>
-        <EditorTabs/>
-        <EditorPanel/>
-      </EditorContainer>
-    )
-  }
-}
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""l""a""s""s"" ""E""d""i""t""o""r"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""E""d""i""t""o""r""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" ""<""E""d""i""t""o""r""T""a""b""s""/"">"
+" "" "" "" "" "" "" "" ""<""E""d""i""t""o""r""P""a""n""e""l""/"">"
+" "" "" "" "" "" ""<""/""E""d""i""t""o""r""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "")"
+" "" ""}"
+"}"

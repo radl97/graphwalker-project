@@ -1,111 +1,111 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import styled from 'styled-components';
-import { Button, Icon, Menu, MenuDivider, MenuItem, Popover, Position } from "@blueprintjs/core";
-import { addModel, selectModel, closeModel, closeAllModels } from "../../../redux/actions";
-import "./style.css";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""c""o""n""n""e""c""t"" ""}"" ""f""r""o""m"" """""r""e""a""c""t""-""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""s""t""y""l""e""d"" ""f""r""o""m"" ""'""s""t""y""l""e""d""-""c""o""m""p""o""n""e""n""t""s""'"";"
+"i""m""p""o""r""t"" ""{"" ""B""u""t""t""o""n"","" ""I""c""o""n"","" ""M""e""n""u"","" ""M""e""n""u""D""i""v""i""d""e""r"","" ""M""e""n""u""I""t""e""m"","" ""P""o""p""o""v""e""r"","" ""P""o""s""i""t""i""o""n"" ""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""{"" ""a""d""d""M""o""d""e""l"","" ""s""e""l""e""c""t""M""o""d""e""l"","" ""c""l""o""s""e""M""o""d""e""l"","" ""c""l""o""s""e""A""l""l""M""o""d""e""l""s"" ""}"" ""f""r""o""m"" """""."".""/""."".""/""."".""/""r""e""d""u""x""/""a""c""t""i""o""n""s""""";"
+"i""m""p""o""r""t"" """"".""/""s""t""y""l""e"".""c""s""s""""";"
 
-const TabsContainer = styled.div`
-  display: flex;
-  height: 30px;
-`;
+"c""o""n""s""t"" ""T""a""b""s""C""o""n""t""a""i""n""e""r"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""h""e""i""g""h""t"":"" ""3""0""p""x"";"
+"`"";"
 
-const TabList = styled.section`
-  display: flex;
-  overflow-x: auto;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  background-color: #F3F3F3;
-`;
+"c""o""n""s""t"" ""T""a""b""L""i""s""t"" ""="" ""s""t""y""l""e""d"".""s""e""c""t""i""o""n""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""o""v""e""r""f""l""o""w""-""x"":"" ""a""u""t""o"";"
+" "" "":"":""-""w""e""b""k""i""t""-""s""c""r""o""l""l""b""a""r"" ""{"
+" "" "" "" ""d""i""s""p""l""a""y"":"" ""n""o""n""e"";"
+" "" ""}"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""F""3""F""3""F""3"";"
+"`"";"
 
-const Tab = styled.div`  
-  display: flex;
-  align-items: center;
-  min-width: fit-content;
-  background-color: #ECECEC;
-  color: #5c7080;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
-  border-right: 1px solid #FFFFFF;
-  cursor: pointer;
-  ${props => props.active ?
-  `
-    background-color: #FFFFFF;
-  `: null}
-`;
+"c""o""n""s""t"" ""T""a""b"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"" "" "
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""a""l""i""g""n""-""i""t""e""m""s"":"" ""c""e""n""t""e""r"";"
+" "" ""m""i""n""-""w""i""d""t""h"":"" ""f""i""t""-""c""o""n""t""e""n""t"";"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""E""C""E""C""E""C"";"
+" "" ""c""o""l""o""r"":"" ""#""5""c""7""0""8""0"";"
+" "" ""p""a""d""d""i""n""g"":"" ""0"".""5""r""e""m"" ""0"".""5""r""e""m"" ""0"".""5""r""e""m"" ""1""r""e""m"";"
+" "" ""b""o""r""d""e""r""-""r""i""g""h""t"":"" ""1""p""x"" ""s""o""l""i""d"" ""#""F""F""F""F""F""F"";"
+" "" ""c""u""r""s""o""r"":"" ""p""o""i""n""t""e""r"";"
+" "" ""$""{""p""r""o""p""s"" ""="">"" ""p""r""o""p""s"".""a""c""t""i""v""e"" ""?"
+" "" ""`"
+" "" "" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""F""F""F""F""F""F"";"
+" "" ""`"":"" ""n""u""l""l""}"
+"`"";"
 
-const TabLabel = styled.span`
-  white-space: nowrap;
-  min-width: 80px;
-  user-select: none;
-  padding-left: 0.5rem;
-  padding-right: 0.75rem;
-`;
+"c""o""n""s""t"" ""T""a""b""L""a""b""e""l"" ""="" ""s""t""y""l""e""d"".""s""p""a""n""`"
+" "" ""w""h""i""t""e""-""s""p""a""c""e"":"" ""n""o""w""r""a""p"";"
+" "" ""m""i""n""-""w""i""d""t""h"":"" ""8""0""p""x"";"
+" "" ""u""s""e""r""-""s""e""l""e""c""t"":"" ""n""o""n""e"";"
+" "" ""p""a""d""d""i""n""g""-""l""e""f""t"":"" ""0"".""5""r""e""m"";"
+" "" ""p""a""d""d""i""n""g""-""r""i""g""h""t"":"" ""0"".""7""5""r""e""m"";"
+"`"";"
 
-const TabCloseAction = styled.div`
-  display: flex;
-  z-order: 1;
-`;
+"c""o""n""s""t"" ""T""a""b""C""l""o""s""e""A""c""t""i""o""n"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""z""-""o""r""d""e""r"":"" ""1"";"
+"`"";"
 
-const TabActionList = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  align-items: center;
-  background-color: #F3F3F3;
-`;
+"c""o""n""s""t"" ""T""a""b""A""c""t""i""o""n""L""i""s""t"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""f""l""e""x"":"" ""1"";"
+" "" ""j""u""s""t""i""f""y""-""c""o""n""t""e""n""t"":"" ""f""l""e""x""-""e""n""d"";"
+" "" ""a""l""i""g""n""-""i""t""e""m""s"":"" ""c""e""n""t""e""r"";"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""F""3""F""3""F""3"";"
+"`"";"
 
-const TabAction = styled.div`
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  min-width: 30px;
-`;
+"c""o""n""s""t"" ""T""a""b""A""c""t""i""o""n"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""j""u""s""t""i""f""y""-""c""o""n""t""e""n""t"":"" ""c""e""n""t""e""r"";"
+" "" ""a""l""i""g""n""-""s""e""l""f"":"" ""c""e""n""t""e""r"";"
+" "" ""m""i""n""-""w""i""d""t""h"":"" ""3""0""p""x"";"
+"`"";"
 
-class EditorTabs extends Component {
+"c""l""a""s""s"" ""E""d""i""t""o""r""T""a""b""s"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
 
-  onRemoveTab = (event, index) => {
-    event.stopPropagation();
-    this.props.closeModel(index);
-  };
+" "" ""o""n""R""e""m""o""v""e""T""a""b"" ""="" ""(""e""v""e""n""t"","" ""i""n""d""e""x"")"" ""="">"" ""{"
+" "" "" "" ""e""v""e""n""t"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" ""t""h""i""s"".""p""r""o""p""s"".""c""l""o""s""e""M""o""d""e""l""(""i""n""d""e""x"")"";"
+" "" ""}"";"
 
-  render() {
-    const { models, selectedModelIndex, addModel, selectModel, closeModel, closeAllModels } = this.props;
-    const moreMenu = (
-      <Menu>
-        <MenuItem icon="cross" text="Close All" onClick={closeAllModels} />
-      </Menu>
-    );
-    const tabs = models.map((model, index) => (
-      <Tab key={index} onClick={() => selectModel(index)} active={selectedModelIndex === index}>
-        <Icon iconSize={10} icon="graph" />
-        <TabLabel>{model.name}</TabLabel>
-        <TabCloseAction>
-          <Icon iconSize={10} icon="cross" onClick={(event) => this.onRemoveTab(event, index)}/>
-        </TabCloseAction>
-      </Tab>
-    ));
-    return (
-      <TabsContainer>
-        <TabList>
-          {tabs}
-        </TabList>
-        <TabActionList>
-          <Button className="tabs-button" icon="plus" onClick={addModel}/>
-          <Popover content={moreMenu} position={Position.BOTTOM_LEFT} minimal boundary="viewport">
-            <Button className="tabs-button" icon="more"/>
-          </Popover>
-        </TabActionList>
-      </TabsContainer>
-    )
-  }
-}
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""c""o""n""s""t"" ""{"" ""m""o""d""e""l""s"","" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"","" ""a""d""d""M""o""d""e""l"","" ""s""e""l""e""c""t""M""o""d""e""l"","" ""c""l""o""s""e""M""o""d""e""l"","" ""c""l""o""s""e""A""l""l""M""o""d""e""l""s"" ""}"" ""="" ""t""h""i""s"".""p""r""o""p""s"";"
+" "" "" "" ""c""o""n""s""t"" ""m""o""r""e""M""e""n""u"" ""="" ""("
+" "" "" "" "" "" ""<""M""e""n""u"">"
+" "" "" "" "" "" "" "" ""<""M""e""n""u""I""t""e""m"" ""i""c""o""n""="""""c""r""o""s""s""""" ""t""e""x""t""="""""C""l""o""s""e"" ""A""l""l""""" ""o""n""C""l""i""c""k""=""{""c""l""o""s""e""A""l""l""M""o""d""e""l""s""}"" ""/"">"
+" "" "" "" "" "" ""<""/""M""e""n""u"">"
+" "" "" "" "")"";"
+" "" "" "" ""c""o""n""s""t"" ""t""a""b""s"" ""="" ""m""o""d""e""l""s"".""m""a""p""(""(""m""o""d""e""l"","" ""i""n""d""e""x"")"" ""="">"" ""("
+" "" "" "" "" "" ""<""T""a""b"" ""k""e""y""=""{""i""n""d""e""x""}"" ""o""n""C""l""i""c""k""=""{""("")"" ""="">"" ""s""e""l""e""c""t""M""o""d""e""l""(""i""n""d""e""x"")""}"" ""a""c""t""i""v""e""=""{""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"" ""=""=""="" ""i""n""d""e""x""}"">"
+" "" "" "" "" "" "" "" ""<""I""c""o""n"" ""i""c""o""n""S""i""z""e""=""{""1""0""}"" ""i""c""o""n""="""""g""r""a""p""h""""" ""/"">"
+" "" "" "" "" "" "" "" ""<""T""a""b""L""a""b""e""l"">""{""m""o""d""e""l"".""n""a""m""e""}""<""/""T""a""b""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" ""<""T""a""b""C""l""o""s""e""A""c""t""i""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""I""c""o""n"" ""i""c""o""n""S""i""z""e""=""{""1""0""}"" ""i""c""o""n""="""""c""r""o""s""s""""" ""o""n""C""l""i""c""k""=""{""(""e""v""e""n""t"")"" ""="">"" ""t""h""i""s"".""o""n""R""e""m""o""v""e""T""a""b""(""e""v""e""n""t"","" ""i""n""d""e""x"")""}""/"">"
+" "" "" "" "" "" "" "" ""<""/""T""a""b""C""l""o""s""e""A""c""t""i""o""n"">"
+" "" "" "" "" "" ""<""/""T""a""b"">"
+" "" "" "" "")"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""T""a""b""s""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" ""<""T""a""b""L""i""s""t"">"
+" "" "" "" "" "" "" "" "" "" ""{""t""a""b""s""}"
+" "" "" "" "" "" "" "" ""<""/""T""a""b""L""i""s""t"">"
+" "" "" "" "" "" "" "" ""<""T""a""b""A""c""t""i""o""n""L""i""s""t"">"
+" "" "" "" "" "" "" "" "" "" ""<""B""u""t""t""o""n"" ""c""l""a""s""s""N""a""m""e""="""""t""a""b""s""-""b""u""t""t""o""n""""" ""i""c""o""n""="""""p""l""u""s""""" ""o""n""C""l""i""c""k""=""{""a""d""d""M""o""d""e""l""}""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""P""o""p""o""v""e""r"" ""c""o""n""t""e""n""t""=""{""m""o""r""e""M""e""n""u""}"" ""p""o""s""i""t""i""o""n""=""{""P""o""s""i""t""i""o""n"".""B""O""T""T""O""M""_""L""E""F""T""}"" ""m""i""n""i""m""a""l"" ""b""o""u""n""d""a""r""y""="""""v""i""e""w""p""o""r""t""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""B""u""t""t""o""n"" ""c""l""a""s""s""N""a""m""e""="""""t""a""b""s""-""b""u""t""t""o""n""""" ""i""c""o""n""="""""m""o""r""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""P""o""p""o""v""e""r"">"
+" "" "" "" "" "" "" "" ""<""/""T""a""b""A""c""t""i""o""n""L""i""s""t"">"
+" "" "" "" "" "" ""<""/""T""a""b""s""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "")"
+" "" ""}"
+"}"
 
-const mapStateToProps = ({ test: { models, selectedModelIndex }}) => {
-  return {
-    models,
-    selectedModelIndex
-  }
-};
+"c""o""n""s""t"" ""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"" ""="" ""(""{"" ""t""e""s""t"":"" ""{"" ""m""o""d""e""l""s"","" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"" ""}""}"")"" ""="">"" ""{"
+" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" ""m""o""d""e""l""s"","
+" "" "" "" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"
+" "" ""}"
+"}"";"
 
-export default connect(mapStateToProps, { addModel, selectModel, closeModel, closeAllModels })(EditorTabs);
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""o""n""n""e""c""t""(""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"","" ""{"" ""a""d""d""M""o""d""e""l"","" ""s""e""l""e""c""t""M""o""d""e""l"","" ""c""l""o""s""e""M""o""d""e""l"","" ""c""l""o""s""e""A""l""l""M""o""d""e""l""s"" ""}"")""(""E""d""i""t""o""r""T""a""b""s"")"";"

@@ -1,166 +1,166 @@
-import produce from "immer";
-import {
-  TEST_LOAD,
-  TEST_NEW,
-  MODEL_ADD,
-  MODEL_CLOSE,
-  MODEL_CLOSE_ALL,
-  MODEL_SELECT,
-  MODEL_UPDATE,
-  ELEMENT_CREATE,
-  ELEMENT_DELETE,
-  ELEMENT_SELECT,
-  ELEMENT_START,
-  ELEMENT_UPDATE,
-  ELEMENT_UPDATE_POSITION, EDITOR_SAVE_STATE
-} from "../actionTypes";
-import { v4 as uuid } from 'uuid';
+"i""m""p""o""r""t"" ""p""r""o""d""u""c""e"" ""f""r""o""m"" """""i""m""m""e""r""""";"
+"i""m""p""o""r""t"" ""{"
+" "" ""T""E""S""T""_""L""O""A""D"","
+" "" ""T""E""S""T""_""N""E""W"","
+" "" ""M""O""D""E""L""_""A""D""D"","
+" "" ""M""O""D""E""L""_""C""L""O""S""E"","
+" "" ""M""O""D""E""L""_""C""L""O""S""E""_""A""L""L"","
+" "" ""M""O""D""E""L""_""S""E""L""E""C""T"","
+" "" ""M""O""D""E""L""_""U""P""D""A""T""E"","
+" "" ""E""L""E""M""E""N""T""_""C""R""E""A""T""E"","
+" "" ""E""L""E""M""E""N""T""_""D""E""L""E""T""E"","
+" "" ""E""L""E""M""E""N""T""_""S""E""L""E""C""T"","
+" "" ""E""L""E""M""E""N""T""_""S""T""A""R""T"","
+" "" ""E""L""E""M""E""N""T""_""U""P""D""A""T""E"","
+" "" ""E""L""E""M""E""N""T""_""U""P""D""A""T""E""_""P""O""S""I""T""I""O""N"","" ""E""D""I""T""O""R""_""S""A""V""E""_""S""T""A""T""E"
+"}"" ""f""r""o""m"" """""."".""/""a""c""t""i""o""n""T""y""p""e""s""""";"
+"i""m""p""o""r""t"" ""{"" ""v""4"" ""a""s"" ""u""u""i""d"" ""}"" ""f""r""o""m"" ""'""u""u""i""d""'"";"
 
-const initialState = {
-  models: [],
-  selectedModelIndex: 0,
-  selectedElementId: null,
-};
+"c""o""n""s""t"" ""i""n""i""t""i""a""l""S""t""a""t""e"" ""="" ""{"
+" "" ""m""o""d""e""l""s"":"" ""[""]"","
+" "" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"":"" ""0"","
+" "" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"":"" ""n""u""l""l"","
+"}"";"
 
-export default function(state = initialState, action) {
-  switch (action.type) {
-    case TEST_LOAD: {
-      return produce(state, draft => {
-        Object.assign(draft, {
-          ...JSON.parse(action.payload.content),
-          selectedModelIndex: 0,
-          selectedElementId: null
-        });
-        draft.models.forEach(model => {
-          if (!model.id) {
-            model.id = uuid()
-          }
-          model.vertices.forEach(vertex => {
-            vertex.properties = Object.assign({x: 0, y: 0}, vertex.properties);
-          });
-        })
-      });
-    }
-    case TEST_NEW: {
-      return {
-        ...initialState,
-        models: [action.payload],
-        selectedModelIndex: 0,
-        selectedElementId: null
-      }
-    }
-    case EDITOR_SAVE_STATE: {
-      return produce(state, draft => {
-        if (draft.models[action.payload.index]) {
-          draft.models[action.payload.index].editor = action.payload.editor;
-        }
-      });
-    }
-    case MODEL_ADD: {
-      return produce(state, draft => {
-        Object.assign(draft, {
-          models: [action.payload, ...state.models],
-          selectedModelIndex: 0,
-          selectedElementId: null
-        });
-      });
-    }
-    case MODEL_CLOSE: {
-      return produce(state, draft => {
-        const { models, selectedModelIndex } = state;
-        Object.assign(draft, {
-          models: models.filter((value, index) => index !== action.payload.index),
-          selectedModelIndex: selectedModelIndex === action.payload.index ? Math.max(selectedModelIndex - 1, 0): selectedModelIndex
-        });
-      });
-    }
-    case MODEL_CLOSE_ALL: {
-      return {
-        ...initialState
-      }
-    }
-    case MODEL_SELECT: {
-      return produce(state, draft => {
-        Object.assign(draft, {
-          selectedModelIndex: action.payload.index,
-          selectedElementId: null
-        });
-      });
-    }
-    case MODEL_UPDATE: {
-      const { field, value } = action.payload;
-      return produce(state, draft => {
-        draft.models[state.selectedModelIndex][field] = value;
-      });
-    }
-    case ELEMENT_CREATE: {
-      const { id, name, sourceVertexId, targetVertexId, properties } = action.payload;
-      return produce(state, draft => {
-        if (properties != null) {
-          draft.models[state.selectedModelIndex].vertices.push({
-            id, name, properties
-          });
-        } else {
-          draft.models[state.selectedModelIndex].edges.push({
-            id, name, sourceVertexId, targetVertexId
-          });
-        }
-      });
-    }
-    case ELEMENT_DELETE: {
-      return produce(state, draft => {
-        if (Array.isArray(action.payload.id)) {
-          draft.models[state.selectedModelIndex].vertices = draft.models[state.selectedModelIndex].vertices.filter(vertex => !action.payload.id.includes(vertex.id))
-          draft.models[state.selectedModelIndex].edges = draft.models[state.selectedModelIndex].edges.filter(edge => !action.payload.id.includes(edge.id))
-        } else {
-          draft.models[state.selectedModelIndex].vertices = draft.models[state.selectedModelIndex].vertices.filter(vertex => vertex.id !== action.payload.id)
-          draft.models[state.selectedModelIndex].edges = draft.models[state.selectedModelIndex].edges.filter(edge => edge.id !== action.payload.id)
-        }
-      });
-    }
-    case ELEMENT_SELECT: {
-      return {
-        ...state,
-        selectedElementId: action.payload.id
-      }
-    }
-    case ELEMENT_START: {
-      const { id } = action.payload;
-      return produce(state, draft => {
-        draft.models.forEach(model => {
-          model.startElementId = model.startElementId != id ? id : "";
-        });
-      });
-    }
-    case ELEMENT_UPDATE: {
-      const { field, value } = action.payload;
-      return produce(state, draft => {
-        const models = draft.models[state.selectedModelIndex];
-        models.vertices.forEach(vertex => {
-          if (vertex.id === state.selectedElementId) {
-            vertex[field] = value;
-          }
-        });
-        models.edges.forEach(edge => {
-          if (edge.id === state.selectedElementId) {
-            edge[field] = value;
-          }
-        });
-      });
-    }
-    case ELEMENT_UPDATE_POSITION: {
-      const { id, position } = action.payload;
-      return produce(state, draft => {
-        draft.models[state.selectedModelIndex].vertices.forEach(vertex => {
-          if (vertex.id === id) {
-            vertex.properties.x = position.x;
-            vertex.properties.y = position.y;
-          }
-        })
-      });
-    }
-    default: {
-      return state;
-    }
-  }
-}
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""f""u""n""c""t""i""o""n""(""s""t""a""t""e"" ""="" ""i""n""i""t""i""a""l""S""t""a""t""e"","" ""a""c""t""i""o""n"")"" ""{"
+" "" ""s""w""i""t""c""h"" ""(""a""c""t""i""o""n"".""t""y""p""e"")"" ""{"
+" "" "" "" ""c""a""s""e"" ""T""E""S""T""_""L""O""A""D"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""O""b""j""e""c""t"".""a""s""s""i""g""n""(""d""r""a""f""t"","" ""{"
+" "" "" "" "" "" "" "" "" "" "".""."".""J""S""O""N"".""p""a""r""s""e""(""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""c""o""n""t""e""n""t"")"","
+" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"":"" ""0"","
+" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"":"" ""n""u""l""l"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s"".""f""o""r""E""a""c""h""(""m""o""d""e""l"" ""="">"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""m""o""d""e""l"".""i""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""o""d""e""l"".""i""d"" ""="" ""u""u""i""d""("")"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" ""m""o""d""e""l"".""v""e""r""t""i""c""e""s"".""f""o""r""E""a""c""h""(""v""e""r""t""e""x"" ""="">"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""v""e""r""t""e""x"".""p""r""o""p""e""r""t""i""e""s"" ""="" ""O""b""j""e""c""t"".""a""s""s""i""g""n""(""{""x"":"" ""0"","" ""y"":"" ""0""}"","" ""v""e""r""t""e""x"".""p""r""o""p""e""r""t""i""e""s"")"";"
+" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" ""}"")"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""T""E""S""T""_""N""E""W"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" "" "" "" "" "".""."".""i""n""i""t""i""a""l""S""t""a""t""e"","
+" "" "" "" "" "" "" "" ""m""o""d""e""l""s"":"" ""[""a""c""t""i""o""n"".""p""a""y""l""o""a""d""]"","
+" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"":"" ""0"","
+" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"":"" ""n""u""l""l"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""E""D""I""T""O""R""_""S""A""V""E""_""S""T""A""T""E"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""d""r""a""f""t"".""m""o""d""e""l""s""[""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""n""d""e""x""]"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""n""d""e""x""]"".""e""d""i""t""o""r"" ""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""e""d""i""t""o""r"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""M""O""D""E""L""_""A""D""D"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""O""b""j""e""c""t"".""a""s""s""i""g""n""(""d""r""a""f""t"","" ""{"
+" "" "" "" "" "" "" "" "" "" ""m""o""d""e""l""s"":"" ""[""a""c""t""i""o""n"".""p""a""y""l""o""a""d"","" "".""."".""s""t""a""t""e"".""m""o""d""e""l""s""]"","
+" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"":"" ""0"","
+" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"":"" ""n""u""l""l"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""M""O""D""E""L""_""C""L""O""S""E"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""c""o""n""s""t"" ""{"" ""m""o""d""e""l""s"","" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"" ""}"" ""="" ""s""t""a""t""e"";"
+" "" "" "" "" "" "" "" ""O""b""j""e""c""t"".""a""s""s""i""g""n""(""d""r""a""f""t"","" ""{"
+" "" "" "" "" "" "" "" "" "" ""m""o""d""e""l""s"":"" ""m""o""d""e""l""s"".""f""i""l""t""e""r""(""(""v""a""l""u""e"","" ""i""n""d""e""x"")"" ""="">"" ""i""n""d""e""x"" ""!""=""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""n""d""e""x"")"","
+" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"":"" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"" ""=""=""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""n""d""e""x"" ""?"" ""M""a""t""h"".""m""a""x""(""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"" ""-"" ""1"","" ""0"")"":"" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""M""O""D""E""L""_""C""L""O""S""E""_""A""L""L"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" "" "" "" "" "".""."".""i""n""i""t""i""a""l""S""t""a""t""e"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""M""O""D""E""L""_""S""E""L""E""C""T"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""O""b""j""e""c""t"".""a""s""s""i""g""n""(""d""r""a""f""t"","" ""{"
+" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x"":"" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""n""d""e""x"","
+" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"":"" ""n""u""l""l"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""M""O""D""E""L""_""U""P""D""A""T""E"":"" ""{"
+" "" "" "" "" "" ""c""o""n""s""t"" ""{"" ""f""i""e""l""d"","" ""v""a""l""u""e"" ""}"" ""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]""[""f""i""e""l""d""]"" ""="" ""v""a""l""u""e"";"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""E""L""E""M""E""N""T""_""C""R""E""A""T""E"":"" ""{"
+" "" "" "" "" "" ""c""o""n""s""t"" ""{"" ""i""d"","" ""n""a""m""e"","" ""s""o""u""r""c""e""V""e""r""t""e""x""I""d"","" ""t""a""r""g""e""t""V""e""r""t""e""x""I""d"","" ""p""r""o""p""e""r""t""i""e""s"" ""}"" ""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""p""r""o""p""e""r""t""i""e""s"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""v""e""r""t""i""c""e""s"".""p""u""s""h""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""d"","" ""n""a""m""e"","" ""p""r""o""p""e""r""t""i""e""s"
+" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""e""d""g""e""s"".""p""u""s""h""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""d"","" ""n""a""m""e"","" ""s""o""u""r""c""e""V""e""r""t""e""x""I""d"","" ""t""a""r""g""e""t""V""e""r""t""e""x""I""d"
+" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""E""L""E""M""E""N""T""_""D""E""L""E""T""E"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""A""r""r""a""y"".""i""s""A""r""r""a""y""(""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""d"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""v""e""r""t""i""c""e""s"" ""="" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""v""e""r""t""i""c""e""s"".""f""i""l""t""e""r""(""v""e""r""t""e""x"" ""="">"" ""!""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""d"".""i""n""c""l""u""d""e""s""(""v""e""r""t""e""x"".""i""d"")"")"
+" "" "" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""e""d""g""e""s"" ""="" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""e""d""g""e""s"".""f""i""l""t""e""r""(""e""d""g""e"" ""="">"" ""!""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""d"".""i""n""c""l""u""d""e""s""(""e""d""g""e"".""i""d"")"")"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""v""e""r""t""i""c""e""s"" ""="" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""v""e""r""t""i""c""e""s"".""f""i""l""t""e""r""(""v""e""r""t""e""x"" ""="">"" ""v""e""r""t""e""x"".""i""d"" ""!""=""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""d"")"
+" "" "" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""e""d""g""e""s"" ""="" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""e""d""g""e""s"".""f""i""l""t""e""r""(""e""d""g""e"" ""="">"" ""e""d""g""e"".""i""d"" ""!""=""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""d"")"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""E""L""E""M""E""N""T""_""S""E""L""E""C""T"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" "" "" "" "" "".""."".""s""t""a""t""e"","
+" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"":"" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"".""i""d"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""E""L""E""M""E""N""T""_""S""T""A""R""T"":"" ""{"
+" "" "" "" "" "" ""c""o""n""s""t"" ""{"" ""i""d"" ""}"" ""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s"".""f""o""r""E""a""c""h""(""m""o""d""e""l"" ""="">"" ""{"
+" "" "" "" "" "" "" "" "" "" ""m""o""d""e""l"".""s""t""a""r""t""E""l""e""m""e""n""t""I""d"" ""="" ""m""o""d""e""l"".""s""t""a""r""t""E""l""e""m""e""n""t""I""d"" ""!""="" ""i""d"" ""?"" ""i""d"" "":"" """""""";"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""E""L""E""M""E""N""T""_""U""P""D""A""T""E"":"" ""{"
+" "" "" "" "" "" ""c""o""n""s""t"" ""{"" ""f""i""e""l""d"","" ""v""a""l""u""e"" ""}"" ""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""c""o""n""s""t"" ""m""o""d""e""l""s"" ""="" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"";"
+" "" "" "" "" "" "" "" ""m""o""d""e""l""s"".""v""e""r""t""i""c""e""s"".""f""o""r""E""a""c""h""(""v""e""r""t""e""x"" ""="">"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""v""e""r""t""e""x"".""i""d"" ""=""=""="" ""s""t""a""t""e"".""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""v""e""r""t""e""x""[""f""i""e""l""d""]"" ""="" ""v""a""l""u""e"";"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" ""m""o""d""e""l""s"".""e""d""g""e""s"".""f""o""r""E""a""c""h""(""e""d""g""e"" ""="">"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e""d""g""e"".""i""d"" ""=""=""="" ""s""t""a""t""e"".""s""e""l""e""c""t""e""d""E""l""e""m""e""n""t""I""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""e""d""g""e""[""f""i""e""l""d""]"" ""="" ""v""a""l""u""e"";"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""a""s""e"" ""E""L""E""M""E""N""T""_""U""P""D""A""T""E""_""P""O""S""I""T""I""O""N"":"" ""{"
+" "" "" "" "" "" ""c""o""n""s""t"" ""{"" ""i""d"","" ""p""o""s""i""t""i""o""n"" ""}"" ""="" ""a""c""t""i""o""n"".""p""a""y""l""o""a""d"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""d""u""c""e""(""s""t""a""t""e"","" ""d""r""a""f""t"" ""="">"" ""{"
+" "" "" "" "" "" "" "" ""d""r""a""f""t"".""m""o""d""e""l""s""[""s""t""a""t""e"".""s""e""l""e""c""t""e""d""M""o""d""e""l""I""n""d""e""x""]"".""v""e""r""t""i""c""e""s"".""f""o""r""E""a""c""h""(""v""e""r""t""e""x"" ""="">"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""v""e""r""t""e""x"".""i""d"" ""=""=""="" ""i""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""v""e""r""t""e""x"".""p""r""o""p""e""r""t""i""e""s"".""x"" ""="" ""p""o""s""i""t""i""o""n"".""x"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""v""e""r""t""e""x"".""p""r""o""p""e""r""t""i""e""s"".""y"" ""="" ""p""o""s""i""t""i""o""n"".""y"";"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"")"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"
+" "" "" "" ""d""e""f""a""u""l""t"":"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""s""t""a""t""e"";"
+" "" "" "" ""}"
+" "" ""}"
+"}"

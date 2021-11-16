@@ -1,13 +1,13 @@
 
-.container-column {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
+".""c""o""n""t""a""i""n""e""r""-""c""o""l""u""m""n"" ""{"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""f""l""e""x""-""d""i""r""e""c""t""i""o""n"":"" ""c""o""l""u""m""n"";"
+" "" ""f""l""e""x"":"" ""1"";"
+"}"
 
-.container-row {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-}
+".""c""o""n""t""a""i""n""e""r""-""r""o""w"" ""{"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+" "" ""f""l""e""x""-""d""i""r""e""c""t""i""o""n"":"" ""r""o""w"";"
+" "" ""f""l""e""x"":"" ""1"";"
+"}"
 

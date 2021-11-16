@@ -1,214 +1,214 @@
-/*!
-Copyright (c) The Cytoscape Consortium
+"/""*""!"
+"C""o""p""y""r""i""g""h""t"" ""(""c"")"" ""T""h""e"" ""C""y""t""o""s""c""a""p""e"" ""C""o""n""s""o""r""t""i""u""m"
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the “Software”), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
+"P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"" ""o""f"
+"t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" ""“""S""o""f""t""w""a""r""e""”"")"","" ""t""o"" ""d""e""a""l"" ""i""n"
+"t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"" ""t""o"
+"u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"" ""c""o""p""i""e""s"
+"o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"
+"s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+"T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"" ""a""l""l"
+"c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+"T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" ""“""A""S"" ""I""S""”"","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+"I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+"F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+"A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+"L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+"O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"" ""T""H""E"
+"S""O""F""T""W""A""R""E""."
+"*""/"
 
-;(function(){ 'use strict';
+";""(""f""u""n""c""t""i""o""n""("")""{"" ""'""u""s""e"" ""s""t""r""i""c""t""'"";"
 
-  // registers the extension on a cytoscape lib ref
-  var register = function( cytoscape, dagre ){
-    if( !cytoscape || !dagre ){ return; } // can't register if cytoscape unspecified
+" "" ""/""/"" ""r""e""g""i""s""t""e""r""s"" ""t""h""e"" ""e""x""t""e""n""s""i""o""n"" ""o""n"" ""a"" ""c""y""t""o""s""c""a""p""e"" ""l""i""b"" ""r""e""f"
+" "" ""v""a""r"" ""r""e""g""i""s""t""e""r"" ""="" ""f""u""n""c""t""i""o""n""("" ""c""y""t""o""s""c""a""p""e"","" ""d""a""g""r""e"" "")""{"
+" "" "" "" ""i""f""("" ""!""c""y""t""o""s""c""a""p""e"" ""|""|"" ""!""d""a""g""r""e"" "")""{"" ""r""e""t""u""r""n"";"" ""}"" ""/""/"" ""c""a""n""'""t"" ""r""e""g""i""s""t""e""r"" ""i""f"" ""c""y""t""o""s""c""a""p""e"" ""u""n""s""p""e""c""i""f""i""e""d"
 
-    var isFunction = function(o){ return typeof o === 'function'; };
+" "" "" "" ""v""a""r"" ""i""s""F""u""n""c""t""i""o""n"" ""="" ""f""u""n""c""t""i""o""n""(""o"")""{"" ""r""e""t""u""r""n"" ""t""y""p""e""o""f"" ""o"" ""=""=""="" ""'""f""u""n""c""t""i""o""n""'"";"" ""}"";"
 
-    // default layout options
-    var defaults = {
-      // dagre algo options, uses default value on undefined
-      nodeSep: undefined, // the separation between adjacent nodes in the same rank
-      edgeSep: undefined, // the separation between adjacent edges in the same rank
-      rankSep: undefined, // the separation between adjacent nodes in the same rank
-      rankDir: undefined, // 'TB' for top to bottom flow, 'LR' for left to right
-      minLen: function( edge ){ return 1; }, // number of ranks to keep between the source and target of the edge
-      edgeWeight: function( edge ){ return 1; }, // higher weight edges are generally made shorter and straighter than lower weight edges
+" "" "" "" ""/""/"" ""d""e""f""a""u""l""t"" ""l""a""y""o""u""t"" ""o""p""t""i""o""n""s"
+" "" "" "" ""v""a""r"" ""d""e""f""a""u""l""t""s"" ""="" ""{"
+" "" "" "" "" "" ""/""/"" ""d""a""g""r""e"" ""a""l""g""o"" ""o""p""t""i""o""n""s"","" ""u""s""e""s"" ""d""e""f""a""u""l""t"" ""v""a""l""u""e"" ""o""n"" ""u""n""d""e""f""i""n""e""d"
+" "" "" "" "" "" ""n""o""d""e""S""e""p"":"" ""u""n""d""e""f""i""n""e""d"","" ""/""/"" ""t""h""e"" ""s""e""p""a""r""a""t""i""o""n"" ""b""e""t""w""e""e""n"" ""a""d""j""a""c""e""n""t"" ""n""o""d""e""s"" ""i""n"" ""t""h""e"" ""s""a""m""e"" ""r""a""n""k"
+" "" "" "" "" "" ""e""d""g""e""S""e""p"":"" ""u""n""d""e""f""i""n""e""d"","" ""/""/"" ""t""h""e"" ""s""e""p""a""r""a""t""i""o""n"" ""b""e""t""w""e""e""n"" ""a""d""j""a""c""e""n""t"" ""e""d""g""e""s"" ""i""n"" ""t""h""e"" ""s""a""m""e"" ""r""a""n""k"
+" "" "" "" "" "" ""r""a""n""k""S""e""p"":"" ""u""n""d""e""f""i""n""e""d"","" ""/""/"" ""t""h""e"" ""s""e""p""a""r""a""t""i""o""n"" ""b""e""t""w""e""e""n"" ""a""d""j""a""c""e""n""t"" ""n""o""d""e""s"" ""i""n"" ""t""h""e"" ""s""a""m""e"" ""r""a""n""k"
+" "" "" "" "" "" ""r""a""n""k""D""i""r"":"" ""u""n""d""e""f""i""n""e""d"","" ""/""/"" ""'""T""B""'"" ""f""o""r"" ""t""o""p"" ""t""o"" ""b""o""t""t""o""m"" ""f""l""o""w"","" ""'""L""R""'"" ""f""o""r"" ""l""e""f""t"" ""t""o"" ""r""i""g""h""t"
+" "" "" "" "" "" ""m""i""n""L""e""n"":"" ""f""u""n""c""t""i""o""n""("" ""e""d""g""e"" "")""{"" ""r""e""t""u""r""n"" ""1"";"" ""}"","" ""/""/"" ""n""u""m""b""e""r"" ""o""f"" ""r""a""n""k""s"" ""t""o"" ""k""e""e""p"" ""b""e""t""w""e""e""n"" ""t""h""e"" ""s""o""u""r""c""e"" ""a""n""d"" ""t""a""r""g""e""t"" ""o""f"" ""t""h""e"" ""e""d""g""e"
+" "" "" "" "" "" ""e""d""g""e""W""e""i""g""h""t"":"" ""f""u""n""c""t""i""o""n""("" ""e""d""g""e"" "")""{"" ""r""e""t""u""r""n"" ""1"";"" ""}"","" ""/""/"" ""h""i""g""h""e""r"" ""w""e""i""g""h""t"" ""e""d""g""e""s"" ""a""r""e"" ""g""e""n""e""r""a""l""l""y"" ""m""a""d""e"" ""s""h""o""r""t""e""r"" ""a""n""d"" ""s""t""r""a""i""g""h""t""e""r"" ""t""h""a""n"" ""l""o""w""e""r"" ""w""e""i""g""h""t"" ""e""d""g""e""s"
 
-      // general layout options
-      fit: true, // whether to fit to viewport
-      padding: 30, // fit padding
-      animate: false, // whether to transition the node positions
-      animationDuration: 500, // duration of animation in ms if enabled
-      animationEasing: undefined, // easing of animation if enabled
-      boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
-      ready: function(){}, // on layoutready
-      stop: function(){} // on layoutstop
-    };
+" "" "" "" "" "" ""/""/"" ""g""e""n""e""r""a""l"" ""l""a""y""o""u""t"" ""o""p""t""i""o""n""s"
+" "" "" "" "" "" ""f""i""t"":"" ""t""r""u""e"","" ""/""/"" ""w""h""e""t""h""e""r"" ""t""o"" ""f""i""t"" ""t""o"" ""v""i""e""w""p""o""r""t"
+" "" "" "" "" "" ""p""a""d""d""i""n""g"":"" ""3""0"","" ""/""/"" ""f""i""t"" ""p""a""d""d""i""n""g"
+" "" "" "" "" "" ""a""n""i""m""a""t""e"":"" ""f""a""l""s""e"","" ""/""/"" ""w""h""e""t""h""e""r"" ""t""o"" ""t""r""a""n""s""i""t""i""o""n"" ""t""h""e"" ""n""o""d""e"" ""p""o""s""i""t""i""o""n""s"
+" "" "" "" "" "" ""a""n""i""m""a""t""i""o""n""D""u""r""a""t""i""o""n"":"" ""5""0""0"","" ""/""/"" ""d""u""r""a""t""i""o""n"" ""o""f"" ""a""n""i""m""a""t""i""o""n"" ""i""n"" ""m""s"" ""i""f"" ""e""n""a""b""l""e""d"
+" "" "" "" "" "" ""a""n""i""m""a""t""i""o""n""E""a""s""i""n""g"":"" ""u""n""d""e""f""i""n""e""d"","" ""/""/"" ""e""a""s""i""n""g"" ""o""f"" ""a""n""i""m""a""t""i""o""n"" ""i""f"" ""e""n""a""b""l""e""d"
+" "" "" "" "" "" ""b""o""u""n""d""i""n""g""B""o""x"":"" ""u""n""d""e""f""i""n""e""d"","" ""/""/"" ""c""o""n""s""t""r""a""i""n"" ""l""a""y""o""u""t"" ""b""o""u""n""d""s"";"" ""{"" ""x""1"","" ""y""1"","" ""x""2"","" ""y""2"" ""}"" ""o""r"" ""{"" ""x""1"","" ""y""1"","" ""w"","" ""h"" ""}"
+" "" "" "" "" "" ""r""e""a""d""y"":"" ""f""u""n""c""t""i""o""n""("")""{""}"","" ""/""/"" ""o""n"" ""l""a""y""o""u""t""r""e""a""d""y"
+" "" "" "" "" "" ""s""t""o""p"":"" ""f""u""n""c""t""i""o""n""("")""{""}"" ""/""/"" ""o""n"" ""l""a""y""o""u""t""s""t""o""p"
+" "" "" "" ""}"";"
 
-    // constructor
-    // options : object containing layout options
-    function DagreLayout( options ){
-      var opts = this.options = {};
-      for( var i in defaults ){ opts[i] = defaults[i]; }
-      for( var i in options ){ opts[i] = options[i]; }
-    }
+" "" "" "" ""/""/"" ""c""o""n""s""t""r""u""c""t""o""r"
+" "" "" "" ""/""/"" ""o""p""t""i""o""n""s"" "":"" ""o""b""j""e""c""t"" ""c""o""n""t""a""i""n""i""n""g"" ""l""a""y""o""u""t"" ""o""p""t""i""o""n""s"
+" "" "" "" ""f""u""n""c""t""i""o""n"" ""D""a""g""r""e""L""a""y""o""u""t""("" ""o""p""t""i""o""n""s"" "")""{"
+" "" "" "" "" "" ""v""a""r"" ""o""p""t""s"" ""="" ""t""h""i""s"".""o""p""t""i""o""n""s"" ""="" ""{""}"";"
+" "" "" "" "" "" ""f""o""r""("" ""v""a""r"" ""i"" ""i""n"" ""d""e""f""a""u""l""t""s"" "")""{"" ""o""p""t""s""[""i""]"" ""="" ""d""e""f""a""u""l""t""s""[""i""]"";"" ""}"
+" "" "" "" "" "" ""f""o""r""("" ""v""a""r"" ""i"" ""i""n"" ""o""p""t""i""o""n""s"" "")""{"" ""o""p""t""s""[""i""]"" ""="" ""o""p""t""i""o""n""s""[""i""]"";"" ""}"
+" "" "" "" ""}"
 
-    // runs the layout
-    DagreLayout.prototype.run = function(){
-      var options = this.options;
-      var layout = this;
+" "" "" "" ""/""/"" ""r""u""n""s"" ""t""h""e"" ""l""a""y""o""u""t"
+" "" "" "" ""D""a""g""r""e""L""a""y""o""u""t"".""p""r""o""t""o""t""y""p""e"".""r""u""n"" ""="" ""f""u""n""c""t""i""o""n""("")""{"
+" "" "" "" "" "" ""v""a""r"" ""o""p""t""i""o""n""s"" ""="" ""t""h""i""s"".""o""p""t""i""o""n""s"";"
+" "" "" "" "" "" ""v""a""r"" ""l""a""y""o""u""t"" ""="" ""t""h""i""s"";"
 
-      var cy = options.cy; // cy is automatically populated for us in the constructor
-      var eles = options.eles;
+" "" "" "" "" "" ""v""a""r"" ""c""y"" ""="" ""o""p""t""i""o""n""s"".""c""y"";"" ""/""/"" ""c""y"" ""i""s"" ""a""u""t""o""m""a""t""i""c""a""l""l""y"" ""p""o""p""u""l""a""t""e""d"" ""f""o""r"" ""u""s"" ""i""n"" ""t""h""e"" ""c""o""n""s""t""r""u""c""t""o""r"
+" "" "" "" "" "" ""v""a""r"" ""e""l""e""s"" ""="" ""o""p""t""i""o""n""s"".""e""l""e""s"";"
 
-      var getVal = function( ele, val ){
-        return isFunction(val) ? val.apply( ele, [ ele ] ) : val;
-      };
+" "" "" "" "" "" ""v""a""r"" ""g""e""t""V""a""l"" ""="" ""f""u""n""c""t""i""o""n""("" ""e""l""e"","" ""v""a""l"" "")""{"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""i""s""F""u""n""c""t""i""o""n""(""v""a""l"")"" ""?"" ""v""a""l"".""a""p""p""l""y""("" ""e""l""e"","" ""["" ""e""l""e"" ""]"" "")"" "":"" ""v""a""l"";"
+" "" "" "" "" "" ""}"";"
 
-      var bb = options.boundingBox || { x1: 0, y1: 0, w: cy.width(), h: cy.height() };
-      if( bb.x2 === undefined ){ bb.x2 = bb.x1 + bb.w; }
-      if( bb.w === undefined ){ bb.w = bb.x2 - bb.x1; }
-      if( bb.y2 === undefined ){ bb.y2 = bb.y1 + bb.h; }
-      if( bb.h === undefined ){ bb.h = bb.y2 - bb.y1; }
+" "" "" "" "" "" ""v""a""r"" ""b""b"" ""="" ""o""p""t""i""o""n""s"".""b""o""u""n""d""i""n""g""B""o""x"" ""|""|"" ""{"" ""x""1"":"" ""0"","" ""y""1"":"" ""0"","" ""w"":"" ""c""y"".""w""i""d""t""h""("")"","" ""h"":"" ""c""y"".""h""e""i""g""h""t""("")"" ""}"";"
+" "" "" "" "" "" ""i""f""("" ""b""b"".""x""2"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"" "")""{"" ""b""b"".""x""2"" ""="" ""b""b"".""x""1"" ""+"" ""b""b"".""w"";"" ""}"
+" "" "" "" "" "" ""i""f""("" ""b""b"".""w"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"" "")""{"" ""b""b"".""w"" ""="" ""b""b"".""x""2"" ""-"" ""b""b"".""x""1"";"" ""}"
+" "" "" "" "" "" ""i""f""("" ""b""b"".""y""2"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"" "")""{"" ""b""b"".""y""2"" ""="" ""b""b"".""y""1"" ""+"" ""b""b"".""h"";"" ""}"
+" "" "" "" "" "" ""i""f""("" ""b""b"".""h"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"" "")""{"" ""b""b"".""h"" ""="" ""b""b"".""y""2"" ""-"" ""b""b"".""y""1"";"" ""}"
 
-      var g = new dagre.graphlib.Graph({
-        multigraph: true,
-        compound: true
-      });
+" "" "" "" "" "" ""v""a""r"" ""g"" ""="" ""n""e""w"" ""d""a""g""r""e"".""g""r""a""p""h""l""i""b"".""G""r""a""p""h""(""{"
+" "" "" "" "" "" "" "" ""m""u""l""t""i""g""r""a""p""h"":"" ""t""r""u""e"","
+" "" "" "" "" "" "" "" ""c""o""m""p""o""u""n""d"":"" ""t""r""u""e"
+" "" "" "" "" "" ""}"")"";"
 
-      var gObj = {};
-      var setGObj = function( name, val ){
-        if( val != null ){
-          gObj[ name ] = val;
-        }
-      };
+" "" "" "" "" "" ""v""a""r"" ""g""O""b""j"" ""="" ""{""}"";"
+" "" "" "" "" "" ""v""a""r"" ""s""e""t""G""O""b""j"" ""="" ""f""u""n""c""t""i""o""n""("" ""n""a""m""e"","" ""v""a""l"" "")""{"
+" "" "" "" "" "" "" "" ""i""f""("" ""v""a""l"" ""!""="" ""n""u""l""l"" "")""{"
+" "" "" "" "" "" "" "" "" "" ""g""O""b""j""["" ""n""a""m""e"" ""]"" ""="" ""v""a""l"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"";"
 
-      setGObj( 'nodesep', options.nodeSep );
-      setGObj( 'edgesep', options.edgeSep );
-      setGObj( 'ranksep', options.rankSep );
-      setGObj( 'rankdir', options.rankDir );
+" "" "" "" "" "" ""s""e""t""G""O""b""j""("" ""'""n""o""d""e""s""e""p""'"","" ""o""p""t""i""o""n""s"".""n""o""d""e""S""e""p"" "")"";"
+" "" "" "" "" "" ""s""e""t""G""O""b""j""("" ""'""e""d""g""e""s""e""p""'"","" ""o""p""t""i""o""n""s"".""e""d""g""e""S""e""p"" "")"";"
+" "" "" "" "" "" ""s""e""t""G""O""b""j""("" ""'""r""a""n""k""s""e""p""'"","" ""o""p""t""i""o""n""s"".""r""a""n""k""S""e""p"" "")"";"
+" "" "" "" "" "" ""s""e""t""G""O""b""j""("" ""'""r""a""n""k""d""i""r""'"","" ""o""p""t""i""o""n""s"".""r""a""n""k""D""i""r"" "")"";"
 
-      g.setGraph( gObj );
+" "" "" "" "" "" ""g"".""s""e""t""G""r""a""p""h""("" ""g""O""b""j"" "")"";"
 
-      g.setDefaultEdgeLabel(function() { return {}; });
-      g.setDefaultNodeLabel(function() { return {}; });
+" "" "" "" "" "" ""g"".""s""e""t""D""e""f""a""u""l""t""E""d""g""e""L""a""b""e""l""(""f""u""n""c""t""i""o""n""("")"" ""{"" ""r""e""t""u""r""n"" ""{""}"";"" ""}"")"";"
+" "" "" "" "" "" ""g"".""s""e""t""D""e""f""a""u""l""t""N""o""d""e""L""a""b""e""l""(""f""u""n""c""t""i""o""n""("")"" ""{"" ""r""e""t""u""r""n"" ""{""}"";"" ""}"")"";"
 
-      // add nodes to dagre
-      var nodes = eles.nodes();
-      for( var i = 0; i < nodes.length; i++ ){
-        var node = nodes[i];
-        var nbb = node.boundingBox();
+" "" "" "" "" "" ""/""/"" ""a""d""d"" ""n""o""d""e""s"" ""t""o"" ""d""a""g""r""e"
+" "" "" "" "" "" ""v""a""r"" ""n""o""d""e""s"" ""="" ""e""l""e""s"".""n""o""d""e""s""("")"";"
+" "" "" "" "" "" ""f""o""r""("" ""v""a""r"" ""i"" ""="" ""0"";"" ""i"" ""<"" ""n""o""d""e""s"".""l""e""n""g""t""h"";"" ""i""+""+"" "")""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""n""o""d""e"" ""="" ""n""o""d""e""s""[""i""]"";"
+" "" "" "" "" "" "" "" ""v""a""r"" ""n""b""b"" ""="" ""n""o""d""e"".""b""o""u""n""d""i""n""g""B""o""x""("")"";"
 
-        g.setNode( node.id(), {
-          width: nbb.w,
-          height: nbb.h,
-          name: node.id()
-        } );
+" "" "" "" "" "" "" "" ""g"".""s""e""t""N""o""d""e""("" ""n""o""d""e"".""i""d""("")"","" ""{"
+" "" "" "" "" "" "" "" "" "" ""w""i""d""t""h"":"" ""n""b""b"".""w"","
+" "" "" "" "" "" "" "" "" "" ""h""e""i""g""h""t"":"" ""n""b""b"".""h"","
+" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""n""o""d""e"".""i""d""("")"
+" "" "" "" "" "" "" "" ""}"" "")"";"
 
-        // console.log( g.node(node.id()) );
-      }
+" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""s""o""l""e"".""l""o""g""("" ""g"".""n""o""d""e""(""n""o""d""e"".""i""d""("")"")"" "")"";"
+" "" "" "" "" "" ""}"
 
-      // set compound parents
-      for( var i = 0; i < nodes.length; i++ ){
-        var node = nodes[i];
+" "" "" "" "" "" ""/""/"" ""s""e""t"" ""c""o""m""p""o""u""n""d"" ""p""a""r""e""n""t""s"
+" "" "" "" "" "" ""f""o""r""("" ""v""a""r"" ""i"" ""="" ""0"";"" ""i"" ""<"" ""n""o""d""e""s"".""l""e""n""g""t""h"";"" ""i""+""+"" "")""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""n""o""d""e"" ""="" ""n""o""d""e""s""[""i""]"";"
 
-        if( node.isChild() ){
-          g.setParent( node.id(), node.parent().id() );
-        }
-      }
+" "" "" "" "" "" "" "" ""i""f""("" ""n""o""d""e"".""i""s""C""h""i""l""d""("")"" "")""{"
+" "" "" "" "" "" "" "" "" "" ""g"".""s""e""t""P""a""r""e""n""t""("" ""n""o""d""e"".""i""d""("")"","" ""n""o""d""e"".""p""a""r""e""n""t""("")"".""i""d""("")"" "")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
 
-      // add edges to dagre
-      var edges = eles.edges().stdFilter(function( edge ){
-        return !edge.source().isParent() && !edge.target().isParent(); // dagre can't handle edges on compound nodes
-      });
-      for( var i = 0; i < edges.length; i++ ){
-        var edge = edges[i];
+" "" "" "" "" "" ""/""/"" ""a""d""d"" ""e""d""g""e""s"" ""t""o"" ""d""a""g""r""e"
+" "" "" "" "" "" ""v""a""r"" ""e""d""g""e""s"" ""="" ""e""l""e""s"".""e""d""g""e""s""("")"".""s""t""d""F""i""l""t""e""r""(""f""u""n""c""t""i""o""n""("" ""e""d""g""e"" "")""{"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""!""e""d""g""e"".""s""o""u""r""c""e""("")"".""i""s""P""a""r""e""n""t""("")"" ""&""&"" ""!""e""d""g""e"".""t""a""r""g""e""t""("")"".""i""s""P""a""r""e""n""t""("")"";"" ""/""/"" ""d""a""g""r""e"" ""c""a""n""'""t"" ""h""a""n""d""l""e"" ""e""d""g""e""s"" ""o""n"" ""c""o""m""p""o""u""n""d"" ""n""o""d""e""s"
+" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" ""f""o""r""("" ""v""a""r"" ""i"" ""="" ""0"";"" ""i"" ""<"" ""e""d""g""e""s"".""l""e""n""g""t""h"";"" ""i""+""+"" "")""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""e""d""g""e"" ""="" ""e""d""g""e""s""[""i""]"";"
 
-        g.setEdge( edge.source().id(), edge.target().id(), {
-          minlen: getVal( edge, options.minLen ),
-          weight: getVal( edge, options.edgeWeight ),
-          name: edge.id()
-        }, edge.id() );
+" "" "" "" "" "" "" "" ""g"".""s""e""t""E""d""g""e""("" ""e""d""g""e"".""s""o""u""r""c""e""("")"".""i""d""("")"","" ""e""d""g""e"".""t""a""r""g""e""t""("")"".""i""d""("")"","" ""{"
+" "" "" "" "" "" "" "" "" "" ""m""i""n""l""e""n"":"" ""g""e""t""V""a""l""("" ""e""d""g""e"","" ""o""p""t""i""o""n""s"".""m""i""n""L""e""n"" "")"","
+" "" "" "" "" "" "" "" "" "" ""w""e""i""g""h""t"":"" ""g""e""t""V""a""l""("" ""e""d""g""e"","" ""o""p""t""i""o""n""s"".""e""d""g""e""W""e""i""g""h""t"" "")"","
+" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""e""d""g""e"".""i""d""("")"
+" "" "" "" "" "" "" "" ""}"","" ""e""d""g""e"".""i""d""("")"" "")"";"
 
-        // console.log( g.edge(edge.source().id(), edge.target().id(), edge.id()) );
-      }
+" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""s""o""l""e"".""l""o""g""("" ""g"".""e""d""g""e""(""e""d""g""e"".""s""o""u""r""c""e""("")"".""i""d""("")"","" ""e""d""g""e"".""t""a""r""g""e""t""("")"".""i""d""("")"","" ""e""d""g""e"".""i""d""("")"")"" "")"";"
+" "" "" "" "" "" ""}"
 
-      dagre.layout( g );
+" "" "" "" "" "" ""d""a""g""r""e"".""l""a""y""o""u""t""("" ""g"" "")"";"
 
-      var gNodeIds = g.nodes();
-      for( var i = 0; i < gNodeIds.length; i++ ){
-        var id = gNodeIds[i];
-        var n = g.node( id );
+" "" "" "" "" "" ""v""a""r"" ""g""N""o""d""e""I""d""s"" ""="" ""g"".""n""o""d""e""s""("")"";"
+" "" "" "" "" "" ""f""o""r""("" ""v""a""r"" ""i"" ""="" ""0"";"" ""i"" ""<"" ""g""N""o""d""e""I""d""s"".""l""e""n""g""t""h"";"" ""i""+""+"" "")""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""i""d"" ""="" ""g""N""o""d""e""I""d""s""[""i""]"";"
+" "" "" "" "" "" "" "" ""v""a""r"" ""n"" ""="" ""g"".""n""o""d""e""("" ""i""d"" "")"";"
 
-        cy.getElementById(id).scratch().dagre = n;
-      }
+" "" "" "" "" "" "" "" ""c""y"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""(""i""d"")"".""s""c""r""a""t""c""h""("")"".""d""a""g""r""e"" ""="" ""n"";"
+" "" "" "" "" "" ""}"
 
-      var dagreBB;
+" "" "" "" "" "" ""v""a""r"" ""d""a""g""r""e""B""B"";"
 
-      if( options.boundingBox ){
-        dagreBB = { x1: Infinity, x2: -Infinity, y1: Infinity, y2: -Infinity };
-        nodes.forEach(function( node ){
-          var dModel = node.scratch().dagre;
+" "" "" "" "" "" ""i""f""("" ""o""p""t""i""o""n""s"".""b""o""u""n""d""i""n""g""B""o""x"" "")""{"
+" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"" ""="" ""{"" ""x""1"":"" ""I""n""f""i""n""i""t""y"","" ""x""2"":"" ""-""I""n""f""i""n""i""t""y"","" ""y""1"":"" ""I""n""f""i""n""i""t""y"","" ""y""2"":"" ""-""I""n""f""i""n""i""t""y"" ""}"";"
+" "" "" "" "" "" "" "" ""n""o""d""e""s"".""f""o""r""E""a""c""h""(""f""u""n""c""t""i""o""n""("" ""n""o""d""e"" "")""{"
+" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""d""M""o""d""e""l"" ""="" ""n""o""d""e"".""s""c""r""a""t""c""h""("")"".""d""a""g""r""e"";"
 
-          dagreBB.x1 = Math.min( dagreBB.x1, dModel.x );
-          dagreBB.x2 = Math.max( dagreBB.x2, dModel.x );
+" "" "" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"".""x""1"" ""="" ""M""a""t""h"".""m""i""n""("" ""d""a""g""r""e""B""B"".""x""1"","" ""d""M""o""d""e""l"".""x"" "")"";"
+" "" "" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"".""x""2"" ""="" ""M""a""t""h"".""m""a""x""("" ""d""a""g""r""e""B""B"".""x""2"","" ""d""M""o""d""e""l"".""x"" "")"";"
 
-          dagreBB.y1 = Math.min( dagreBB.y1, dModel.y );
-          dagreBB.y2 = Math.max( dagreBB.y2, dModel.y );
-        });
+" "" "" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"".""y""1"" ""="" ""M""a""t""h"".""m""i""n""("" ""d""a""g""r""e""B""B"".""y""1"","" ""d""M""o""d""e""l"".""y"" "")"";"
+" "" "" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"".""y""2"" ""="" ""M""a""t""h"".""m""a""x""("" ""d""a""g""r""e""B""B"".""y""2"","" ""d""M""o""d""e""l"".""y"" "")"";"
+" "" "" "" "" "" "" "" ""}"")"";"
 
-        dagreBB.w = dagreBB.x2 - dagreBB.x1;
-        dagreBB.h = dagreBB.y2 - dagreBB.y1;
-      } else {
-        dagreBB = bb;
-      }
+" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"".""w"" ""="" ""d""a""g""r""e""B""B"".""x""2"" ""-"" ""d""a""g""r""e""B""B"".""x""1"";"
+" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"".""h"" ""="" ""d""a""g""r""e""B""B"".""y""2"" ""-"" ""d""a""g""r""e""B""B"".""y""1"";"
+" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" ""d""a""g""r""e""B""B"" ""="" ""b""b"";"
+" "" "" "" "" "" ""}"
 
-      var constrainPos = function( p ){
-        if( options.boundingBox ){
-          var xPct = dagreBB.w === 0 ? 0 : (p.x - dagreBB.x1) / dagreBB.w;
-          var yPct = dagreBB.h === 0 ? 0 : (p.y - dagreBB.y1) / dagreBB.h;
+" "" "" "" "" "" ""v""a""r"" ""c""o""n""s""t""r""a""i""n""P""o""s"" ""="" ""f""u""n""c""t""i""o""n""("" ""p"" "")""{"
+" "" "" "" "" "" "" "" ""i""f""("" ""o""p""t""i""o""n""s"".""b""o""u""n""d""i""n""g""B""o""x"" "")""{"
+" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""x""P""c""t"" ""="" ""d""a""g""r""e""B""B"".""w"" ""=""=""="" ""0"" ""?"" ""0"" "":"" ""(""p"".""x"" ""-"" ""d""a""g""r""e""B""B"".""x""1"")"" ""/"" ""d""a""g""r""e""B""B"".""w"";"
+" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""y""P""c""t"" ""="" ""d""a""g""r""e""B""B"".""h"" ""=""=""="" ""0"" ""?"" ""0"" "":"" ""(""p"".""y"" ""-"" ""d""a""g""r""e""B""B"".""y""1"")"" ""/"" ""d""a""g""r""e""B""B"".""h"";"
 
-          return {
-            x: bb.x1 + xPct * bb.w,
-            y: bb.y1 + yPct * bb.h
-          };
-        } else {
-          return p;
-        }
-      };
+" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""x"":"" ""b""b"".""x""1"" ""+"" ""x""P""c""t"" ""*"" ""b""b"".""w"","
+" "" "" "" "" "" "" "" "" "" "" "" ""y"":"" ""b""b"".""y""1"" ""+"" ""y""P""c""t"" ""*"" ""b""b"".""h"
+" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""p"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"";"
 
-      nodes.layoutPositions(layout, options, function(){
-        var dModel = this.scratch().dagre;
+" "" "" "" "" "" ""n""o""d""e""s"".""l""a""y""o""u""t""P""o""s""i""t""i""o""n""s""(""l""a""y""o""u""t"","" ""o""p""t""i""o""n""s"","" ""f""u""n""c""t""i""o""n""("")""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""d""M""o""d""e""l"" ""="" ""t""h""i""s"".""s""c""r""a""t""c""h""("")"".""d""a""g""r""e"";"
 
-        return constrainPos({
-          x: dModel.x,
-          y: dModel.y
-        });
-      });
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""c""o""n""s""t""r""a""i""n""P""o""s""(""{"
+" "" "" "" "" "" "" "" "" "" ""x"":"" ""d""M""o""d""e""l"".""x"","
+" "" "" "" "" "" "" "" "" "" ""y"":"" ""d""M""o""d""e""l"".""y"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" ""}"")"";"
 
-      return this; // chaining
-    };
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"" ""/""/"" ""c""h""a""i""n""i""n""g"
+" "" "" "" ""}"";"
 
-    cytoscape('layout', 'dagre', DagreLayout);
+" "" "" "" ""c""y""t""o""s""c""a""p""e""(""'""l""a""y""o""u""t""'"","" ""'""d""a""g""r""e""'"","" ""D""a""g""r""e""L""a""y""o""u""t"")"";"
 
-  };
+" "" ""}"";"
 
-  if( typeof module !== 'undefined' && module.exports ){ // expose as a commonjs module
-    module.exports = register;
-  }
+" "" ""i""f""("" ""t""y""p""e""o""f"" ""m""o""d""u""l""e"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"" ""&""&"" ""m""o""d""u""l""e"".""e""x""p""o""r""t""s"" "")""{"" ""/""/"" ""e""x""p""o""s""e"" ""a""s"" ""a"" ""c""o""m""m""o""n""j""s"" ""m""o""d""u""l""e"
+" "" "" "" ""m""o""d""u""l""e"".""e""x""p""o""r""t""s"" ""="" ""r""e""g""i""s""t""e""r"";"
+" "" ""}"
 
-  if( typeof define !== 'undefined' && define.amd ){ // expose as an amd/requirejs module
-    define('cytoscape-dagre', function(){
-      return register;
-    });
-  }
+" "" ""i""f""("" ""t""y""p""e""o""f"" ""d""e""f""i""n""e"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"" ""&""&"" ""d""e""f""i""n""e"".""a""m""d"" "")""{"" ""/""/"" ""e""x""p""o""s""e"" ""a""s"" ""a""n"" ""a""m""d""/""r""e""q""u""i""r""e""j""s"" ""m""o""d""u""l""e"
+" "" "" "" ""d""e""f""i""n""e""(""'""c""y""t""o""s""c""a""p""e""-""d""a""g""r""e""'"","" ""f""u""n""c""t""i""o""n""("")""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""r""e""g""i""s""t""e""r"";"
+" "" "" "" ""}"")"";"
+" "" ""}"
 
-  if( typeof cytoscape !== 'undefined' && typeof dagre !== 'undefined' ){ // expose to global cytoscape (i.e. window.cytoscape)
-    register( cytoscape, dagre );
-  }
+" "" ""i""f""("" ""t""y""p""e""o""f"" ""c""y""t""o""s""c""a""p""e"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"" ""&""&"" ""t""y""p""e""o""f"" ""d""a""g""r""e"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"" "")""{"" ""/""/"" ""e""x""p""o""s""e"" ""t""o"" ""g""l""o""b""a""l"" ""c""y""t""o""s""c""a""p""e"" ""(""i"".""e""."" ""w""i""n""d""o""w"".""c""y""t""o""s""c""a""p""e"")"
+" "" "" "" ""r""e""g""i""s""t""e""r""("" ""c""y""t""o""s""c""a""p""e"","" ""d""a""g""r""e"" "")"";"
+" "" ""}"
 
-})();
+"}"")""("")"";"

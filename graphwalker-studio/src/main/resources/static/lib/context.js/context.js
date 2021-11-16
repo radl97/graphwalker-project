@@ -1,141 +1,141 @@
-/* 
- * Context.js
- * Copyright Jacob Kelley
- * MIT License
- */
+"/""*"" "
+" ""*"" ""C""o""n""t""e""x""t"".""j""s"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""J""a""c""o""b"" ""K""e""l""l""e""y"
+" ""*"" ""M""I""T"" ""L""i""c""e""n""s""e"
+" ""*""/"
 
-var context = context || (function () {
-    
-	var options = {
-		fadeSpeed: 100,
-		filter: function ($obj) {
-			// Modify $obj, Do not return
-		},
-		above: 'auto',
-		preventDoubleContext: true,
-		compress: false
-	};
+"v""a""r"" ""c""o""n""t""e""x""t"" ""="" ""c""o""n""t""e""x""t"" ""|""|"" ""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "
+"	""v""a""r"" ""o""p""t""i""o""n""s"" ""="" ""{"
+"	""	""f""a""d""e""S""p""e""e""d"":"" ""1""0""0"","
+"	""	""f""i""l""t""e""r"":"" ""f""u""n""c""t""i""o""n"" ""(""$""o""b""j"")"" ""{"
+"	""	""	""/""/"" ""M""o""d""i""f""y"" ""$""o""b""j"","" ""D""o"" ""n""o""t"" ""r""e""t""u""r""n"
+"	""	""}"","
+"	""	""a""b""o""v""e"":"" ""'""a""u""t""o""'"","
+"	""	""p""r""e""v""e""n""t""D""o""u""b""l""e""C""o""n""t""e""x""t"":"" ""t""r""u""e"","
+"	""	""c""o""m""p""r""e""s""s"":"" ""f""a""l""s""e"
+"	""}"";"
 
-	function initialize(opts) {
-		
-		options = $.extend({}, options, opts);
-		
-		$(document).on('click', 'html', function () {
-			$('.dropdown-context').fadeOut(options.fadeSpeed, function(){
-				$('.dropdown-context').css({display:''}).find('.drop-left').removeClass('drop-left');
-			});
-		});
-		if(options.preventDoubleContext){
-			$(document).on('contextmenu', '.dropdown-context', function (e) {
-				e.preventDefault();
-			});
-		}
-		$(document).on('mouseenter', '.dropdown-submenu', function(){
-			var $sub = $(this).find('.dropdown-context-sub:first'),
-				subWidth = $sub.width(),
-				subLeft = $sub.offset().left,
-				collision = (subWidth+subLeft) > window.innerWidth;
-			if(collision){
-				$sub.addClass('drop-left');
-			}
-		});
-		
-	}
+"	""f""u""n""c""t""i""o""n"" ""i""n""i""t""i""a""l""i""z""e""(""o""p""t""s"")"" ""{"
+"	""	"
+"	""	""o""p""t""i""o""n""s"" ""="" ""$"".""e""x""t""e""n""d""(""{""}"","" ""o""p""t""i""o""n""s"","" ""o""p""t""s"")"";"
+"	""	"
+"	""	""$""(""d""o""c""u""m""e""n""t"")"".""o""n""(""'""c""l""i""c""k""'"","" ""'""h""t""m""l""'"","" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+"	""	""	""$""(""'"".""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""'"")"".""f""a""d""e""O""u""t""(""o""p""t""i""o""n""s"".""f""a""d""e""S""p""e""e""d"","" ""f""u""n""c""t""i""o""n""("")""{"
+"	""	""	""	""$""(""'"".""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""'"")"".""c""s""s""(""{""d""i""s""p""l""a""y"":""'""'""}"")"".""f""i""n""d""(""'"".""d""r""o""p""-""l""e""f""t""'"")"".""r""e""m""o""v""e""C""l""a""s""s""(""'""d""r""o""p""-""l""e""f""t""'"")"";"
+"	""	""	""}"")"";"
+"	""	""}"")"";"
+"	""	""i""f""(""o""p""t""i""o""n""s"".""p""r""e""v""e""n""t""D""o""u""b""l""e""C""o""n""t""e""x""t"")""{"
+"	""	""	""$""(""d""o""c""u""m""e""n""t"")"".""o""n""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""'"".""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""'"","" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+"	""	""	""	""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+"	""	""	""}"")"";"
+"	""	""}"
+"	""	""$""(""d""o""c""u""m""e""n""t"")"".""o""n""(""'""m""o""u""s""e""e""n""t""e""r""'"","" ""'"".""d""r""o""p""d""o""w""n""-""s""u""b""m""e""n""u""'"","" ""f""u""n""c""t""i""o""n""("")""{"
+"	""	""	""v""a""r"" ""$""s""u""b"" ""="" ""$""(""t""h""i""s"")"".""f""i""n""d""(""'"".""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""-""s""u""b"":""f""i""r""s""t""'"")"","
+"	""	""	""	""s""u""b""W""i""d""t""h"" ""="" ""$""s""u""b"".""w""i""d""t""h""("")"","
+"	""	""	""	""s""u""b""L""e""f""t"" ""="" ""$""s""u""b"".""o""f""f""s""e""t""("")"".""l""e""f""t"","
+"	""	""	""	""c""o""l""l""i""s""i""o""n"" ""="" ""(""s""u""b""W""i""d""t""h""+""s""u""b""L""e""f""t"")"" "">"" ""w""i""n""d""o""w"".""i""n""n""e""r""W""i""d""t""h"";"
+"	""	""	""i""f""(""c""o""l""l""i""s""i""o""n"")""{"
+"	""	""	""	""$""s""u""b"".""a""d""d""C""l""a""s""s""(""'""d""r""o""p""-""l""e""f""t""'"")"";"
+"	""	""	""}"
+"	""	""}"")"";"
+"	""	"
+"	""}"
 
-	function updateOptions(opts){
-		options = $.extend({}, options, opts);
-	}
+"	""f""u""n""c""t""i""o""n"" ""u""p""d""a""t""e""O""p""t""i""o""n""s""(""o""p""t""s"")""{"
+"	""	""o""p""t""i""o""n""s"" ""="" ""$"".""e""x""t""e""n""d""(""{""}"","" ""o""p""t""i""o""n""s"","" ""o""p""t""s"")"";"
+"	""}"
 
-	function buildMenu(data, id, subMenu) {
-		var subClass = (subMenu) ? ' dropdown-context-sub' : '',
-			compressed = options.compress ? ' compressed-context' : '',
-			$menu = $('<ul class="dropdown-menu dropdown-context' + subClass + compressed+'" id="dropdown-' + id + '"></ul>');
-        var i = 0, linkTarget = '';
-        for(i; i<data.length; i++) {
-        	if (typeof data[i].divider !== 'undefined') {
-				$menu.append('<li class="divider"></li>');
-			} else if (typeof data[i].header !== 'undefined') {
-				$menu.append('<li class="nav-header">' + data[i].header + '</li>');
-			} else {
-				if (typeof data[i].href == 'undefined') {
-					data[i].href = '#';
-				}
-				if (typeof data[i].target !== 'undefined') {
-					linkTarget = ' target="'+data[i].target+'"';
-				}
-				if (typeof data[i].subMenu !== 'undefined') {
-					$sub = ('<li class="dropdown-submenu"><a tabindex="-1" href="' + data[i].href + '">' + data[i].text + '</a></li>');
-				} else {
-					$sub = $('<li><a tabindex="-1" href="' + data[i].href + '"'+linkTarget+'>' + data[i].text + '</a></li>');
-				}
-				if (typeof data[i].action !== 'undefined') {
-					var actiond = new Date(),
-						actionID = 'event-' + actiond.getTime() * Math.floor(Math.random()*100000),
-						eventAction = data[i].action;
-					$sub.find('a').attr('id', actionID);
-					$('#' + actionID).addClass('context-event');
-					$(document).on('click', '#' + actionID, eventAction);
-				}
-				$menu.append($sub);
-				if (typeof data[i].subMenu != 'undefined') {
-					var subMenuData = buildMenu(data[i].subMenu, id, true);
-					$menu.find('li:last').append(subMenuData);
-				}
-			}
-			if (typeof options.filter == 'function') {
-				options.filter($menu.find('li:last'));
-			}
-		}
-		return $menu;
-	}
+"	""f""u""n""c""t""i""o""n"" ""b""u""i""l""d""M""e""n""u""(""d""a""t""a"","" ""i""d"","" ""s""u""b""M""e""n""u"")"" ""{"
+"	""	""v""a""r"" ""s""u""b""C""l""a""s""s"" ""="" ""(""s""u""b""M""e""n""u"")"" ""?"" ""'"" ""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""-""s""u""b""'"" "":"" ""'""'"","
+"	""	""	""c""o""m""p""r""e""s""s""e""d"" ""="" ""o""p""t""i""o""n""s"".""c""o""m""p""r""e""s""s"" ""?"" ""'"" ""c""o""m""p""r""e""s""s""e""d""-""c""o""n""t""e""x""t""'"" "":"" ""'""'"","
+"	""	""	""$""m""e""n""u"" ""="" ""$""(""'""<""u""l"" ""c""l""a""s""s""="""""d""r""o""p""d""o""w""n""-""m""e""n""u"" ""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""'"" ""+"" ""s""u""b""C""l""a""s""s"" ""+"" ""c""o""m""p""r""e""s""s""e""d""+""'""""" ""i""d""="""""d""r""o""p""d""o""w""n""-""'"" ""+"" ""i""d"" ""+"" ""'""""">""<""/""u""l"">""'"")"";"
+" "" "" "" "" "" "" "" ""v""a""r"" ""i"" ""="" ""0"","" ""l""i""n""k""T""a""r""g""e""t"" ""="" ""'""'"";"
+" "" "" "" "" "" "" "" ""f""o""r""(""i"";"" ""i""<""d""a""t""a"".""l""e""n""g""t""h"";"" ""i""+""+"")"" ""{"
+" "" "" "" "" "" "" "" ""	""i""f"" ""(""t""y""p""e""o""f"" ""d""a""t""a""[""i""]"".""d""i""v""i""d""e""r"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+"	""	""	""	""$""m""e""n""u"".""a""p""p""e""n""d""(""'""<""l""i"" ""c""l""a""s""s""="""""d""i""v""i""d""e""r""""">""<""/""l""i"">""'"")"";"
+"	""	""	""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""d""a""t""a""[""i""]"".""h""e""a""d""e""r"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+"	""	""	""	""$""m""e""n""u"".""a""p""p""e""n""d""(""'""<""l""i"" ""c""l""a""s""s""="""""n""a""v""-""h""e""a""d""e""r""""">""'"" ""+"" ""d""a""t""a""[""i""]"".""h""e""a""d""e""r"" ""+"" ""'""<""/""l""i"">""'"")"";"
+"	""	""	""}"" ""e""l""s""e"" ""{"
+"	""	""	""	""i""f"" ""(""t""y""p""e""o""f"" ""d""a""t""a""[""i""]"".""h""r""e""f"" ""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+"	""	""	""	""	""d""a""t""a""[""i""]"".""h""r""e""f"" ""="" ""'""#""'"";"
+"	""	""	""	""}"
+"	""	""	""	""i""f"" ""(""t""y""p""e""o""f"" ""d""a""t""a""[""i""]"".""t""a""r""g""e""t"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+"	""	""	""	""	""l""i""n""k""T""a""r""g""e""t"" ""="" ""'"" ""t""a""r""g""e""t""="""""'""+""d""a""t""a""[""i""]"".""t""a""r""g""e""t""+""'"""""'"";"
+"	""	""	""	""}"
+"	""	""	""	""i""f"" ""(""t""y""p""e""o""f"" ""d""a""t""a""[""i""]"".""s""u""b""M""e""n""u"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+"	""	""	""	""	""$""s""u""b"" ""="" ""(""'""<""l""i"" ""c""l""a""s""s""="""""d""r""o""p""d""o""w""n""-""s""u""b""m""e""n""u""""">""<""a"" ""t""a""b""i""n""d""e""x""="""""-""1""""" ""h""r""e""f""="""""'"" ""+"" ""d""a""t""a""[""i""]"".""h""r""e""f"" ""+"" ""'""""">""'"" ""+"" ""d""a""t""a""[""i""]"".""t""e""x""t"" ""+"" ""'""<""/""a"">""<""/""l""i"">""'"")"";"
+"	""	""	""	""}"" ""e""l""s""e"" ""{"
+"	""	""	""	""	""$""s""u""b"" ""="" ""$""(""'""<""l""i"">""<""a"" ""t""a""b""i""n""d""e""x""="""""-""1""""" ""h""r""e""f""="""""'"" ""+"" ""d""a""t""a""[""i""]"".""h""r""e""f"" ""+"" ""'"""""'""+""l""i""n""k""T""a""r""g""e""t""+""'"">""'"" ""+"" ""d""a""t""a""[""i""]"".""t""e""x""t"" ""+"" ""'""<""/""a"">""<""/""l""i"">""'"")"";"
+"	""	""	""	""}"
+"	""	""	""	""i""f"" ""(""t""y""p""e""o""f"" ""d""a""t""a""[""i""]"".""a""c""t""i""o""n"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+"	""	""	""	""	""v""a""r"" ""a""c""t""i""o""n""d"" ""="" ""n""e""w"" ""D""a""t""e""("")"","
+"	""	""	""	""	""	""a""c""t""i""o""n""I""D"" ""="" ""'""e""v""e""n""t""-""'"" ""+"" ""a""c""t""i""o""n""d"".""g""e""t""T""i""m""e""("")"" ""*"" ""M""a""t""h"".""f""l""o""o""r""(""M""a""t""h"".""r""a""n""d""o""m""("")""*""1""0""0""0""0""0"")"","
+"	""	""	""	""	""	""e""v""e""n""t""A""c""t""i""o""n"" ""="" ""d""a""t""a""[""i""]"".""a""c""t""i""o""n"";"
+"	""	""	""	""	""$""s""u""b"".""f""i""n""d""(""'""a""'"")"".""a""t""t""r""(""'""i""d""'"","" ""a""c""t""i""o""n""I""D"")"";"
+"	""	""	""	""	""$""(""'""#""'"" ""+"" ""a""c""t""i""o""n""I""D"")"".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""e""v""e""n""t""'"")"";"
+"	""	""	""	""	""$""(""d""o""c""u""m""e""n""t"")"".""o""n""(""'""c""l""i""c""k""'"","" ""'""#""'"" ""+"" ""a""c""t""i""o""n""I""D"","" ""e""v""e""n""t""A""c""t""i""o""n"")"";"
+"	""	""	""	""}"
+"	""	""	""	""$""m""e""n""u"".""a""p""p""e""n""d""(""$""s""u""b"")"";"
+"	""	""	""	""i""f"" ""(""t""y""p""e""o""f"" ""d""a""t""a""[""i""]"".""s""u""b""M""e""n""u"" ""!""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+"	""	""	""	""	""v""a""r"" ""s""u""b""M""e""n""u""D""a""t""a"" ""="" ""b""u""i""l""d""M""e""n""u""(""d""a""t""a""[""i""]"".""s""u""b""M""e""n""u"","" ""i""d"","" ""t""r""u""e"")"";"
+"	""	""	""	""	""$""m""e""n""u"".""f""i""n""d""(""'""l""i"":""l""a""s""t""'"")"".""a""p""p""e""n""d""(""s""u""b""M""e""n""u""D""a""t""a"")"";"
+"	""	""	""	""}"
+"	""	""	""}"
+"	""	""	""i""f"" ""(""t""y""p""e""o""f"" ""o""p""t""i""o""n""s"".""f""i""l""t""e""r"" ""=""="" ""'""f""u""n""c""t""i""o""n""'"")"" ""{"
+"	""	""	""	""o""p""t""i""o""n""s"".""f""i""l""t""e""r""(""$""m""e""n""u"".""f""i""n""d""(""'""l""i"":""l""a""s""t""'"")"")"";"
+"	""	""	""}"
+"	""	""}"
+"	""	""r""e""t""u""r""n"" ""$""m""e""n""u"";"
+"	""}"
 
-	function addContext(selector, data) {
-		
-		var d = new Date(),
-			id = d.getTime(),
-			$menu = buildMenu(data, id);
-			
-		$('body').append($menu);
-		
-		
-		$(document).on('contextmenu', selector, function (e) {
-			e.preventDefault();
-			e.stopPropagation();
-			
-			$('.dropdown-context:not(.dropdown-context-sub)').hide();
-			
-			$dd = $('#dropdown-' + id);
-			if (typeof options.above == 'boolean' && options.above) {
-				$dd.addClass('dropdown-context-up').css({
-					top: e.pageY - 20 - $('#dropdown-' + id).height(),
-					left: e.pageX - 13
-				}).fadeIn(options.fadeSpeed);
-			} else if (typeof options.above == 'string' && options.above == 'auto') {
-				$dd.removeClass('dropdown-context-up');
-				var autoH = $dd.height() + 12;
-				if ((e.pageY + autoH) > $('html').height()) {
-					$dd.addClass('dropdown-context-up').css({
-						top: e.pageY - 20 - autoH,
-						left: e.pageX - 13
-					}).fadeIn(options.fadeSpeed);
-				} else {
-					$dd.css({
-						top: e.pageY + 10,
-						left: e.pageX - 13
-					}).fadeIn(options.fadeSpeed);
-				}
-			}
-		});
-	}
-	
-	function destroyContext(selector) {
-		$(document).off('contextmenu', selector).off('click', '.context-event');
-	}
-	
-	return {
-		init: initialize,
-		settings: updateOptions,
-		attach: addContext,
-		destroy: destroyContext
-	};
-})();
+"	""f""u""n""c""t""i""o""n"" ""a""d""d""C""o""n""t""e""x""t""(""s""e""l""e""c""t""o""r"","" ""d""a""t""a"")"" ""{"
+"	""	"
+"	""	""v""a""r"" ""d"" ""="" ""n""e""w"" ""D""a""t""e""("")"","
+"	""	""	""i""d"" ""="" ""d"".""g""e""t""T""i""m""e""("")"","
+"	""	""	""$""m""e""n""u"" ""="" ""b""u""i""l""d""M""e""n""u""(""d""a""t""a"","" ""i""d"")"";"
+"	""	""	"
+"	""	""$""(""'""b""o""d""y""'"")"".""a""p""p""e""n""d""(""$""m""e""n""u"")"";"
+"	""	"
+"	""	"
+"	""	""$""(""d""o""c""u""m""e""n""t"")"".""o""n""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""s""e""l""e""c""t""o""r"","" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+"	""	""	""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+"	""	""	""e"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+"	""	""	"
+"	""	""	""$""(""'"".""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t"":""n""o""t""("".""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""-""s""u""b"")""'"")"".""h""i""d""e""("")"";"
+"	""	""	"
+"	""	""	""$""d""d"" ""="" ""$""(""'""#""d""r""o""p""d""o""w""n""-""'"" ""+"" ""i""d"")"";"
+"	""	""	""i""f"" ""(""t""y""p""e""o""f"" ""o""p""t""i""o""n""s"".""a""b""o""v""e"" ""=""="" ""'""b""o""o""l""e""a""n""'"" ""&""&"" ""o""p""t""i""o""n""s"".""a""b""o""v""e"")"" ""{"
+"	""	""	""	""$""d""d"".""a""d""d""C""l""a""s""s""(""'""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""-""u""p""'"")"".""c""s""s""(""{"
+"	""	""	""	""	""t""o""p"":"" ""e"".""p""a""g""e""Y"" ""-"" ""2""0"" ""-"" ""$""(""'""#""d""r""o""p""d""o""w""n""-""'"" ""+"" ""i""d"")"".""h""e""i""g""h""t""("")"","
+"	""	""	""	""	""l""e""f""t"":"" ""e"".""p""a""g""e""X"" ""-"" ""1""3"
+"	""	""	""	""}"")"".""f""a""d""e""I""n""(""o""p""t""i""o""n""s"".""f""a""d""e""S""p""e""e""d"")"";"
+"	""	""	""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""o""p""t""i""o""n""s"".""a""b""o""v""e"" ""=""="" ""'""s""t""r""i""n""g""'"" ""&""&"" ""o""p""t""i""o""n""s"".""a""b""o""v""e"" ""=""="" ""'""a""u""t""o""'"")"" ""{"
+"	""	""	""	""$""d""d"".""r""e""m""o""v""e""C""l""a""s""s""(""'""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""-""u""p""'"")"";"
+"	""	""	""	""v""a""r"" ""a""u""t""o""H"" ""="" ""$""d""d"".""h""e""i""g""h""t""("")"" ""+"" ""1""2"";"
+"	""	""	""	""i""f"" ""(""(""e"".""p""a""g""e""Y"" ""+"" ""a""u""t""o""H"")"" "">"" ""$""(""'""h""t""m""l""'"")"".""h""e""i""g""h""t""("")"")"" ""{"
+"	""	""	""	""	""$""d""d"".""a""d""d""C""l""a""s""s""(""'""d""r""o""p""d""o""w""n""-""c""o""n""t""e""x""t""-""u""p""'"")"".""c""s""s""(""{"
+"	""	""	""	""	""	""t""o""p"":"" ""e"".""p""a""g""e""Y"" ""-"" ""2""0"" ""-"" ""a""u""t""o""H"","
+"	""	""	""	""	""	""l""e""f""t"":"" ""e"".""p""a""g""e""X"" ""-"" ""1""3"
+"	""	""	""	""	""}"")"".""f""a""d""e""I""n""(""o""p""t""i""o""n""s"".""f""a""d""e""S""p""e""e""d"")"";"
+"	""	""	""	""}"" ""e""l""s""e"" ""{"
+"	""	""	""	""	""$""d""d"".""c""s""s""(""{"
+"	""	""	""	""	""	""t""o""p"":"" ""e"".""p""a""g""e""Y"" ""+"" ""1""0"","
+"	""	""	""	""	""	""l""e""f""t"":"" ""e"".""p""a""g""e""X"" ""-"" ""1""3"
+"	""	""	""	""	""}"")"".""f""a""d""e""I""n""(""o""p""t""i""o""n""s"".""f""a""d""e""S""p""e""e""d"")"";"
+"	""	""	""	""}"
+"	""	""	""}"
+"	""	""}"")"";"
+"	""}"
+"	"
+"	""f""u""n""c""t""i""o""n"" ""d""e""s""t""r""o""y""C""o""n""t""e""x""t""(""s""e""l""e""c""t""o""r"")"" ""{"
+"	""	""$""(""d""o""c""u""m""e""n""t"")"".""o""f""f""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""s""e""l""e""c""t""o""r"")"".""o""f""f""(""'""c""l""i""c""k""'"","" ""'"".""c""o""n""t""e""x""t""-""e""v""e""n""t""'"")"";"
+"	""}"
+"	"
+"	""r""e""t""u""r""n"" ""{"
+"	""	""i""n""i""t"":"" ""i""n""i""t""i""a""l""i""z""e"","
+"	""	""s""e""t""t""i""n""g""s"":"" ""u""p""d""a""t""e""O""p""t""i""o""n""s"","
+"	""	""a""t""t""a""c""h"":"" ""a""d""d""C""o""n""t""e""x""t"","
+"	""	""d""e""s""t""r""o""y"":"" ""d""e""s""t""r""o""y""C""o""n""t""e""x""t"
+"	""}"";"
+"}"")""("")"";"

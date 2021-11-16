@@ -1,153 +1,153 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>GraphWalker Studio</title>
-  <link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.12.1/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" type="text/css" href="lib/jquery-mobile-1.4.5/jquery.mobile-1.4.5.css">
-  <link rel="stylesheet" type="text/css" href="lib/context.js/context.standalone.css">
-  <style>
-    #loading-mask {
-      background-color: white;
-      height: 100%;
-      left: 0;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 9999;
-    }
-  </style>
-</head>
-<body>
-  <div id="loading-mask"></div>
-  <div data-role="page" id="panel-fixed-page1">
-    <div data-role="header" data-theme="a" data-position="fixed">
-      <h1>GraphWalker Studio</h1>
-      <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-      <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
-    </div>
+"<""!""D""O""C""T""Y""P""E"" ""h""t""m""l"">"
+"<""h""t""m""l"">"
+"<""h""e""a""d"">"
+" "" ""<""m""e""t""a"" ""c""h""a""r""s""e""t""="""""U""T""F""-""8""""">"
+" "" ""<""t""i""t""l""e"">""G""r""a""p""h""W""a""l""k""e""r"" ""S""t""u""d""i""o""<""/""t""i""t""l""e"">"
+" "" ""<""l""i""n""k"" ""r""e""l""="""""s""t""y""l""e""s""h""e""e""t""""" ""t""y""p""e""="""""t""e""x""t""/""c""s""s""""" ""h""r""e""f""="""""l""i""b""/""j""q""u""e""r""y""-""u""i""-""1"".""1""2"".""1""/""t""h""e""m""e""s""/""s""m""o""o""t""h""n""e""s""s""/""j""q""u""e""r""y""-""u""i"".""c""s""s""""">"
+" "" ""<""l""i""n""k"" ""r""e""l""="""""s""t""y""l""e""s""h""e""e""t""""" ""t""y""p""e""="""""t""e""x""t""/""c""s""s""""" ""h""r""e""f""="""""l""i""b""/""j""q""u""e""r""y""-""m""o""b""i""l""e""-""1"".""4"".""5""/""j""q""u""e""r""y"".""m""o""b""i""l""e""-""1"".""4"".""5"".""c""s""s""""">"
+" "" ""<""l""i""n""k"" ""r""e""l""="""""s""t""y""l""e""s""h""e""e""t""""" ""t""y""p""e""="""""t""e""x""t""/""c""s""s""""" ""h""r""e""f""="""""l""i""b""/""c""o""n""t""e""x""t"".""j""s""/""c""o""n""t""e""x""t"".""s""t""a""n""d""a""l""o""n""e"".""c""s""s""""">"
+" "" ""<""s""t""y""l""e"">"
+" "" "" "" ""#""l""o""a""d""i""n""g""-""m""a""s""k"" ""{"
+" "" "" "" "" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""w""h""i""t""e"";"
+" "" "" "" "" "" ""h""e""i""g""h""t"":"" ""1""0""0""%"";"
+" "" "" "" "" "" ""l""e""f""t"":"" ""0"";"
+" "" "" "" "" "" ""p""o""s""i""t""i""o""n"":"" ""f""i""x""e""d"";"
+" "" "" "" "" "" ""t""o""p"":"" ""0"";"
+" "" "" "" "" "" ""w""i""d""t""h"":"" ""1""0""0""%"";"
+" "" "" "" "" "" ""z""-""i""n""d""e""x"":"" ""9""9""9""9"";"
+" "" "" "" ""}"
+" "" ""<""/""s""t""y""l""e"">"
+"<""/""h""e""a""d"">"
+"<""b""o""d""y"">"
+" "" ""<""d""i""v"" ""i""d""="""""l""o""a""d""i""n""g""-""m""a""s""k""""">""<""/""d""i""v"">"
+" "" ""<""d""i""v"" ""d""a""t""a""-""r""o""l""e""="""""p""a""g""e""""" ""i""d""="""""p""a""n""e""l""-""f""i""x""e""d""-""p""a""g""e""1""""">"
+" "" "" "" ""<""d""i""v"" ""d""a""t""a""-""r""o""l""e""="""""h""e""a""d""e""r""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""d""a""t""a""-""p""o""s""i""t""i""o""n""="""""f""i""x""e""d""""">"
+" "" "" "" "" "" ""<""h""1"">""G""r""a""p""h""W""a""l""k""e""r"" ""S""t""u""d""i""o""<""/""h""1"">"
+" "" "" "" "" "" ""<""a"" ""h""r""e""f""="""""#""n""a""v""-""p""a""n""e""l""""" ""d""a""t""a""-""i""c""o""n""="""""b""a""r""s""""" ""d""a""t""a""-""i""c""o""n""p""o""s""="""""n""o""t""e""x""t""""">""M""e""n""u""<""/""a"">"
+" "" "" "" "" "" ""<""a"" ""h""r""e""f""="""""#""a""d""d""-""f""o""r""m""""" ""d""a""t""a""-""i""c""o""n""="""""g""e""a""r""""" ""d""a""t""a""-""i""c""o""n""p""o""s""="""""n""o""t""e""x""t""""">""A""d""d""<""/""a"">"
+" "" "" "" ""<""/""d""i""v"">"
 
-    <div data-role="content" class="jqm-content">
-      <div id="tabs">
-        <ul></ul>
-      </div>
-      <div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div>
-    </div>
+" "" "" "" ""<""d""i""v"" ""d""a""t""a""-""r""o""l""e""="""""c""o""n""t""e""n""t""""" ""c""l""a""s""s""="""""j""q""m""-""c""o""n""t""e""n""t""""">"
+" "" "" "" "" "" ""<""d""i""v"" ""i""d""="""""t""a""b""s""""">"
+" "" "" "" "" "" "" "" ""<""u""l"">""<""/""u""l"">"
+" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "" "" ""<""d""i""v"" ""d""a""t""a""-""d""e""m""o""-""h""t""m""l""="""""#""p""a""n""e""l""-""f""i""x""e""d""-""p""a""g""e""1""""" ""d""a""t""a""-""d""e""m""o""-""c""s""s""="""""t""r""u""e""""">""<""/""d""i""v"">"
+" "" "" "" ""<""/""d""i""v"">"
 
-    <div data-role="footer" data-position="fixed" data-theme="a">
-      <h4 id="issues">Fixed footer</h4>
-    </div>
+" "" "" "" ""<""d""i""v"" ""d""a""t""a""-""r""o""l""e""="""""f""o""o""t""e""r""""" ""d""a""t""a""-""p""o""s""i""t""i""o""n""="""""f""i""x""e""d""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""">"
+" "" "" "" "" "" ""<""h""4"" ""i""d""="""""i""s""s""u""e""s""""">""F""i""x""e""d"" ""f""o""o""t""e""r""<""/""h""4"">"
+" "" "" "" ""<""/""d""i""v"">"
 
-    <div data-role="panel" data-position-fixed="true" data-theme="a" id="nav-panel" data-dismissible="false">
-      <ul data-role="listview" data-theme="a" class="nav-search">
-        <li data-icon="delete">
-          <a href="#" data-rel="close">Close menu</a>
-        </li>
-      </ul>
+" "" "" "" ""<""d""i""v"" ""d""a""t""a""-""r""o""l""e""="""""p""a""n""e""l""""" ""d""a""t""a""-""p""o""s""i""t""i""o""n""-""f""i""x""e""d""="""""t""r""u""e""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""i""d""="""""n""a""v""-""p""a""n""e""l""""" ""d""a""t""a""-""d""i""s""m""i""s""s""i""b""l""e""="""""f""a""l""s""e""""">"
+" "" "" "" "" "" ""<""u""l"" ""d""a""t""a""-""r""o""l""e""="""""l""i""s""t""v""i""e""w""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""c""l""a""s""s""="""""n""a""v""-""s""e""a""r""c""h""""">"
+" "" "" "" "" "" "" "" ""<""l""i"" ""d""a""t""a""-""i""c""o""n""="""""d""e""l""e""t""e""""">"
+" "" "" "" "" "" "" "" "" "" ""<""a"" ""h""r""e""f""="""""#""""" ""d""a""t""a""-""r""e""l""="""""c""l""o""s""e""""">""C""l""o""s""e"" ""m""e""n""u""<""/""a"">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" ""<""/""u""l"">"
 
-      <ul data-role="listview" data-theme="a" class="nav-search">
-        </li>
-          <fieldset data-role="fieldcontain">
-            <button type='button' data-mini="true" id="newTest" onclick="graphwalker.studio.onNewTest()">New test</button>
-            <button type='button' data-mini="true" id="loadTest" onclick="graphwalker.studio.onLoadTest()">Load test</button>
-            <button type='button' data-mini="true" id="saveTest" onclick="graphwalker.studio.onSaveTest()">Save test</button>
-          </fieldset>
-         </li>
-      </ul>
+" "" "" "" "" "" ""<""u""l"" ""d""a""t""a""-""r""o""l""e""="""""l""i""s""t""v""i""e""w""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""c""l""a""s""s""="""""n""a""v""-""s""e""a""r""c""h""""">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" ""<""f""i""e""l""d""s""e""t"" ""d""a""t""a""-""r""o""l""e""="""""f""i""e""l""d""c""o""n""t""a""i""n""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""n""e""w""T""e""s""t""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""N""e""w""T""e""s""t""("")""""">""N""e""w"" ""t""e""s""t""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""l""o""a""d""T""e""s""t""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""L""o""a""d""T""e""s""t""("")""""">""L""o""a""d"" ""t""e""s""t""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""s""a""v""e""T""e""s""t""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""S""a""v""e""T""e""s""t""("")""""">""S""a""v""e"" ""t""e""s""t""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""f""i""e""l""d""s""e""t"">"
+" "" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" ""<""/""u""l"">"
 
-      <ul data-role="listview" data-theme="a" class="nav-search">
-        </li>
-        <fieldset data-role="fieldcontain">
-          <button type='button' data-mini="true" id="runTest" onclick="graphwalker.studio.onRunTest()">Run test</button>
-          <button type='button' data-mini="true" id="resetTest" onclick="graphwalker.studio.onResetTest()">Reset test</button>
-          <button type='button' data-mini="true" id="pausePlayExecution" onclick="graphwalker.studio.onPausePlayExecution(this)" value="Pause">Pause</button>
-          <button type='button' data-mini="true" id="stepExecution" onclick="graphwalker.studio.onStepExecution()">Step</button>
-        </fieldset>
+" "" "" "" "" "" ""<""u""l"" ""d""a""t""a""-""r""o""l""e""="""""l""i""s""t""v""i""e""w""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""c""l""a""s""s""="""""n""a""v""-""s""e""a""r""c""h""""">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" "" "" ""<""f""i""e""l""d""s""e""t"" ""d""a""t""a""-""r""o""l""e""="""""f""i""e""l""d""c""o""n""t""a""i""n""""">"
+" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""r""u""n""T""e""s""t""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""R""u""n""T""e""s""t""("")""""">""R""u""n"" ""t""e""s""t""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""r""e""s""e""t""T""e""s""t""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""R""e""s""e""t""T""e""s""t""("")""""">""R""e""s""e""t"" ""t""e""s""t""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""p""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""P""a""u""s""e""P""l""a""y""E""x""e""c""u""t""i""o""n""(""t""h""i""s"")""""" ""v""a""l""u""e""="""""P""a""u""s""e""""">""P""a""u""s""e""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""s""t""e""p""E""x""e""c""u""t""i""o""n""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""S""t""e""p""E""x""e""c""u""t""i""o""n""("")""""">""S""t""e""p""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" ""<""/""f""i""e""l""d""s""e""t"">"
 
-          <label for="executionSpeedSlider">Execution delay (ms)</label>
-          <input type="range" id="executionSpeedSlider" value="0" min="0" max="500" data-highlight="true"/>
-        </li>
-      </ul>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""e""x""e""c""u""t""i""o""n""S""p""e""e""d""S""l""i""d""e""r""""">""E""x""e""c""u""t""i""o""n"" ""d""e""l""a""y"" ""(""m""s"")""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""r""a""n""g""e""""" ""i""d""="""""e""x""e""c""u""t""i""o""n""S""p""e""e""d""S""l""i""d""e""r""""" ""v""a""l""u""e""="""""0""""" ""m""i""n""="""""0""""" ""m""a""x""="""""5""0""0""""" ""d""a""t""a""-""h""i""g""h""l""i""g""h""t""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" ""<""/""u""l"">"
 
-      <ul data-role="listview" data-theme="a" class="nav-search">
-        </li>
-        <fieldset data-role="fieldcontain">
-          <button type='button' data-mini="true" id="addModel" onclick="graphwalker.studio.onAddModel()">Add Model</button>
-          <button type='button' data-mini="true" id="doLayout" onclick="graphwalker.studio.onDoLayout()">Do layout</button>
-        </fieldset>
-        </li>
-      </ul>
+" "" "" "" "" "" ""<""u""l"" ""d""a""t""a""-""r""o""l""e""="""""l""i""s""t""v""i""e""w""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""c""l""a""s""s""="""""n""a""v""-""s""e""a""r""c""h""""">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" "" "" ""<""f""i""e""l""d""s""e""t"" ""d""a""t""a""-""r""o""l""e""="""""f""i""e""l""d""c""o""n""t""a""i""n""""">"
+" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""a""d""d""M""o""d""e""l""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""A""d""d""M""o""d""e""l""("")""""">""A""d""d"" ""M""o""d""e""l""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" "" "" ""<""b""u""t""t""o""n"" ""t""y""p""e""=""'""b""u""t""t""o""n""'"" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""d""o""L""a""y""o""u""t""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""D""o""L""a""y""o""u""t""("")""""">""D""o"" ""l""a""y""o""u""t""<""/""b""u""t""t""o""n"">"
+" "" "" "" "" "" "" "" ""<""/""f""i""e""l""d""s""e""t"">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" ""<""/""u""l"">"
 
-      <ul data-role="listview" data-theme="a" class="nav-search">
-        </li>
-          <label for="modelName">Model name:</label>
-          <input type="text" data-mini="true" id="modelName" value="" placeholder="model name"/>
+" "" "" "" "" "" ""<""u""l"" ""d""a""t""a""-""r""o""l""e""="""""l""i""s""t""v""i""e""w""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""c""l""a""s""s""="""""n""a""v""-""s""e""a""r""c""h""""">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""m""o""d""e""l""N""a""m""e""""">""M""o""d""e""l"" ""n""a""m""e"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""m""o""d""e""l""N""a""m""e""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""m""o""d""e""l"" ""n""a""m""e"""""/"">"
 
-          <label for="generator-builder">Model generator builder:</label>
-          <input type="text" data-mini="true" id="generator-builder" value="" value="" placeholder="generator builder"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""g""e""n""e""r""a""t""o""r""-""b""u""i""l""d""e""r""""">""M""o""d""e""l"" ""g""e""n""e""r""a""t""o""r"" ""b""u""i""l""d""e""r"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""g""e""n""e""r""a""t""o""r""-""b""u""i""l""d""e""r""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""g""e""n""e""r""a""t""o""r"" ""b""u""i""l""d""e""r"""""/"">"
 
-          <label for="generator">Model generator:</label>
-          <input type="text" data-mini="true" id="generator" value="" value="" placeholder="generator(s)"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""g""e""n""e""r""a""t""o""r""""">""M""o""d""e""l"" ""g""e""n""e""r""a""t""o""r"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""g""e""n""e""r""a""t""o""r""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""g""e""n""e""r""a""t""o""r""(""s"")"""""/"">"
 
-          <label for="modelActions">Model actions:</label>
-          <input type="text" data-mini="true" id="modelActions" value="" value="" placeholder="model action(s)"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""m""o""d""e""l""A""c""t""i""o""n""s""""">""M""o""d""e""l"" ""a""c""t""i""o""n""s"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""m""o""d""e""l""A""c""t""i""o""n""s""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""m""o""d""e""l"" ""a""c""t""i""o""n""(""s"")"""""/"">"
 
-          <label for="modelRequirement">Model requirement:</label>
-          <input type="text" data-mini="true" id="modelRequirement" value="" value="" placeholder="model requirement(s)"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""m""o""d""e""l""R""e""q""u""i""r""e""m""e""n""t""""">""M""o""d""e""l"" ""r""e""q""u""i""r""e""m""e""n""t"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""m""o""d""e""l""R""e""q""u""i""r""e""m""e""n""t""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""m""o""d""e""l"" ""r""e""q""u""i""r""e""m""e""n""t""(""s"")"""""/"">"
 
-          <label for="label">Element name:</label>
-          <input type="text" data-mini="true" id="label" value="" value="" placeholder="element name"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""l""a""b""e""l""""">""E""l""e""m""e""n""t"" ""n""a""m""e"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""l""a""b""e""l""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""e""l""e""m""e""n""t"" ""n""a""m""e"""""/"">"
 
-          <label for="label">Element id:</label>
-          <input type="text" data-mini="true" id="elementId" value="" readonly/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""l""a""b""e""l""""">""E""l""e""m""e""n""t"" ""i""d"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""e""l""e""m""e""n""t""I""d""""" ""v""a""l""u""e""="""""""" ""r""e""a""d""o""n""l""y""/"">"
 
-          <label for="sharedStateName">Shared name:</label>
-          <input type="text" data-mini="true" id="sharedStateName" value="" value="" placeholder="element shared name"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""s""h""a""r""e""d""S""t""a""t""e""N""a""m""e""""">""S""h""a""r""e""d"" ""n""a""m""e"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""s""h""a""r""e""d""S""t""a""t""e""N""a""m""e""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""e""l""e""m""e""n""t"" ""s""h""a""r""e""d"" ""n""a""m""e"""""/"">"
 
-          <label for="guard">Guard:</label>
-          <input type="text" data-mini="true" id="guard" value="" value="" placeholder="element guard"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""g""u""a""r""d""""">""G""u""a""r""d"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""g""u""a""r""d""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""e""l""e""m""e""n""t"" ""g""u""a""r""d"""""/"">"
 
-          <label for="weight">Weight:</label>
-          <input type="text" data-mini="true" id="weight" value="" value="" placeholder="element weight"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""w""e""i""g""h""t""""">""W""e""i""g""h""t"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""w""e""i""g""h""t""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""e""l""e""m""e""n""t"" ""w""e""i""g""h""t"""""/"">"
 
-          <label for="actions">Actions:</label>
-          <input type="text" data-mini="true" id="actions" value="" value="" placeholder="element action(s)"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""a""c""t""i""o""n""s""""">""A""c""t""i""o""n""s"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""a""c""t""i""o""n""s""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""e""l""e""m""e""n""t"" ""a""c""t""i""o""n""(""s"")"""""/"">"
 
-          <label for="requirements">Requirements:</label>
-          <input type="text" data-mini="true" id="requirements" value="" value="" placeholder="element requirement(s)"/>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""r""e""q""u""i""r""e""m""e""n""t""s""""">""R""e""q""u""i""r""e""m""e""n""t""s"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""r""e""q""u""i""r""e""m""e""n""t""s""""" ""v""a""l""u""e""="""""""" ""v""a""l""u""e""="""""""" ""p""l""a""c""e""h""o""l""d""e""r""="""""e""l""e""m""e""n""t"" ""r""e""q""u""i""r""e""m""e""n""t""(""s"")"""""/"">"
 
-          <label for="checkboxStartElement">Start element:</label>
-          <input type="checkbox" data-mini="true" id="checkboxStartElement" class="custom"/>
-        </li>
-      </ul>
-    </div>
+" "" "" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""c""h""e""c""k""b""o""x""S""t""a""r""t""E""l""e""m""e""n""t""""">""S""t""a""r""t"" ""e""l""e""m""e""n""t"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""c""h""e""c""k""b""o""x""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""i""d""="""""c""h""e""c""k""b""o""x""S""t""a""r""t""E""l""e""m""e""n""t""""" ""c""l""a""s""s""="""""c""u""s""t""o""m"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""l""i"">"
+" "" "" "" "" "" ""<""/""u""l"">"
+" "" "" "" ""<""/""d""i""v"">"
 
-    <div id="add-form" data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a">
-      <form class="userform">
-        <h2>Connection</h2>
-        <label for="location">Location:</label>
-        <input type="text" name="location" id="location" value="" data-clear-btn="true" data-mini="true">
-        <div class="ui-grid-a">
-          <div class="ui-block-a">
-            <a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true" onclick="graphwalker.studio.onConnect()">Connect</a>
-          </div>
-          <div class="ui-block-b">
-            <a href="#" data-rel="close" data-role="button" data-theme="a" data-mini="true" onclick="graphwalker.studio.onDisconnect()">Disconnect</a>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+" "" "" "" ""<""d""i""v"" ""i""d""="""""a""d""d""-""f""o""r""m""""" ""d""a""t""a""-""r""o""l""e""="""""p""a""n""e""l""""" ""d""a""t""a""-""p""o""s""i""t""i""o""n""="""""r""i""g""h""t""""" ""d""a""t""a""-""p""o""s""i""t""i""o""n""-""f""i""x""e""d""="""""t""r""u""e""""" ""d""a""t""a""-""d""i""s""p""l""a""y""="""""o""v""e""r""l""a""y""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""">"
+" "" "" "" "" "" ""<""f""o""r""m"" ""c""l""a""s""s""="""""u""s""e""r""f""o""r""m""""">"
+" "" "" "" "" "" "" "" ""<""h""2"">""C""o""n""n""e""c""t""i""o""n""<""/""h""2"">"
+" "" "" "" "" "" "" "" ""<""l""a""b""e""l"" ""f""o""r""="""""l""o""c""a""t""i""o""n""""">""L""o""c""a""t""i""o""n"":""<""/""l""a""b""e""l"">"
+" "" "" "" "" "" "" "" ""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""n""a""m""e""="""""l""o""c""a""t""i""o""n""""" ""i""d""="""""l""o""c""a""t""i""o""n""""" ""v""a""l""u""e""="""""""" ""d""a""t""a""-""c""l""e""a""r""-""b""t""n""="""""t""r""u""e""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""">"
+" "" "" "" "" "" "" "" ""<""d""i""v"" ""c""l""a""s""s""="""""u""i""-""g""r""i""d""-""a""""">"
+" "" "" "" "" "" "" "" "" "" ""<""d""i""v"" ""c""l""a""s""s""="""""u""i""-""b""l""o""c""k""-""a""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""a"" ""h""r""e""f""="""""#""""" ""d""a""t""a""-""r""e""l""="""""c""l""o""s""e""""" ""d""a""t""a""-""r""o""l""e""="""""b""u""t""t""o""n""""" ""d""a""t""a""-""t""h""e""m""e""="""""c""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""C""o""n""n""e""c""t""("")""""">""C""o""n""n""e""c""t""<""/""a"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "" "" "" "" "" "" ""<""d""i""v"" ""c""l""a""s""s""="""""u""i""-""b""l""o""c""k""-""b""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""a"" ""h""r""e""f""="""""#""""" ""d""a""t""a""-""r""e""l""="""""c""l""o""s""e""""" ""d""a""t""a""-""r""o""l""e""="""""b""u""t""t""o""n""""" ""d""a""t""a""-""t""h""e""m""e""="""""a""""" ""d""a""t""a""-""m""i""n""i""="""""t""r""u""e""""" ""o""n""c""l""i""c""k""="""""g""r""a""p""h""w""a""l""k""e""r"".""s""t""u""d""i""o"".""o""n""D""i""s""c""o""n""n""e""c""t""("")""""">""D""i""s""c""o""n""n""e""c""t""<""/""a"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "" "" ""<""/""f""o""r""m"">"
+" "" "" "" ""<""/""d""i""v"">"
+" "" ""<""/""d""i""v"">"
 
-  <script type="text/javascript" src="lib/react-15.1.0/react.js"></script>
-  <script type="text/javascript" src="lib/react-15.1.0/react-dom.js"></script>
-  <script type="text/javascript" src="lib/jquery-2.2.4/jquery.js"></script>
-  <script type="text/javascript" src="lib/jquery-ui-1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="lib/jquery-mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
-  <script type="text/javascript" src="lib/context.js/context.js"></script>
-  <script type="text/javascript" src="lib/cytoscape-2.7.11/cytoscape.js"></script>
-  <script type="text/javascript" src="lib/dagre-0.7.4/dagre.js"></script>
-  <script type="text/javascript" src="lib/cytoscape-dagre-1.3.0/cytoscape-dagre.js"></script>
-  <script type="text/javascript" src="bundle.js"></script>
-</body>
-</html>
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""r""e""a""c""t""-""1""5"".""1"".""0""/""r""e""a""c""t"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""r""e""a""c""t""-""1""5"".""1"".""0""/""r""e""a""c""t""-""d""o""m"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""j""q""u""e""r""y""-""2"".""2"".""4""/""j""q""u""e""r""y"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""j""q""u""e""r""y""-""u""i""-""1"".""1""2"".""1""/""j""q""u""e""r""y""-""u""i"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""j""q""u""e""r""y""-""m""o""b""i""l""e""-""1"".""4"".""5""/""j""q""u""e""r""y"".""m""o""b""i""l""e""-""1"".""4"".""5"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""c""o""n""t""e""x""t"".""j""s""/""c""o""n""t""e""x""t"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""c""y""t""o""s""c""a""p""e""-""2"".""7"".""1""1""/""c""y""t""o""s""c""a""p""e"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""d""a""g""r""e""-""0"".""7"".""4""/""d""a""g""r""e"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""l""i""b""/""c""y""t""o""s""c""a""p""e""-""d""a""g""r""e""-""1"".""3"".""0""/""c""y""t""o""s""c""a""p""e""-""d""a""g""r""e"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+" "" ""<""s""c""r""i""p""t"" ""t""y""p""e""="""""t""e""x""t""/""j""a""v""a""s""c""r""i""p""t""""" ""s""r""c""="""""b""u""n""d""l""e"".""j""s""""">""<""/""s""c""r""i""p""t"">"
+"<""/""b""o""d""y"">"
+"<""/""h""t""m""l"">"

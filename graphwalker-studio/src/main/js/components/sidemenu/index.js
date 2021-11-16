@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { Divider } from "@blueprintjs/core";
-import FileMenu from "./file-menu";
-import ExecutionMenu from "./execution-menu";
-import EditorMenu from "./editor-menu";
-import './style.css';
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""D""i""v""i""d""e""r"" ""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""F""i""l""e""M""e""n""u"" ""f""r""o""m"" """"".""/""f""i""l""e""-""m""e""n""u""""";"
+"i""m""p""o""r""t"" ""E""x""e""c""u""t""i""o""n""M""e""n""u"" ""f""r""o""m"" """"".""/""e""x""e""c""u""t""i""o""n""-""m""e""n""u""""";"
+"i""m""p""o""r""t"" ""E""d""i""t""o""r""M""e""n""u"" ""f""r""o""m"" """"".""/""e""d""i""t""o""r""-""m""e""n""u""""";"
+"i""m""p""o""r""t"" ""'"".""/""s""t""y""l""e"".""c""s""s""'"";"
 
-export default class SideMenu extends Component {
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""l""a""s""s"" ""S""i""d""e""M""e""n""u"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
 
-  render() {
-    return (
-      <aside className="sidemenu">
-        <FileMenu/>
-        <Divider/>
-        <ExecutionMenu/>
-        <Divider/>
-        <EditorMenu/>
-      </aside>
-    )
-  }
-}
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""a""s""i""d""e"" ""c""l""a""s""s""N""a""m""e""="""""s""i""d""e""m""e""n""u""""">"
+" "" "" "" "" "" "" "" ""<""F""i""l""e""M""e""n""u""/"">"
+" "" "" "" "" "" "" "" ""<""D""i""v""i""d""e""r""/"">"
+" "" "" "" "" "" "" "" ""<""E""x""e""c""u""t""i""o""n""M""e""n""u""/"">"
+" "" "" "" "" "" "" "" ""<""D""i""v""i""d""e""r""/"">"
+" "" "" "" "" "" "" "" ""<""E""d""i""t""o""r""M""e""n""u""/"">"
+" "" "" "" "" "" ""<""/""a""s""i""d""e"">"
+" "" "" "" "")"
+" "" ""}"
+"}"

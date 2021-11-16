@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { Button, ButtonGroup } from "@blueprintjs/core";
-import { runTest, pauseTest, stepTest, stopTest } from "../../redux/actions";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""c""o""n""n""e""c""t"" ""}"" ""f""r""o""m"" """""r""e""a""c""t""-""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""{"" ""B""u""t""t""o""n"","" ""B""u""t""t""o""n""G""r""o""u""p"" ""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""{"" ""r""u""n""T""e""s""t"","" ""p""a""u""s""e""T""e""s""t"","" ""s""t""e""p""T""e""s""t"","" ""s""t""o""p""T""e""s""t"" ""}"" ""f""r""o""m"" """""."".""/""."".""/""r""e""d""u""x""/""a""c""t""i""o""n""s""""";"
 
-class ExecutionMenu extends Component {
-  render() {
-    const { disabled, running, paused, visited, runTest, pauseTest, stepTest, stopTest } = this.props;
-    return (
-      <ButtonGroup minimal={true} vertical={true} large={true} >
-        {running ?
-          <Button className="sidemenu-button" disabled={disabled} icon="pause" onClick={pauseTest}/> :
-          <Button className="sidemenu-button" disabled={disabled} icon="play" onClick={runTest} />
-        }
-        <Button className="sidemenu-button" disabled={disabled || !paused} icon="step-forward" onClick={stepTest} />
-        <Button className="sidemenu-button" disabled={disabled || !(running || paused || Object.keys(visited).length > 0)} icon="stop" onClick={stopTest} />
-      </ButtonGroup>
-    )
-  }
-}
+"c""l""a""s""s"" ""E""x""e""c""u""t""i""o""n""M""e""n""u"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""c""o""n""s""t"" ""{"" ""d""i""s""a""b""l""e""d"","" ""r""u""n""n""i""n""g"","" ""p""a""u""s""e""d"","" ""v""i""s""i""t""e""d"","" ""r""u""n""T""e""s""t"","" ""p""a""u""s""e""T""e""s""t"","" ""s""t""e""p""T""e""s""t"","" ""s""t""o""p""T""e""s""t"" ""}"" ""="" ""t""h""i""s"".""p""r""o""p""s"";"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""B""u""t""t""o""n""G""r""o""u""p"" ""m""i""n""i""m""a""l""=""{""t""r""u""e""}"" ""v""e""r""t""i""c""a""l""=""{""t""r""u""e""}"" ""l""a""r""g""e""=""{""t""r""u""e""}"" "">"
+" "" "" "" "" "" "" "" ""{""r""u""n""n""i""n""g"" ""?"
+" "" "" "" "" "" "" "" "" "" ""<""B""u""t""t""o""n"" ""c""l""a""s""s""N""a""m""e""="""""s""i""d""e""m""e""n""u""-""b""u""t""t""o""n""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"" ""i""c""o""n""="""""p""a""u""s""e""""" ""o""n""C""l""i""c""k""=""{""p""a""u""s""e""T""e""s""t""}""/"">"" "":"
+" "" "" "" "" "" "" "" "" "" ""<""B""u""t""t""o""n"" ""c""l""a""s""s""N""a""m""e""="""""s""i""d""e""m""e""n""u""-""b""u""t""t""o""n""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d""}"" ""i""c""o""n""="""""p""l""a""y""""" ""o""n""C""l""i""c""k""=""{""r""u""n""T""e""s""t""}"" ""/"">"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""<""B""u""t""t""o""n"" ""c""l""a""s""s""N""a""m""e""="""""s""i""d""e""m""e""n""u""-""b""u""t""t""o""n""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""!""p""a""u""s""e""d""}"" ""i""c""o""n""="""""s""t""e""p""-""f""o""r""w""a""r""d""""" ""o""n""C""l""i""c""k""=""{""s""t""e""p""T""e""s""t""}"" ""/"">"
+" "" "" "" "" "" "" "" ""<""B""u""t""t""o""n"" ""c""l""a""s""s""N""a""m""e""="""""s""i""d""e""m""e""n""u""-""b""u""t""t""o""n""""" ""d""i""s""a""b""l""e""d""=""{""d""i""s""a""b""l""e""d"" ""|""|"" ""!""(""r""u""n""n""i""n""g"" ""|""|"" ""p""a""u""s""e""d"" ""|""|"" ""O""b""j""e""c""t"".""k""e""y""s""(""v""i""s""i""t""e""d"")"".""l""e""n""g""t""h"" "">"" ""0"")""}"" ""i""c""o""n""="""""s""t""o""p""""" ""o""n""C""l""i""c""k""=""{""s""t""o""p""T""e""s""t""}"" ""/"">"
+" "" "" "" "" "" ""<""/""B""u""t""t""o""n""G""r""o""u""p"">"
+" "" "" "" "")"
+" "" ""}"
+"}"
 
-const mapStateToProps = ({ test: { models }, execution: { running, paused, visited }}) => {
-  return {
-    disabled: models.length === 0,
-    running,
-    paused,
-    visited
-  }
-}
+"c""o""n""s""t"" ""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"" ""="" ""(""{"" ""t""e""s""t"":"" ""{"" ""m""o""d""e""l""s"" ""}"","" ""e""x""e""c""u""t""i""o""n"":"" ""{"" ""r""u""n""n""i""n""g"","" ""p""a""u""s""e""d"","" ""v""i""s""i""t""e""d"" ""}""}"")"" ""="">"" ""{"
+" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""m""o""d""e""l""s"".""l""e""n""g""t""h"" ""=""=""="" ""0"","
+" "" "" "" ""r""u""n""n""i""n""g"","
+" "" "" "" ""p""a""u""s""e""d"","
+" "" "" "" ""v""i""s""i""t""e""d"
+" "" ""}"
+"}"
 
-export default connect(mapStateToProps, { runTest, pauseTest, stepTest, stopTest })(ExecutionMenu);
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""o""n""n""e""c""t""(""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"","" ""{"" ""r""u""n""T""e""s""t"","" ""p""a""u""s""e""T""e""s""t"","" ""s""t""e""p""T""e""s""t"","" ""s""t""o""p""T""e""s""t"" ""}"")""(""E""x""e""c""u""t""i""o""n""M""e""n""u"")"";"

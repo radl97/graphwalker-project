@@ -1,26 +1,26 @@
-@import "~normalize.css";
-@import "~@blueprintjs/core/lib/css/blueprint.css";
-@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+"@""i""m""p""o""r""t"" """""~""n""o""r""m""a""l""i""z""e"".""c""s""s""""";"
+"@""i""m""p""o""r""t"" """""~""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""/""l""i""b""/""c""s""s""/""b""l""u""e""p""r""i""n""t"".""c""s""s""""";"
+"@""i""m""p""o""r""t"" """""~""@""b""l""u""e""p""r""i""n""t""j""s""/""i""c""o""n""s""/""l""i""b""/""c""s""s""/""b""l""u""e""p""r""i""n""t""-""i""c""o""n""s"".""c""s""s""""";"
 
-html, body, #root {
-  width: 100%;
-  height: 100%;
-  user-select: none;
-}
+"h""t""m""l"","" ""b""o""d""y"","" ""#""r""o""o""t"" ""{"
+" "" ""w""i""d""t""h"":"" ""1""0""0""%"";"
+" "" ""h""e""i""g""h""t"":"" ""1""0""0""%"";"
+" "" ""u""s""e""r""-""s""e""l""e""c""t"":"" ""n""o""n""e"";"
+"}"
 
-html {
-  overflow: hidden;
-}
+"h""t""m""l"" ""{"
+" "" ""o""v""e""r""f""l""o""w"":"" ""h""i""d""d""e""n"";"
+"}"
 
-#root {
-  display: flex;
-}
+"#""r""o""o""t"" ""{"
+" "" ""d""i""s""p""l""a""y"":"" ""f""l""e""x"";"
+"}"
 
-.banner {
-  flex: 1;
-  fill: rgb(34, 47, 53);
-}
+".""b""a""n""n""e""r"" ""{"
+" "" ""f""l""e""x"":"" ""1"";"
+" "" ""f""i""l""l"":"" ""r""g""b""(""3""4"","" ""4""7"","" ""5""3"")"";"
+"}"
 
-.panelGroup > .panelWrapper {
-  height: calc(100vh - 22px) !important;
-}
+".""p""a""n""e""l""G""r""o""u""p"" "">"" "".""p""a""n""e""l""W""r""a""p""p""e""r"" ""{"
+" "" ""h""e""i""g""h""t"":"" ""c""a""l""c""(""1""0""0""v""h"" ""-"" ""2""2""p""x"")"" ""!""i""m""p""o""r""t""a""n""t"";"
+"}"

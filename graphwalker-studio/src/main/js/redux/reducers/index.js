@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
-import execution from "./execution";
-import test from "./test"
-import editor from "./editor";
+"i""m""p""o""r""t"" ""{"" ""c""o""m""b""i""n""e""R""e""d""u""c""e""r""s"" ""}"" ""f""r""o""m"" """""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""e""x""e""c""u""t""i""o""n"" ""f""r""o""m"" """"".""/""e""x""e""c""u""t""i""o""n""""";"
+"i""m""p""o""r""t"" ""t""e""s""t"" ""f""r""o""m"" """"".""/""t""e""s""t""""
+"i""m""p""o""r""t"" ""e""d""i""t""o""r"" ""f""r""o""m"" """"".""/""e""d""i""t""o""r""""";"
 
-export default combineReducers({
-  execution,
-  test,
-  editor
-});
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""o""m""b""i""n""e""R""e""d""u""c""e""r""s""(""{"
+" "" ""e""x""e""c""u""t""i""o""n"","
+" "" ""t""e""s""t"","
+" "" ""e""d""i""t""o""r"
+"}"")"";"

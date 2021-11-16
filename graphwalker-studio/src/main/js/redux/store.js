@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from 'redux-thunk';
-import rootReducer from "./reducers";
-import WebSocketClient from "../client";
+"i""m""p""o""r""t"" ""{"" ""c""r""e""a""t""e""S""t""o""r""e"","" ""a""p""p""l""y""M""i""d""d""l""e""w""a""r""e"","" ""c""o""m""p""o""s""e"" ""}"" ""f""r""o""m"" """""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""t""h""u""n""k"" ""f""r""o""m"" ""'""r""e""d""u""x""-""t""h""u""n""k""'"";"
+"i""m""p""o""r""t"" ""r""o""o""t""R""e""d""u""c""e""r"" ""f""r""o""m"" """"".""/""r""e""d""u""c""e""r""s""""";"
+"i""m""p""o""r""t"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t"" ""f""r""o""m"" """""."".""/""c""l""i""e""n""t""""";"
 
-const client = new WebSocketClient('ws://localhost:9999');
+"c""o""n""s""t"" ""c""l""i""e""n""t"" ""="" ""n""e""w"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t""(""'""w""s"":""/""/""l""o""c""a""l""h""o""s""t"":""9""9""9""9""'"")"";"
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+"c""o""n""s""t"" ""c""o""m""p""o""s""e""E""n""h""a""n""c""e""r""s"" ""="" ""w""i""n""d""o""w"".""_""_""R""E""D""U""X""_""D""E""V""T""O""O""L""S""_""E""X""T""E""N""S""I""O""N""_""C""O""M""P""O""S""E""_""_"" ""|""|"" ""c""o""m""p""o""s""e"";"
 
-export default createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk.withExtraArgument(client)))
-);
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""r""e""a""t""e""S""t""o""r""e""("
+" "" ""r""o""o""t""R""e""d""u""c""e""r"","
+" "" ""c""o""m""p""o""s""e""E""n""h""a""n""c""e""r""s""(""a""p""p""l""y""M""i""d""d""l""e""w""a""r""e""(""t""h""u""n""k"".""w""i""t""h""E""x""t""r""a""A""r""g""u""m""e""n""t""(""c""l""i""e""n""t"")"")"")"
+")"";"

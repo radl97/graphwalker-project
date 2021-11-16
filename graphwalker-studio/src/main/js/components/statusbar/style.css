@@ -1,23 +1,23 @@
 
-.statusbar {
-  height: 22px;
-  font-size: 12px;
-  background-color: #248ec2;
-}
+".""s""t""a""t""u""s""b""a""r"" ""{"
+" "" ""h""e""i""g""h""t"":"" ""2""2""p""x"";"
+" "" ""f""o""n""t""-""s""i""z""e"":"" ""1""2""p""x"";"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""2""4""8""e""c""2"";"
+"}"
 
-.statusbar.issues {
-  background-color: #db3737;
-}
+".""s""t""a""t""u""s""b""a""r"".""i""s""s""u""e""s"" ""{"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""d""b""3""7""3""7"";"
+"}"
 
-.statusbar.complete {
-  background-color: #0f9960;
-}
+".""s""t""a""t""u""s""b""a""r"".""c""o""m""p""l""e""t""e"" ""{"
+" "" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""0""f""9""9""6""0"";"
+"}"
 
-.statusbar > .bp3-progress-bar {
-  height: 100%;
-  border-radius: 0;
-}
+".""s""t""a""t""u""s""b""a""r"" "">"" "".""b""p""3""-""p""r""o""g""r""e""s""s""-""b""a""r"" ""{"
+" "" ""h""e""i""g""h""t"":"" ""1""0""0""%"";"
+" "" ""b""o""r""d""e""r""-""r""a""d""i""u""s"":"" ""0"";"
+"}"
 
-.statusbar > .bp3-progress-bar > .bp3-progress-meter {
-  border-radius: 0;
-}
+".""s""t""a""t""u""s""b""a""r"" "">"" "".""b""p""3""-""p""r""o""g""r""e""s""s""-""b""a""r"" "">"" "".""b""p""3""-""p""r""o""g""r""e""s""s""-""m""e""t""e""r"" ""{"
+" "" ""b""o""r""d""e""r""-""r""a""d""i""u""s"":"" ""0"";"
+"}"

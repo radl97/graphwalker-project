@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import './style.css';
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""'"".""/""s""t""y""l""e"".""c""s""s""'"";"
 
-export default class Container extends Component {
-  render() {
-    const containerType = this.props.column ? "container-column": "container-row";
-    return (
-      <div className={containerType}>
-        {this.props.children}
-      </div>
-    )
-  }
-}
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""l""a""s""s"" ""C""o""n""t""a""i""n""e""r"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""c""o""n""s""t"" ""c""o""n""t""a""i""n""e""r""T""y""p""e"" ""="" ""t""h""i""s"".""p""r""o""p""s"".""c""o""l""u""m""n"" ""?"" """""c""o""n""t""a""i""n""e""r""-""c""o""l""u""m""n""""":"" """""c""o""n""t""a""i""n""e""r""-""r""o""w""""";"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""d""i""v"" ""c""l""a""s""s""N""a""m""e""=""{""c""o""n""t""a""i""n""e""r""T""y""p""e""}"">"
+" "" "" "" "" "" "" "" ""{""t""h""i""s"".""p""r""o""p""s"".""c""h""i""l""d""r""e""n""}"
+" "" "" "" "" "" ""<""/""d""i""v"">"
+" "" "" "" "")"
+" "" ""}"
+"}"

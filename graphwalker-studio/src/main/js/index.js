@@ -1,9 +1,9 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
-import React from 'react';
-import { render } from "react-dom";
-import { Provider } from 'react-redux'
-import store from './redux/store'
-import Application from './Application';
+"i""m""p""o""r""t"" """""c""o""r""e""-""j""s""/""s""t""a""b""l""e""""";"
+"i""m""p""o""r""t"" """""r""e""g""e""n""e""r""a""t""o""r""-""r""u""n""t""i""m""e""/""r""u""n""t""i""m""e""""";"
+"i""m""p""o""r""t"" ""R""e""a""c""t"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""r""e""n""d""e""r"" ""}"" ""f""r""o""m"" """""r""e""a""c""t""-""d""o""m""""";"
+"i""m""p""o""r""t"" ""{"" ""P""r""o""v""i""d""e""r"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""-""r""e""d""u""x""'"
+"i""m""p""o""r""t"" ""s""t""o""r""e"" ""f""r""o""m"" ""'"".""/""r""e""d""u""x""/""s""t""o""r""e""'"
+"i""m""p""o""r""t"" ""A""p""p""l""i""c""a""t""i""o""n"" ""f""r""o""m"" ""'"".""/""A""p""p""l""i""c""a""t""i""o""n""'"";"
 
-render(<Provider store={store}><Application /></Provider>, document.getElementById('root'));
+"r""e""n""d""e""r""(""<""P""r""o""v""i""d""e""r"" ""s""t""o""r""e""=""{""s""t""o""r""e""}"">""<""A""p""p""l""i""c""a""t""i""o""n"" ""/"">""<""/""P""r""o""v""i""d""e""r"">"","" ""d""o""c""u""m""e""n""t"".""g""e""t""E""l""e""m""e""n""t""B""y""I""d""(""'""r""o""o""t""'"")"")"";"

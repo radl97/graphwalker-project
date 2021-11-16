@@ -1,20 +1,20 @@
-import React, { Component, createRef } from 'react';
-import styled from 'styled-components';
-import { ResizeSensor } from "@blueprintjs/core";
-import EditorComponent from "./editor-component";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"","" ""c""r""e""a""t""e""R""e""f"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""s""t""y""l""e""d"" ""f""r""o""m"" ""'""s""t""y""l""e""d""-""c""o""m""p""o""n""e""n""t""s""'"";"
+"i""m""p""o""r""t"" ""{"" ""R""e""s""i""z""e""S""e""n""s""o""r"" ""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""E""d""i""t""o""r""C""o""m""p""o""n""e""n""t"" ""f""r""o""m"" """"".""/""e""d""i""t""o""r""-""c""o""m""p""o""n""e""n""t""""";"
 
-const EditorPanelContainer = styled.div`
-  height: 100%;
-  overflow: hidden;
-`;
+"c""o""n""s""t"" ""E""d""i""t""o""r""P""a""n""e""l""C""o""n""t""a""i""n""e""r"" ""="" ""s""t""y""l""e""d"".""d""i""v""`"
+" "" ""h""e""i""g""h""t"":"" ""1""0""0""%"";"
+" "" ""o""v""e""r""f""l""o""w"":"" ""h""i""d""d""e""n"";"
+"`"";"
 
-export default class EditorPanel extends Component {
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""l""a""s""s"" ""E""d""i""t""o""r""P""a""n""e""l"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
 
-  render() {
-    return (
-      <EditorPanelContainer>
-        <EditorComponent/>
-      </EditorPanelContainer>
-    );
-  }
-}
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""E""d""i""t""o""r""P""a""n""e""l""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "" "" "" "" ""<""E""d""i""t""o""r""C""o""m""p""o""n""e""n""t""/"">"
+" "" "" "" "" "" ""<""/""E""d""i""t""o""r""P""a""n""e""l""C""o""n""t""a""i""n""e""r"">"
+" "" "" "" "")"";"
+" "" ""}"
+"}"

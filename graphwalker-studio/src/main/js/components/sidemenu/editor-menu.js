@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { Button, ButtonGroup } from "@blueprintjs/core";
-import { toggleProperties} from "../../redux/actions";
+"i""m""p""o""r""t"" ""R""e""a""c""t"","" ""{"" ""C""o""m""p""o""n""e""n""t"" ""}"" ""f""r""o""m"" ""'""r""e""a""c""t""'"";"
+"i""m""p""o""r""t"" ""{"" ""c""o""n""n""e""c""t"" ""}"" ""f""r""o""m"" """""r""e""a""c""t""-""r""e""d""u""x""""";"
+"i""m""p""o""r""t"" ""{"" ""B""u""t""t""o""n"","" ""B""u""t""t""o""n""G""r""o""u""p"" ""}"" ""f""r""o""m"" """""@""b""l""u""e""p""r""i""n""t""j""s""/""c""o""r""e""""";"
+"i""m""p""o""r""t"" ""{"" ""t""o""g""g""l""e""P""r""o""p""e""r""t""i""e""s""}"" ""f""r""o""m"" """""."".""/""."".""/""r""e""d""u""x""/""a""c""t""i""o""n""s""""";"
 
-class EditorMenu extends Component {
+"c""l""a""s""s"" ""E""d""i""t""o""r""M""e""n""u"" ""e""x""t""e""n""d""s"" ""C""o""m""p""o""n""e""n""t"" ""{"
 
-  render() {
-    return (
-      <ButtonGroup minimal={true} vertical={true} large={true}>
-        <Button disabled={this.props.isMenuDisabled} className="sidemenu-button" icon="properties" onClick={ this.props.toggleProperties } />
-      </ButtonGroup>
-    );
-  }
-}
+" "" ""r""e""n""d""e""r""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""("
+" "" "" "" "" "" ""<""B""u""t""t""o""n""G""r""o""u""p"" ""m""i""n""i""m""a""l""=""{""t""r""u""e""}"" ""v""e""r""t""i""c""a""l""=""{""t""r""u""e""}"" ""l""a""r""g""e""=""{""t""r""u""e""}"">"
+" "" "" "" "" "" "" "" ""<""B""u""t""t""o""n"" ""d""i""s""a""b""l""e""d""=""{""t""h""i""s"".""p""r""o""p""s"".""i""s""M""e""n""u""D""i""s""a""b""l""e""d""}"" ""c""l""a""s""s""N""a""m""e""="""""s""i""d""e""m""e""n""u""-""b""u""t""t""o""n""""" ""i""c""o""n""="""""p""r""o""p""e""r""t""i""e""s""""" ""o""n""C""l""i""c""k""=""{"" ""t""h""i""s"".""p""r""o""p""s"".""t""o""g""g""l""e""P""r""o""p""e""r""t""i""e""s"" ""}"" ""/"">"
+" "" "" "" "" "" ""<""/""B""u""t""t""o""n""G""r""o""u""p"">"
+" "" "" "" "")"";"
+" "" ""}"
+"}"
 
-const mapStateToProps = ({ test: { models }}) => {
-  return {
-    isMenuDisabled: models.length === 0
-  }
-}
+"c""o""n""s""t"" ""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"" ""="" ""(""{"" ""t""e""s""t"":"" ""{"" ""m""o""d""e""l""s"" ""}""}"")"" ""="">"" ""{"
+" "" ""r""e""t""u""r""n"" ""{"
+" "" "" "" ""i""s""M""e""n""u""D""i""s""a""b""l""e""d"":"" ""m""o""d""e""l""s"".""l""e""n""g""t""h"" ""=""=""="" ""0"
+" "" ""}"
+"}"
 
-export default connect(mapStateToProps, { toggleProperties })(EditorMenu);
+"e""x""p""o""r""t"" ""d""e""f""a""u""l""t"" ""c""o""n""n""e""c""t""(""m""a""p""S""t""a""t""e""T""o""P""r""o""p""s"","" ""{"" ""t""o""g""g""l""e""P""r""o""p""e""r""t""i""e""s"" ""}"")""(""E""d""i""t""o""r""M""e""n""u"")"";"
