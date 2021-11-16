@@ -1,106 +1,106 @@
-package org.graphwalker.java.annotation;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""a""n""n""o""t""a""t""i""o""n"";"
 
-/*
- * #%L
- * GraphWalker Java
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""J""a""v""a"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.Set;
-import org.graphwalker.core.machine.Context;
-import org.reflections.Reflections;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+"i""m""p""o""r""t"" ""j""a""v""a"".""l""a""n""g"".""a""n""n""o""t""a""t""i""o""n"".""A""n""n""o""t""a""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""l""a""n""g"".""r""e""f""l""e""c""t"".""I""n""v""o""c""a""t""i""o""n""T""a""r""g""e""t""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""l""a""n""g"".""r""e""f""l""e""c""t"".""M""e""t""h""o""d"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""S""e""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""S""e""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""r""e""f""l""e""c""t""i""o""n""s"".""R""e""f""l""e""c""t""i""o""n""s"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r""F""a""c""t""o""r""y"";"
 
-/**
- * @author Nils Olsson
- */
-public abstract class AnnotationUtils {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""a""b""s""t""r""a""c""t"" ""c""l""a""s""s"" ""A""n""n""o""t""a""t""i""o""n""U""t""i""l""s"" ""{"
 
-  private static final Logger logger = LoggerFactory.getLogger(AnnotationUtils.class);
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""L""o""g""g""e""r"" ""l""o""g""g""e""r"" ""="" ""L""o""g""g""e""r""F""a""c""t""o""r""y"".""g""e""t""L""o""g""g""e""r""(""A""n""n""o""t""a""t""i""o""n""U""t""i""l""s"".""c""l""a""s""s"")"";"
 
-  public static Set<Class<?>> findTests(Reflections reflections) {
-    return find(reflections, Context.class, GraphWalker.class);
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""S""e""t""<""C""l""a""s""s""<""?"">"">"" ""f""i""n""d""T""e""s""t""s""(""R""e""f""l""e""c""t""i""o""n""s"" ""r""e""f""l""e""c""t""i""o""n""s"")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""f""i""n""d""(""r""e""f""l""e""c""t""i""o""n""s"","" ""C""o""n""t""e""x""t"".""c""l""a""s""s"","" ""G""r""a""p""h""W""a""l""k""e""r"".""c""l""a""s""s"")"";"
+" "" ""}"
 
-  public static Set<Class<?>> find(Reflections reflections, Class<?> type, Class<? extends Annotation> annotation) {
-    Set<Class<?>> classes = new HashSet<>();
-    for (Class<?> subType : reflections.getTypesAnnotatedWith(annotation)) {
-      if (type.isAssignableFrom(subType)) {
-        classes.add(subType);
-      }
-    }
-    return classes;
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""S""e""t""<""C""l""a""s""s""<""?"">"">"" ""f""i""n""d""(""R""e""f""l""e""c""t""i""o""n""s"" ""r""e""f""l""e""c""t""i""o""n""s"","" ""C""l""a""s""s""<""?"">"" ""t""y""p""e"","" ""C""l""a""s""s""<""?"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"" ""a""n""n""o""t""a""t""i""o""n"")"" ""{"
+" "" "" "" ""S""e""t""<""C""l""a""s""s""<""?"">"">"" ""c""l""a""s""s""e""s"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""C""l""a""s""s""<""?"">"" ""s""u""b""T""y""p""e"" "":"" ""r""e""f""l""e""c""t""i""o""n""s"".""g""e""t""T""y""p""e""s""A""n""n""o""t""a""t""e""d""W""i""t""h""(""a""n""n""o""t""a""t""i""o""n"")"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""t""y""p""e"".""i""s""A""s""s""i""g""n""a""b""l""e""F""r""o""m""(""s""u""b""T""y""p""e"")"")"" ""{"
+" "" "" "" "" "" "" "" ""c""l""a""s""s""e""s"".""a""d""d""(""s""u""b""T""y""p""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""c""l""a""s""s""e""s"";"
+" "" ""}"
 
-  private static boolean isAnnotationPresent(Class<?> type, Class<? extends Annotation> annotation) {
-    return isAnnotationPresent(type, annotation, Thread.currentThread().getContextClassLoader());
-  }
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""b""o""o""l""e""a""n"" ""i""s""A""n""n""o""t""a""t""i""o""n""P""r""e""s""e""n""t""(""C""l""a""s""s""<""?"">"" ""t""y""p""e"","" ""C""l""a""s""s""<""?"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"" ""a""n""n""o""t""a""t""i""o""n"")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""i""s""A""n""n""o""t""a""t""i""o""n""P""r""e""s""e""n""t""(""t""y""p""e"","" ""a""n""n""o""t""a""t""i""o""n"","" ""T""h""r""e""a""d"".""c""u""r""r""e""n""t""T""h""r""e""a""d""("")"".""g""e""t""C""o""n""t""e""x""t""C""l""a""s""s""L""o""a""d""e""r""("")"")"";"
+" "" ""}"
 
-  @SuppressWarnings("unchecked")
-  private static boolean isAnnotationPresent(Class<?> type, Class<? extends Annotation> annotation, ClassLoader classLoader) {
-    try {
-      Class<? extends Annotation> a = (Class<? extends Annotation>) classLoader.loadClass(annotation.getName());
-      return type.isAnnotationPresent(a);
-    } catch (ClassNotFoundException e) {
-      logger.error(e.getMessage());
-      throw new RuntimeException();
-    }
-  }
+" "" ""@""S""u""p""p""r""e""s""s""W""a""r""n""i""n""g""s""("""""u""n""c""h""e""c""k""e""d""""")"
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""b""o""o""l""e""a""n"" ""i""s""A""n""n""o""t""a""t""i""o""n""P""r""e""s""e""n""t""(""C""l""a""s""s""<""?"">"" ""t""y""p""e"","" ""C""l""a""s""s""<""?"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"" ""a""n""n""o""t""a""t""i""o""n"","" ""C""l""a""s""s""L""o""a""d""e""r"" ""c""l""a""s""s""L""o""a""d""e""r"")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""C""l""a""s""s""<""?"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"" ""a"" ""="" ""(""C""l""a""s""s""<""?"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"")"" ""c""l""a""s""s""L""o""a""d""e""r"".""l""o""a""d""C""l""a""s""s""(""a""n""n""o""t""a""t""i""o""n"".""g""e""t""N""a""m""e""("")"")"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""y""p""e"".""i""s""A""n""n""o""t""a""t""i""o""n""P""r""e""s""e""n""t""(""a"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""C""l""a""s""s""N""o""t""F""o""u""n""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""("")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static <T extends Annotation> Set<T> getAnnotations(final Class<?> clazz, final Class<T> annotation) {
-    Set<T> annotations = new HashSet<>();
-    Class<?> queryClass = clazz;
-    while (null != queryClass) {
-      addAnnotation(queryClass, annotations, annotation);
-      for (Class<?> interfaceClass : queryClass.getInterfaces()) {
-        addAnnotation(interfaceClass, annotations, annotation);
-      }
-      queryClass = queryClass.getSuperclass();
-    }
-    return annotations;
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""<""T"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"" ""S""e""t""<""T"">"" ""g""e""t""A""n""n""o""t""a""t""i""o""n""s""(""f""i""n""a""l"" ""C""l""a""s""s""<""?"">"" ""c""l""a""z""z"","" ""f""i""n""a""l"" ""C""l""a""s""s""<""T"">"" ""a""n""n""o""t""a""t""i""o""n"")"" ""{"
+" "" "" "" ""S""e""t""<""T"">"" ""a""n""n""o""t""a""t""i""o""n""s"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
+" "" "" "" ""C""l""a""s""s""<""?"">"" ""q""u""e""r""y""C""l""a""s""s"" ""="" ""c""l""a""z""z"";"
+" "" "" "" ""w""h""i""l""e"" ""(""n""u""l""l"" ""!""="" ""q""u""e""r""y""C""l""a""s""s"")"" ""{"
+" "" "" "" "" "" ""a""d""d""A""n""n""o""t""a""t""i""o""n""(""q""u""e""r""y""C""l""a""s""s"","" ""a""n""n""o""t""a""t""i""o""n""s"","" ""a""n""n""o""t""a""t""i""o""n"")"";"
+" "" "" "" "" "" ""f""o""r"" ""(""C""l""a""s""s""<""?"">"" ""i""n""t""e""r""f""a""c""e""C""l""a""s""s"" "":"" ""q""u""e""r""y""C""l""a""s""s"".""g""e""t""I""n""t""e""r""f""a""c""e""s""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""a""d""d""A""n""n""o""t""a""t""i""o""n""(""i""n""t""e""r""f""a""c""e""C""l""a""s""s"","" ""a""n""n""o""t""a""t""i""o""n""s"","" ""a""n""n""o""t""a""t""i""o""n"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""q""u""e""r""y""C""l""a""s""s"" ""="" ""q""u""e""r""y""C""l""a""s""s"".""g""e""t""S""u""p""e""r""c""l""a""s""s""("")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""a""n""n""o""t""a""t""i""o""n""s"";"
+" "" ""}"
 
-  private static <T extends Annotation> void addAnnotation(final Class<?> clazz, final Set<T> annotations, final Class<T> annotation) {
-    if (clazz.isAnnotationPresent(annotation)) {
-      annotations.add(clazz.getAnnotation(annotation));
-    }
-  }
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""<""T"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"" ""v""o""i""d"" ""a""d""d""A""n""n""o""t""a""t""i""o""n""(""f""i""n""a""l"" ""C""l""a""s""s""<""?"">"" ""c""l""a""z""z"","" ""f""i""n""a""l"" ""S""e""t""<""T"">"" ""a""n""n""o""t""a""t""i""o""n""s"","" ""f""i""n""a""l"" ""C""l""a""s""s""<""T"">"" ""a""n""n""o""t""a""t""i""o""n"")"" ""{"
+" "" "" "" ""i""f"" ""(""c""l""a""z""z"".""i""s""A""n""n""o""t""a""t""i""o""n""P""r""e""s""e""n""t""(""a""n""n""o""t""a""t""i""o""n"")"")"" ""{"
+" "" "" "" "" "" ""a""n""n""o""t""a""t""i""o""n""s"".""a""d""d""(""c""l""a""z""z"".""g""e""t""A""n""n""o""t""a""t""i""o""n""(""a""n""n""o""t""a""t""i""o""n"")"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static void execute(Class<? extends Annotation> annotation, Object implementation) {
-    for (Method method : implementation.getClass().getMethods()) {
-      if (method.isAnnotationPresent(annotation)) {
-        try {
-          method.invoke(implementation);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""v""o""i""d"" ""e""x""e""c""u""t""e""(""C""l""a""s""s""<""?"" ""e""x""t""e""n""d""s"" ""A""n""n""o""t""a""t""i""o""n"">"" ""a""n""n""o""t""a""t""i""o""n"","" ""O""b""j""e""c""t"" ""i""m""p""l""e""m""e""n""t""a""t""i""o""n"")"" ""{"
+" "" "" "" ""f""o""r"" ""(""M""e""t""h""o""d"" ""m""e""t""h""o""d"" "":"" ""i""m""p""l""e""m""e""n""t""a""t""i""o""n"".""g""e""t""C""l""a""s""s""("")"".""g""e""t""M""e""t""h""o""d""s""("")"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""m""e""t""h""o""d"".""i""s""A""n""n""o""t""a""t""i""o""n""P""r""e""s""e""n""t""(""a""n""n""o""t""a""t""i""o""n"")"")"" ""{"
+" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" ""m""e""t""h""o""d"".""i""n""v""o""k""e""(""i""m""p""l""e""m""e""n""t""a""t""i""o""n"")"";"
+" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""l""l""e""g""a""l""A""c""c""e""s""s""E""x""c""e""p""t""i""o""n"" ""|"" ""I""n""v""o""c""a""t""i""o""n""T""a""r""g""e""t""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""e"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
 
-}
+"}"

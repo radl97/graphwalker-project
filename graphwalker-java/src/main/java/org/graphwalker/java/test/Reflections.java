@@ -1,102 +1,102 @@
-package org.graphwalker.java.test;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""t""e""s""t"";"
 
-/*
- * #%L
- * GraphWalker Java
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""J""a""v""a"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+"i""m""p""o""r""t"" ""j""a""v""a"".""l""a""n""g"".""r""e""f""l""e""c""t"".""C""o""n""s""t""r""u""c""t""o""r"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""l""a""n""g"".""r""e""f""l""e""c""t"".""I""n""v""o""c""a""t""i""o""n""T""a""r""g""e""t""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""l""a""n""g"".""r""e""f""l""e""c""t"".""M""e""t""h""o""d"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r""F""a""c""t""o""r""y"";"
 
-/**
- * @author Nils Olsson
- */
-public abstract class Reflections {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""a""b""s""t""r""a""c""t"" ""c""l""a""s""s"" ""R""e""f""l""e""c""t""i""o""n""s"" ""{"
 
-  private static final Logger logger = LoggerFactory.getLogger(Reflections.class);
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""L""o""g""g""e""r"" ""l""o""g""g""e""r"" ""="" ""L""o""g""g""e""r""F""a""c""t""o""r""y"".""g""e""t""L""o""g""g""e""r""(""R""e""f""l""e""c""t""i""o""n""s"".""c""l""a""s""s"")"";"
 
-  private static final Class[] NO_ARGS = new Class[]{};
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""C""l""a""s""s""[""]"" ""N""O""_""A""R""G""S"" ""="" ""n""e""w"" ""C""l""a""s""s""[""]""{""}"";"
 
-  public static Class<?> loadClass(ClassLoader classLoader, Class<?> type) {
-    try {
-      return classLoader.loadClass(type.getName());
-    } catch (ClassNotFoundException e) {
-      logger.error(e.getMessage());
-      throw new RuntimeException(e);
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""C""l""a""s""s""<""?"">"" ""l""o""a""d""C""l""a""s""s""(""C""l""a""s""s""L""o""a""d""e""r"" ""c""l""a""s""s""L""o""a""d""e""r"","" ""C""l""a""s""s""<""?"">"" ""t""y""p""e"")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""c""l""a""s""s""L""o""a""d""e""r"".""l""o""a""d""C""l""a""s""s""(""t""y""p""e"".""g""e""t""N""a""m""e""("")"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""C""l""a""s""s""N""o""t""F""o""u""n""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static Object newInstance(ClassLoader classLoader, Class<?> type) {
-    try {
-      return loadClass(classLoader, type).newInstance();
-    } catch (InstantiationException | IllegalAccessException e) {
-      logger.error(e.getCause().getMessage());
-      throw new RuntimeException(e);
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""O""b""j""e""c""t"" ""n""e""w""I""n""s""t""a""n""c""e""(""C""l""a""s""s""L""o""a""d""e""r"" ""c""l""a""s""s""L""o""a""d""e""r"","" ""C""l""a""s""s""<""?"">"" ""t""y""p""e"")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""l""o""a""d""C""l""a""s""s""(""c""l""a""s""s""L""o""a""d""e""r"","" ""t""y""p""e"")"".""n""e""w""I""n""s""t""a""n""c""e""("")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""n""s""t""a""n""t""i""a""t""i""o""n""E""x""c""e""p""t""i""o""n"" ""|"" ""I""l""l""e""g""a""l""A""c""c""e""s""s""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""C""a""u""s""e""("")"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static Object newInstance(Constructor<?> constructor, Object... arguments) {
-    try {
-      return constructor.newInstance(arguments);
-    } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
-      logger.error(e.getCause().getMessage());
-      throw new RuntimeException(e);
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""O""b""j""e""c""t"" ""n""e""w""I""n""s""t""a""n""c""e""(""C""o""n""s""t""r""u""c""t""o""r""<""?"">"" ""c""o""n""s""t""r""u""c""t""o""r"","" ""O""b""j""e""c""t""."".""."" ""a""r""g""u""m""e""n""t""s"")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""c""o""n""s""t""r""u""c""t""o""r"".""n""e""w""I""n""s""t""a""n""c""e""(""a""r""g""u""m""e""n""t""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""n""v""o""c""a""t""i""o""n""T""a""r""g""e""t""E""x""c""e""p""t""i""o""n"" ""|"" ""I""n""s""t""a""n""t""i""a""t""i""o""n""E""x""c""e""p""t""i""o""n"" ""|"" ""I""l""l""e""g""a""l""A""c""c""e""s""s""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""C""a""u""s""e""("")"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static Object invoke(Object object, Method method, Object... arguments) {
-    try {
-      return method.invoke(object, arguments);
-    } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-      logger.error(e.getCause().getMessage());
-      throw new RuntimeException(e);
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""O""b""j""e""c""t"" ""i""n""v""o""k""e""(""O""b""j""e""c""t"" ""o""b""j""e""c""t"","" ""M""e""t""h""o""d"" ""m""e""t""h""o""d"","" ""O""b""j""e""c""t""."".""."" ""a""r""g""u""m""e""n""t""s"")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""m""e""t""h""o""d"".""i""n""v""o""k""e""(""o""b""j""e""c""t"","" ""a""r""g""u""m""e""n""t""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""l""l""e""g""a""l""A""r""g""u""m""e""n""t""E""x""c""e""p""t""i""o""n"" ""|"" ""I""l""l""e""g""a""l""A""c""c""e""s""s""E""x""c""e""p""t""i""o""n"" ""|"" ""I""n""v""o""c""a""t""i""o""n""T""a""r""g""e""t""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""C""a""u""s""e""("")"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static Method getMethod(Class<?> type, String name, Class... parameters) {
-    try {
-      return type.getMethod(name, parameters);
-    } catch (NoSuchMethodException e) {
-      logger.error(e.getMessage());
-      throw new RuntimeException(e);
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""M""e""t""h""o""d"" ""g""e""t""M""e""t""h""o""d""(""C""l""a""s""s""<""?"">"" ""t""y""p""e"","" ""S""t""r""i""n""g"" ""n""a""m""e"","" ""C""l""a""s""s""."".""."" ""p""a""r""a""m""e""t""e""r""s"")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""y""p""e"".""g""e""t""M""e""t""h""o""d""(""n""a""m""e"","" ""p""a""r""a""m""e""t""e""r""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""N""o""S""u""c""h""M""e""t""h""o""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static Constructor<?> getConstructor(ClassLoader classLoader, Class<?> type, Class<?> parameters) {
-    try {
-      return loadClass(classLoader, type).getConstructor(parameters);
-    } catch (NoSuchMethodException e) {
-      logger.error(e.getMessage());
-      throw new RuntimeException(e);
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""C""o""n""s""t""r""u""c""t""o""r""<""?"">"" ""g""e""t""C""o""n""s""t""r""u""c""t""o""r""(""C""l""a""s""s""L""o""a""d""e""r"" ""c""l""a""s""s""L""o""a""d""e""r"","" ""C""l""a""s""s""<""?"">"" ""t""y""p""e"","" ""C""l""a""s""s""<""?"">"" ""p""a""r""a""m""e""t""e""r""s"")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""l""o""a""d""C""l""a""s""s""(""c""l""a""s""s""L""o""a""d""e""r"","" ""t""y""p""e"")"".""g""e""t""C""o""n""s""t""r""u""c""t""o""r""(""p""a""r""a""m""e""t""e""r""s"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""N""o""S""u""c""h""M""e""t""h""o""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  public static Object get(Object object, Class<?> type, String name) {
-    Method method = getMethod(type, name, NO_ARGS);
-    return invoke(object, method);
-  }
-}
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""O""b""j""e""c""t"" ""g""e""t""(""O""b""j""e""c""t"" ""o""b""j""e""c""t"","" ""C""l""a""s""s""<""?"">"" ""t""y""p""e"","" ""S""t""r""i""n""g"" ""n""a""m""e"")"" ""{"
+" "" "" "" ""M""e""t""h""o""d"" ""m""e""t""h""o""d"" ""="" ""g""e""t""M""e""t""h""o""d""(""t""y""p""e"","" ""n""a""m""e"","" ""N""O""_""A""R""G""S"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""i""n""v""o""k""e""(""o""b""j""e""c""t"","" ""m""e""t""h""o""d"")"";"
+" "" ""}"
+"}"

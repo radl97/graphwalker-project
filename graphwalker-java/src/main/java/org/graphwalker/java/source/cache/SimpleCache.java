@@ -1,99 +1,99 @@
-package org.graphwalker.java.source.cache;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""j""a""v""a"".""s""o""u""r""c""e"".""c""a""c""h""e"";"
 
-/*-
- * #%L
- * GraphWalker Java
- * %%
- * Copyright (C) 2005 - 2017 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*""-"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""J""a""v""a"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""7"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+"i""m""p""o""r""t"" ""c""o""m"".""g""o""o""g""l""e"".""g""s""o""n"".""G""s""o""n"";"
+"i""m""p""o""r""t"" ""c""o""m"".""g""o""o""g""l""e"".""g""s""o""n"".""G""s""o""n""B""u""i""l""d""e""r"";"
+"i""m""p""o""r""t"" ""c""o""m"".""g""o""o""g""l""e"".""g""s""o""n"".""r""e""f""l""e""c""t"".""T""y""p""e""T""o""k""e""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""l""a""n""g"".""r""e""f""l""e""c""t"".""T""y""p""e"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""c""h""a""r""s""e""t"".""C""h""a""r""s""e""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""F""i""l""e""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""M""a""p"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""M""a""p"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r""F""a""c""t""o""r""y"";"
 
-/**
- * @author Nils Olsson
- */
-public final class SimpleCache implements Cache<Path, CacheEntry> {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""f""i""n""a""l"" ""c""l""a""s""s"" ""S""i""m""p""l""e""C""a""c""h""e"" ""i""m""p""l""e""m""e""n""t""s"" ""C""a""c""h""e""<""P""a""t""h"","" ""C""a""c""h""e""E""n""t""r""y"">"" ""{"
 
-  private static final Logger logger = LoggerFactory.getLogger(SimpleCache.class);
-  private static final Type type = new TypeToken<HashMap<String, CacheEntry>>() {
-  }.getType();
-  private static final Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-  private final Path path;
-  private final Map<String, CacheEntry> storage = new HashMap<>();
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""L""o""g""g""e""r"" ""l""o""g""g""e""r"" ""="" ""L""o""g""g""e""r""F""a""c""t""o""r""y"".""g""e""t""L""o""g""g""e""r""(""S""i""m""p""l""e""C""a""c""h""e"".""c""l""a""s""s"")"";"
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""T""y""p""e"" ""t""y""p""e"" ""="" ""n""e""w"" ""T""y""p""e""T""o""k""e""n""<""H""a""s""h""M""a""p""<""S""t""r""i""n""g"","" ""C""a""c""h""e""E""n""t""r""y"">"">""("")"" ""{"
+" "" ""}"".""g""e""t""T""y""p""e""("")"";"
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""G""s""o""n"" ""g""s""o""n"" ""="" ""n""e""w"" ""G""s""o""n""B""u""i""l""d""e""r""("")"".""e""x""c""l""u""d""e""F""i""e""l""d""s""W""i""t""h""o""u""t""E""x""p""o""s""e""A""n""n""o""t""a""t""i""o""n""("")"".""c""r""e""a""t""e""("")"";"
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""P""a""t""h"" ""p""a""t""h"";"
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""M""a""p""<""S""t""r""i""n""g"","" ""C""a""c""h""e""E""n""t""r""y"">"" ""s""t""o""r""a""g""e"" ""="" ""n""e""w"" ""H""a""s""h""M""a""p""<"">""("")"";"
 
-  public SimpleCache(Path path) {
-    this.path = path.resolve(Paths.get("cache.json"));
-    read();
-  }
+" "" ""p""u""b""l""i""c"" ""S""i""m""p""l""e""C""a""c""h""e""(""P""a""t""h"" ""p""a""t""h"")"" ""{"
+" "" "" "" ""t""h""i""s"".""p""a""t""h"" ""="" ""p""a""t""h"".""r""e""s""o""l""v""e""(""P""a""t""h""s"".""g""e""t""("""""c""a""c""h""e"".""j""s""o""n""""")"")"";"
+" "" "" "" ""r""e""a""d""("")"";"
+" "" ""}"
 
-  private void read() {
-    if (Files.exists(path)) {
-      try {
-        String json = new String(Files.readAllBytes(path), Charset.forName("UTF-8"));
-        Map<String, CacheEntry> data = gson.fromJson(json, type);
-        storage.putAll(data);
-      } catch (IOException e) {
-        logger.error(e.getMessage());
-        throw new CacheException(e);
-      }
-    }
-  }
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""r""e""a""d""("")"" ""{"
+" "" "" "" ""i""f"" ""(""F""i""l""e""s"".""e""x""i""s""t""s""(""p""a""t""h"")"")"" ""{"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""S""t""r""i""n""g"" ""j""s""o""n"" ""="" ""n""e""w"" ""S""t""r""i""n""g""(""F""i""l""e""s"".""r""e""a""d""A""l""l""B""y""t""e""s""(""p""a""t""h"")"","" ""C""h""a""r""s""e""t"".""f""o""r""N""a""m""e""("""""U""T""F""-""8""""")"")"";"
+" "" "" "" "" "" "" "" ""M""a""p""<""S""t""r""i""n""g"","" ""C""a""c""h""e""E""n""t""r""y"">"" ""d""a""t""a"" ""="" ""g""s""o""n"".""f""r""o""m""J""s""o""n""(""j""s""o""n"","" ""t""y""p""e"")"";"
+" "" "" "" "" "" "" "" ""s""t""o""r""a""g""e"".""p""u""t""A""l""l""(""d""a""t""a"")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""O""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""C""a""c""h""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
 
-  private void save() {
-    try {
-      String json = gson.toJson(storage);
-      Files.createDirectories(path.getParent());
-      Files.write(path, json.getBytes(Charset.forName("UTF-8")));
-    } catch (IOException e) {
-      logger.error(e.getMessage());
-      throw new CacheException(e);
-    }
-  }
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""s""a""v""e""("")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""S""t""r""i""n""g"" ""j""s""o""n"" ""="" ""g""s""o""n"".""t""o""J""s""o""n""(""s""t""o""r""a""g""e"")"";"
+" "" "" "" "" "" ""F""i""l""e""s"".""c""r""e""a""t""e""D""i""r""e""c""t""o""r""i""e""s""(""p""a""t""h"".""g""e""t""P""a""r""e""n""t""("")"")"";"
+" "" "" "" "" "" ""F""i""l""e""s"".""w""r""i""t""e""(""p""a""t""h"","" ""j""s""o""n"".""g""e""t""B""y""t""e""s""(""C""h""a""r""s""e""t"".""f""o""r""N""a""m""e""("""""U""T""F""-""8""""")"")"")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""O""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""(""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""C""a""c""h""e""E""x""c""e""p""t""i""o""n""(""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  @Override
-  public CacheEntry get(Path key) {
-    return storage.get(key.toString());
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""C""a""c""h""e""E""n""t""r""y"" ""g""e""t""(""P""a""t""h"" ""k""e""y"")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""s""t""o""r""a""g""e"".""g""e""t""(""k""e""y"".""t""o""S""t""r""i""n""g""("")"")"";"
+" "" ""}"
 
-  @Override
-  public void add(Path key, CacheEntry value) {
-    storage.put(key.toString(), value);
-    save();
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""a""d""d""(""P""a""t""h"" ""k""e""y"","" ""C""a""c""h""e""E""n""t""r""y"" ""v""a""l""u""e"")"" ""{"
+" "" "" "" ""s""t""o""r""a""g""e"".""p""u""t""(""k""e""y"".""t""o""S""t""r""i""n""g""("")"","" ""v""a""l""u""e"")"";"
+" "" "" "" ""s""a""v""e""("")"";"
+" "" ""}"
 
-  @Override
-  public boolean contains(Path key) {
-    return storage.containsKey(key.toString());
-  }
-}
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""c""o""n""t""a""i""n""s""(""P""a""t""h"" ""k""e""y"")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""s""t""o""r""a""g""e"".""c""o""n""t""a""i""n""s""K""e""y""(""k""e""y"".""t""o""S""t""r""i""n""g""("")"")"";"
+" "" ""}"
+"}"
