@@ -1,43 +1,43 @@
-Copyright jQuery Foundation and other contributors, https://jquery.org/
+"C""o""p""y""r""i""g""h""t"" ""j""Q""u""e""r""y"" ""F""o""u""n""d""a""t""i""o""n"" ""a""n""d"" ""o""t""h""e""r"" ""c""o""n""t""r""i""b""u""t""o""r""s"","" ""h""t""t""p""s"":""/""/""j""q""u""e""r""y"".""o""r""g""/"
 
-This software consists of voluntary contributions made by many
-individuals. For exact contribution history, see the revision history
-available at https://github.com/jquery/jquery-ui
+"T""h""i""s"" ""s""o""f""t""w""a""r""e"" ""c""o""n""s""i""s""t""s"" ""o""f"" ""v""o""l""u""n""t""a""r""y"" ""c""o""n""t""r""i""b""u""t""i""o""n""s"" ""m""a""d""e"" ""b""y"" ""m""a""n""y"
+"i""n""d""i""v""i""d""u""a""l""s""."" ""F""o""r"" ""e""x""a""c""t"" ""c""o""n""t""r""i""b""u""t""i""o""n"" ""h""i""s""t""o""r""y"","" ""s""e""e"" ""t""h""e"" ""r""e""v""i""s""i""o""n"" ""h""i""s""t""o""r""y"
+"a""v""a""i""l""a""b""l""e"" ""a""t"" ""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""j""q""u""e""r""y""/""j""q""u""e""r""y""-""u""i"
 
-The following license applies to all parts of this software except as
-documented below:
+"T""h""e"" ""f""o""l""l""o""w""i""n""g"" ""l""i""c""e""n""s""e"" ""a""p""p""l""i""e""s"" ""t""o"" ""a""l""l"" ""p""a""r""t""s"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""e""x""c""e""p""t"" ""a""s"
+"d""o""c""u""m""e""n""t""e""d"" ""b""e""l""o""w"":"
 
-====
+"=""=""=""="
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+"P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"
+"a"" ""c""o""p""y"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"
+""""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"
+"w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","
+"d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"
+"p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"
+"t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+"T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"
+"i""n""c""l""u""d""e""d"" ""i""n"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","
+"E""X""P""R""E""S""S"" ""O""R"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"
+"M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"
+"N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"
+"L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"
+"O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"
+"W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
 
-====
+"=""=""=""="
 
-Copyright and related rights for sample code are waived via CC0. Sample
-code is defined as all source code contained within the demos directory.
+"C""o""p""y""r""i""g""h""t"" ""a""n""d"" ""r""e""l""a""t""e""d"" ""r""i""g""h""t""s"" ""f""o""r"" ""s""a""m""p""l""e"" ""c""o""d""e"" ""a""r""e"" ""w""a""i""v""e""d"" ""v""i""a"" ""C""C""0""."" ""S""a""m""p""l""e"
+"c""o""d""e"" ""i""s"" ""d""e""f""i""n""e""d"" ""a""s"" ""a""l""l"" ""s""o""u""r""c""e"" ""c""o""d""e"" ""c""o""n""t""a""i""n""e""d"" ""w""i""t""h""i""n"" ""t""h""e"" ""d""e""m""o""s"" ""d""i""r""e""c""t""o""r""y""."
 
-CC0: http://creativecommons.org/publicdomain/zero/1.0/
+"C""C""0"":"" ""h""t""t""p"":""/""/""c""r""e""a""t""i""v""e""c""o""m""m""o""n""s"".""o""r""g""/""p""u""b""l""i""c""d""o""m""a""i""n""/""z""e""r""o""/""1"".""0""/"
 
-====
+"=""=""=""="
 
-All files located in the node_modules and external directories are
-externally maintained libraries used by this software which have their
-own licenses; we recommend you read them, as their terms may differ from
-the terms above.
+"A""l""l"" ""f""i""l""e""s"" ""l""o""c""a""t""e""d"" ""i""n"" ""t""h""e"" ""n""o""d""e""_""m""o""d""u""l""e""s"" ""a""n""d"" ""e""x""t""e""r""n""a""l"" ""d""i""r""e""c""t""o""r""i""e""s"" ""a""r""e"
+"e""x""t""e""r""n""a""l""l""y"" ""m""a""i""n""t""a""i""n""e""d"" ""l""i""b""r""a""r""i""e""s"" ""u""s""e""d"" ""b""y"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""w""h""i""c""h"" ""h""a""v""e"" ""t""h""e""i""r"
+"o""w""n"" ""l""i""c""e""n""s""e""s"";"" ""w""e"" ""r""e""c""o""m""m""e""n""d"" ""y""o""u"" ""r""e""a""d"" ""t""h""e""m"","" ""a""s"" ""t""h""e""i""r"" ""t""e""r""m""s"" ""m""a""y"" ""d""i""f""f""e""r"" ""f""r""o""m"
+"t""h""e"" ""t""e""r""m""s"" ""a""b""o""v""e""."
