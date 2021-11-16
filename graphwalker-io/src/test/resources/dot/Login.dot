@@ -1,11 +1,11 @@
-digraph Login {
-  Start -> v_AppNotRunning [label="e_Init"];
-  v_AppNotRunning -> v_LoginDialog [label="e_Start"];
-  v_AppNotRunning -> v_MainView [label="e_Start"];
-  v_MainView -> v_AppNotRunning [label="e_Exit"];
-  v_MainView -> v_LoginDialog [label="e_Logout"];
-  v_LoginDialog -> v_AppNotRunning [label="e_Close"];
-  v_LoginDialog -> v_LoginDialog [label="e_ToggleRememberMe"];
-  v_LoginDialog -> v_LoginDialog [label="e_InvalidCredentials"];
-  v_LoginDialog -> v_MainView [label="e_ValidCredentials"];
-}
+"d""i""g""r""a""p""h"" ""L""o""g""i""n"" ""{"
+" "" ""S""t""a""r""t"" ""-"">"" ""v""_""A""p""p""N""o""t""R""u""n""n""i""n""g"" ""[""l""a""b""e""l""="""""e""_""I""n""i""t"""""]"";"
+" "" ""v""_""A""p""p""N""o""t""R""u""n""n""i""n""g"" ""-"">"" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""[""l""a""b""e""l""="""""e""_""S""t""a""r""t"""""]"";"
+" "" ""v""_""A""p""p""N""o""t""R""u""n""n""i""n""g"" ""-"">"" ""v""_""M""a""i""n""V""i""e""w"" ""[""l""a""b""e""l""="""""e""_""S""t""a""r""t"""""]"";"
+" "" ""v""_""M""a""i""n""V""i""e""w"" ""-"">"" ""v""_""A""p""p""N""o""t""R""u""n""n""i""n""g"" ""[""l""a""b""e""l""="""""e""_""E""x""i""t"""""]"";"
+" "" ""v""_""M""a""i""n""V""i""e""w"" ""-"">"" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""[""l""a""b""e""l""="""""e""_""L""o""g""o""u""t"""""]"";"
+" "" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""-"">"" ""v""_""A""p""p""N""o""t""R""u""n""n""i""n""g"" ""[""l""a""b""e""l""="""""e""_""C""l""o""s""e"""""]"";"
+" "" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""-"">"" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""[""l""a""b""e""l""="""""e""_""T""o""g""g""l""e""R""e""m""e""m""b""e""r""M""e"""""]"";"
+" "" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""-"">"" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""[""l""a""b""e""l""="""""e""_""I""n""v""a""l""i""d""C""r""e""d""e""n""t""i""a""l""s"""""]"";"
+" "" ""v""_""L""o""g""i""n""D""i""a""l""o""g"" ""-"">"" ""v""_""M""a""i""n""V""i""e""w"" ""[""l""a""b""e""l""="""""e""_""V""a""l""i""d""C""r""e""d""e""n""t""i""a""l""s"""""]"";"
+"}"

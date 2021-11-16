@@ -1,285 +1,285 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
-  <!--Created by yFiles for Java 2.11-->
-  <key for="graphml" id="d0" yfiles.type="resources"/>
-  <key for="port" id="d1" yfiles.type="portgraphics"/>
-  <key for="port" id="d2" yfiles.type="portgeometry"/>
-  <key for="port" id="d3" yfiles.type="portuserdata"/>
-  <key attr.name="url" attr.type="string" for="node" id="d4"/>
-  <key attr.name="description" attr.type="string" for="node" id="d5"/>
-  <key for="node" id="d6" yfiles.type="nodegraphics"/>
-  <key attr.name="url" attr.type="string" for="edge" id="d7"/>
-  <key attr.name="description" attr.type="string" for="edge" id="d8"/>
-  <key for="edge" id="d9" yfiles.type="edgegraphics"/>
-  <graph edgedefault="directed" id="G">
-    <node id="n0">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="30.0" width="43.0" x="198.98095238095237" y="0.0"/>
-          <y:Fill color="#00FF00" color2="#CCFFCC" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="35.75732421875" x="3.621337890625" y="5.43359375">Start</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n1">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="30.0" width="121.0" x="159.98095238095237" y="155.93750000000006"/>
-          <y:Fill color="#FFCC00" color2="#FFFF00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="119.16552734375" x="0.917236328125" y="5.43359375">v_BrowserStarted</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n2">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="44.2529296875" width="85.6396484375" x="177.66112816220237" y="233.9062500000001"/>
-          <y:Fill color="#FFCC00" color2="#FFFF00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="75.6396484375" x="5.0" y="12.56005859375">v_BaseURL</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n3">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="44.2529296875" width="113.89306640625" x="177.7709271143353" y="356.1279296875001"/>
-          <y:Fill color="#FFCC00" color2="#FFFF00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="103.89306640625" x="5.0" y="12.56005859375">v_SearchResult</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n4">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="30.0" width="128.0" x="156.48095238095237" y="77.96875000000007"/>
-          <y:Fill color="#FFCC00" color2="#FFFF00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="125.21484375" x="1.392578125" y="5.43359375">v_BrowserStopped</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n5">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="44.2529296875" width="136.02734375" x="195.17720114087302" y="463.3496093750001"/>
-          <y:Fill color="#FFCC00" color2="#FFFF00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="126.02734375" x="5.0" y="12.56005859375">v_BookInformation</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n6">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="30.0" width="145.0" x="373.93650793650795" y="585.5712890625002"/>
-          <y:Fill color="#FFCC00" color2="#FFFF00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="140.931640625" x="2.0341796875" y="5.43359375">v_OtherBoughtBooks</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <node id="n7">
-      <data key="d6">
-        <y:ShapeNode>
-          <y:Geometry height="44.2529296875" width="116.73046875" x="159.4831783234127" y="693.5400390625002"/>
-          <y:Fill color="#FFCC00" color2="#FFFF00" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="106.73046875" x="5.0" y="12.56005859375">v_ShoppingCart</y:NodeLabel>
-          <y:Shape type="roundrectangle"/>
-          <y:DropShadow color="#B3A691" offsetX="1" offsetY="1"/>
-        </y:ShapeNode>
-      </data>
-    </node>
-    <edge id="e0" source="n0" target="n4">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="15.0" tx="0.0" ty="-15.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="271.931640625" x="-135.96582496279763" y="15.000000000000036">e_init / num_of_books = 0; MAX_BOOKS = 5;<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e1" source="n1" target="n2">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="15.0" tx="0.0" ty="-22.12646484375"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="102.619140625" x="-51.309574962797626" y="15.000000000000085">e_EnterBaseURL<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e2" source="n2" target="n3">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="22.12646484375" tx="-14.23663330078125" ty="-22.12646484375"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="88.73828125" x="-44.369145275297626" y="15.000000000000114">e_SearchBook<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e3" source="n4" target="n1">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="15.0" tx="0.0" ty="-15.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="95.587890625" x="-47.793949962797626" y="15.000000000000085">e_StartBrowser<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e4" source="n3" target="n5">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="28.47326660156253" sy="22.12646484375" tx="0.0" ty="-22.12646484375"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="75.841796875" x="-37.920760284908226" y="30.000000000000114">e_ClickBook<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e5" source="n5" target="n6">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="22.12646484375" tx="0.0" ty="-15.0">
-            <y:Point x="263.190873015873" y="537.6025390625001"/>
-            <y:Point x="446.43650793650795" y="537.6025390625001"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="427.17578125" x="-30.342270139663924" y="45.00000000000023">e_AddBookToCart [num_of_books&lt;=MAX_BOOKS] / num_of_books++;<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e6" source="n6" target="n7">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="-36.25" sy="15.0" tx="38.91015625" ty="-22.12646484375">
-            <y:Point x="410.18650793650795" y="678.5400390625002"/>
-            <y:Point x="256.7585689484127" y="678.5400390625002"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="99.109375" x="-49.554672483413924" y="30.000000000000227">e_ShoppingCart<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e7" source="n3" target="n7">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="-28.4732666015625" sy="22.12646484375" tx="-38.91015625" ty="-22.12646484375">
-            <y:Point x="206.2441937158978" y="415.3808593750001"/>
-            <y:Point x="153.29365079365078" y="415.3808593750001"/>
-            <y:Point x="153.29365079365078" y="669.5556640625002"/>
-            <y:Point x="178.9382564484127" y="669.5556640625002"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="99.109375" x="-102.50522310771643" y="152.22167968750023">e_ShoppingCart<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e8" source="n5" target="n7">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="-45.342447916666686" sy="22.12646484375" tx="0.0" ty="-22.12646484375"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="99.109375" x="-49.55469399104044" y="83.98437500000023">e_ShoppingCart<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e9" source="n7" target="n3">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="22.12646484375" tx="-42.70989990234375" ty="-22.12646484375">
-            <y:Point x="217.8484126984127" y="752.7929687500002"/>
-            <y:Point x="44.36944444444445" y="752.7929687500002"/>
-            <y:Point x="44.36944444444445" y="341.1279296875001"/>
-            <y:Point x="192.00756041511656" y="341.1279296875001"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="88.73828125" x="-217.8481153700087" y="-185.19042968749977">e_SearchBook<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e10" source="n6" target="n3">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="36.25" sy="15.0" tx="14.23663330078125" ty="-22.12646484375">
-            <y:Point x="482.68650793650795" y="630.5712890625002"/>
-            <y:Point x="675.0246031746032" y="630.5712890625002"/>
-            <y:Point x="675.0246031746032" y="326.1279296875001"/>
-            <y:Point x="248.95409361824156" y="326.1279296875001"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="88.73828125" x="147.96896962968128" y="-139.0795898437499">e_SearchBook<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e11" source="n5" target="n3">
-      <data key="d9">
-        <y:PolyLineEdge>
-          <y:Path sx="45.34244791666667" sy="22.12646484375" tx="42.70989990234375" ty="-22.12646484375">
-            <y:Point x="308.5333209325397" y="522.6025390625001"/>
-            <y:Point x="360.4809523809524" y="522.6025390625001"/>
-            <y:Point x="360.4809523809524" y="341.1279296875001"/>
-            <y:Point x="277.4273602198041" y="341.1279296875001"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFF99" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" height="17.96875" lineColor="#FFFF00" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="88.73828125" x="7.578486560639874" y="-77.22167968749989">e_SearchBook<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="on_edge" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="true"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-  </graph>
-  <data key="d0">
-    <y:Resources/>
-  </data>
-</graphml>
+"<""?""x""m""l"" ""v""e""r""s""i""o""n""="""""1"".""0""""" ""e""n""c""o""d""i""n""g""="""""U""T""F""-""8""""" ""s""t""a""n""d""a""l""o""n""e""="""""n""o"""""?"">"
+"<""g""r""a""p""h""m""l"" ""x""m""l""n""s""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s""""" ""x""m""l""n""s"":""x""s""i""="""""h""t""t""p"":""/""/""w""w""w"".""w""3"".""o""r""g""/""2""0""0""1""/""X""M""L""S""c""h""e""m""a""-""i""n""s""t""a""n""c""e""""" ""x""m""l""n""s"":""y""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""g""r""a""p""h""m""l""""" ""x""m""l""n""s"":""y""e""d""="""""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""y""e""d""/""3""""" ""x""s""i"":""s""c""h""e""m""a""L""o""c""a""t""i""o""n""="""""h""t""t""p"":""/""/""g""r""a""p""h""m""l"".""g""r""a""p""h""d""r""a""w""i""n""g"".""o""r""g""/""x""m""l""n""s"" ""h""t""t""p"":""/""/""w""w""w"".""y""w""o""r""k""s"".""c""o""m""/""x""m""l""/""s""c""h""e""m""a""/""g""r""a""p""h""m""l""/""1"".""1""/""y""g""r""a""p""h""m""l"".""x""s""d""""">"
+" "" ""<""!""-""-""C""r""e""a""t""e""d"" ""b""y"" ""y""F""i""l""e""s"" ""f""o""r"" ""J""a""v""a"" ""2"".""1""1""-""-"">"
+" "" ""<""k""e""y"" ""f""o""r""="""""g""r""a""p""h""m""l""""" ""i""d""="""""d""0""""" ""y""f""i""l""e""s"".""t""y""p""e""="""""r""e""s""o""u""r""c""e""s"""""/"">"
+" "" ""<""k""e""y"" ""f""o""r""="""""p""o""r""t""""" ""i""d""="""""d""1""""" ""y""f""i""l""e""s"".""t""y""p""e""="""""p""o""r""t""g""r""a""p""h""i""c""s"""""/"">"
+" "" ""<""k""e""y"" ""f""o""r""="""""p""o""r""t""""" ""i""d""="""""d""2""""" ""y""f""i""l""e""s"".""t""y""p""e""="""""p""o""r""t""g""e""o""m""e""t""r""y"""""/"">"
+" "" ""<""k""e""y"" ""f""o""r""="""""p""o""r""t""""" ""i""d""="""""d""3""""" ""y""f""i""l""e""s"".""t""y""p""e""="""""p""o""r""t""u""s""e""r""d""a""t""a"""""/"">"
+" "" ""<""k""e""y"" ""a""t""t""r"".""n""a""m""e""="""""u""r""l""""" ""a""t""t""r"".""t""y""p""e""="""""s""t""r""i""n""g""""" ""f""o""r""="""""n""o""d""e""""" ""i""d""="""""d""4"""""/"">"
+" "" ""<""k""e""y"" ""a""t""t""r"".""n""a""m""e""="""""d""e""s""c""r""i""p""t""i""o""n""""" ""a""t""t""r"".""t""y""p""e""="""""s""t""r""i""n""g""""" ""f""o""r""="""""n""o""d""e""""" ""i""d""="""""d""5"""""/"">"
+" "" ""<""k""e""y"" ""f""o""r""="""""n""o""d""e""""" ""i""d""="""""d""6""""" ""y""f""i""l""e""s"".""t""y""p""e""="""""n""o""d""e""g""r""a""p""h""i""c""s"""""/"">"
+" "" ""<""k""e""y"" ""a""t""t""r"".""n""a""m""e""="""""u""r""l""""" ""a""t""t""r"".""t""y""p""e""="""""s""t""r""i""n""g""""" ""f""o""r""="""""e""d""g""e""""" ""i""d""="""""d""7"""""/"">"
+" "" ""<""k""e""y"" ""a""t""t""r"".""n""a""m""e""="""""d""e""s""c""r""i""p""t""i""o""n""""" ""a""t""t""r"".""t""y""p""e""="""""s""t""r""i""n""g""""" ""f""o""r""="""""e""d""g""e""""" ""i""d""="""""d""8"""""/"">"
+" "" ""<""k""e""y"" ""f""o""r""="""""e""d""g""e""""" ""i""d""="""""d""9""""" ""y""f""i""l""e""s"".""t""y""p""e""="""""e""d""g""e""g""r""a""p""h""i""c""s"""""/"">"
+" "" ""<""g""r""a""p""h"" ""e""d""g""e""d""e""f""a""u""l""t""="""""d""i""r""e""c""t""e""d""""" ""i""d""="""""G""""">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""0""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""3""0"".""0""""" ""w""i""d""t""h""="""""4""3"".""0""""" ""x""="""""1""9""8"".""9""8""0""9""5""2""3""8""0""9""5""2""3""7""""" ""y""="""""0"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""0""0""F""F""0""0""""" ""c""o""l""o""r""2""="""""#""C""C""F""F""C""C""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""3""5"".""7""5""7""3""2""4""2""1""8""7""5""""" ""x""="""""3"".""6""2""1""3""3""7""8""9""0""6""2""5""""" ""y""="""""5"".""4""3""3""5""9""3""7""5""""">""S""t""a""r""t""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""1""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""3""0"".""0""""" ""w""i""d""t""h""="""""1""2""1"".""0""""" ""x""="""""1""5""9"".""9""8""0""9""5""2""3""8""0""9""5""2""3""7""""" ""y""="""""1""5""5"".""9""3""7""5""0""0""0""0""0""0""0""0""0""6"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""F""F""C""C""0""0""""" ""c""o""l""o""r""2""="""""#""F""F""F""F""0""0""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""1""1""9"".""1""6""5""5""2""7""3""4""3""7""5""""" ""x""="""""0"".""9""1""7""2""3""6""3""2""8""1""2""5""""" ""y""="""""5"".""4""3""3""5""9""3""7""5""""">""v""_""B""r""o""w""s""e""r""S""t""a""r""t""e""d""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""2""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""4""4"".""2""5""2""9""2""9""6""8""7""5""""" ""w""i""d""t""h""="""""8""5"".""6""3""9""6""4""8""4""3""7""5""""" ""x""="""""1""7""7"".""6""6""1""1""2""8""1""6""2""2""0""2""3""7""""" ""y""="""""2""3""3"".""9""0""6""2""5""0""0""0""0""0""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""F""F""C""C""0""0""""" ""c""o""l""o""r""2""="""""#""F""F""F""F""0""0""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""7""5"".""6""3""9""6""4""8""4""3""7""5""""" ""x""="""""5"".""0""""" ""y""="""""1""2"".""5""6""0""0""5""8""5""9""3""7""5""""">""v""_""B""a""s""e""U""R""L""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""3""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""4""4"".""2""5""2""9""2""9""6""8""7""5""""" ""w""i""d""t""h""="""""1""1""3"".""8""9""3""0""6""6""4""0""6""2""5""""" ""x""="""""1""7""7"".""7""7""0""9""2""7""1""1""4""3""3""5""3""""" ""y""="""""3""5""6"".""1""2""7""9""2""9""6""8""7""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""F""F""C""C""0""0""""" ""c""o""l""o""r""2""="""""#""F""F""F""F""0""0""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""1""0""3"".""8""9""3""0""6""6""4""0""6""2""5""""" ""x""="""""5"".""0""""" ""y""="""""1""2"".""5""6""0""0""5""8""5""9""3""7""5""""">""v""_""S""e""a""r""c""h""R""e""s""u""l""t""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""4""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""3""0"".""0""""" ""w""i""d""t""h""="""""1""2""8"".""0""""" ""x""="""""1""5""6"".""4""8""0""9""5""2""3""8""0""9""5""2""3""7""""" ""y""="""""7""7"".""9""6""8""7""5""0""0""0""0""0""0""0""0""7"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""F""F""C""C""0""0""""" ""c""o""l""o""r""2""="""""#""F""F""F""F""0""0""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""1""2""5"".""2""1""4""8""4""3""7""5""""" ""x""="""""1"".""3""9""2""5""7""8""1""2""5""""" ""y""="""""5"".""4""3""3""5""9""3""7""5""""">""v""_""B""r""o""w""s""e""r""S""t""o""p""p""e""d""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""5""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""4""4"".""2""5""2""9""2""9""6""8""7""5""""" ""w""i""d""t""h""="""""1""3""6"".""0""2""7""3""4""3""7""5""""" ""x""="""""1""9""5"".""1""7""7""2""0""1""1""4""0""8""7""3""0""2""""" ""y""="""""4""6""3"".""3""4""9""6""0""9""3""7""5""0""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""F""F""C""C""0""0""""" ""c""o""l""o""r""2""="""""#""F""F""F""F""0""0""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""1""2""6"".""0""2""7""3""4""3""7""5""""" ""x""="""""5"".""0""""" ""y""="""""1""2"".""5""6""0""0""5""8""5""9""3""7""5""""">""v""_""B""o""o""k""I""n""f""o""r""m""a""t""i""o""n""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""6""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""3""0"".""0""""" ""w""i""d""t""h""="""""1""4""5"".""0""""" ""x""="""""3""7""3"".""9""3""6""5""0""7""9""3""6""5""0""7""9""5""""" ""y""="""""5""8""5"".""5""7""1""2""8""9""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""F""F""C""C""0""0""""" ""c""o""l""o""r""2""="""""#""F""F""F""F""0""0""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""1""4""0"".""9""3""1""6""4""0""6""2""5""""" ""x""="""""2"".""0""3""4""1""7""9""6""8""7""5""""" ""y""="""""5"".""4""3""3""5""9""3""7""5""""">""v""_""O""t""h""e""r""B""o""u""g""h""t""B""o""o""k""s""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""n""o""d""e"" ""i""d""="""""n""7""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""6""""">"
+" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""G""e""o""m""e""t""r""y"" ""h""e""i""g""h""t""="""""4""4"".""2""5""2""9""2""9""6""8""7""5""""" ""w""i""d""t""h""="""""1""1""6"".""7""3""0""4""6""8""7""5""""" ""x""="""""1""5""9"".""4""8""3""1""7""8""3""2""3""4""1""2""7""""" ""y""="""""6""9""3"".""5""4""0""0""3""9""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""F""i""l""l"" ""c""o""l""o""r""="""""#""F""F""C""C""0""0""""" ""c""o""l""o""r""2""="""""#""F""F""F""F""0""0""""" ""t""r""a""n""s""p""a""r""e""n""t""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""o""r""d""e""r""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""N""o""d""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""a""u""t""o""S""i""z""e""P""o""l""i""c""y""="""""c""o""n""t""e""n""t""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""3""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""a""s""B""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""a""s""L""i""n""e""C""o""l""o""r""="""""f""a""l""s""e""""" ""h""e""i""g""h""t""="""""1""9"".""1""3""2""8""1""2""5""""" ""m""o""d""e""l""N""a""m""e""="""""i""n""t""e""r""n""a""l""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""c""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""1""0""6"".""7""3""0""4""6""8""7""5""""" ""x""="""""5"".""0""""" ""y""="""""1""2"".""5""6""0""0""5""8""5""9""3""7""5""""">""v""_""S""h""o""p""p""i""n""g""C""a""r""t""<""/""y"":""N""o""d""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""S""h""a""p""e"" ""t""y""p""e""="""""r""o""u""n""d""r""e""c""t""a""n""g""l""e"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""D""r""o""p""S""h""a""d""o""w"" ""c""o""l""o""r""="""""#""B""3""A""6""9""1""""" ""o""f""f""s""e""t""X""="""""1""""" ""o""f""f""s""e""t""Y""="""""1"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""S""h""a""p""e""N""o""d""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""n""o""d""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""0""""" ""s""o""u""r""c""e""="""""n""0""""" ""t""a""r""g""e""t""="""""n""4""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""0"".""0""""" ""s""y""="""""1""5"".""0""""" ""t""x""="""""0"".""0""""" ""t""y""="""""-""1""5"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""2""7""1"".""9""3""1""6""4""0""6""2""5""""" ""x""="""""-""1""3""5"".""9""6""5""8""2""4""9""6""2""7""9""7""6""3""""" ""y""="""""1""5"".""0""0""0""0""0""0""0""0""0""0""0""0""0""3""6""""">""e""_""i""n""i""t"" ""/"" ""n""u""m""_""o""f""_""b""o""o""k""s"" ""="" ""0"";"" ""M""A""X""_""B""O""O""K""S"" ""="" ""5"";""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""1""""" ""s""o""u""r""c""e""="""""n""1""""" ""t""a""r""g""e""t""="""""n""2""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""0"".""0""""" ""s""y""="""""1""5"".""0""""" ""t""x""="""""0"".""0""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""1""0""2"".""6""1""9""1""4""0""6""2""5""""" ""x""="""""-""5""1"".""3""0""9""5""7""4""9""6""2""7""9""7""6""2""6""""" ""y""="""""1""5"".""0""0""0""0""0""0""0""0""0""0""0""0""0""8""5""""">""e""_""E""n""t""e""r""B""a""s""e""U""R""L""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""2""""" ""s""o""u""r""c""e""="""""n""2""""" ""t""a""r""g""e""t""="""""n""3""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""0"".""0""""" ""s""y""="""""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""" ""t""x""="""""-""1""4"".""2""3""6""6""3""3""3""0""0""7""8""1""2""5""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""8""8"".""7""3""8""2""8""1""2""5""""" ""x""="""""-""4""4"".""3""6""9""1""4""5""2""7""5""2""9""7""6""2""6""""" ""y""="""""1""5"".""0""0""0""0""0""0""0""0""0""0""0""0""1""1""4""""">""e""_""S""e""a""r""c""h""B""o""o""k""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""3""""" ""s""o""u""r""c""e""="""""n""4""""" ""t""a""r""g""e""t""="""""n""1""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""0"".""0""""" ""s""y""="""""1""5"".""0""""" ""t""x""="""""0"".""0""""" ""t""y""="""""-""1""5"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""9""5"".""5""8""7""8""9""0""6""2""5""""" ""x""="""""-""4""7"".""7""9""3""9""4""9""9""6""2""7""9""7""6""2""6""""" ""y""="""""1""5"".""0""0""0""0""0""0""0""0""0""0""0""0""0""8""5""""">""e""_""S""t""a""r""t""B""r""o""w""s""e""r""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""4""""" ""s""o""u""r""c""e""="""""n""3""""" ""t""a""r""g""e""t""="""""n""5""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""2""8"".""4""7""3""2""6""6""6""0""1""5""6""2""5""3""""" ""s""y""="""""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""" ""t""x""="""""0"".""0""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""7""5"".""8""4""1""7""9""6""8""7""5""""" ""x""="""""-""3""7"".""9""2""0""7""6""0""2""8""4""9""0""8""2""2""6""""" ""y""="""""3""0"".""0""0""0""0""0""0""0""0""0""0""0""0""1""1""4""""">""e""_""C""l""i""c""k""B""o""o""k""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""f""a""l""s""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""5""""" ""s""o""u""r""c""e""="""""n""5""""" ""t""a""r""g""e""t""="""""n""6""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""0"".""0""""" ""s""y""="""""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""" ""t""x""="""""0"".""0""""" ""t""y""="""""-""1""5"".""0""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""2""6""3"".""1""9""0""8""7""3""0""1""5""8""7""3""""" ""y""="""""5""3""7"".""6""0""2""5""3""9""0""6""2""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""4""4""6"".""4""3""6""5""0""7""9""3""6""5""0""7""9""5""""" ""y""="""""5""3""7"".""6""0""2""5""3""9""0""6""2""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""P""a""t""h"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""4""2""7"".""1""7""5""7""8""1""2""5""""" ""x""="""""-""3""0"".""3""4""2""2""7""0""1""3""9""6""6""3""9""2""4""""" ""y""="""""4""5"".""0""0""0""0""0""0""0""0""0""0""0""0""2""3""""">""e""_""A""d""d""B""o""o""k""T""o""C""a""r""t"" ""[""n""u""m""_""o""f""_""b""o""o""k""s""&""l""t"";""=""M""A""X""_""B""O""O""K""S""]"" ""/"" ""n""u""m""_""o""f""_""b""o""o""k""s""+""+"";""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""6""""" ""s""o""u""r""c""e""="""""n""6""""" ""t""a""r""g""e""t""="""""n""7""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""-""3""6"".""2""5""""" ""s""y""="""""1""5"".""0""""" ""t""x""="""""3""8"".""9""1""0""1""5""6""2""5""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""4""1""0"".""1""8""6""5""0""7""9""3""6""5""0""7""9""5""""" ""y""="""""6""7""8"".""5""4""0""0""3""9""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""2""5""6"".""7""5""8""5""6""8""9""4""8""4""1""2""7""""" ""y""="""""6""7""8"".""5""4""0""0""3""9""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""P""a""t""h"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""9""9"".""1""0""9""3""7""5""""" ""x""="""""-""4""9"".""5""5""4""6""7""2""4""8""3""4""1""3""9""2""4""""" ""y""="""""3""0"".""0""0""0""0""0""0""0""0""0""0""0""0""2""2""7""""">""e""_""S""h""o""p""p""i""n""g""C""a""r""t""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""7""""" ""s""o""u""r""c""e""="""""n""3""""" ""t""a""r""g""e""t""="""""n""7""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""-""2""8"".""4""7""3""2""6""6""6""0""1""5""6""2""5""""" ""s""y""="""""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""" ""t""x""="""""-""3""8"".""9""1""0""1""5""6""2""5""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""2""0""6"".""2""4""4""1""9""3""7""1""5""8""9""7""8""""" ""y""="""""4""1""5"".""3""8""0""8""5""9""3""7""5""0""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""1""5""3"".""2""9""3""6""5""0""7""9""3""6""5""0""7""8""""" ""y""="""""4""1""5"".""3""8""0""8""5""9""3""7""5""0""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""1""5""3"".""2""9""3""6""5""0""7""9""3""6""5""0""7""8""""" ""y""="""""6""6""9"".""5""5""5""6""6""4""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""1""7""8"".""9""3""8""2""5""6""4""4""8""4""1""2""7""""" ""y""="""""6""6""9"".""5""5""5""6""6""4""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""P""a""t""h"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""9""9"".""1""0""9""3""7""5""""" ""x""="""""-""1""0""2"".""5""0""5""2""2""3""1""0""7""7""1""6""4""3""""" ""y""="""""1""5""2"".""2""2""1""6""7""9""6""8""7""5""0""0""2""3""""">""e""_""S""h""o""p""p""i""n""g""C""a""r""t""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""8""""" ""s""o""u""r""c""e""="""""n""5""""" ""t""a""r""g""e""t""="""""n""7""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""-""4""5"".""3""4""2""4""4""7""9""1""6""6""6""6""6""8""6""""" ""s""y""="""""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""" ""t""x""="""""0"".""0""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""9""9"".""1""0""9""3""7""5""""" ""x""="""""-""4""9"".""5""5""4""6""9""3""9""9""1""0""4""0""4""4""""" ""y""="""""8""3"".""9""8""4""3""7""5""0""0""0""0""0""0""2""3""""">""e""_""S""h""o""p""p""i""n""g""C""a""r""t""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""9""""" ""s""o""u""r""c""e""="""""n""7""""" ""t""a""r""g""e""t""="""""n""3""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""0"".""0""""" ""s""y""="""""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""" ""t""x""="""""-""4""2"".""7""0""9""8""9""9""9""0""2""3""4""3""7""5""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""2""1""7"".""8""4""8""4""1""2""6""9""8""4""1""2""7""""" ""y""="""""7""5""2"".""7""9""2""9""6""8""7""5""0""0""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""4""4"".""3""6""9""4""4""4""4""4""4""4""4""4""4""5""""" ""y""="""""7""5""2"".""7""9""2""9""6""8""7""5""0""0""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""4""4"".""3""6""9""4""4""4""4""4""4""4""4""4""4""5""""" ""y""="""""3""4""1"".""1""2""7""9""2""9""6""8""7""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""1""9""2"".""0""0""7""5""6""0""4""1""5""1""1""6""5""6""""" ""y""="""""3""4""1"".""1""2""7""9""2""9""6""8""7""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""P""a""t""h"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""8""8"".""7""3""8""2""8""1""2""5""""" ""x""="""""-""2""1""7"".""8""4""8""1""1""5""3""7""0""0""0""8""7""""" ""y""="""""-""1""8""5"".""1""9""0""4""2""9""6""8""7""4""9""9""7""7""""">""e""_""S""e""a""r""c""h""B""o""o""k""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""1""0""""" ""s""o""u""r""c""e""="""""n""6""""" ""t""a""r""g""e""t""="""""n""3""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""3""6"".""2""5""""" ""s""y""="""""1""5"".""0""""" ""t""x""="""""1""4"".""2""3""6""6""3""3""3""0""0""7""8""1""2""5""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""4""8""2"".""6""8""6""5""0""7""9""3""6""5""0""7""9""5""""" ""y""="""""6""3""0"".""5""7""1""2""8""9""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""6""7""5"".""0""2""4""6""0""3""1""7""4""6""0""3""2""""" ""y""="""""6""3""0"".""5""7""1""2""8""9""0""6""2""5""0""0""2"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""6""7""5"".""0""2""4""6""0""3""1""7""4""6""0""3""2""""" ""y""="""""3""2""6"".""1""2""7""9""2""9""6""8""7""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""2""4""8"".""9""5""4""0""9""3""6""1""8""2""4""1""5""6""""" ""y""="""""3""2""6"".""1""2""7""9""2""9""6""8""7""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""P""a""t""h"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""8""8"".""7""3""8""2""8""1""2""5""""" ""x""="""""1""4""7"".""9""6""8""9""6""9""6""2""9""6""8""1""2""8""""" ""y""="""""-""1""3""9"".""0""7""9""5""8""9""8""4""3""7""4""9""9""""">""e""_""S""e""a""r""c""h""B""o""o""k""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" "" "" ""<""e""d""g""e"" ""i""d""="""""e""1""1""""" ""s""o""u""r""c""e""="""""n""5""""" ""t""a""r""g""e""t""="""""n""3""""">"
+" "" "" "" "" "" ""<""d""a""t""a"" ""k""e""y""="""""d""9""""">"
+" "" "" "" "" "" "" "" ""<""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""P""a""t""h"" ""s""x""="""""4""5"".""3""4""2""4""4""7""9""1""6""6""6""6""6""7""""" ""s""y""="""""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""" ""t""x""="""""4""2"".""7""0""9""8""9""9""9""0""2""3""4""3""7""5""""" ""t""y""="""""-""2""2"".""1""2""6""4""6""4""8""4""3""7""5""""">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""3""0""8"".""5""3""3""3""2""0""9""3""2""5""3""9""7""""" ""y""="""""5""2""2"".""6""0""2""5""3""9""0""6""2""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""3""6""0"".""4""8""0""9""5""2""3""8""0""9""5""2""4""""" ""y""="""""5""2""2"".""6""0""2""5""3""9""0""6""2""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""3""6""0"".""4""8""0""9""5""2""3""8""0""9""5""2""4""""" ""y""="""""3""4""1"".""1""2""7""9""2""9""6""8""7""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""<""y"":""P""o""i""n""t"" ""x""="""""2""7""7"".""4""2""7""3""6""0""2""1""9""8""0""4""1""""" ""y""="""""3""4""1"".""1""2""7""9""2""9""6""8""7""5""0""0""1"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""P""a""t""h"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""L""i""n""e""S""t""y""l""e"" ""c""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""t""y""p""e""="""""l""i""n""e""""" ""w""i""d""t""h""="""""1"".""0"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""A""r""r""o""w""s"" ""s""o""u""r""c""e""="""""n""o""n""e""""" ""t""a""r""g""e""t""="""""s""t""a""n""d""a""r""d"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""E""d""g""e""L""a""b""e""l"" ""a""l""i""g""n""m""e""n""t""="""""c""e""n""t""e""r""""" ""b""a""c""k""g""r""o""u""n""d""C""o""l""o""r""="""""#""F""F""F""F""9""9""""" ""d""i""s""t""a""n""c""e""="""""2"".""0""""" ""f""o""n""t""F""a""m""i""l""y""="""""D""i""a""l""o""g""""" ""f""o""n""t""S""i""z""e""="""""1""2""""" ""f""o""n""t""S""t""y""l""e""="""""p""l""a""i""n""""" ""h""e""i""g""h""t""="""""1""7"".""9""6""8""7""5""""" ""l""i""n""e""C""o""l""o""r""="""""#""F""F""F""F""0""0""""" ""m""o""d""e""l""N""a""m""e""="""""f""r""e""e""""" ""m""o""d""e""l""P""o""s""i""t""i""o""n""="""""a""n""y""w""h""e""r""e""""" ""p""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""="""""o""n""_""e""d""g""e""""" ""r""a""t""i""o""="""""0"".""5""""" ""t""e""x""t""C""o""l""o""r""="""""#""0""0""0""0""0""0""""" ""v""i""s""i""b""l""e""="""""t""r""u""e""""" ""w""i""d""t""h""="""""8""8"".""7""3""8""2""8""1""2""5""""" ""x""="""""7"".""5""7""8""4""8""6""5""6""0""6""3""9""8""7""4""""" ""y""="""""-""7""7"".""2""2""1""6""7""9""6""8""7""4""9""9""8""9""""">""e""_""S""e""a""r""c""h""B""o""o""k""<""y"":""P""r""e""f""e""r""r""e""d""P""l""a""c""e""m""e""n""t""D""e""s""c""r""i""p""t""o""r"" ""a""n""g""l""e""="""""0"".""0""""" ""a""n""g""l""e""O""f""f""s""e""t""O""n""R""i""g""h""t""S""i""d""e""="""""0""""" ""a""n""g""l""e""R""e""f""e""r""e""n""c""e""="""""a""b""s""o""l""u""t""e""""" ""a""n""g""l""e""R""o""t""a""t""i""o""n""O""n""R""i""g""h""t""S""i""d""e""="""""c""o""""" ""d""i""s""t""a""n""c""e""="""""-""1"".""0""""" ""f""r""o""z""e""n""="""""t""r""u""e""""" ""p""l""a""c""e""m""e""n""t""="""""a""n""y""w""h""e""r""e""""" ""s""i""d""e""="""""o""n""_""e""d""g""e""""" ""s""i""d""e""R""e""f""e""r""e""n""c""e""="""""r""e""l""a""t""i""v""e""_""t""o""_""e""d""g""e""_""f""l""o""w"""""/"">"
+" "" "" "" "" "" "" "" "" "" ""<""/""y"":""E""d""g""e""L""a""b""e""l"">"
+" "" "" "" "" "" "" "" "" "" ""<""y"":""B""e""n""d""S""t""y""l""e"" ""s""m""o""o""t""h""e""d""="""""t""r""u""e"""""/"">"
+" "" "" "" "" "" "" "" ""<""/""y"":""P""o""l""y""L""i""n""e""E""d""g""e"">"
+" "" "" "" "" "" ""<""/""d""a""t""a"">"
+" "" "" "" ""<""/""e""d""g""e"">"
+" "" ""<""/""g""r""a""p""h"">"
+" "" ""<""d""a""t""a"" ""k""e""y""="""""d""0""""">"
+" "" "" "" ""<""y"":""R""e""s""o""u""r""c""e""s""/"">"
+" "" ""<""/""d""a""t""a"">"
+"<""/""g""r""a""p""h""m""l"">"
