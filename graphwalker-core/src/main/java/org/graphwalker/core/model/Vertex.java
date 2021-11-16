@@ -1,205 +1,205 @@
-package org.graphwalker.core.model;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"";"
 
-/*
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import org.graphwalker.core.common.Objects;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"".""O""b""j""e""c""t""s"";"
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
 
-import static org.graphwalker.core.common.Objects.isNotNullOrEmpty;
-import static org.graphwalker.core.common.Objects.unmodifiableList;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"".""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"".""O""b""j""e""c""t""s"".""u""n""m""o""d""i""f""i""a""b""l""e""L""i""s""t"";"
 
-/**
- * <h1>Vertex</h1>
- * The  Vertex holds the information for a state in a model.
- * </p>
- * The vertex is the verification point for a test. It's here where the test asserts
- * that the system under test is in the expected state.
- * The vertex is uniquely identified by its id.
- * The source vertex is not mandatory, but in a model, there should be only one
- * such instance. Also, the target vertex is not mandatory, but again, in a model,
- * there should be only one such instance.
- *
- * @author Nils Olsson
- */
-public class Vertex extends CachedBuilder<Vertex, Vertex.RuntimeVertex> {
+"/""*""*"
+" ""*"" ""<""h""1"">""V""e""r""t""e""x""<""/""h""1"">"
+" ""*"" ""T""h""e"" "" ""V""e""r""t""e""x"" ""h""o""l""d""s"" ""t""h""e"" ""i""n""f""o""r""m""a""t""i""o""n"" ""f""o""r"" ""a"" ""s""t""a""t""e"" ""i""n"" ""a"" ""m""o""d""e""l""."
+" ""*"" ""<""/""p"">"
+" ""*"" ""T""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""t""h""e"" ""v""e""r""i""f""i""c""a""t""i""o""n"" ""p""o""i""n""t"" ""f""o""r"" ""a"" ""t""e""s""t""."" ""I""t""'""s"" ""h""e""r""e"" ""w""h""e""r""e"" ""t""h""e"" ""t""e""s""t"" ""a""s""s""e""r""t""s"
+" ""*"" ""t""h""a""t"" ""t""h""e"" ""s""y""s""t""e""m"" ""u""n""d""e""r"" ""t""e""s""t"" ""i""s"" ""i""n"" ""t""h""e"" ""e""x""p""e""c""t""e""d"" ""s""t""a""t""e""."
+" ""*"" ""T""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""u""n""i""q""u""e""l""y"" ""i""d""e""n""t""i""f""i""e""d"" ""b""y"" ""i""t""s"" ""i""d""."
+" ""*"" ""T""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x"" ""i""s"" ""n""o""t"" ""m""a""n""d""a""t""o""r""y"","" ""b""u""t"" ""i""n"" ""a"" ""m""o""d""e""l"","" ""t""h""e""r""e"" ""s""h""o""u""l""d"" ""b""e"" ""o""n""l""y"" ""o""n""e"
+" ""*"" ""s""u""c""h"" ""i""n""s""t""a""n""c""e""."" ""A""l""s""o"","" ""t""h""e"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x"" ""i""s"" ""n""o""t"" ""m""a""n""d""a""t""o""r""y"","" ""b""u""t"" ""a""g""a""i""n"","" ""i""n"" ""a"" ""m""o""d""e""l"","
+" ""*"" ""t""h""e""r""e"" ""s""h""o""u""l""d"" ""b""e"" ""o""n""l""y"" ""o""n""e"" ""s""u""c""h"" ""i""n""s""t""a""n""c""e""."
+" ""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""V""e""r""t""e""x"" ""e""x""t""e""n""d""s"" ""C""a""c""h""e""d""B""u""i""l""d""e""r""<""V""e""r""t""e""x"","" ""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"">"" ""{"
 
-  private String sharedState;
-  private List<Action> actions = new ArrayList<>();
+" "" ""p""r""i""v""a""t""e"" ""S""t""r""i""n""g"" ""s""h""a""r""e""d""S""t""a""t""e"";"
+" "" ""p""r""i""v""a""t""e"" ""L""i""s""t""<""A""c""t""i""o""n"">"" ""a""c""t""i""o""n""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
 
-  /**
-   * Gets the name of the shared state.
-   *
-   * @return The name as a string.
-   * @see Vertex#setSharedState
-   */
-  public String getSharedState() {
-    return sharedState;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""n""a""m""e"" ""o""f"" ""t""h""e"" ""s""h""a""r""e""d"" ""s""t""a""t""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""n""a""m""e"" ""a""s"" ""a"" ""s""t""r""i""n""g""."
+" "" "" ""*"" ""@""s""e""e"" ""V""e""r""t""e""x""#""s""e""t""S""h""a""r""e""d""S""t""a""t""e"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""S""t""r""i""n""g"" ""g""e""t""S""h""a""r""e""d""S""t""a""t""e""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""s""h""a""r""e""d""S""t""a""t""e"";"
+" "" ""}"
 
-  /**
-   * Sets the name of the shared state of this vertex.
-   * If the vertex is to act as a shared state, the name of the shared state needs to be set to a non-empty
-   * string.
-   * </p>
-   * The shared state is portal to other shared states in other models. It creates a 'virtual edge'
-   * between to vertices sharing the same name in their shared state.
-   * </p>
-   * <img src="doc-files/Vertex.setSharedState.png">
-   * </p>
-   * In the 2 models above, GraphWalker will create virtual edges, the dotted arrows. These edges will
-   * allow passages between the 2 models.
-   *
-   * @param sharedState The name of the shared state.
-   * @return The vertex
-   */
-  public Vertex setSharedState(String sharedState) {
-    this.sharedState = sharedState;
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""S""e""t""s"" ""t""h""e"" ""n""a""m""e"" ""o""f"" ""t""h""e"" ""s""h""a""r""e""d"" ""s""t""a""t""e"" ""o""f"" ""t""h""i""s"" ""v""e""r""t""e""x""."
+" "" "" ""*"" ""I""f"" ""t""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""t""o"" ""a""c""t"" ""a""s"" ""a"" ""s""h""a""r""e""d"" ""s""t""a""t""e"","" ""t""h""e"" ""n""a""m""e"" ""o""f"" ""t""h""e"" ""s""h""a""r""e""d"" ""s""t""a""t""e"" ""n""e""e""d""s"" ""t""o"" ""b""e"" ""s""e""t"" ""t""o"" ""a"" ""n""o""n""-""e""m""p""t""y"
+" "" "" ""*"" ""s""t""r""i""n""g""."
+" "" "" ""*"" ""<""/""p"">"
+" "" "" ""*"" ""T""h""e"" ""s""h""a""r""e""d"" ""s""t""a""t""e"" ""i""s"" ""p""o""r""t""a""l"" ""t""o"" ""o""t""h""e""r"" ""s""h""a""r""e""d"" ""s""t""a""t""e""s"" ""i""n"" ""o""t""h""e""r"" ""m""o""d""e""l""s""."" ""I""t"" ""c""r""e""a""t""e""s"" ""a"" ""'""v""i""r""t""u""a""l"" ""e""d""g""e""'"
+" "" "" ""*"" ""b""e""t""w""e""e""n"" ""t""o"" ""v""e""r""t""i""c""e""s"" ""s""h""a""r""i""n""g"" ""t""h""e"" ""s""a""m""e"" ""n""a""m""e"" ""i""n"" ""t""h""e""i""r"" ""s""h""a""r""e""d"" ""s""t""a""t""e""."
+" "" "" ""*"" ""<""/""p"">"
+" "" "" ""*"" ""<""i""m""g"" ""s""r""c""="""""d""o""c""-""f""i""l""e""s""/""V""e""r""t""e""x"".""s""e""t""S""h""a""r""e""d""S""t""a""t""e"".""p""n""g""""">"
+" "" "" ""*"" ""<""/""p"">"
+" "" "" ""*"" ""I""n"" ""t""h""e"" ""2"" ""m""o""d""e""l""s"" ""a""b""o""v""e"","" ""G""r""a""p""h""W""a""l""k""e""r"" ""w""i""l""l"" ""c""r""e""a""t""e"" ""v""i""r""t""u""a""l"" ""e""d""g""e""s"","" ""t""h""e"" ""d""o""t""t""e""d"" ""a""r""r""o""w""s""."" ""T""h""e""s""e"" ""e""d""g""e""s"" ""w""i""l""l"
+" "" "" ""*"" ""a""l""l""o""w"" ""p""a""s""s""a""g""e""s"" ""b""e""t""w""e""e""n"" ""t""h""e"" ""2"" ""m""o""d""e""l""s""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""s""h""a""r""e""d""S""t""a""t""e"" ""T""h""e"" ""n""a""m""e"" ""o""f"" ""t""h""e"" ""s""h""a""r""e""d"" ""s""t""a""t""e""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""v""e""r""t""e""x"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x"" ""s""e""t""S""h""a""r""e""d""S""t""a""t""e""(""S""t""r""i""n""g"" ""s""h""a""r""e""d""S""t""a""t""e"")"" ""{"
+" "" "" "" ""t""h""i""s"".""s""h""a""r""e""d""S""t""a""t""e"" ""="" ""s""h""a""r""e""d""S""t""a""t""e"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Adds an action to the vertex, which represents a piece of code that will be executed
-   * each time the vertex is being traversed. The code is by default interpreted as javascript.
-   *
-   * @param action The action.
-   * @return The vertex.
-   */
-  public Vertex addAction(Action action) {
-    this.actions.add(action);
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""A""d""d""s"" ""a""n"" ""a""c""t""i""o""n"" ""t""o"" ""t""h""e"" ""v""e""r""t""e""x"","" ""w""h""i""c""h"" ""r""e""p""r""e""s""e""n""t""s"" ""a"" ""p""i""e""c""e"" ""o""f"" ""c""o""d""e"" ""t""h""a""t"" ""w""i""l""l"" ""b""e"" ""e""x""e""c""u""t""e""d"
+" "" "" ""*"" ""e""a""c""h"" ""t""i""m""e"" ""t""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""b""e""i""n""g"" ""t""r""a""v""e""r""s""e""d""."" ""T""h""e"" ""c""o""d""e"" ""i""s"" ""b""y"" ""d""e""f""a""u""l""t"" ""i""n""t""e""r""p""r""e""t""e""d"" ""a""s"" ""j""a""v""a""s""c""r""i""p""t""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""a""c""t""i""o""n"" ""T""h""e"" ""a""c""t""i""o""n""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""v""e""r""t""e""x""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x"" ""a""d""d""A""c""t""i""o""n""(""A""c""t""i""o""n"" ""a""c""t""i""o""n"")"" ""{"
+" "" "" "" ""t""h""i""s"".""a""c""t""i""o""n""s"".""a""d""d""(""a""c""t""i""o""n"")"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  public Vertex addActions(Action... actions) {
-    return addActions(Arrays.asList(actions));
-  }
+" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x"" ""a""d""d""A""c""t""i""o""n""s""(""A""c""t""i""o""n""."".""."" ""a""c""t""i""o""n""s"")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""a""d""d""A""c""t""i""o""n""s""(""A""r""r""a""y""s"".""a""s""L""i""s""t""(""a""c""t""i""o""n""s"")"")"";"
+" "" ""}"
 
-  public Vertex addActions(List<Action> actions) {
-    this.actions.addAll(actions);
-    return this;
-  }
+" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x"" ""a""d""d""A""c""t""i""o""n""s""(""L""i""s""t""<""A""c""t""i""o""n"">"" ""a""c""t""i""o""n""s"")"" ""{"
+" "" "" "" ""t""h""i""s"".""a""c""t""i""o""n""s"".""a""d""d""A""l""l""(""a""c""t""i""o""n""s"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Adds a list of actions to the vertex, which represents a pieces of code that will be executed
-   * each time the vertex is being traversed. The code snippets is by default interpreted as javascript.
-   *
-   * @param actions The actions.
-   * @return The vertex.
-   * @see Vertex#addAction
-   */
-  public Vertex setActions(List<Action> actions) {
-    this.actions = new ArrayList<>(actions);
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""A""d""d""s"" ""a"" ""l""i""s""t"" ""o""f"" ""a""c""t""i""o""n""s"" ""t""o"" ""t""h""e"" ""v""e""r""t""e""x"","" ""w""h""i""c""h"" ""r""e""p""r""e""s""e""n""t""s"" ""a"" ""p""i""e""c""e""s"" ""o""f"" ""c""o""d""e"" ""t""h""a""t"" ""w""i""l""l"" ""b""e"" ""e""x""e""c""u""t""e""d"
+" "" "" ""*"" ""e""a""c""h"" ""t""i""m""e"" ""t""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""b""e""i""n""g"" ""t""r""a""v""e""r""s""e""d""."" ""T""h""e"" ""c""o""d""e"" ""s""n""i""p""p""e""t""s"" ""i""s"" ""b""y"" ""d""e""f""a""u""l""t"" ""i""n""t""e""r""p""r""e""t""e""d"" ""a""s"" ""j""a""v""a""s""c""r""i""p""t""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""a""c""t""i""o""n""s"" ""T""h""e"" ""a""c""t""i""o""n""s""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""v""e""r""t""e""x""."
+" "" "" ""*"" ""@""s""e""e"" ""V""e""r""t""e""x""#""a""d""d""A""c""t""i""o""n"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x"" ""s""e""t""A""c""t""i""o""n""s""(""L""i""s""t""<""A""c""t""i""o""n"">"" ""a""c""t""i""o""n""s"")"" ""{"
+" "" "" "" ""t""h""i""s"".""a""c""t""i""o""n""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""(""a""c""t""i""o""n""s"")"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Gets the lists of actions of the vertex.
-   *
-   * @return The actions
-   * @see Vertex#setActions
-   */
-  public List<Action> getActions() {
-    return unmodifiableList(actions);
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""l""i""s""t""s"" ""o""f"" ""a""c""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""v""e""r""t""e""x""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""a""c""t""i""o""n""s"
+" "" "" ""*"" ""@""s""e""e"" ""V""e""r""t""e""x""#""s""e""t""A""c""t""i""o""n""s"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""L""i""s""t""<""A""c""t""i""o""n"">"" ""g""e""t""A""c""t""i""o""n""s""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""u""n""m""o""d""i""f""i""a""b""l""e""L""i""s""t""(""a""c""t""i""o""n""s"")"";"
+" "" ""}"
 
-  /**
-   * Creates an immutable vertex from this vertex.
-   *
-   * @return An immutable vertex as a RuntimeVertex
-   */
-  @Override
-  protected RuntimeVertex createCache() {
-    return new RuntimeVertex(this);
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""C""r""e""a""t""e""s"" ""a""n"" ""i""m""m""u""t""a""b""l""e"" ""v""e""r""t""e""x"" ""f""r""o""m"" ""t""h""i""s"" ""v""e""r""t""e""x""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""A""n"" ""i""m""m""u""t""a""b""l""e"" ""v""e""r""t""e""x"" ""a""s"" ""a"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"
+" "" "" ""*""/"
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""r""o""t""e""c""t""e""d"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""c""r""e""a""t""e""C""a""c""h""e""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""n""e""w"" ""R""u""n""t""i""m""e""V""e""r""t""e""x""(""t""h""i""s"")"";"
+" "" ""}"
 
-  /**
-   * <h1>RuntimeVertex</h1>
-   * Immutable class for Vertex
-   * </p>
-   * This class is used in models. It guarantees that that the internal states of
-   * the instance will not change after it's construction.
-   */
-  public static class RuntimeVertex extends RuntimeBase {
+" "" ""/""*""*"
+" "" "" ""*"" ""<""h""1"">""R""u""n""t""i""m""e""V""e""r""t""e""x""<""/""h""1"">"
+" "" "" ""*"" ""I""m""m""u""t""a""b""l""e"" ""c""l""a""s""s"" ""f""o""r"" ""V""e""r""t""e""x"
+" "" "" ""*"" ""<""/""p"">"
+" "" "" ""*"" ""T""h""i""s"" ""c""l""a""s""s"" ""i""s"" ""u""s""e""d"" ""i""n"" ""m""o""d""e""l""s""."" ""I""t"" ""g""u""a""r""a""n""t""e""e""s"" ""t""h""a""t"" ""t""h""a""t"" ""t""h""e"" ""i""n""t""e""r""n""a""l"" ""s""t""a""t""e""s"" ""o""f"
+" "" "" ""*"" ""t""h""e"" ""i""n""s""t""a""n""c""e"" ""w""i""l""l"" ""n""o""t"" ""c""h""a""n""g""e"" ""a""f""t""e""r"" ""i""t""'""s"" ""c""o""n""s""t""r""u""c""t""i""o""n""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""c""l""a""s""s"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""e""x""t""e""n""d""s"" ""R""u""n""t""i""m""e""B""a""s""e"" ""{"
 
-    private final String sharedState;
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""S""t""r""i""n""g"" ""s""h""a""r""e""d""S""t""a""t""e"";"
 
-    private RuntimeVertex(Vertex vertex) {
-      super(vertex.getId(), vertex.getName(), vertex.getActions(), vertex.getRequirements(), vertex.getProperties());
-      this.sharedState = vertex.getSharedState();
-    }
+" "" "" "" ""p""r""i""v""a""t""e"" ""R""u""n""t""i""m""e""V""e""r""t""e""x""(""V""e""r""t""e""x"" ""v""e""r""t""e""x"")"" ""{"
+" "" "" "" "" "" ""s""u""p""e""r""(""v""e""r""t""e""x"".""g""e""t""I""d""("")"","" ""v""e""r""t""e""x"".""g""e""t""N""a""m""e""("")"","" ""v""e""r""t""e""x"".""g""e""t""A""c""t""i""o""n""s""("")"","" ""v""e""r""t""e""x"".""g""e""t""R""e""q""u""i""r""e""m""e""n""t""s""("")"","" ""v""e""r""t""e""x"".""g""e""t""P""r""o""p""e""r""t""i""e""s""("")"")"";"
+" "" "" "" "" "" ""t""h""i""s"".""s""h""a""r""e""d""S""t""a""t""e"" ""="" ""v""e""r""t""e""x"".""g""e""t""S""h""a""r""e""d""S""t""a""t""e""("")"";"
+" "" "" "" ""}"
 
-    /**
-     * Gets the name of the shared state.
-     *
-     * @return The name as a string.
-     * @see Vertex#setSharedState
-     */
-    public String getSharedState() {
-      return sharedState;
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""n""a""m""e"" ""o""f"" ""t""h""e"" ""s""h""a""r""e""d"" ""s""t""a""t""e""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""n""a""m""e"" ""a""s"" ""a"" ""s""t""r""i""n""g""."
+" "" "" "" "" ""*"" ""@""s""e""e"" ""V""e""r""t""e""x""#""s""e""t""S""h""a""r""e""d""S""t""a""t""e"
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""S""t""r""i""n""g"" ""g""e""t""S""h""a""r""e""d""S""t""a""t""e""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""s""h""a""r""e""d""S""t""a""t""e"";"
+" "" "" "" ""}"
 
-    /**
-     * Returns true if the vertex has a valid shared state.
-     *
-     * @return True if the vertex has a shared state.
-     */
-    public boolean hasSharedState() {
-      return isNotNullOrEmpty(sharedState);
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""R""e""t""u""r""n""s"" ""t""r""u""e"" ""i""f"" ""t""h""e"" ""v""e""r""t""e""x"" ""h""a""s"" ""a"" ""v""a""l""i""d"" ""s""h""a""r""e""d"" ""s""t""a""t""e""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""r""u""e"" ""i""f"" ""t""h""e"" ""v""e""r""t""e""x"" ""h""a""s"" ""a"" ""s""h""a""r""e""d"" ""s""t""a""t""e""."
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""h""a""s""S""h""a""r""e""d""S""t""a""t""e""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""s""h""a""r""e""d""S""t""a""t""e"")"";"
+" "" "" "" ""}"
 
-    /**
-     * TODO Needs documentation
-     */
-    @Override
-    public void accept(ElementVisitor visitor) {
-      visitor.visit(this);
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""T""O""D""O"" ""N""e""e""d""s"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" ""*""/"
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""a""c""c""e""p""t""(""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""v""i""s""i""t""o""r"")"" ""{"
+" "" "" "" "" "" ""v""i""s""i""t""o""r"".""v""i""s""i""t""(""t""h""i""s"")"";"
+" "" "" "" ""}"
 
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = super.hashCode();
-      result = prime * result
-               + ((sharedState == null) ? 0 : sharedState.hashCode());
-      return result;
-    }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""i""n""t"" ""h""a""s""h""C""o""d""e""("")"" ""{"
+" "" "" "" "" "" ""f""i""n""a""l"" ""i""n""t"" ""p""r""i""m""e"" ""="" ""3""1"";"
+" "" "" "" "" "" ""i""n""t"" ""r""e""s""u""l""t"" ""="" ""s""u""p""e""r"".""h""a""s""h""C""o""d""e""("")"";"
+" "" "" "" "" "" ""r""e""s""u""l""t"" ""="" ""p""r""i""m""e"" ""*"" ""r""e""s""u""l""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""+"" ""(""(""s""h""a""r""e""d""S""t""a""t""e"" ""=""="" ""n""u""l""l"")"" ""?"" ""0"" "":"" ""s""h""a""r""e""d""S""t""a""t""e"".""h""a""s""h""C""o""d""e""("")"")"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""r""e""s""u""l""t"";"
+" "" "" "" ""}"
 
-    @Override
-    public boolean equals(Object o) {
-      if (!super.equals(o)) {
-        return false;
-      }
-      RuntimeVertex that = (RuntimeVertex) o;
-      return Objects.equals(sharedState, that.sharedState);
-    }
-  }
-}
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""e""q""u""a""l""s""(""O""b""j""e""c""t"" ""o"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""s""u""p""e""r"".""e""q""u""a""l""s""(""o"")"")"" ""{"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""f""a""l""s""e"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""t""h""a""t"" ""="" ""(""R""u""n""t""i""m""e""V""e""r""t""e""x"")"" ""o"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""s""h""a""r""e""d""S""t""a""t""e"","" ""t""h""a""t"".""s""h""a""r""e""d""S""t""a""t""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
+"}"

@@ -1,114 +1,114 @@
-package org.graphwalker.core.algorithm;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""a""l""g""o""r""i""t""h""m"";"
 
-/*
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import static org.junit.Assert.assertNotNull;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""j""u""n""i""t"".""A""s""s""e""r""t"".""a""s""s""e""r""t""N""o""t""N""u""l""l"";"
 
-import org.graphwalker.core.model.Classification;
-import org.graphwalker.core.model.ClassificationTree;
-import org.junit.Test;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""C""l""a""s""s""i""f""i""c""a""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""C""l""a""s""s""i""f""i""c""a""t""i""o""n""T""r""e""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-/**
- * @author Kristian Karl
- */
-public class AllClassificationCombinationsTest {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""K""r""i""s""t""i""a""n"" ""K""a""r""l"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""A""l""l""C""l""a""s""s""i""f""i""c""a""t""i""o""n""C""o""m""b""i""n""a""t""i""o""n""s""T""e""s""t"" ""{"
 
-  @Test
-  public void simpleTree() throws Exception {
-    Classification branchA = new Classification().setName("Branch A");
-    branchA.addClassification(new Classification().setName("Leaf 1"));
-    branchA.addClassification(new Classification().setName("Leaf 2"));
-    branchA.addClassification(new Classification().setName("Leaf 3"));
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""i""m""p""l""e""T""r""e""e""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""b""r""a""n""c""h""A"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""B""r""a""n""c""h"" ""A""""")"";"
+" "" "" "" ""b""r""a""n""c""h""A"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""1""""")"")"";"
+" "" "" "" ""b""r""a""n""c""h""A"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""2""""")"")"";"
+" "" "" "" ""b""r""a""n""c""h""A"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""3""""")"")"";"
 
-    Classification branchB = new Classification().setName("Branch B");
-    branchB.addClassification(new Classification().setName("Leaf 4"));
-    branchB.addClassification(new Classification().setName("Leaf 5"));
-    branchB.addClassification(new Classification().setName("Leaf 6"));
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""b""r""a""n""c""h""B"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""B""r""a""n""c""h"" ""B""""")"";"
+" "" "" "" ""b""r""a""n""c""h""B"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""4""""")"")"";"
+" "" "" "" ""b""r""a""n""c""h""B"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""5""""")"")"";"
+" "" "" "" ""b""r""a""n""c""h""B"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""6""""")"")"";"
 
-    Classification branchC = new Classification().setName("Branch C");
-    branchC.addClassification(new Classification().setName("Leaf 7"));
-    branchC.addClassification(new Classification().setName("Leaf 8"));
-    branchC.addClassification(new Classification().setName("Leaf 9"));
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""b""r""a""n""c""h""C"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""B""r""a""n""c""h"" ""C""""")"";"
+" "" "" "" ""b""r""a""n""c""h""C"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""7""""")"")"";"
+" "" "" "" ""b""r""a""n""c""h""C"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""8""""")"")"";"
+" "" "" "" ""b""r""a""n""c""h""C"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""e""a""f"" ""9""""")"")"";"
 
-    ClassificationTree tree = new ClassificationTree();
-    tree.addClassification(branchA);
-    tree.addClassification(branchB);
-    tree.addClassification(branchC);
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""T""r""e""e"" ""t""r""e""e"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""T""r""e""e""("")"";"
+" "" "" "" ""t""r""e""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""b""r""a""n""c""h""A"")"";"
+" "" "" "" ""t""r""e""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""b""r""a""n""c""h""B"")"";"
+" "" "" "" ""t""r""e""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""b""r""a""n""c""h""C"")"";"
 
-    AllClassificationCombinations allCombinations = new AllClassificationCombinations(tree.build());
-    assertNotNull(allCombinations);
+" "" "" "" ""A""l""l""C""l""a""s""s""i""f""i""c""a""t""i""o""n""C""o""m""b""i""n""a""t""i""o""n""s"" ""a""l""l""C""o""m""b""i""n""a""t""i""o""n""s"" ""="" ""n""e""w"" ""A""l""l""C""l""a""s""s""i""f""i""c""a""t""i""o""n""C""o""m""b""i""n""a""t""i""o""n""s""(""t""r""e""e"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""a""s""s""e""r""t""N""o""t""N""u""l""l""(""a""l""l""C""o""m""b""i""n""a""t""i""o""n""s"")"";"
 
-    allCombinations.generate();
-  }
+" "" "" "" ""a""l""l""C""o""m""b""i""n""a""t""i""o""n""s"".""g""e""n""e""r""a""t""e""("")"";"
+" "" ""}"
 
-  @Test
-  public void timeSheetEntry() throws Exception {
-        /*
-         * Populate tre according to the time sheet entry example at:
-         * https://mattarcherblog.wordpress.com/2012/03/07/software-test-case-design-with-the-classification-tree-technique-sample-book-chapter/
-         */
-    Classification time = new Classification().setName("Time");
-    Classification hours = new Classification().setName("Hours");
-    Classification negativeHours = new Classification().setName("Negative hours");
-    Classification zeroAndPositiveHours = new Classification().setName("Zero and positive hours");
-    Classification minutes = new Classification().setName("Minutes");
-    Classification lowerBoundry = new Classification().setName("Lower boundry");
-    Classification justBelowLowerBoundry = new Classification().setName("Just below lower boundry");
-    Classification justAboveLowerBoundry = new Classification().setName("Just above lower boundry");
-    Classification upperBoundry = new Classification().setName("Upper boundry");
-    Classification justBelowUpperBoundry = new Classification().setName("Just below upper boundry");
-    Classification justAboveUpperBoundry = new Classification().setName("Just above upper boundry");
-    Classification costCode = new Classification().setName("Cost code");
-    Classification anyExistingCode = new Classification().setName("Any existing code");
-    Classification anyNonExistentCode = new Classification().setName("Any non-existent code");
+" "" ""@""T""e""s""t"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""t""i""m""e""S""h""e""e""t""E""n""t""r""y""("")"" ""t""h""r""o""w""s"" ""E""x""c""e""p""t""i""o""n"" ""{"
+" "" "" "" "" "" "" "" ""/""*"
+" "" "" "" "" "" "" "" "" ""*"" ""P""o""p""u""l""a""t""e"" ""t""r""e"" ""a""c""c""o""r""d""i""n""g"" ""t""o"" ""t""h""e"" ""t""i""m""e"" ""s""h""e""e""t"" ""e""n""t""r""y"" ""e""x""a""m""p""l""e"" ""a""t"":"
+" "" "" "" "" "" "" "" "" ""*"" ""h""t""t""p""s"":""/""/""m""a""t""t""a""r""c""h""e""r""b""l""o""g"".""w""o""r""d""p""r""e""s""s"".""c""o""m""/""2""0""1""2""/""0""3""/""0""7""/""s""o""f""t""w""a""r""e""-""t""e""s""t""-""c""a""s""e""-""d""e""s""i""g""n""-""w""i""t""h""-""t""h""e""-""c""l""a""s""s""i""f""i""c""a""t""i""o""n""-""t""r""e""e""-""t""e""c""h""n""i""q""u""e""-""s""a""m""p""l""e""-""b""o""o""k""-""c""h""a""p""t""e""r""/"
+" "" "" "" "" "" "" "" "" ""*""/"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""t""i""m""e"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""T""i""m""e""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""h""o""u""r""s"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""H""o""u""r""s""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""n""e""g""a""t""i""v""e""H""o""u""r""s"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""N""e""g""a""t""i""v""e"" ""h""o""u""r""s""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""z""e""r""o""A""n""d""P""o""s""i""t""i""v""e""H""o""u""r""s"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""Z""e""r""o"" ""a""n""d"" ""p""o""s""i""t""i""v""e"" ""h""o""u""r""s""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""m""i""n""u""t""e""s"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""M""i""n""u""t""e""s""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""l""o""w""e""r""B""o""u""n""d""r""y"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""L""o""w""e""r"" ""b""o""u""n""d""r""y""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""j""u""s""t""B""e""l""o""w""L""o""w""e""r""B""o""u""n""d""r""y"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""J""u""s""t"" ""b""e""l""o""w"" ""l""o""w""e""r"" ""b""o""u""n""d""r""y""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""j""u""s""t""A""b""o""v""e""L""o""w""e""r""B""o""u""n""d""r""y"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""J""u""s""t"" ""a""b""o""v""e"" ""l""o""w""e""r"" ""b""o""u""n""d""r""y""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""u""p""p""e""r""B""o""u""n""d""r""y"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""U""p""p""e""r"" ""b""o""u""n""d""r""y""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""j""u""s""t""B""e""l""o""w""U""p""p""e""r""B""o""u""n""d""r""y"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""J""u""s""t"" ""b""e""l""o""w"" ""u""p""p""e""r"" ""b""o""u""n""d""r""y""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""j""u""s""t""A""b""o""v""e""U""p""p""e""r""B""o""u""n""d""r""y"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""J""u""s""t"" ""a""b""o""v""e"" ""u""p""p""e""r"" ""b""o""u""n""d""r""y""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""c""o""s""t""C""o""d""e"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""C""o""s""t"" ""c""o""d""e""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""a""n""y""E""x""i""s""t""i""n""g""C""o""d""e"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""A""n""y"" ""e""x""i""s""t""i""n""g"" ""c""o""d""e""""")"";"
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n"" ""a""n""y""N""o""n""E""x""i""s""t""e""n""t""C""o""d""e"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""("")"".""s""e""t""N""a""m""e""("""""A""n""y"" ""n""o""n""-""e""x""i""s""t""e""n""t"" ""c""o""d""e""""")"";"
 
-    ClassificationTree tree = new ClassificationTree();
-    tree.addClassification(time);
+" "" "" "" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""T""r""e""e"" ""t""r""e""e"" ""="" ""n""e""w"" ""C""l""a""s""s""i""f""i""c""a""t""i""o""n""T""r""e""e""("")"";"
+" "" "" "" ""t""r""e""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""t""i""m""e"")"";"
 
-    time.addClassification(hours);
-    time.addClassification(minutes);
+" "" "" "" ""t""i""m""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""h""o""u""r""s"")"";"
+" "" "" "" ""t""i""m""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""m""i""n""u""t""e""s"")"";"
 
-    minutes.addClassification(lowerBoundry);
-    minutes.addClassification(upperBoundry);
+" "" "" "" ""m""i""n""u""t""e""s"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""l""o""w""e""r""B""o""u""n""d""r""y"")"";"
+" "" "" "" ""m""i""n""u""t""e""s"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""u""p""p""e""r""B""o""u""n""d""r""y"")"";"
 
-    lowerBoundry.addClassification(justBelowLowerBoundry);
-    lowerBoundry.addClassification(justAboveLowerBoundry);
+" "" "" "" ""l""o""w""e""r""B""o""u""n""d""r""y"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""j""u""s""t""B""e""l""o""w""L""o""w""e""r""B""o""u""n""d""r""y"")"";"
+" "" "" "" ""l""o""w""e""r""B""o""u""n""d""r""y"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""j""u""s""t""A""b""o""v""e""L""o""w""e""r""B""o""u""n""d""r""y"")"";"
 
-    upperBoundry.addClassification(justBelowUpperBoundry);
-    upperBoundry.addClassification(justAboveUpperBoundry);
+" "" "" "" ""u""p""p""e""r""B""o""u""n""d""r""y"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""j""u""s""t""B""e""l""o""w""U""p""p""e""r""B""o""u""n""d""r""y"")"";"
+" "" "" "" ""u""p""p""e""r""B""o""u""n""d""r""y"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""j""u""s""t""A""b""o""v""e""U""p""p""e""r""B""o""u""n""d""r""y"")"";"
 
-    tree.addClassification(costCode);
+" "" "" "" ""t""r""e""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""c""o""s""t""C""o""d""e"")"";"
 
-    costCode.addClassification(anyExistingCode);
-    costCode.addClassification(anyNonExistentCode);
+" "" "" "" ""c""o""s""t""C""o""d""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""a""n""y""E""x""i""s""t""i""n""g""C""o""d""e"")"";"
+" "" "" "" ""c""o""s""t""C""o""d""e"".""a""d""d""C""l""a""s""s""i""f""i""c""a""t""i""o""n""(""a""n""y""N""o""n""E""x""i""s""t""e""n""t""C""o""d""e"")"";"
 
-    AllClassificationCombinations allCombinations = new AllClassificationCombinations(tree.build());
-    assertNotNull(allCombinations);
+" "" "" "" ""A""l""l""C""l""a""s""s""i""f""i""c""a""t""i""o""n""C""o""m""b""i""n""a""t""i""o""n""s"" ""a""l""l""C""o""m""b""i""n""a""t""i""o""n""s"" ""="" ""n""e""w"" ""A""l""l""C""l""a""s""s""i""f""i""c""a""t""i""o""n""C""o""m""b""i""n""a""t""i""o""n""s""(""t""r""e""e"".""b""u""i""l""d""("")"")"";"
+" "" "" "" ""a""s""s""e""r""t""N""o""t""N""u""l""l""(""a""l""l""C""o""m""b""i""n""a""t""i""o""n""s"")"";"
 
-    //List<List<Classification>> result = allCombinations.generate();
-  }
-}
+" "" "" "" ""/""/""L""i""s""t""<""L""i""s""t""<""C""l""a""s""s""i""f""i""c""a""t""i""o""n"">"">"" ""r""e""s""u""l""t"" ""="" ""a""l""l""C""o""m""b""i""n""a""t""i""o""n""s"".""g""e""n""e""r""a""t""e""("")"";"
+" "" ""}"
+"}"

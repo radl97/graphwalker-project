@@ -1,116 +1,116 @@
-package org.graphwalker.core.machine;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"";"
 
-/*
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import org.graphwalker.core.event.EventType;
-import org.graphwalker.core.event.Observer;
-import org.graphwalker.core.model.Element;
-import org.graphwalker.core.statistics.Profiler;
-import org.graphwalker.core.statistics.SimpleProfiler;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""e""v""e""n""t"".""E""v""e""n""t""T""y""p""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""e""v""e""n""t"".""O""b""s""e""r""v""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""s""t""a""t""i""s""t""i""c""s"".""P""r""o""f""i""l""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""s""t""a""t""i""s""t""i""c""s"".""S""i""m""p""l""e""P""r""o""f""i""l""e""r"";"
 
-import java.util.ArrayList;
-import java.util.List;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
 
-import static org.graphwalker.core.common.Objects.isNotNull;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"".""O""b""j""e""c""t""s"".""i""s""N""o""t""N""u""l""l"";"
 
-/**
- * <h1>MachineBase</h1>
- * MachineBase represents the Finite State Machine.
- * </p>
- * The MachineBase keeps lists of Contexts and Observers, a Profiler and the exception strategy.
- * </p>
- *
- * @author Nils Olsson
- */
-public abstract class MachineBase implements Machine {
+"/""*""*"
+" ""*"" ""<""h""1"">""M""a""c""h""i""n""e""B""a""s""e""<""/""h""1"">"
+" ""*"" ""M""a""c""h""i""n""e""B""a""s""e"" ""r""e""p""r""e""s""e""n""t""s"" ""t""h""e"" ""F""i""n""i""t""e"" ""S""t""a""t""e"" ""M""a""c""h""i""n""e""."
+" ""*"" ""<""/""p"">"
+" ""*"" ""T""h""e"" ""M""a""c""h""i""n""e""B""a""s""e"" ""k""e""e""p""s"" ""l""i""s""t""s"" ""o""f"" ""C""o""n""t""e""x""t""s"" ""a""n""d"" ""O""b""s""e""r""v""e""r""s"","" ""a"" ""P""r""o""f""i""l""e""r"" ""a""n""d"" ""t""h""e"" ""e""x""c""e""p""t""i""o""n"" ""s""t""r""a""t""e""g""y""."
+" ""*"" ""<""/""p"">"
+" ""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""a""b""s""t""r""a""c""t"" ""c""l""a""s""s"" ""M""a""c""h""i""n""e""B""a""s""e"" ""i""m""p""l""e""m""e""n""t""s"" ""M""a""c""h""i""n""e"" ""{"
 
-  private final List<Context> contexts = new ArrayList<>();
-  private final List<Observer> observers = new ArrayList<>();
-  private final Profiler profiler = new SimpleProfiler();
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""c""o""n""t""e""x""t""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""L""i""s""t""<""O""b""s""e""r""v""e""r"">"" ""o""b""s""e""r""v""e""r""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""P""r""o""f""i""l""e""r"" ""p""r""o""f""i""l""e""r"" ""="" ""n""e""w"" ""S""i""m""p""l""e""P""r""o""f""i""l""e""r""("")"";"
 
-  private ExceptionStrategy exceptionStrategy = new FailFastStrategy();
-  private Context currentContext;
+" "" ""p""r""i""v""a""t""e"" ""E""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"" ""e""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"" ""="" ""n""e""w"" ""F""a""i""l""F""a""s""t""S""t""r""a""t""e""g""y""("")"";"
+" "" ""p""r""i""v""a""t""e"" ""C""o""n""t""e""x""t"" ""c""u""r""r""e""n""t""C""o""n""t""e""x""t"";"
 
-  @Override
-  public List<Context> getContexts() {
-    return contexts;
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""L""i""s""t""<""C""o""n""t""e""x""t"">"" ""g""e""t""C""o""n""t""e""x""t""s""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""c""o""n""t""e""x""t""s"";"
+" "" ""}"
 
-  @Override
-  public List<Observer> getObservers() {
-    return observers;
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""L""i""s""t""<""O""b""s""e""r""v""e""r"">"" ""g""e""t""O""b""s""e""r""v""e""r""s""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""o""b""s""e""r""v""e""r""s"";"
+" "" ""}"
 
-  @Override
-  public void addObserver(Observer observer) {
-    if (isNotNull(observer) && !observers.contains(observer)) {
-      observers.add(observer);
-    }
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""a""d""d""O""b""s""e""r""v""e""r""(""O""b""s""e""r""v""e""r"" ""o""b""s""e""r""v""e""r"")"" ""{"
+" "" "" "" ""i""f"" ""(""i""s""N""o""t""N""u""l""l""(""o""b""s""e""r""v""e""r"")"" ""&""&"" ""!""o""b""s""e""r""v""e""r""s"".""c""o""n""t""a""i""n""s""(""o""b""s""e""r""v""e""r"")"")"" ""{"
+" "" "" "" "" "" ""o""b""s""e""r""v""e""r""s"".""a""d""d""(""o""b""s""e""r""v""e""r"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  @Override
-  public void notifyObservers(Element element, EventType type) {
-    for (Observer observer : observers) {
-      observer.update(this, element, type);
-    }
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""n""o""t""i""f""y""O""b""s""e""r""v""e""r""s""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"","" ""E""v""e""n""t""T""y""p""e"" ""t""y""p""e"")"" ""{"
+" "" "" "" ""f""o""r"" ""(""O""b""s""e""r""v""e""r"" ""o""b""s""e""r""v""e""r"" "":"" ""o""b""s""e""r""v""e""r""s"")"" ""{"
+" "" "" "" "" "" ""o""b""s""e""r""v""e""r"".""u""p""d""a""t""e""(""t""h""i""s"","" ""e""l""e""m""e""n""t"","" ""t""y""p""e"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  @Override
-  public void deleteObserver(Observer observer) {
-    observers.remove(observer);
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""d""e""l""e""t""e""O""b""s""e""r""v""e""r""(""O""b""s""e""r""v""e""r"" ""o""b""s""e""r""v""e""r"")"" ""{"
+" "" "" "" ""o""b""s""e""r""v""e""r""s"".""r""e""m""o""v""e""(""o""b""s""e""r""v""e""r"")"";"
+" "" ""}"
 
-  @Override
-  public void deleteObservers() {
-    observers.clear();
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""d""e""l""e""t""e""O""b""s""e""r""v""e""r""s""("")"" ""{"
+" "" "" "" ""o""b""s""e""r""v""e""r""s"".""c""l""e""a""r""("")"";"
+" "" ""}"
 
-  @Override
-  public Profiler getProfiler() {
-    return profiler;
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""P""r""o""f""i""l""e""r"" ""g""e""t""P""r""o""f""i""l""e""r""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""p""r""o""f""i""l""e""r"";"
+" "" ""}"
 
-  @Override
-  public Context getCurrentContext() {
-    return currentContext;
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""C""o""n""t""e""x""t"" ""g""e""t""C""u""r""r""e""n""t""C""o""n""t""e""x""t""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""c""u""r""r""e""n""t""C""o""n""t""e""x""t"";"
+" "" ""}"
 
-  protected void setCurrentContext(Context currentContext) {
-    this.currentContext = currentContext;
-  }
+" "" ""p""r""o""t""e""c""t""e""d"" ""v""o""i""d"" ""s""e""t""C""u""r""r""e""n""t""C""o""n""t""e""x""t""(""C""o""n""t""e""x""t"" ""c""u""r""r""e""n""t""C""o""n""t""e""x""t"")"" ""{"
+" "" "" "" ""t""h""i""s"".""c""u""r""r""e""n""t""C""o""n""t""e""x""t"" ""="" ""c""u""r""r""e""n""t""C""o""n""t""e""x""t"";"
+" "" ""}"
 
-  @Override
-  public ExceptionStrategy getExceptionStrategy() {
-    return exceptionStrategy;
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""E""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"" ""g""e""t""E""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""e""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"";"
+" "" ""}"
 
-  @Override
-  public void setExceptionStrategy(ExceptionStrategy exceptionStrategy) {
-    this.exceptionStrategy = exceptionStrategy;
-  }
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""e""t""E""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y""(""E""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"" ""e""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"")"" ""{"
+" "" "" "" ""t""h""i""s"".""e""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"" ""="" ""e""x""c""e""p""t""i""o""n""S""t""r""a""t""e""g""y"";"
+" "" ""}"
 
-}
+"}"

@@ -1,364 +1,364 @@
-package org.graphwalker.core.model;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"";"
 
-/*
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2017 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""7"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import org.graphwalker.core.common.Objects;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"".""O""b""j""e""c""t""s"";"
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""s"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
 
-import static org.graphwalker.core.common.Objects.*;
-import static org.graphwalker.core.model.Vertex.RuntimeVertex;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""m""m""o""n"".""O""b""j""e""c""t""s"".""*"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"";"
 
-/**
- * <h1>Edge</h1>
- * The  Edge holds the information for a transition in a model.
- * </p>
- * The edge represents an action performed by a test, which takes the system
- * under test, from a state to another.
- * The edge has a source and target vertex. If the vertices are identical, the
- * edge is a self loop. The source vertex is not mandatory, but in a model,
- * there should be only one such instance. Also, the target vertex is not
- * mandatory, but again, in a model, there should be only one such instance.
- *
- * @author Nils Olsson
- */
-public class Edge extends CachedBuilder<Edge, Edge.RuntimeEdge> {
+"/""*""*"
+" ""*"" ""<""h""1"">""E""d""g""e""<""/""h""1"">"
+" ""*"" ""T""h""e"" "" ""E""d""g""e"" ""h""o""l""d""s"" ""t""h""e"" ""i""n""f""o""r""m""a""t""i""o""n"" ""f""o""r"" ""a"" ""t""r""a""n""s""i""t""i""o""n"" ""i""n"" ""a"" ""m""o""d""e""l""."
+" ""*"" ""<""/""p"">"
+" ""*"" ""T""h""e"" ""e""d""g""e"" ""r""e""p""r""e""s""e""n""t""s"" ""a""n"" ""a""c""t""i""o""n"" ""p""e""r""f""o""r""m""e""d"" ""b""y"" ""a"" ""t""e""s""t"","" ""w""h""i""c""h"" ""t""a""k""e""s"" ""t""h""e"" ""s""y""s""t""e""m"
+" ""*"" ""u""n""d""e""r"" ""t""e""s""t"","" ""f""r""o""m"" ""a"" ""s""t""a""t""e"" ""t""o"" ""a""n""o""t""h""e""r""."
+" ""*"" ""T""h""e"" ""e""d""g""e"" ""h""a""s"" ""a"" ""s""o""u""r""c""e"" ""a""n""d"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x""."" ""I""f"" ""t""h""e"" ""v""e""r""t""i""c""e""s"" ""a""r""e"" ""i""d""e""n""t""i""c""a""l"","" ""t""h""e"
+" ""*"" ""e""d""g""e"" ""i""s"" ""a"" ""s""e""l""f"" ""l""o""o""p""."" ""T""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x"" ""i""s"" ""n""o""t"" ""m""a""n""d""a""t""o""r""y"","" ""b""u""t"" ""i""n"" ""a"" ""m""o""d""e""l"","
+" ""*"" ""t""h""e""r""e"" ""s""h""o""u""l""d"" ""b""e"" ""o""n""l""y"" ""o""n""e"" ""s""u""c""h"" ""i""n""s""t""a""n""c""e""."" ""A""l""s""o"","" ""t""h""e"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x"" ""i""s"" ""n""o""t"
+" ""*"" ""m""a""n""d""a""t""o""r""y"","" ""b""u""t"" ""a""g""a""i""n"","" ""i""n"" ""a"" ""m""o""d""e""l"","" ""t""h""e""r""e"" ""s""h""o""u""l""d"" ""b""e"" ""o""n""l""y"" ""o""n""e"" ""s""u""c""h"" ""i""n""s""t""a""n""c""e""."
+" ""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""E""d""g""e"" ""e""x""t""e""n""d""s"" ""C""a""c""h""e""d""B""u""i""l""d""e""r""<""E""d""g""e"","" ""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"">"" ""{"
 
-  private Vertex sourceVertex;
-  private Vertex targetVertex;
-  private Guard guard;
-  private List<Action> actions = new ArrayList<>();
-  private Double weight = 0.0;
-  private Integer dependency = 0;
+" "" ""p""r""i""v""a""t""e"" ""V""e""r""t""e""x"" ""s""o""u""r""c""e""V""e""r""t""e""x"";"
+" "" ""p""r""i""v""a""t""e"" ""V""e""r""t""e""x"" ""t""a""r""g""e""t""V""e""r""t""e""x"";"
+" "" ""p""r""i""v""a""t""e"" ""G""u""a""r""d"" ""g""u""a""r""d"";"
+" "" ""p""r""i""v""a""t""e"" ""L""i""s""t""<""A""c""t""i""o""n"">"" ""a""c""t""i""o""n""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" ""p""r""i""v""a""t""e"" ""D""o""u""b""l""e"" ""w""e""i""g""h""t"" ""="" ""0"".""0"";"
+" "" ""p""r""i""v""a""t""e"" ""I""n""t""e""g""e""r"" ""d""e""p""e""n""d""e""n""c""y"" ""="" ""0"";"
 
-  /**
-   * Sets the source vertex of the edge.
-   *
-   * @param vertex The source vertex.
-   * @return The edge.
-   */
-  public Edge setSourceVertex(Vertex vertex) {
-    this.sourceVertex = vertex;
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""S""e""t""s"" ""t""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""v""e""r""t""e""x"" ""T""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""e""d""g""e""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""V""e""r""t""e""x"" ""v""e""r""t""e""x"")"" ""{"
+" "" "" "" ""t""h""i""s"".""s""o""u""r""c""e""V""e""r""t""e""x"" ""="" ""v""e""r""t""e""x"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Gets the source vertex.
-   *
-   * @return The source vertex.
-   * @see Edge#setSourceVertex
-   */
-  public Vertex getSourceVertex() {
-    return sourceVertex;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x""."
+" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x"" ""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""s""o""u""r""c""e""V""e""r""t""e""x"";"
+" "" ""}"
 
-  /**
-   * Sets the target vertex of the edge.
-   *
-   * @param vertex The target vertex.
-   * @return The edge.
-   */
-  public Edge setTargetVertex(Vertex vertex) {
-    this.targetVertex = vertex;
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""S""e""t""s"" ""t""h""e"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""v""e""r""t""e""x"" ""T""h""e"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""e""d""g""e""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""V""e""r""t""e""x"" ""v""e""r""t""e""x"")"" ""{"
+" "" "" "" ""t""h""i""s"".""t""a""r""g""e""t""V""e""r""t""e""x"" ""="" ""v""e""r""t""e""x"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Gets the target vertex of the edge.
-   *
-   * @return The vertex.
-   * @see Edge#setTargetVertex
-   */
-  public Vertex getTargetVertex() {
-    return targetVertex;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""v""e""r""t""e""x""."
+" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x"" ""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""t""a""r""g""e""t""V""e""r""t""e""x"";"
+" "" ""}"
 
-  /**
-   * Sets the guard of the edge. The code in the guard is by default interpreted as javascript.
-   * The guard works like an 'if-statement'. It controls the accessibility of the edge.
-   * During execution, the guard evaluates to a boolean expression.
-   * If true, the edge is accessible, else it's not.
-   *
-   * @param guard The guard.
-   * @return The edge.
-   */
-  public Edge setGuard(Guard guard) {
-    this.guard = guard;
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""S""e""t""s"" ""t""h""e"" ""g""u""a""r""d"" ""o""f"" ""t""h""e"" ""e""d""g""e""."" ""T""h""e"" ""c""o""d""e"" ""i""n"" ""t""h""e"" ""g""u""a""r""d"" ""i""s"" ""b""y"" ""d""e""f""a""u""l""t"" ""i""n""t""e""r""p""r""e""t""e""d"" ""a""s"" ""j""a""v""a""s""c""r""i""p""t""."
+" "" "" ""*"" ""T""h""e"" ""g""u""a""r""d"" ""w""o""r""k""s"" ""l""i""k""e"" ""a""n"" ""'""i""f""-""s""t""a""t""e""m""e""n""t""'""."" ""I""t"" ""c""o""n""t""r""o""l""s"" ""t""h""e"" ""a""c""c""e""s""s""i""b""i""l""i""t""y"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"" ""D""u""r""i""n""g"" ""e""x""e""c""u""t""i""o""n"","" ""t""h""e"" ""g""u""a""r""d"" ""e""v""a""l""u""a""t""e""s"" ""t""o"" ""a"" ""b""o""o""l""e""a""n"" ""e""x""p""r""e""s""s""i""o""n""."
+" "" "" ""*"" ""I""f"" ""t""r""u""e"","" ""t""h""e"" ""e""d""g""e"" ""i""s"" ""a""c""c""e""s""s""i""b""l""e"","" ""e""l""s""e"" ""i""t""'""s"" ""n""o""t""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""g""u""a""r""d"" ""T""h""e"" ""g""u""a""r""d""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""e""d""g""e""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""s""e""t""G""u""a""r""d""(""G""u""a""r""d"" ""g""u""a""r""d"")"" ""{"
+" "" "" "" ""t""h""i""s"".""g""u""a""r""d"" ""="" ""g""u""a""r""d"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Gets the guard of the edge.
-   *
-   * @return The guard.
-   * @see Edge#setGuard
-   */
-  public Guard getGuard() {
-    return guard;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""g""u""a""r""d"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""g""u""a""r""d""."
+" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""G""u""a""r""d"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""G""u""a""r""d"" ""g""e""t""G""u""a""r""d""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""g""u""a""r""d"";"
+" "" ""}"
 
-  /**
-   * Adds an action to the edge, which represents a piece of code that will be executed
-   * each time the edge is being traversed. The code is by default interpreted as javascript.
-   *
-   * @param action The action.
-   * @return The edge.
-   */
-  public Edge addAction(Action action) {
-    this.actions.add(action);
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""A""d""d""s"" ""a""n"" ""a""c""t""i""o""n"" ""t""o"" ""t""h""e"" ""e""d""g""e"","" ""w""h""i""c""h"" ""r""e""p""r""e""s""e""n""t""s"" ""a"" ""p""i""e""c""e"" ""o""f"" ""c""o""d""e"" ""t""h""a""t"" ""w""i""l""l"" ""b""e"" ""e""x""e""c""u""t""e""d"
+" "" "" ""*"" ""e""a""c""h"" ""t""i""m""e"" ""t""h""e"" ""e""d""g""e"" ""i""s"" ""b""e""i""n""g"" ""t""r""a""v""e""r""s""e""d""."" ""T""h""e"" ""c""o""d""e"" ""i""s"" ""b""y"" ""d""e""f""a""u""l""t"" ""i""n""t""e""r""p""r""e""t""e""d"" ""a""s"" ""j""a""v""a""s""c""r""i""p""t""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""a""c""t""i""o""n"" ""T""h""e"" ""a""c""t""i""o""n""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""e""d""g""e""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""a""d""d""A""c""t""i""o""n""(""A""c""t""i""o""n"" ""a""c""t""i""o""n"")"" ""{"
+" "" "" "" ""t""h""i""s"".""a""c""t""i""o""n""s"".""a""d""d""(""a""c""t""i""o""n"")"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  public Edge addActions(Action... actions) {
-    return addActions(Arrays.asList(actions));
-  }
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""a""d""d""A""c""t""i""o""n""s""(""A""c""t""i""o""n""."".""."" ""a""c""t""i""o""n""s"")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""a""d""d""A""c""t""i""o""n""s""(""A""r""r""a""y""s"".""a""s""L""i""s""t""(""a""c""t""i""o""n""s"")"")"";"
+" "" ""}"
 
-  public Edge addActions(List<Action> actions) {
-    this.actions.addAll(actions);
-    return this;
-  }
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""a""d""d""A""c""t""i""o""n""s""(""L""i""s""t""<""A""c""t""i""o""n"">"" ""a""c""t""i""o""n""s"")"" ""{"
+" "" "" "" ""t""h""i""s"".""a""c""t""i""o""n""s"".""a""d""d""A""l""l""(""a""c""t""i""o""n""s"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Adds a list of actions to the edge, which represents a pieces of code that will be executed
-   * each time the edge is being traversed. The code snippets is by default interpreted as javascript.
-   *
-   * @param actions The actions.
-   * @return The edge.
-   * @see Edge#addAction
-   */
-  public Edge setActions(List<Action> actions) {
-    this.actions = new ArrayList<>(actions);
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""A""d""d""s"" ""a"" ""l""i""s""t"" ""o""f"" ""a""c""t""i""o""n""s"" ""t""o"" ""t""h""e"" ""e""d""g""e"","" ""w""h""i""c""h"" ""r""e""p""r""e""s""e""n""t""s"" ""a"" ""p""i""e""c""e""s"" ""o""f"" ""c""o""d""e"" ""t""h""a""t"" ""w""i""l""l"" ""b""e"" ""e""x""e""c""u""t""e""d"
+" "" "" ""*"" ""e""a""c""h"" ""t""i""m""e"" ""t""h""e"" ""e""d""g""e"" ""i""s"" ""b""e""i""n""g"" ""t""r""a""v""e""r""s""e""d""."" ""T""h""e"" ""c""o""d""e"" ""s""n""i""p""p""e""t""s"" ""i""s"" ""b""y"" ""d""e""f""a""u""l""t"" ""i""n""t""e""r""p""r""e""t""e""d"" ""a""s"" ""j""a""v""a""s""c""r""i""p""t""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""a""c""t""i""o""n""s"" ""T""h""e"" ""a""c""t""i""o""n""s""."
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""e""d""g""e""."
+" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""a""d""d""A""c""t""i""o""n"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""s""e""t""A""c""t""i""o""n""s""(""L""i""s""t""<""A""c""t""i""o""n"">"" ""a""c""t""i""o""n""s"")"" ""{"
+" "" "" "" ""t""h""i""s"".""a""c""t""i""o""n""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""(""a""c""t""i""o""n""s"")"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Gets the lists of actions of the edge.
-   *
-   * @return The actions
-   * @see Edge#setActions
-   */
-  public List<Action> getActions() {
-    return unmodifiableList(actions);
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""l""i""s""t""s"" ""o""f"" ""a""c""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""a""c""t""i""o""n""s"
+" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""A""c""t""i""o""n""s"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""L""i""s""t""<""A""c""t""i""o""n"">"" ""g""e""t""A""c""t""i""o""n""s""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""u""n""m""o""d""i""f""i""a""b""l""e""L""i""s""t""(""a""c""t""i""o""n""s"")"";"
+" "" ""}"
 
-  /**
-   * Gets the weight of the edge.
-   *
-   * @return The weight as double.
-   * @see Edge#setWeight
-   */
-  public Double getWeight() {
-    return weight;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""w""e""i""g""h""t"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""w""e""i""g""h""t"" ""a""s"" ""d""o""u""b""l""e""."
+" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""W""e""i""g""h""t"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""D""o""u""b""l""e"" ""g""e""t""W""e""i""g""h""t""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""w""e""i""g""h""t"";"
+" "" ""}"
 
-  /**
-   * The weight is used as probability when using the {@link org.graphwalker.core.generator.WeightedRandomPath}.
-   * Weight means the probability for the edge to be selected.
-   *
-   * @param weight a double between 0 and 1
-   * @return The edge
-   */
-  public Edge setWeight(Double weight) {
-    this.weight = weight;
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""T""h""e"" ""w""e""i""g""h""t"" ""i""s"" ""u""s""e""d"" ""a""s"" ""p""r""o""b""a""b""i""l""i""t""y"" ""w""h""e""n"" ""u""s""i""n""g"" ""t""h""e"" ""{""@""l""i""n""k"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""W""e""i""g""h""t""e""d""R""a""n""d""o""m""P""a""t""h""}""."
+" "" "" ""*"" ""W""e""i""g""h""t"" ""m""e""a""n""s"" ""t""h""e"" ""p""r""o""b""a""b""i""l""i""t""y"" ""f""o""r"" ""t""h""e"" ""e""d""g""e"" ""t""o"" ""b""e"" ""s""e""l""e""c""t""e""d""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""w""e""i""g""h""t"" ""a"" ""d""o""u""b""l""e"" ""b""e""t""w""e""e""n"" ""0"" ""a""n""d"" ""1"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""e""d""g""e"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""s""e""t""W""e""i""g""h""t""(""D""o""u""b""l""e"" ""w""e""i""g""h""t"")"" ""{"
+" "" "" "" ""t""h""i""s"".""w""e""i""g""h""t"" ""="" ""w""e""i""g""h""t"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * Creates an immutable edge from this edge.
-   *
-   * @return An immutable edge as a RuntimeEdge
-   */
-  @Override
-  protected RuntimeEdge createCache() {
-    return new RuntimeEdge(this);
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""C""r""e""a""t""e""s"" ""a""n"" ""i""m""m""u""t""a""b""l""e"" ""e""d""g""e"" ""f""r""o""m"" ""t""h""i""s"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""A""n"" ""i""m""m""u""t""a""b""l""e"" ""e""d""g""e"" ""a""s"" ""a"" ""R""u""n""t""i""m""e""E""d""g""e"
+" "" "" ""*""/"
+" "" ""@""O""v""e""r""r""i""d""e"
+" "" ""p""r""o""t""e""c""t""e""d"" ""R""u""n""t""i""m""e""E""d""g""e"" ""c""r""e""a""t""e""C""a""c""h""e""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""n""e""w"" ""R""u""n""t""i""m""e""E""d""g""e""(""t""h""i""s"")"";"
+" "" ""}"
 
-  /**
-   * Gets the dependency of the edge.
-   *
-   * @return The dependency as double.
-   * @see Edge#setDependency
-   */
-  public Integer getDependency() {
-    return dependency;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""a""s"" ""d""o""u""b""l""e""."
+" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""D""e""p""e""n""d""e""n""c""y"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""I""n""t""e""g""e""r"" ""g""e""t""D""e""p""e""n""d""e""n""c""y""("")"" ""{"
+" "" "" "" ""r""e""t""u""r""n"" ""d""e""p""e""n""d""e""n""c""y"";"
+" "" ""}"
 
-  /**
-   * The dependency shows how much targetVertex depends on sourceVertex.
-   * One way to obtain the dependency is by using
-   * process mining to generate a model out of log files.
-   *
-   * @param dependency a double between 0 and 1
-   * @return The edge
-   */
-  public Edge setDependency(Integer dependency) {
-    this.dependency = dependency;
-    invalidateCache();
-    return this;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""T""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""s""h""o""w""s"" ""h""o""w"" ""m""u""c""h"" ""t""a""r""g""e""t""V""e""r""t""e""x"" ""d""e""p""e""n""d""s"" ""o""n"" ""s""o""u""r""c""e""V""e""r""t""e""x""."
+" "" "" ""*"" ""O""n""e"" ""w""a""y"" ""t""o"" ""o""b""t""a""i""n"" ""t""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""i""s"" ""b""y"" ""u""s""i""n""g"
+" "" "" ""*"" ""p""r""o""c""e""s""s"" ""m""i""n""i""n""g"" ""t""o"" ""g""e""n""e""r""a""t""e"" ""a"" ""m""o""d""e""l"" ""o""u""t"" ""o""f"" ""l""o""g"" ""f""i""l""e""s""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""d""e""p""e""n""d""e""n""c""y"" ""a"" ""d""o""u""b""l""e"" ""b""e""t""w""e""e""n"" ""0"" ""a""n""d"" ""1"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""e""d""g""e"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""E""d""g""e"" ""s""e""t""D""e""p""e""n""d""e""n""c""y""(""I""n""t""e""g""e""r"" ""d""e""p""e""n""d""e""n""c""y"")"" ""{"
+" "" "" "" ""t""h""i""s"".""d""e""p""e""n""d""e""n""c""y"" ""="" ""d""e""p""e""n""d""e""n""c""y"";"
+" "" "" "" ""i""n""v""a""l""i""d""a""t""e""C""a""c""h""e""("")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" ""}"
 
-  /**
-   * <h1>RuntimeEdge</h1>
-   * Immutable class for Edge
-   * </p>
-   * This class is used in models. It guarantees that that the internal states of
-   * the instance will not change after it's construction.
-   * </p>
-   */
-  public static class RuntimeEdge extends RuntimeBase {
+" "" ""/""*""*"
+" "" "" ""*"" ""<""h""1"">""R""u""n""t""i""m""e""E""d""g""e""<""/""h""1"">"
+" "" "" ""*"" ""I""m""m""u""t""a""b""l""e"" ""c""l""a""s""s"" ""f""o""r"" ""E""d""g""e"
+" "" "" ""*"" ""<""/""p"">"
+" "" "" ""*"" ""T""h""i""s"" ""c""l""a""s""s"" ""i""s"" ""u""s""e""d"" ""i""n"" ""m""o""d""e""l""s""."" ""I""t"" ""g""u""a""r""a""n""t""e""e""s"" ""t""h""a""t"" ""t""h""a""t"" ""t""h""e"" ""i""n""t""e""r""n""a""l"" ""s""t""a""t""e""s"" ""o""f"
+" "" "" ""*"" ""t""h""e"" ""i""n""s""t""a""n""c""e"" ""w""i""l""l"" ""n""o""t"" ""c""h""a""n""g""e"" ""a""f""t""e""r"" ""i""t""'""s"" ""c""o""n""s""t""r""u""c""t""i""o""n""."
+" "" "" ""*"" ""<""/""p"">"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""s""t""a""t""i""c"" ""c""l""a""s""s"" ""R""u""n""t""i""m""e""E""d""g""e"" ""e""x""t""e""n""d""s"" ""R""u""n""t""i""m""e""B""a""s""e"" ""{"
 
-    private final RuntimeVertex sourceVertex;
-    private final RuntimeVertex targetVertex;
-    private final Guard guard;
-    private final Double weight;
-    private final Integer dependency;
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""s""o""u""r""c""e""V""e""r""t""e""x"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""t""a""r""g""e""t""V""e""r""t""e""x"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""G""u""a""r""d"" ""g""u""a""r""d"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""D""o""u""b""l""e"" ""w""e""i""g""h""t"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""I""n""t""e""g""e""r"" ""d""e""p""e""n""d""e""n""c""y"";"
 
-    private RuntimeEdge(Edge edge) {
-      super(edge.getId(), edge.getName(), edge.getActions(), edge.getRequirements(), edge.getProperties());
-      this.sourceVertex = build(edge.getSourceVertex());
-      this.targetVertex = build(edge.getTargetVertex());
-      this.guard = edge.getGuard();
-      this.weight = edge.getWeight();
-      this.dependency = edge.getDependency();
-    }
+" "" "" "" ""p""r""i""v""a""t""e"" ""R""u""n""t""i""m""e""E""d""g""e""(""E""d""g""e"" ""e""d""g""e"")"" ""{"
+" "" "" "" "" "" ""s""u""p""e""r""(""e""d""g""e"".""g""e""t""I""d""("")"","" ""e""d""g""e"".""g""e""t""N""a""m""e""("")"","" ""e""d""g""e"".""g""e""t""A""c""t""i""o""n""s""("")"","" ""e""d""g""e"".""g""e""t""R""e""q""u""i""r""e""m""e""n""t""s""("")"","" ""e""d""g""e"".""g""e""t""P""r""o""p""e""r""t""i""e""s""("")"")"";"
+" "" "" "" "" "" ""t""h""i""s"".""s""o""u""r""c""e""V""e""r""t""e""x"" ""="" ""b""u""i""l""d""(""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"")"";"
+" "" "" "" "" "" ""t""h""i""s"".""t""a""r""g""e""t""V""e""r""t""e""x"" ""="" ""b""u""i""l""d""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"")"";"
+" "" "" "" "" "" ""t""h""i""s"".""g""u""a""r""d"" ""="" ""e""d""g""e"".""g""e""t""G""u""a""r""d""("")"";"
+" "" "" "" "" "" ""t""h""i""s"".""w""e""i""g""h""t"" ""="" ""e""d""g""e"".""g""e""t""W""e""i""g""h""t""("")"";"
+" "" "" "" "" "" ""t""h""i""s"".""d""e""p""e""n""d""e""n""c""y"" ""="" ""e""d""g""e"".""g""e""t""D""e""p""e""n""d""e""n""c""y""("")"";"
+" "" "" "" ""}"
 
-    private <T> T build(Builder<T> builder) {
-      return isNotNull(builder) ? builder.build() : null;
-    }
+" "" "" "" ""p""r""i""v""a""t""e"" ""<""T"">"" ""T"" ""b""u""i""l""d""(""B""u""i""l""d""e""r""<""T"">"" ""b""u""i""l""d""e""r"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""i""s""N""o""t""N""u""l""l""(""b""u""i""l""d""e""r"")"" ""?"" ""b""u""i""l""d""e""r"".""b""u""i""l""d""("")"" "":"" ""n""u""l""l"";"
+" "" "" "" ""}"
 
-    /**
-     * Gets the source vertex.
-     *
-     * @return The source vertex.
-     * @see Edge#setSourceVertex
-     */
-    public RuntimeVertex getSourceVertex() {
-      return sourceVertex;
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""s""o""u""r""c""e"" ""v""e""r""t""e""x""."
+" "" "" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x"
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""s""o""u""r""c""e""V""e""r""t""e""x"";"
+" "" "" "" ""}"
 
-    /**
-     * Gets the target vertex of the edge.
-     *
-     * @return The vertex.
-     * @see Edge#setTargetVertex
-     */
-    public RuntimeVertex getTargetVertex() {
-      return targetVertex;
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""t""a""r""g""e""t"" ""v""e""r""t""e""x"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""v""e""r""t""e""x""."
+" "" "" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x"
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""a""r""g""e""t""V""e""r""t""e""x"";"
+" "" "" "" ""}"
 
-    /**
-     * Gets the guard of the edge.
-     *
-     * @return The guard.
-     * @see Edge#setGuard
-     */
-    public Guard getGuard() {
-      return guard;
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""g""u""a""r""d"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""g""u""a""r""d""."
+" "" "" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""G""u""a""r""d"
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""G""u""a""r""d"" ""g""e""t""G""u""a""r""d""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""g""u""a""r""d"";"
+" "" "" "" ""}"
 
-    public boolean hasGuard() {
-      return isNotNull(guard) && isNotNullOrEmpty(guard.getScript());
-    }
+" "" "" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""h""a""s""G""u""a""r""d""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""i""s""N""o""t""N""u""l""l""(""g""u""a""r""d"")"" ""&""&"" ""i""s""N""o""t""N""u""l""l""O""r""E""m""p""t""y""(""g""u""a""r""d"".""g""e""t""S""c""r""i""p""t""("")"")"";"
+" "" "" "" ""}"
 
-    /**
-     * Gets the weight of the edge.
-     *
-     * @return The weight as double.
-     * @see Edge#setWeight
-     */
-    public Double getWeight() {
-      return weight;
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""w""e""i""g""h""t"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""w""e""i""g""h""t"" ""a""s"" ""d""o""u""b""l""e""."
+" "" "" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""W""e""i""g""h""t"
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""D""o""u""b""l""e"" ""g""e""t""W""e""i""g""h""t""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""w""e""i""g""h""t"";"
+" "" "" "" ""}"
 
-    /**
-     * TODO Needs documentation
-     */
-    @Override
-    public void accept(ElementVisitor visitor) {
-      visitor.visit(this);
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""T""O""D""O"" ""N""e""e""d""s"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"
+" "" "" "" "" ""*""/"
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""a""c""c""e""p""t""(""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""v""i""s""i""t""o""r"")"" ""{"
+" "" "" "" "" "" ""v""i""s""i""t""o""r"".""v""i""s""i""t""(""t""h""i""s"")"";"
+" "" "" "" ""}"
 
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + ((guard == null) ? 0 : guard.hashCode());
-      result = prime * result
-               + ((sourceVertex == null) ? 0 : sourceVertex.hashCode());
-      result = prime * result
-               + ((targetVertex == null) ? 0 : targetVertex.hashCode());
-      result = prime * result
-               + ((weight == null) ? 0 : weight.hashCode());
-      result = prime * result
-               + ((dependency == null) ? 0 : dependency.hashCode());
-      return result;
-    }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""i""n""t"" ""h""a""s""h""C""o""d""e""("")"" ""{"
+" "" "" "" "" "" ""f""i""n""a""l"" ""i""n""t"" ""p""r""i""m""e"" ""="" ""3""1"";"
+" "" "" "" "" "" ""i""n""t"" ""r""e""s""u""l""t"" ""="" ""1"";"
+" "" "" "" "" "" ""r""e""s""u""l""t"" ""="" ""p""r""i""m""e"" ""*"" ""r""e""s""u""l""t"" ""+"" ""(""(""g""u""a""r""d"" ""=""="" ""n""u""l""l"")"" ""?"" ""0"" "":"" ""g""u""a""r""d"".""h""a""s""h""C""o""d""e""("")"")"";"
+" "" "" "" "" "" ""r""e""s""u""l""t"" ""="" ""p""r""i""m""e"" ""*"" ""r""e""s""u""l""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""+"" ""(""(""s""o""u""r""c""e""V""e""r""t""e""x"" ""=""="" ""n""u""l""l"")"" ""?"" ""0"" "":"" ""s""o""u""r""c""e""V""e""r""t""e""x"".""h""a""s""h""C""o""d""e""("")"")"";"
+" "" "" "" "" "" ""r""e""s""u""l""t"" ""="" ""p""r""i""m""e"" ""*"" ""r""e""s""u""l""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""+"" ""(""(""t""a""r""g""e""t""V""e""r""t""e""x"" ""=""="" ""n""u""l""l"")"" ""?"" ""0"" "":"" ""t""a""r""g""e""t""V""e""r""t""e""x"".""h""a""s""h""C""o""d""e""("")"")"";"
+" "" "" "" "" "" ""r""e""s""u""l""t"" ""="" ""p""r""i""m""e"" ""*"" ""r""e""s""u""l""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""+"" ""(""(""w""e""i""g""h""t"" ""=""="" ""n""u""l""l"")"" ""?"" ""0"" "":"" ""w""e""i""g""h""t"".""h""a""s""h""C""o""d""e""("")"")"";"
+" "" "" "" "" "" ""r""e""s""u""l""t"" ""="" ""p""r""i""m""e"" ""*"" ""r""e""s""u""l""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""+"" ""(""(""d""e""p""e""n""d""e""n""c""y"" ""=""="" ""n""u""l""l"")"" ""?"" ""0"" "":"" ""d""e""p""e""n""d""e""n""c""y"".""h""a""s""h""C""o""d""e""("")"")"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""r""e""s""u""l""t"";"
+" "" "" "" ""}"
 
-    @Override
-    public boolean equals(Object o) {
-      if (!super.equals(o)) {
-        return false;
-      }
-      RuntimeEdge that = (RuntimeEdge) o;
-      return Objects.equals(sourceVertex, that.sourceVertex) &&
-             Objects.equals(targetVertex, that.targetVertex) &&
-             Objects.equals(guard, that.guard) &&
-             Objects.equals(weight, that.weight) &&
-             Objects.equals(dependency, that.dependency);
-    }
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""e""q""u""a""l""s""(""O""b""j""e""c""t"" ""o"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""s""u""p""e""r"".""e""q""u""a""l""s""(""o"")"")"" ""{"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""f""a""l""s""e"";"
+" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""R""u""n""t""i""m""e""E""d""g""e"" ""t""h""a""t"" ""="" ""(""R""u""n""t""i""m""e""E""d""g""e"")"" ""o"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""s""o""u""r""c""e""V""e""r""t""e""x"","" ""t""h""a""t"".""s""o""u""r""c""e""V""e""r""t""e""x"")"" ""&""&"
+" "" "" "" "" "" "" "" "" "" "" "" "" ""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""t""a""r""g""e""t""V""e""r""t""e""x"","" ""t""h""a""t"".""t""a""r""g""e""t""V""e""r""t""e""x"")"" ""&""&"
+" "" "" "" "" "" "" "" "" "" "" "" "" ""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""g""u""a""r""d"","" ""t""h""a""t"".""g""u""a""r""d"")"" ""&""&"
+" "" "" "" "" "" "" "" "" "" "" "" "" ""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""w""e""i""g""h""t"","" ""t""h""a""t"".""w""e""i""g""h""t"")"" ""&""&"
+" "" "" "" "" "" "" "" "" "" "" "" "" ""O""b""j""e""c""t""s"".""e""q""u""a""l""s""(""d""e""p""e""n""d""e""n""c""y"","" ""t""h""a""t"".""d""e""p""e""n""d""e""n""c""y"")"";"
+" "" "" "" ""}"
 
-    /**
-     * Gets the dependency of the edge.
-     *
-     * @return The dependency as Integer.
-     * @see Edge#setDependency
-     */
-    public Integer getDependency() {
-      return dependency;
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""a""s"" ""I""n""t""e""g""e""r""."
+" "" "" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""D""e""p""e""n""d""e""n""c""y"
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""I""n""t""e""g""e""r"" ""g""e""t""D""e""p""e""n""d""e""n""c""y""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""d""e""p""e""n""d""e""n""c""y"";"
+" "" "" "" ""}"
 
-    /**
-     * Gets the dependency of the edge.
-     *
-     * @return The dependency as Double.
-     * @see Edge#setDependency
-     */
-    public double getDependencyAsDouble() {
-      return (double) getDependency() / 100;
-    }
+" "" "" "" ""/""*""*"
+" "" "" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""o""f"" ""t""h""e"" ""e""d""g""e""."
+" "" "" "" "" ""*"
+" "" "" "" "" ""*"" ""@""r""e""t""u""r""n"" ""T""h""e"" ""d""e""p""e""n""d""e""n""c""y"" ""a""s"" ""D""o""u""b""l""e""."
+" "" "" "" "" ""*"" ""@""s""e""e"" ""E""d""g""e""#""s""e""t""D""e""p""e""n""d""e""n""c""y"
+" "" "" "" "" ""*""/"
+" "" "" "" ""p""u""b""l""i""c"" ""d""o""u""b""l""e"" ""g""e""t""D""e""p""e""n""d""e""n""c""y""A""s""D""o""u""b""l""e""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""(""d""o""u""b""l""e"")"" ""g""e""t""D""e""p""e""n""d""e""n""c""y""("")"" ""/"" ""1""0""0"";"
+" "" "" "" ""}"
 
 
-  }
-}
+" "" ""}"
+"}"
