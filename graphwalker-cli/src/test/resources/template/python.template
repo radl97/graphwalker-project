@@ -1,27 +1,27 @@
-HEADER<{{
-import requests,json
-##
-## 1) Generate python stub source code:
-##    java -jar graphwalker-4.0.1.jar source -i model.graphml python.template > model.py
-##
-## 2) Start graphwalker:
-##    java -jar graphwalker-4.0.1.jar online --service RESTFUL -m model.graphml "random(edge_coverage(100))"
-##
-## 3) Run the per program:
-##    python model.py
-##
-}}>HEADER
+"H""E""A""D""E""R""<""{""{"
+"i""m""p""o""r""t"" ""r""e""q""u""e""s""t""s"",""j""s""o""n"
+"#""#"
+"#""#"" ""1"")"" ""G""e""n""e""r""a""t""e"" ""p""y""t""h""o""n"" ""s""t""u""b"" ""s""o""u""r""c""e"" ""c""o""d""e"":"
+"#""#"" "" "" "" ""j""a""v""a"" ""-""j""a""r"" ""g""r""a""p""h""w""a""l""k""e""r""-""4"".""0"".""1"".""j""a""r"" ""s""o""u""r""c""e"" ""-""i"" ""m""o""d""e""l"".""g""r""a""p""h""m""l"" ""p""y""t""h""o""n"".""t""e""m""p""l""a""t""e"" "">"" ""m""o""d""e""l"".""p""y"
+"#""#"
+"#""#"" ""2"")"" ""S""t""a""r""t"" ""g""r""a""p""h""w""a""l""k""e""r"":"
+"#""#"" "" "" "" ""j""a""v""a"" ""-""j""a""r"" ""g""r""a""p""h""w""a""l""k""e""r""-""4"".""0"".""1"".""j""a""r"" ""o""n""l""i""n""e"" ""-""-""s""e""r""v""i""c""e"" ""R""E""S""T""F""U""L"" ""-""m"" ""m""o""d""e""l"".""g""r""a""p""h""m""l"" """""r""a""n""d""o""m""(""e""d""g""e""_""c""o""v""e""r""a""g""e""(""1""0""0"")"")""""
+"#""#"
+"#""#"" ""3"")"" ""R""u""n"" ""t""h""e"" ""p""e""r"" ""p""r""o""g""r""a""m"":"
+"#""#"" "" "" "" ""p""y""t""h""o""n"" ""m""o""d""e""l"".""p""y"
+"#""#"
+"}""}"">""H""E""A""D""E""R"
 
-def {LABEL}() :
-    print( "{LABEL}" )
-    return
+"d""e""f"" ""{""L""A""B""E""L""}""("")"" "":"
+" "" "" "" ""p""r""i""n""t""("" """""{""L""A""B""E""L""}""""" "")"
+" "" "" "" ""r""e""t""u""r""n"
 
-FOOTER<{{
-gw_url = 'http://localhost:8887/graphwalker'
+"F""O""O""T""E""R""<""{""{"
+"g""w""_""u""r""l"" ""="" ""'""h""t""t""p"":""/""/""l""o""c""a""l""h""o""s""t"":""8""8""8""7""/""g""r""a""p""h""w""a""l""k""e""r""'"
 
-while requests.get(gw_url+'/hasNext').json()['hasNext'] == 'true' :
-    # Get next step from GraphWalker
-    step = requests.get(gw_url+'/getNext').json()['currentElementName']
-    if step != '' :
-        eval( step + "()" )
-}}>FOOTER
+"w""h""i""l""e"" ""r""e""q""u""e""s""t""s"".""g""e""t""(""g""w""_""u""r""l""+""'""/""h""a""s""N""e""x""t""'"")"".""j""s""o""n""("")""[""'""h""a""s""N""e""x""t""'""]"" ""=""="" ""'""t""r""u""e""'"" "":"
+" "" "" "" ""#"" ""G""e""t"" ""n""e""x""t"" ""s""t""e""p"" ""f""r""o""m"" ""G""r""a""p""h""W""a""l""k""e""r"
+" "" "" "" ""s""t""e""p"" ""="" ""r""e""q""u""e""s""t""s"".""g""e""t""(""g""w""_""u""r""l""+""'""/""g""e""t""N""e""x""t""'"")"".""j""s""o""n""("")""[""'""c""u""r""r""e""n""t""E""l""e""m""e""n""t""N""a""m""e""'""]"
+" "" "" "" ""i""f"" ""s""t""e""p"" ""!""="" ""'""'"" "":"
+" "" "" "" "" "" "" "" ""e""v""a""l""("" ""s""t""e""p"" ""+"" """""("")""""" "")"
+"}""}"">""F""O""O""T""E""R"

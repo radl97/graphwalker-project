@@ -1,155 +1,155 @@
-package org.graphwalker.core.algorithm;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""a""l""g""o""r""i""t""h""m"";"
 
-/*
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.model.Element;
-import org.graphwalker.core.model.ElementVisitor;
-import org.graphwalker.core.model.Path;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t""V""i""s""i""t""o""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""P""a""t""h"";"
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""A""r""r""a""y""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""S""e""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""L""i""s""t"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""S""e""t"";"
 
-import static org.graphwalker.core.model.Edge.RuntimeEdge;
-import static org.graphwalker.core.model.Model.RuntimeModel;
-import static org.graphwalker.core.model.Vertex.RuntimeVertex;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""M""o""d""e""l"".""R""u""n""t""i""m""e""M""o""d""e""l"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"";"
 
-/**
- * @author Nils Olsson
- */
-public class Fleury implements Algorithm {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""F""l""e""u""r""y"" ""i""m""p""l""e""m""e""n""t""s"" ""A""l""g""o""r""i""t""h""m"" ""{"
 
-  private final Context context;
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"";"
 
-  public Fleury(Context context) {
-    this.context = context;
-  }
+" "" ""p""u""b""l""i""c"" ""F""l""e""u""r""y""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"")"" ""{"
+" "" "" "" ""t""h""i""s"".""c""o""n""t""e""x""t"" ""="" ""c""o""n""t""e""x""t"";"
+" "" ""}"
 
-  public Path<Element> getTrail(Element element) {
-    if (element instanceof RuntimeEdge) {
-      RuntimeEdge edge = (RuntimeEdge)element;
-      Set<RuntimeEdge> visitedEdges = new HashSet<>();
-      visitedEdges.add(edge);
-      Path<Element> path = getTrail(edge.getTargetVertex(), visitedEdges);
-      path.addFirst(edge.getTargetVertex());
-      return path;
-    } else {
-      return getTrail((RuntimeVertex)element, new HashSet<>());
-    }
-  }
+" "" ""p""u""b""l""i""c"" ""P""a""t""h""<""E""l""e""m""e""n""t"">"" ""g""e""t""T""r""a""i""l""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""E""d""g""e"")"" ""{"
+" "" "" "" "" "" ""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" ""="" ""(""R""u""n""t""i""m""e""E""d""g""e"")""e""l""e""m""e""n""t"";"
+" "" "" "" "" "" ""S""e""t""<""R""u""n""t""i""m""e""E""d""g""e"">"" ""v""i""s""i""t""e""d""E""d""g""e""s"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
+" "" "" "" "" "" ""v""i""s""i""t""e""d""E""d""g""e""s"".""a""d""d""(""e""d""g""e"")"";"
+" "" "" "" "" "" ""P""a""t""h""<""E""l""e""m""e""n""t"">"" ""p""a""t""h"" ""="" ""g""e""t""T""r""a""i""l""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"","" ""v""i""s""i""t""e""d""E""d""g""e""s"")"";"
+" "" "" "" "" "" ""p""a""t""h"".""a""d""d""F""i""r""s""t""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"")"";"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""a""t""h"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""g""e""t""T""r""a""i""l""(""(""R""u""n""t""i""m""e""V""e""r""t""e""x"")""e""l""e""m""e""n""t"","" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"")"";"
+" "" "" "" ""}"
+" "" ""}"
 
-  private Path<Element> getTrail(RuntimeVertex vertex, Set<RuntimeEdge> visitedEdges) {
-    // Step 1
-    Path<Element> trail = new Path<>();
-    RuntimeVertex currentVertex = vertex;
-    List<RuntimeEdge> availableEdges = new ArrayList<>(context.getModel().getEdges());
-    availableEdges.removeAll(visitedEdges);
-    while (!availableEdges.isEmpty()) {
-      // Step 2
-      RuntimeEdge edge = getNextEdge(context.getModel(), visitedEdges, currentVertex);
-      // Step 3
-      trail.add(edge);
-      visitedEdges.add(edge);
-      currentVertex = edge.getTargetVertex();
-      trail.add(currentVertex);
-      // Step 4
-      availableEdges.remove(edge);
-    }
-    return trail;
-  }
+" "" ""p""r""i""v""a""t""e"" ""P""a""t""h""<""E""l""e""m""e""n""t"">"" ""g""e""t""T""r""a""i""l""(""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"","" ""S""e""t""<""R""u""n""t""i""m""e""E""d""g""e"">"" ""v""i""s""i""t""e""d""E""d""g""e""s"")"" ""{"
+" "" "" "" ""/""/"" ""S""t""e""p"" ""1"
+" "" "" "" ""P""a""t""h""<""E""l""e""m""e""n""t"">"" ""t""r""a""i""l"" ""="" ""n""e""w"" ""P""a""t""h""<"">""("")"";"
+" "" "" "" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""c""u""r""r""e""n""t""V""e""r""t""e""x"" ""="" ""v""e""r""t""e""x"";"
+" "" "" "" ""L""i""s""t""<""R""u""n""t""i""m""e""E""d""g""e"">"" ""a""v""a""i""l""a""b""l""e""E""d""g""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""d""g""e""s""("")"")"";"
+" "" "" "" ""a""v""a""i""l""a""b""l""e""E""d""g""e""s"".""r""e""m""o""v""e""A""l""l""(""v""i""s""i""t""e""d""E""d""g""e""s"")"";"
+" "" "" "" ""w""h""i""l""e"" ""(""!""a""v""a""i""l""a""b""l""e""E""d""g""e""s"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" ""/""/"" ""S""t""e""p"" ""2"
+" "" "" "" "" "" ""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" ""="" ""g""e""t""N""e""x""t""E""d""g""e""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"","" ""v""i""s""i""t""e""d""E""d""g""e""s"","" ""c""u""r""r""e""n""t""V""e""r""t""e""x"")"";"
+" "" "" "" "" "" ""/""/"" ""S""t""e""p"" ""3"
+" "" "" "" "" "" ""t""r""a""i""l"".""a""d""d""(""e""d""g""e"")"";"
+" "" "" "" "" "" ""v""i""s""i""t""e""d""E""d""g""e""s"".""a""d""d""(""e""d""g""e"")"";"
+" "" "" "" "" "" ""c""u""r""r""e""n""t""V""e""r""t""e""x"" ""="" ""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"";"
+" "" "" "" "" "" ""t""r""a""i""l"".""a""d""d""(""c""u""r""r""e""n""t""V""e""r""t""e""x"")"";"
+" "" "" "" "" "" ""/""/"" ""S""t""e""p"" ""4"
+" "" "" "" "" "" ""a""v""a""i""l""a""b""l""e""E""d""g""e""s"".""r""e""m""o""v""e""(""e""d""g""e"")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""t""r""a""i""l"";"
+" "" ""}"
 
-  private RuntimeEdge getNextEdge(RuntimeModel model, Set<RuntimeEdge> visitedEdges, RuntimeVertex vertex) {
-    List<RuntimeEdge> bridges = new ArrayList<>();
-    for (RuntimeEdge edge : model.getOutEdges(vertex)) {
-      if (!visitedEdges.contains(edge)) {
-        if (!isBridge(model, visitedEdges, edge)) {
-          return edge;
-        } else {
-          bridges.add(edge);
-        }
-      }
-    }
-    if (!bridges.isEmpty()) {
-      return bridges.get(0);
-    }
-    throw new AlgorithmException();
-  }
+" "" ""p""r""i""v""a""t""e"" ""R""u""n""t""i""m""e""E""d""g""e"" ""g""e""t""N""e""x""t""E""d""g""e""(""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"","" ""S""e""t""<""R""u""n""t""i""m""e""E""d""g""e"">"" ""v""i""s""i""t""e""d""E""d""g""e""s"","" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"")"" ""{"
+" "" "" "" ""L""i""s""t""<""R""u""n""t""i""m""e""E""d""g""e"">"" ""b""r""i""d""g""e""s"" ""="" ""n""e""w"" ""A""r""r""a""y""L""i""s""t""<"">""("")"";"
+" "" "" "" ""f""o""r"" ""(""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""m""o""d""e""l"".""g""e""t""O""u""t""E""d""g""e""s""(""v""e""r""t""e""x"")"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""v""i""s""i""t""e""d""E""d""g""e""s"".""c""o""n""t""a""i""n""s""(""e""d""g""e"")"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""!""i""s""B""r""i""d""g""e""(""m""o""d""e""l"","" ""v""i""s""i""t""e""d""E""d""g""e""s"","" ""e""d""g""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""e""d""g""e"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" ""b""r""i""d""g""e""s"".""a""d""d""(""e""d""g""e"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""i""f"" ""(""!""b""r""i""d""g""e""s"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""b""r""i""d""g""e""s"".""g""e""t""(""0"")"";"
+" "" "" "" ""}"
+" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""A""l""g""o""r""i""t""h""m""E""x""c""e""p""t""i""o""n""("")"";"
+" "" ""}"
 
-  private boolean isBridge(RuntimeModel model, Set<RuntimeEdge> visitedElements, RuntimeEdge edge) {
-    VertexCounter counter1 = new VertexCounter(model, visitedElements, edge);
-    VertexCounter counter2 = new VertexCounter(model);
-    edge.getSourceVertex().accept(counter1);
-    edge.getSourceVertex().accept(counter2);
-    return counter1.getCount() < counter2.getCount();
-  }
+" "" ""p""r""i""v""a""t""e"" ""b""o""o""l""e""a""n"" ""i""s""B""r""i""d""g""e""(""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"","" ""S""e""t""<""R""u""n""t""i""m""e""E""d""g""e"">"" ""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"","" ""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"")"" ""{"
+" "" "" "" ""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""c""o""u""n""t""e""r""1"" ""="" ""n""e""w"" ""V""e""r""t""e""x""C""o""u""n""t""e""r""(""m""o""d""e""l"","" ""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"","" ""e""d""g""e"")"";"
+" "" "" "" ""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""c""o""u""n""t""e""r""2"" ""="" ""n""e""w"" ""V""e""r""t""e""x""C""o""u""n""t""e""r""(""m""o""d""e""l"")"";"
+" "" "" "" ""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"".""a""c""c""e""p""t""(""c""o""u""n""t""e""r""1"")"";"
+" "" "" "" ""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"".""a""c""c""e""p""t""(""c""o""u""n""t""e""r""2"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""c""o""u""n""t""e""r""1"".""g""e""t""C""o""u""n""t""("")"" ""<"" ""c""o""u""n""t""e""r""2"".""g""e""t""C""o""u""n""t""("")"";"
+" "" ""}"
 
-  private static class VertexCounter implements ElementVisitor {
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""c""l""a""s""s"" ""V""e""r""t""e""x""C""o""u""n""t""e""r"" ""i""m""p""l""e""m""e""n""t""s"" ""E""l""e""m""e""n""t""V""i""s""i""t""o""r"" ""{"
 
-    private final RuntimeModel model;
-    private final Set<Element> visitedElements = new HashSet<>();
-    private int count = 0;
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""S""e""t""<""E""l""e""m""e""n""t"">"" ""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"" ""="" ""n""e""w"" ""H""a""s""h""S""e""t""<"">""("")"";"
+" "" "" "" ""p""r""i""v""a""t""e"" ""i""n""t"" ""c""o""u""n""t"" ""="" ""0"";"
 
-    public VertexCounter(RuntimeModel model) {
-      this.model = model;
-    }
+" "" "" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x""C""o""u""n""t""e""r""(""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"")"" ""{"
+" "" "" "" "" "" ""t""h""i""s"".""m""o""d""e""l"" ""="" ""m""o""d""e""l"";"
+" "" "" "" ""}"
 
-    public VertexCounter(RuntimeModel model, Set<RuntimeEdge> visitedElements, RuntimeEdge edge) {
-      this.model = model;
-      this.visitedElements.addAll(visitedElements);
-      this.visitedElements.add(edge);
-    }
+" "" "" "" ""p""u""b""l""i""c"" ""V""e""r""t""e""x""C""o""u""n""t""e""r""(""R""u""n""t""i""m""e""M""o""d""e""l"" ""m""o""d""e""l"","" ""S""e""t""<""R""u""n""t""i""m""e""E""d""g""e"">"" ""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"","" ""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"")"" ""{"
+" "" "" "" "" "" ""t""h""i""s"".""m""o""d""e""l"" ""="" ""m""o""d""e""l"";"
+" "" "" "" "" "" ""t""h""i""s"".""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"".""a""d""d""A""l""l""(""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"")"";"
+" "" "" "" "" "" ""t""h""i""s"".""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"".""a""d""d""(""e""d""g""e"")"";"
+" "" "" "" ""}"
 
-    public int getCount() {
-      return count;
-    }
+" "" "" "" ""p""u""b""l""i""c"" ""i""n""t"" ""g""e""t""C""o""u""n""t""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""c""o""u""n""t"";"
+" "" "" "" ""}"
 
-    private boolean isNotVisited(Element element) {
-      return !visitedElements.contains(element);
-    }
+" "" "" "" ""p""r""i""v""a""t""e"" ""b""o""o""l""e""a""n"" ""i""s""N""o""t""V""i""s""i""t""e""d""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""!""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"".""c""o""n""t""a""i""n""s""(""e""l""e""m""e""n""t"")"";"
+" "" "" "" ""}"
 
-    @Override
-    public void visit(Element element) {
-      visitedElements.add(element);
-      if (element instanceof RuntimeVertex) {
-        RuntimeVertex vertex = (RuntimeVertex) element;
-        count++;
-        for (RuntimeEdge edge : model.getOutEdges(vertex)) {
-          if (isNotVisited(edge)) {
-            edge.accept(this);
-          }
-        }
-      } else if (element instanceof RuntimeEdge) {
-        RuntimeEdge edge = (RuntimeEdge) element;
-        if (isNotVisited(edge.getTargetVertex())) {
-          edge.getTargetVertex().accept(this);
-        }
-      }
-    }
-  }
-}
+" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""v""i""s""i""t""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" "" "" ""v""i""s""i""t""e""d""E""l""e""m""e""n""t""s"".""a""d""d""(""e""l""e""m""e""n""t"")"";"
+" "" "" "" "" "" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""V""e""r""t""e""x"")"" ""{"
+" "" "" "" "" "" "" "" ""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"" ""="" ""(""R""u""n""t""i""m""e""V""e""r""t""e""x"")"" ""e""l""e""m""e""n""t"";"
+" "" "" "" "" "" "" "" ""c""o""u""n""t""+""+"";"
+" "" "" "" "" "" "" "" ""f""o""r"" ""(""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""m""o""d""e""l"".""g""e""t""O""u""t""E""d""g""e""s""(""v""e""r""t""e""x"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""s""N""o""t""V""i""s""i""t""e""d""(""e""d""g""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""e""d""g""e"".""a""c""c""e""p""t""(""t""h""i""s"")"";"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""e""l""e""m""e""n""t"" ""i""n""s""t""a""n""c""e""o""f"" ""R""u""n""t""i""m""e""E""d""g""e"")"" ""{"
+" "" "" "" "" "" "" "" ""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" ""="" ""(""R""u""n""t""i""m""e""E""d""g""e"")"" ""e""l""e""m""e""n""t"";"
+" "" "" "" "" "" "" "" ""i""f"" ""(""i""s""N""o""t""V""i""s""i""t""e""d""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"".""a""c""c""e""p""t""(""t""h""i""s"")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
+"}"

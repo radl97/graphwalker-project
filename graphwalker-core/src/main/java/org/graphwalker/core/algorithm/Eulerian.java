@@ -1,113 +1,113 @@
-package org.graphwalker.core.algorithm;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""a""l""g""o""r""i""t""h""m"";"
 
-/*
- * #%L
- * GraphWalker Core
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.model.Element;
-import org.graphwalker.core.model.Path;
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""l""e""m""e""n""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""P""a""t""h"";"
 
-import java.util.HashMap;
-import java.util.Map;
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""H""a""s""h""M""a""p"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""u""t""i""l"".""M""a""p"";"
 
-import static org.graphwalker.core.model.Edge.RuntimeEdge;
-import static org.graphwalker.core.model.Vertex.RuntimeVertex;
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"".""R""u""n""t""i""m""e""E""d""g""e"";"
+"i""m""p""o""r""t"" ""s""t""a""t""i""c"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"".""R""u""n""t""i""m""e""V""e""r""t""e""x"";"
 
-/**
- * @author Nils Olsson
- */
-public class Eulerian implements Algorithm {
+"/""*""*"
+" ""*"" ""@""a""u""t""h""o""r"" ""N""i""l""s"" ""O""l""s""s""o""n"
+" ""*""/"
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""E""u""l""e""r""i""a""n"" ""i""m""p""l""e""m""e""n""t""s"" ""A""l""g""o""r""i""t""h""m"" ""{"
 
-  private final Context context;
-  private final Map<RuntimeVertex, PolarityCounter> polarities;
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"";"
+" "" ""p""r""i""v""a""t""e"" ""f""i""n""a""l"" ""M""a""p""<""R""u""n""t""i""m""e""V""e""r""t""e""x"","" ""P""o""l""a""r""i""t""y""C""o""u""n""t""e""r"">"" ""p""o""l""a""r""i""t""i""e""s"";"
 
-  public Eulerian(Context context) {
-    this.context = context;
-    this.polarities = new HashMap<>(context.getModel().getVertices().size());
-    polarize();
-  }
+" "" ""p""u""b""l""i""c"" ""E""u""l""e""r""i""a""n""(""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"")"" ""{"
+" "" "" "" ""t""h""i""s"".""c""o""n""t""e""x""t"" ""="" ""c""o""n""t""e""x""t"";"
+" "" "" "" ""t""h""i""s"".""p""o""l""a""r""i""t""i""e""s"" ""="" ""n""e""w"" ""H""a""s""h""M""a""p""<"">""(""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""V""e""r""t""i""c""e""s""("")"".""s""i""z""e""("")"")"";"
+" "" "" "" ""p""o""l""a""r""i""z""e""("")"";"
+" "" ""}"
 
-  public enum EulerianType {
-    EULERIAN, SEMI_EULERIAN, NOT_EULERIAN
-  }
+" "" ""p""u""b""l""i""c"" ""e""n""u""m"" ""E""u""l""e""r""i""a""n""T""y""p""e"" ""{"
+" "" "" "" ""E""U""L""E""R""I""A""N"","" ""S""E""M""I""_""E""U""L""E""R""I""A""N"","" ""N""O""T""_""E""U""L""E""R""I""A""N"
+" "" ""}"
 
-  private void polarize() {
-    for (RuntimeEdge edge : context.getModel().getEdges()) {
-      getPolarityCounter(edge.getSourceVertex()).decrease();
-      getPolarityCounter(edge.getTargetVertex()).increase();
-    }
-    for (RuntimeVertex vertex : context.getModel().getVertices()) {
-      if (!polarities.get(vertex).hasPolarity()) {
-        polarities.remove(vertex);
-      }
-    }
-  }
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""p""o""l""a""r""i""z""e""("")"" ""{"
+" "" "" "" ""f""o""r"" ""(""R""u""n""t""i""m""e""E""d""g""e"" ""e""d""g""e"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""E""d""g""e""s""("")"")"" ""{"
+" "" "" "" "" "" ""g""e""t""P""o""l""a""r""i""t""y""C""o""u""n""t""e""r""(""e""d""g""e"".""g""e""t""S""o""u""r""c""e""V""e""r""t""e""x""("")"")"".""d""e""c""r""e""a""s""e""("")"";"
+" "" "" "" "" "" ""g""e""t""P""o""l""a""r""i""t""y""C""o""u""n""t""e""r""(""e""d""g""e"".""g""e""t""T""a""r""g""e""t""V""e""r""t""e""x""("")"")"".""i""n""c""r""e""a""s""e""("")"";"
+" "" "" "" ""}"
+" "" "" "" ""f""o""r"" ""(""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"" "":"" ""c""o""n""t""e""x""t"".""g""e""t""M""o""d""e""l""("")"".""g""e""t""V""e""r""t""i""c""e""s""("")"")"" ""{"
+" "" "" "" "" "" ""i""f"" ""(""!""p""o""l""a""r""i""t""i""e""s"".""g""e""t""(""v""e""r""t""e""x"")"".""h""a""s""P""o""l""a""r""i""t""y""("")"")"" ""{"
+" "" "" "" "" "" "" "" ""p""o""l""a""r""i""t""i""e""s"".""r""e""m""o""v""e""(""v""e""r""t""e""x"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
 
-  private PolarityCounter getPolarityCounter(RuntimeVertex vertex) {
-    if (!polarities.containsKey(vertex)) {
-      polarities.put(vertex, new PolarityCounter());
-    }
-    return polarities.get(vertex);
-  }
+" "" ""p""r""i""v""a""t""e"" ""P""o""l""a""r""i""t""y""C""o""u""n""t""e""r"" ""g""e""t""P""o""l""a""r""i""t""y""C""o""u""n""t""e""r""(""R""u""n""t""i""m""e""V""e""r""t""e""x"" ""v""e""r""t""e""x"")"" ""{"
+" "" "" "" ""i""f"" ""(""!""p""o""l""a""r""i""t""i""e""s"".""c""o""n""t""a""i""n""s""K""e""y""(""v""e""r""t""e""x"")"")"" ""{"
+" "" "" "" "" "" ""p""o""l""a""r""i""t""i""e""s"".""p""u""t""(""v""e""r""t""e""x"","" ""n""e""w"" ""P""o""l""a""r""i""t""y""C""o""u""n""t""e""r""("")"")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""p""o""l""a""r""i""t""i""e""s"".""g""e""t""(""v""e""r""t""e""x"")"";"
+" "" ""}"
 
-  public EulerianType getEulerianType() {
-    if (polarities.isEmpty()) {
-      return EulerianType.EULERIAN;
-    }
-    if (2 == polarities.size()) {
-      return EulerianType.SEMI_EULERIAN;
-    }
-    return EulerianType.NOT_EULERIAN;
-  }
+" "" ""p""u""b""l""i""c"" ""E""u""l""e""r""i""a""n""T""y""p""e"" ""g""e""t""E""u""l""e""r""i""a""n""T""y""p""e""("")"" ""{"
+" "" "" "" ""i""f"" ""(""p""o""l""a""r""i""t""i""e""s"".""i""s""E""m""p""t""y""("")"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""E""u""l""e""r""i""a""n""T""y""p""e"".""E""U""L""E""R""I""A""N"";"
+" "" "" "" ""}"
+" "" "" "" ""i""f"" ""(""2"" ""=""="" ""p""o""l""a""r""i""t""i""e""s"".""s""i""z""e""("")"")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""E""u""l""e""r""i""a""n""T""y""p""e"".""S""E""M""I""_""E""U""L""E""R""I""A""N"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""E""u""l""e""r""i""a""n""T""y""p""e"".""N""O""T""_""E""U""L""E""R""I""A""N"";"
+" "" ""}"
 
-  public Path<Element> getEulerPath(Element element) {
-    if (EulerianType.NOT_EULERIAN.equals(getEulerianType())) {
-      throw new AlgorithmException("The model is not eulerian or semi eulerian, no single path can cover the entire graph");
-    }
-    return context.getAlgorithm(Fleury.class).getTrail(element);
-  }
+" "" ""p""u""b""l""i""c"" ""P""a""t""h""<""E""l""e""m""e""n""t"">"" ""g""e""t""E""u""l""e""r""P""a""t""h""(""E""l""e""m""e""n""t"" ""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" ""i""f"" ""(""E""u""l""e""r""i""a""n""T""y""p""e"".""N""O""T""_""E""U""L""E""R""I""A""N"".""e""q""u""a""l""s""(""g""e""t""E""u""l""e""r""i""a""n""T""y""p""e""("")"")"")"" ""{"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""A""l""g""o""r""i""t""h""m""E""x""c""e""p""t""i""o""n""("""""T""h""e"" ""m""o""d""e""l"" ""i""s"" ""n""o""t"" ""e""u""l""e""r""i""a""n"" ""o""r"" ""s""e""m""i"" ""e""u""l""e""r""i""a""n"","" ""n""o"" ""s""i""n""g""l""e"" ""p""a""t""h"" ""c""a""n"" ""c""o""v""e""r"" ""t""h""e"" ""e""n""t""i""r""e"" ""g""r""a""p""h""""")"";"
+" "" "" "" ""}"
+" "" "" "" ""r""e""t""u""r""n"" ""c""o""n""t""e""x""t"".""g""e""t""A""l""g""o""r""i""t""h""m""(""F""l""e""u""r""y"".""c""l""a""s""s"")"".""g""e""t""T""r""a""i""l""(""e""l""e""m""e""n""t"")"";"
+" "" ""}"
 
-  class PolarityCounter {
+" "" ""c""l""a""s""s"" ""P""o""l""a""r""i""t""y""C""o""u""n""t""e""r"" ""{"
 
-    private int polarity = 0;
+" "" "" "" ""p""r""i""v""a""t""e"" ""i""n""t"" ""p""o""l""a""r""i""t""y"" ""="" ""0"";"
 
-    public void increase() {
-      polarity += 1;
-    }
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""i""n""c""r""e""a""s""e""("")"" ""{"
+" "" "" "" "" "" ""p""o""l""a""r""i""t""y"" ""+""="" ""1"";"
+" "" "" "" ""}"
 
-    public void decrease() {
-      polarity -= 1;
-    }
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""d""e""c""r""e""a""s""e""("")"" ""{"
+" "" "" "" "" "" ""p""o""l""a""r""i""t""y"" ""-""="" ""1"";"
+" "" "" "" ""}"
 
-    public boolean hasPolarity() {
-      return 0 != getPolarity();
-    }
+" "" "" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""h""a""s""P""o""l""a""r""i""t""y""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""0"" ""!""="" ""g""e""t""P""o""l""a""r""i""t""y""("")"";"
+" "" "" "" ""}"
 
-    public int getPolarity() {
-      return polarity;
-    }
-  }
-}
+" "" "" "" ""p""u""b""l""i""c"" ""i""n""t"" ""g""e""t""P""o""l""a""r""i""t""y""("")"" ""{"
+" "" "" "" "" "" ""r""e""t""u""r""n"" ""p""o""l""a""r""i""t""y"";"
+" "" "" "" ""}"
+" "" ""}"
+"}"

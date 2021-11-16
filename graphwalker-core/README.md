@@ -1,162 +1,162 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.graphwalker/graphwalker-core)
-GraphWalker Core
-===================
+"[""!""[""M""a""v""e""n"" ""C""e""n""t""r""a""l""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e""/""b""a""d""g""e"".""s""v""g"")""]""(""h""t""t""p""s"":""/""/""m""a""v""e""n""-""b""a""d""g""e""s"".""h""e""r""o""k""u""a""p""p"".""c""o""m""/""m""a""v""e""n""-""c""e""n""t""r""a""l""/""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e"")"
+"G""r""a""p""h""W""a""l""k""e""r"" ""C""o""r""e"
+"=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""=""="
 
-### What is GraphWalker
+"#""#""#"" ""W""h""a""t"" ""i""s"" ""G""r""a""p""h""W""a""l""k""e""r"
 
-GraphWalker is a Model-based testing tool which uses directed graphs (finite state diagram). The graphs are expressions of a systems expected behavior. It's not a description of the actual system under test, rather than it is an expression of the test design. See [Finite State Model-Based Testing on a Shoestring] as an example.
+"G""r""a""p""h""W""a""l""k""e""r"" ""i""s"" ""a"" ""M""o""d""e""l""-""b""a""s""e""d"" ""t""e""s""t""i""n""g"" ""t""o""o""l"" ""w""h""i""c""h"" ""u""s""e""s"" ""d""i""r""e""c""t""e""d"" ""g""r""a""p""h""s"" ""(""f""i""n""i""t""e"" ""s""t""a""t""e"" ""d""i""a""g""r""a""m"")""."" ""T""h""e"" ""g""r""a""p""h""s"" ""a""r""e"" ""e""x""p""r""e""s""s""i""o""n""s"" ""o""f"" ""a"" ""s""y""s""t""e""m""s"" ""e""x""p""e""c""t""e""d"" ""b""e""h""a""v""i""o""r""."" ""I""t""'""s"" ""n""o""t"" ""a"" ""d""e""s""c""r""i""p""t""i""o""n"" ""o""f"" ""t""h""e"" ""a""c""t""u""a""l"" ""s""y""s""t""e""m"" ""u""n""d""e""r"" ""t""e""s""t"","" ""r""a""t""h""e""r"" ""t""h""a""n"" ""i""t"" ""i""s"" ""a""n"" ""e""x""p""r""e""s""s""i""o""n"" ""o""f"" ""t""h""e"" ""t""e""s""t"" ""d""e""s""i""g""n""."" ""S""e""e"" ""[""F""i""n""i""t""e"" ""S""t""a""t""e"" ""M""o""d""e""l""-""B""a""s""e""d"" ""T""e""s""t""i""n""g"" ""o""n"" ""a"" ""S""h""o""e""s""t""r""i""n""g""]"" ""a""s"" ""a""n"" ""e""x""a""m""p""l""e""."
 
-GraphWalker generates test sequences from the graph. The test sequences are then used to run the actual tests.
+"G""r""a""p""h""W""a""l""k""e""r"" ""g""e""n""e""r""a""t""e""s"" ""t""e""s""t"" ""s""e""q""u""e""n""c""e""s"" ""f""r""o""m"" ""t""h""e"" ""g""r""a""p""h""."" ""T""h""e"" ""t""e""s""t"" ""s""e""q""u""e""n""c""e""s"" ""a""r""e"" ""t""h""e""n"" ""u""s""e""d"" ""t""o"" ""r""u""n"" ""t""h""e"" ""a""c""t""u""a""l"" ""t""e""s""t""s""."
 
-For a working implementation of GW3, please see: https://github.com/GraphWalker/graphwalker-cli
+"F""o""r"" ""a"" ""w""o""r""k""i""n""g"" ""i""m""p""l""e""m""e""n""t""a""t""i""o""n"" ""o""f"" ""G""W""3"","" ""p""l""e""a""s""e"" ""s""e""e"":"" ""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""c""l""i"
 
-### Design goal
-Graphwalker-core provides only the
-basic functionality for:
-* model data structure
-* algorithms
-* stop conditions
-* events
-* path generators
-* machines
-* statistics
+"#""#""#"" ""D""e""s""i""g""n"" ""g""o""a""l"
+"G""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e"" ""p""r""o""v""i""d""e""s"" ""o""n""l""y"" ""t""h""e"
+"b""a""s""i""c"" ""f""u""n""c""t""i""o""n""a""l""i""t""y"" ""f""o""r"":"
+"*"" ""m""o""d""e""l"" ""d""a""t""a"" ""s""t""r""u""c""t""u""r""e"
+"*"" ""a""l""g""o""r""i""t""h""m""s"
+"*"" ""s""t""o""p"" ""c""o""n""d""i""t""i""o""n""s"
+"*"" ""e""v""e""n""t""s"
+"*"" ""p""a""t""h"" ""g""e""n""e""r""a""t""o""r""s"
+"*"" ""m""a""c""h""i""n""e""s"
+"*"" ""s""t""a""t""i""s""t""i""c""s"
 
-For example, the core itself does not know how to read and parse models from file, that's handles by another module: **graphwalker-io**. The obvious advantage for this is that it will be easier to extend graphwalker to ones own needs.
+"F""o""r"" ""e""x""a""m""p""l""e"","" ""t""h""e"" ""c""o""r""e"" ""i""t""s""e""l""f"" ""d""o""e""s"" ""n""o""t"" ""k""n""o""w"" ""h""o""w"" ""t""o"" ""r""e""a""d"" ""a""n""d"" ""p""a""r""s""e"" ""m""o""d""e""l""s"" ""f""r""o""m"" ""f""i""l""e"","" ""t""h""a""t""'""s"" ""h""a""n""d""l""e""s"" ""b""y"" ""a""n""o""t""h""e""r"" ""m""o""d""u""l""e"":"" ""*""*""g""r""a""p""h""w""a""l""k""e""r""-""i""o""*""*""."" ""T""h""e"" ""o""b""v""i""o""u""s"" ""a""d""v""a""n""t""a""g""e"" ""f""o""r"" ""t""h""i""s"" ""i""s"" ""t""h""a""t"" ""i""t"" ""w""i""l""l"" ""b""e"" ""e""a""s""i""e""r"" ""t""o"" ""e""x""t""e""n""d"" ""g""r""a""p""h""w""a""l""k""e""r"" ""t""o"" ""o""n""e""s"" ""o""w""n"" ""n""e""e""d""s""."
 
-### How to build and install locally
-```sh
-git clone https://github.com/GraphWalker/graphwalker-project.git
-cd graphwalker-project/graphwalker-core
-mvn install
-```
+"#""#""#"" ""H""o""w"" ""t""o"" ""b""u""i""l""d"" ""a""n""d"" ""i""n""s""t""a""l""l"" ""l""o""c""a""l""l""y"
+"`""`""`""s""h"
+"g""i""t"" ""c""l""o""n""e"" ""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t"".""g""i""t"
+"c""d"" ""g""r""a""p""h""w""a""l""k""e""r""-""p""r""o""j""e""c""t""/""g""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e"
+"m""v""n"" ""i""n""s""t""a""l""l"
+"`""`""`"
 
-### Include it into your maven project
-For a maven project just add this dependency:
-```xml
-<dependency>
-    <groupId>org.graphwalker</groupId>
-    <artifactId>graphwalker-core</artifactId>
-    <version>4.3.1</version>
-</dependency>
-```
+"#""#""#"" ""I""n""c""l""u""d""e"" ""i""t"" ""i""n""t""o"" ""y""o""u""r"" ""m""a""v""e""n"" ""p""r""o""j""e""c""t"
+"F""o""r"" ""a"" ""m""a""v""e""n"" ""p""r""o""j""e""c""t"" ""j""u""s""t"" ""a""d""d"" ""t""h""i""s"" ""d""e""p""e""n""d""e""n""c""y"":"
+"`""`""`""x""m""l"
+"<""d""e""p""e""n""d""e""n""c""y"">"
+" "" "" "" ""<""g""r""o""u""p""I""d"">""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r""<""/""g""r""o""u""p""I""d"">"
+" "" "" "" ""<""a""r""t""i""f""a""c""t""I""d"">""g""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e""<""/""a""r""t""i""f""a""c""t""I""d"">"
+" "" "" "" ""<""v""e""r""s""i""o""n"">""4"".""3"".""1""<""/""v""e""r""s""i""o""n"">"
+"<""/""d""e""p""e""n""d""e""n""c""y"">"
+"`""`""`"
 
-### Example
+"#""#""#"" ""E""x""a""m""p""l""e"
 
-```java
-import org.graphwalker.core.condition.VertexCoverage;
-import org.graphwalker.core.generator.PathGenerator;
-import org.graphwalker.core.generator.RandomPath;
-import org.graphwalker.core.machine.Context;
-import org.graphwalker.core.machine.ExecutionContext;
-import org.graphwalker.core.machine.Machine;
-import org.graphwalker.core.machine.SimpleMachine;
-import org.graphwalker.core.model.Edge;
-import org.graphwalker.core.model.Model;
-import org.graphwalker.core.model.Vertex;
-import org.junit.Test;
+"`""`""`""j""a""v""a"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""c""o""n""d""i""t""i""o""n"".""V""e""r""t""e""x""C""o""v""e""r""a""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""P""a""t""h""G""e""n""e""r""a""t""o""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""g""e""n""e""r""a""t""o""r"".""R""a""n""d""o""m""P""a""t""h"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""E""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""M""a""c""h""i""n""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""a""c""h""i""n""e"".""S""i""m""p""l""e""M""a""c""h""i""n""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""E""d""g""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""M""o""d""e""l"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""c""o""r""e"".""m""o""d""e""l"".""V""e""r""t""e""x"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""u""n""i""t"".""T""e""s""t"";"
 
-public class SimpleTest {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""S""i""m""p""l""e""T""e""s""t"" ""{"
 
-    @Test
-    public void runTestWithOnlyCore() {
-        // create a model
-        Vertex start = new Vertex();
-        Model model = new Model().addEdge(new Edge()
-            .setSourceVertex(start)
-            .setTargetVertex(new Vertex().setName("myTestMethod")));
-        // create a context based on the model and a path generator
-        PathGenerator pathGenerator = new RandomPath(new VertexCoverage(100));
-        Context context = new TestContext(model, pathGenerator);
-        // set the start vertex as our start point
-        context.setNextElement(start);
-        // create a machine and execute the test
-        Machine machine = new SimpleMachine(context);
-        while (machine.hasNextStep()) {
-            machine.getNextStep();
-        }
-    }
+" "" "" "" ""@""T""e""s""t"
+" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""r""u""n""T""e""s""t""W""i""t""h""O""n""l""y""C""o""r""e""("")"" ""{"
+" "" "" "" "" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""a"" ""m""o""d""e""l"
+" "" "" "" "" "" "" "" ""V""e""r""t""e""x"" ""s""t""a""r""t"" ""="" ""n""e""w"" ""V""e""r""t""e""x""("")"";"
+" "" "" "" "" "" "" "" ""M""o""d""e""l"" ""m""o""d""e""l"" ""="" ""n""e""w"" ""M""o""d""e""l""("")"".""a""d""d""E""d""g""e""(""n""e""w"" ""E""d""g""e""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "".""s""e""t""S""o""u""r""c""e""V""e""r""t""e""x""(""s""t""a""r""t"")"
+" "" "" "" "" "" "" "" "" "" "" "" "".""s""e""t""T""a""r""g""e""t""V""e""r""t""e""x""(""n""e""w"" ""V""e""r""t""e""x""("")"".""s""e""t""N""a""m""e""("""""m""y""T""e""s""t""M""e""t""h""o""d""""")"")"")"";"
+" "" "" "" "" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""a"" ""c""o""n""t""e""x""t"" ""b""a""s""e""d"" ""o""n"" ""t""h""e"" ""m""o""d""e""l"" ""a""n""d"" ""a"" ""p""a""t""h"" ""g""e""n""e""r""a""t""o""r"
+" "" "" "" "" "" "" "" ""P""a""t""h""G""e""n""e""r""a""t""o""r"" ""p""a""t""h""G""e""n""e""r""a""t""o""r"" ""="" ""n""e""w"" ""R""a""n""d""o""m""P""a""t""h""(""n""e""w"" ""V""e""r""t""e""x""C""o""v""e""r""a""g""e""(""1""0""0"")"")"";"
+" "" "" "" "" "" "" "" ""C""o""n""t""e""x""t"" ""c""o""n""t""e""x""t"" ""="" ""n""e""w"" ""T""e""s""t""C""o""n""t""e""x""t""(""m""o""d""e""l"","" ""p""a""t""h""G""e""n""e""r""a""t""o""r"")"";"
+" "" "" "" "" "" "" "" ""/""/"" ""s""e""t"" ""t""h""e"" ""s""t""a""r""t"" ""v""e""r""t""e""x"" ""a""s"" ""o""u""r"" ""s""t""a""r""t"" ""p""o""i""n""t"
+" "" "" "" "" "" "" "" ""c""o""n""t""e""x""t"".""s""e""t""N""e""x""t""E""l""e""m""e""n""t""(""s""t""a""r""t"")"";"
+" "" "" "" "" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""a"" ""m""a""c""h""i""n""e"" ""a""n""d"" ""e""x""e""c""u""t""e"" ""t""h""e"" ""t""e""s""t"
+" "" "" "" "" "" "" "" ""M""a""c""h""i""n""e"" ""m""a""c""h""i""n""e"" ""="" ""n""e""w"" ""S""i""m""p""l""e""M""a""c""h""i""n""e""(""c""o""n""t""e""x""t"")"";"
+" "" "" "" "" "" "" "" ""w""h""i""l""e"" ""(""m""a""c""h""i""n""e"".""h""a""s""N""e""x""t""S""t""e""p""("")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""a""c""h""i""n""e"".""g""e""t""N""e""x""t""S""t""e""p""("")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" ""}"
 
-    // needs to be public, because it will be instantiated from graphwalker
-    public class TestContext extends ExecutionContext {
+" "" "" "" ""/""/"" ""n""e""e""d""s"" ""t""o"" ""b""e"" ""p""u""b""l""i""c"","" ""b""e""c""a""u""s""e"" ""i""t"" ""w""i""l""l"" ""b""e"" ""i""n""s""t""a""n""t""i""a""t""e""d"" ""f""r""o""m"" ""g""r""a""p""h""w""a""l""k""e""r"
+" "" "" "" ""p""u""b""l""i""c"" ""c""l""a""s""s"" ""T""e""s""t""C""o""n""t""e""x""t"" ""e""x""t""e""n""d""s"" ""E""x""e""c""u""t""i""o""n""C""o""n""t""e""x""t"" ""{"
 
-        public TestContext(Model model, PathGenerator pathGenerator) {
-            super(model, pathGenerator);
-        }
+" "" "" "" "" "" "" "" ""p""u""b""l""i""c"" ""T""e""s""t""C""o""n""t""e""x""t""(""M""o""d""e""l"" ""m""o""d""e""l"","" ""P""a""t""h""G""e""n""e""r""a""t""o""r"" ""p""a""t""h""G""e""n""e""r""a""t""o""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""s""u""p""e""r""(""m""o""d""e""l"","" ""p""a""t""h""G""e""n""e""r""a""t""o""r"")"";"
+" "" "" "" "" "" "" "" ""}"
 
-        public void myTestMethod() {
-            // This is executed during the model execution
-        }
-    }
-}
-```
-
-
-### Model data structure
-The model represents a finite state diagram. It consists of vertices (nodes or states) and edges (transitions).
-
-### Algorithms
-Are used by path generators. The [algorithm] provides the generators the logic for how to traverse a model. Examples of algorithms are:
-* [A Star]
-* [Depth-first Search]
-* [Eulerian]
-* [Fleury]
-* [Floyd-Warshall]
-
-### Stop conditions
-Used by path generators to determine when to stop generating a path. Stop conditions can be logically AND'ed and OR'ed. When a stop condition (or a combination of several) evaluates to true, the generator stops. Examples are:
-* **Edge coverage** - The condition is a percentage number. When, during execution, the percentage of traversed edges are reached, the test is stopped. If an edge is traversed more than one time, it still counts as 1, when calculating the percentage coverage.
-* **Length** - The condition is a number, representing the total numbers of pairs of vertices and edges generated by a generator. For example, if the number is 110, the test sequence would be 220 lines long. (including 110 pairs of edges and vertices).
-* **Never** - This special condition will never halt the generator.
-* **Reached edge** - The condition is a named edge. When, during execution, the edge is reached, the test is stopped.
-* **Reached vertex** - The stop criteria is a named vertex. When, during execution, the vertex is reached, the test is stopped.
-* **Requirement coverage** - The condition is a percentage number. When, during execution, the percentage of traversed requirements is reached, the test is stopped. If an requirement is traversed more than one time, it still counts as 1, when calculating the percentage coverage.
-* **Time duration** - The condition is a time, representing the number of seconds that the test generator is allowed to execute.
-* **Vertex coverage** - The condition is a percentage number. When, during execution, the percentage of traversed vertices are reached, the test is stopped. If a vertex is traversed more than one time, it still counts as 1, when calculating the percentage coverage.
+" "" "" "" "" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""m""y""T""e""s""t""M""e""t""h""o""d""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""T""h""i""s"" ""i""s"" ""e""x""e""c""u""t""e""d"" ""d""u""r""i""n""g"" ""t""h""e"" ""m""o""d""e""l"" ""e""x""e""c""u""t""i""o""n"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+"}"
+"`""`""`"
 
 
-### Events
-An implementation of the [Observer pattern]. For instance, the [SimpleMachine] implements the pattern, and notifies observers when following has happened:
-* [SimpleMachine.walk] - When a machine generates a path using some generator, it walks the generated path. Everytime a step is walked, this method is called, and thus an observer can be notified of this event.
+"#""#""#"" ""M""o""d""e""l"" ""d""a""t""a"" ""s""t""r""u""c""t""u""r""e"
+"T""h""e"" ""m""o""d""e""l"" ""r""e""p""r""e""s""e""n""t""s"" ""a"" ""f""i""n""i""t""e"" ""s""t""a""t""e"" ""d""i""a""g""r""a""m""."" ""I""t"" ""c""o""n""s""i""s""t""s"" ""o""f"" ""v""e""r""t""i""c""e""s"" ""(""n""o""d""e""s"" ""o""r"" ""s""t""a""t""e""s"")"" ""a""n""d"" ""e""d""g""e""s"" ""(""t""r""a""n""s""i""t""i""o""n""s"")""."
+
+"#""#""#"" ""A""l""g""o""r""i""t""h""m""s"
+"A""r""e"" ""u""s""e""d"" ""b""y"" ""p""a""t""h"" ""g""e""n""e""r""a""t""o""r""s""."" ""T""h""e"" ""[""a""l""g""o""r""i""t""h""m""]"" ""p""r""o""v""i""d""e""s"" ""t""h""e"" ""g""e""n""e""r""a""t""o""r""s"" ""t""h""e"" ""l""o""g""i""c"" ""f""o""r"" ""h""o""w"" ""t""o"" ""t""r""a""v""e""r""s""e"" ""a"" ""m""o""d""e""l""."" ""E""x""a""m""p""l""e""s"" ""o""f"" ""a""l""g""o""r""i""t""h""m""s"" ""a""r""e"":"
+"*"" ""[""A"" ""S""t""a""r""]"
+"*"" ""[""D""e""p""t""h""-""f""i""r""s""t"" ""S""e""a""r""c""h""]"
+"*"" ""[""E""u""l""e""r""i""a""n""]"
+"*"" ""[""F""l""e""u""r""y""]"
+"*"" ""[""F""l""o""y""d""-""W""a""r""s""h""a""l""l""]"
+
+"#""#""#"" ""S""t""o""p"" ""c""o""n""d""i""t""i""o""n""s"
+"U""s""e""d"" ""b""y"" ""p""a""t""h"" ""g""e""n""e""r""a""t""o""r""s"" ""t""o"" ""d""e""t""e""r""m""i""n""e"" ""w""h""e""n"" ""t""o"" ""s""t""o""p"" ""g""e""n""e""r""a""t""i""n""g"" ""a"" ""p""a""t""h""."" ""S""t""o""p"" ""c""o""n""d""i""t""i""o""n""s"" ""c""a""n"" ""b""e"" ""l""o""g""i""c""a""l""l""y"" ""A""N""D""'""e""d"" ""a""n""d"" ""O""R""'""e""d""."" ""W""h""e""n"" ""a"" ""s""t""o""p"" ""c""o""n""d""i""t""i""o""n"" ""(""o""r"" ""a"" ""c""o""m""b""i""n""a""t""i""o""n"" ""o""f"" ""s""e""v""e""r""a""l"")"" ""e""v""a""l""u""a""t""e""s"" ""t""o"" ""t""r""u""e"","" ""t""h""e"" ""g""e""n""e""r""a""t""o""r"" ""s""t""o""p""s""."" ""E""x""a""m""p""l""e""s"" ""a""r""e"":"
+"*"" ""*""*""E""d""g""e"" ""c""o""v""e""r""a""g""e""*""*"" ""-"" ""T""h""e"" ""c""o""n""d""i""t""i""o""n"" ""i""s"" ""a"" ""p""e""r""c""e""n""t""a""g""e"" ""n""u""m""b""e""r""."" ""W""h""e""n"","" ""d""u""r""i""n""g"" ""e""x""e""c""u""t""i""o""n"","" ""t""h""e"" ""p""e""r""c""e""n""t""a""g""e"" ""o""f"" ""t""r""a""v""e""r""s""e""d"" ""e""d""g""e""s"" ""a""r""e"" ""r""e""a""c""h""e""d"","" ""t""h""e"" ""t""e""s""t"" ""i""s"" ""s""t""o""p""p""e""d""."" ""I""f"" ""a""n"" ""e""d""g""e"" ""i""s"" ""t""r""a""v""e""r""s""e""d"" ""m""o""r""e"" ""t""h""a""n"" ""o""n""e"" ""t""i""m""e"","" ""i""t"" ""s""t""i""l""l"" ""c""o""u""n""t""s"" ""a""s"" ""1"","" ""w""h""e""n"" ""c""a""l""c""u""l""a""t""i""n""g"" ""t""h""e"" ""p""e""r""c""e""n""t""a""g""e"" ""c""o""v""e""r""a""g""e""."
+"*"" ""*""*""L""e""n""g""t""h""*""*"" ""-"" ""T""h""e"" ""c""o""n""d""i""t""i""o""n"" ""i""s"" ""a"" ""n""u""m""b""e""r"","" ""r""e""p""r""e""s""e""n""t""i""n""g"" ""t""h""e"" ""t""o""t""a""l"" ""n""u""m""b""e""r""s"" ""o""f"" ""p""a""i""r""s"" ""o""f"" ""v""e""r""t""i""c""e""s"" ""a""n""d"" ""e""d""g""e""s"" ""g""e""n""e""r""a""t""e""d"" ""b""y"" ""a"" ""g""e""n""e""r""a""t""o""r""."" ""F""o""r"" ""e""x""a""m""p""l""e"","" ""i""f"" ""t""h""e"" ""n""u""m""b""e""r"" ""i""s"" ""1""1""0"","" ""t""h""e"" ""t""e""s""t"" ""s""e""q""u""e""n""c""e"" ""w""o""u""l""d"" ""b""e"" ""2""2""0"" ""l""i""n""e""s"" ""l""o""n""g""."" ""(""i""n""c""l""u""d""i""n""g"" ""1""1""0"" ""p""a""i""r""s"" ""o""f"" ""e""d""g""e""s"" ""a""n""d"" ""v""e""r""t""i""c""e""s"")""."
+"*"" ""*""*""N""e""v""e""r""*""*"" ""-"" ""T""h""i""s"" ""s""p""e""c""i""a""l"" ""c""o""n""d""i""t""i""o""n"" ""w""i""l""l"" ""n""e""v""e""r"" ""h""a""l""t"" ""t""h""e"" ""g""e""n""e""r""a""t""o""r""."
+"*"" ""*""*""R""e""a""c""h""e""d"" ""e""d""g""e""*""*"" ""-"" ""T""h""e"" ""c""o""n""d""i""t""i""o""n"" ""i""s"" ""a"" ""n""a""m""e""d"" ""e""d""g""e""."" ""W""h""e""n"","" ""d""u""r""i""n""g"" ""e""x""e""c""u""t""i""o""n"","" ""t""h""e"" ""e""d""g""e"" ""i""s"" ""r""e""a""c""h""e""d"","" ""t""h""e"" ""t""e""s""t"" ""i""s"" ""s""t""o""p""p""e""d""."
+"*"" ""*""*""R""e""a""c""h""e""d"" ""v""e""r""t""e""x""*""*"" ""-"" ""T""h""e"" ""s""t""o""p"" ""c""r""i""t""e""r""i""a"" ""i""s"" ""a"" ""n""a""m""e""d"" ""v""e""r""t""e""x""."" ""W""h""e""n"","" ""d""u""r""i""n""g"" ""e""x""e""c""u""t""i""o""n"","" ""t""h""e"" ""v""e""r""t""e""x"" ""i""s"" ""r""e""a""c""h""e""d"","" ""t""h""e"" ""t""e""s""t"" ""i""s"" ""s""t""o""p""p""e""d""."
+"*"" ""*""*""R""e""q""u""i""r""e""m""e""n""t"" ""c""o""v""e""r""a""g""e""*""*"" ""-"" ""T""h""e"" ""c""o""n""d""i""t""i""o""n"" ""i""s"" ""a"" ""p""e""r""c""e""n""t""a""g""e"" ""n""u""m""b""e""r""."" ""W""h""e""n"","" ""d""u""r""i""n""g"" ""e""x""e""c""u""t""i""o""n"","" ""t""h""e"" ""p""e""r""c""e""n""t""a""g""e"" ""o""f"" ""t""r""a""v""e""r""s""e""d"" ""r""e""q""u""i""r""e""m""e""n""t""s"" ""i""s"" ""r""e""a""c""h""e""d"","" ""t""h""e"" ""t""e""s""t"" ""i""s"" ""s""t""o""p""p""e""d""."" ""I""f"" ""a""n"" ""r""e""q""u""i""r""e""m""e""n""t"" ""i""s"" ""t""r""a""v""e""r""s""e""d"" ""m""o""r""e"" ""t""h""a""n"" ""o""n""e"" ""t""i""m""e"","" ""i""t"" ""s""t""i""l""l"" ""c""o""u""n""t""s"" ""a""s"" ""1"","" ""w""h""e""n"" ""c""a""l""c""u""l""a""t""i""n""g"" ""t""h""e"" ""p""e""r""c""e""n""t""a""g""e"" ""c""o""v""e""r""a""g""e""."
+"*"" ""*""*""T""i""m""e"" ""d""u""r""a""t""i""o""n""*""*"" ""-"" ""T""h""e"" ""c""o""n""d""i""t""i""o""n"" ""i""s"" ""a"" ""t""i""m""e"","" ""r""e""p""r""e""s""e""n""t""i""n""g"" ""t""h""e"" ""n""u""m""b""e""r"" ""o""f"" ""s""e""c""o""n""d""s"" ""t""h""a""t"" ""t""h""e"" ""t""e""s""t"" ""g""e""n""e""r""a""t""o""r"" ""i""s"" ""a""l""l""o""w""e""d"" ""t""o"" ""e""x""e""c""u""t""e""."
+"*"" ""*""*""V""e""r""t""e""x"" ""c""o""v""e""r""a""g""e""*""*"" ""-"" ""T""h""e"" ""c""o""n""d""i""t""i""o""n"" ""i""s"" ""a"" ""p""e""r""c""e""n""t""a""g""e"" ""n""u""m""b""e""r""."" ""W""h""e""n"","" ""d""u""r""i""n""g"" ""e""x""e""c""u""t""i""o""n"","" ""t""h""e"" ""p""e""r""c""e""n""t""a""g""e"" ""o""f"" ""t""r""a""v""e""r""s""e""d"" ""v""e""r""t""i""c""e""s"" ""a""r""e"" ""r""e""a""c""h""e""d"","" ""t""h""e"" ""t""e""s""t"" ""i""s"" ""s""t""o""p""p""e""d""."" ""I""f"" ""a"" ""v""e""r""t""e""x"" ""i""s"" ""t""r""a""v""e""r""s""e""d"" ""m""o""r""e"" ""t""h""a""n"" ""o""n""e"" ""t""i""m""e"","" ""i""t"" ""s""t""i""l""l"" ""c""o""u""n""t""s"" ""a""s"" ""1"","" ""w""h""e""n"" ""c""a""l""c""u""l""a""t""i""n""g"" ""t""h""e"" ""p""e""r""c""e""n""t""a""g""e"" ""c""o""v""e""r""a""g""e""."
 
 
-### Generators
-A generator used an algorithm to decide how to traverse a model. Different generators will generate different test sequences, and they will navigate them in different ways.
-
-* **AStarPath** - Navigate through the model in a completely random manor. Also called "Drunkard’s walk", or "Random walk". This algorithm selects an out-edge from a vertex by random, and repeats the process in the next vertex.
-* **QuickRandomPath** - Tries to run the shortest path through a model, but in a fast fashion. This is how the algorithm works:
-   1. Choose an edge not yet visited by random.
-   1. Select the shortest path to that edge using the A Star algorithm
-   1. Walk that path, and mark all those edges being executed as visited.
-   1. When reaching the selected edge in step 1, start all over, repeating steps 1->4.
-
-   The algorithm works well an very large models, and generates reasonably short sequences. The downside is when used in conjunction with EFSM, the algorithm can choose a path which is blocked by a guard.
-* **RandomPath** - Navigate through the model in a completely random manor. Also called "Drunkard’s walk", or "Random walk". This algorithm selects an out-edge from a vertex by random, and repeats the process in the next vertex.
+"#""#""#"" ""E""v""e""n""t""s"
+"A""n"" ""i""m""p""l""e""m""e""n""t""a""t""i""o""n"" ""o""f"" ""t""h""e"" ""[""O""b""s""e""r""v""e""r"" ""p""a""t""t""e""r""n""]""."" ""F""o""r"" ""i""n""s""t""a""n""c""e"","" ""t""h""e"" ""[""S""i""m""p""l""e""M""a""c""h""i""n""e""]"" ""i""m""p""l""e""m""e""n""t""s"" ""t""h""e"" ""p""a""t""t""e""r""n"","" ""a""n""d"" ""n""o""t""i""f""i""e""s"" ""o""b""s""e""r""v""e""r""s"" ""w""h""e""n"" ""f""o""l""l""o""w""i""n""g"" ""h""a""s"" ""h""a""p""p""e""n""e""d"":"
+"*"" ""[""S""i""m""p""l""e""M""a""c""h""i""n""e"".""w""a""l""k""]"" ""-"" ""W""h""e""n"" ""a"" ""m""a""c""h""i""n""e"" ""g""e""n""e""r""a""t""e""s"" ""a"" ""p""a""t""h"" ""u""s""i""n""g"" ""s""o""m""e"" ""g""e""n""e""r""a""t""o""r"","" ""i""t"" ""w""a""l""k""s"" ""t""h""e"" ""g""e""n""e""r""a""t""e""d"" ""p""a""t""h""."" ""E""v""e""r""y""t""i""m""e"" ""a"" ""s""t""e""p"" ""i""s"" ""w""a""l""k""e""d"","" ""t""h""i""s"" ""m""e""t""h""o""d"" ""i""s"" ""c""a""l""l""e""d"","" ""a""n""d"" ""t""h""u""s"" ""a""n"" ""o""b""s""e""r""v""e""r"" ""c""a""n"" ""b""e"" ""n""o""t""i""f""i""e""d"" ""o""f"" ""t""h""i""s"" ""e""v""e""n""t""."
 
 
-### Machines
-A machine is the mechanism that generates an actual path, given:
-* the data in the model(s)
-* the generator(s)
-* the stop condition(s)
+"#""#""#"" ""G""e""n""e""r""a""t""o""r""s"
+"A"" ""g""e""n""e""r""a""t""o""r"" ""u""s""e""d"" ""a""n"" ""a""l""g""o""r""i""t""h""m"" ""t""o"" ""d""e""c""i""d""e"" ""h""o""w"" ""t""o"" ""t""r""a""v""e""r""s""e"" ""a"" ""m""o""d""e""l""."" ""D""i""f""f""e""r""e""n""t"" ""g""e""n""e""r""a""t""o""r""s"" ""w""i""l""l"" ""g""e""n""e""r""a""t""e"" ""d""i""f""f""e""r""e""n""t"" ""t""e""s""t"" ""s""e""q""u""e""n""c""e""s"","" ""a""n""d"" ""t""h""e""y"" ""w""i""l""l"" ""n""a""v""i""g""a""t""e"" ""t""h""e""m"" ""i""n"" ""d""i""f""f""e""r""e""n""t"" ""w""a""y""s""."
 
-An example of a machine is the [SimpleMachine].
+"*"" ""*""*""A""S""t""a""r""P""a""t""h""*""*"" ""-"" ""N""a""v""i""g""a""t""e"" ""t""h""r""o""u""g""h"" ""t""h""e"" ""m""o""d""e""l"" ""i""n"" ""a"" ""c""o""m""p""l""e""t""e""l""y"" ""r""a""n""d""o""m"" ""m""a""n""o""r""."" ""A""l""s""o"" ""c""a""l""l""e""d"" """""D""r""u""n""k""a""r""d""’""s"" ""w""a""l""k""""","" ""o""r"" """""R""a""n""d""o""m"" ""w""a""l""k"""""."" ""T""h""i""s"" ""a""l""g""o""r""i""t""h""m"" ""s""e""l""e""c""t""s"" ""a""n"" ""o""u""t""-""e""d""g""e"" ""f""r""o""m"" ""a"" ""v""e""r""t""e""x"" ""b""y"" ""r""a""n""d""o""m"","" ""a""n""d"" ""r""e""p""e""a""t""s"" ""t""h""e"" ""p""r""o""c""e""s""s"" ""i""n"" ""t""h""e"" ""n""e""x""t"" ""v""e""r""t""e""x""."
+"*"" ""*""*""Q""u""i""c""k""R""a""n""d""o""m""P""a""t""h""*""*"" ""-"" ""T""r""i""e""s"" ""t""o"" ""r""u""n"" ""t""h""e"" ""s""h""o""r""t""e""s""t"" ""p""a""t""h"" ""t""h""r""o""u""g""h"" ""a"" ""m""o""d""e""l"","" ""b""u""t"" ""i""n"" ""a"" ""f""a""s""t"" ""f""a""s""h""i""o""n""."" ""T""h""i""s"" ""i""s"" ""h""o""w"" ""t""h""e"" ""a""l""g""o""r""i""t""h""m"" ""w""o""r""k""s"":"
+" "" "" ""1""."" ""C""h""o""o""s""e"" ""a""n"" ""e""d""g""e"" ""n""o""t"" ""y""e""t"" ""v""i""s""i""t""e""d"" ""b""y"" ""r""a""n""d""o""m""."
+" "" "" ""1""."" ""S""e""l""e""c""t"" ""t""h""e"" ""s""h""o""r""t""e""s""t"" ""p""a""t""h"" ""t""o"" ""t""h""a""t"" ""e""d""g""e"" ""u""s""i""n""g"" ""t""h""e"" ""A"" ""S""t""a""r"" ""a""l""g""o""r""i""t""h""m"
+" "" "" ""1""."" ""W""a""l""k"" ""t""h""a""t"" ""p""a""t""h"","" ""a""n""d"" ""m""a""r""k"" ""a""l""l"" ""t""h""o""s""e"" ""e""d""g""e""s"" ""b""e""i""n""g"" ""e""x""e""c""u""t""e""d"" ""a""s"" ""v""i""s""i""t""e""d""."
+" "" "" ""1""."" ""W""h""e""n"" ""r""e""a""c""h""i""n""g"" ""t""h""e"" ""s""e""l""e""c""t""e""d"" ""e""d""g""e"" ""i""n"" ""s""t""e""p"" ""1"","" ""s""t""a""r""t"" ""a""l""l"" ""o""v""e""r"","" ""r""e""p""e""a""t""i""n""g"" ""s""t""e""p""s"" ""1""-"">""4""."
 
-### Statistics
-Keeps track of the metrics, such as which parts of the model has been executed.
-
-
-### License
-GraphWalker is using the [MIT license].
+" "" "" ""T""h""e"" ""a""l""g""o""r""i""t""h""m"" ""w""o""r""k""s"" ""w""e""l""l"" ""a""n"" ""v""e""r""y"" ""l""a""r""g""e"" ""m""o""d""e""l""s"","" ""a""n""d"" ""g""e""n""e""r""a""t""e""s"" ""r""e""a""s""o""n""a""b""l""y"" ""s""h""o""r""t"" ""s""e""q""u""e""n""c""e""s""."" ""T""h""e"" ""d""o""w""n""s""i""d""e"" ""i""s"" ""w""h""e""n"" ""u""s""e""d"" ""i""n"" ""c""o""n""j""u""n""c""t""i""o""n"" ""w""i""t""h"" ""E""F""S""M"","" ""t""h""e"" ""a""l""g""o""r""i""t""h""m"" ""c""a""n"" ""c""h""o""o""s""e"" ""a"" ""p""a""t""h"" ""w""h""i""c""h"" ""i""s"" ""b""l""o""c""k""e""d"" ""b""y"" ""a"" ""g""u""a""r""d""."
+"*"" ""*""*""R""a""n""d""o""m""P""a""t""h""*""*"" ""-"" ""N""a""v""i""g""a""t""e"" ""t""h""r""o""u""g""h"" ""t""h""e"" ""m""o""d""e""l"" ""i""n"" ""a"" ""c""o""m""p""l""e""t""e""l""y"" ""r""a""n""d""o""m"" ""m""a""n""o""r""."" ""A""l""s""o"" ""c""a""l""l""e""d"" """""D""r""u""n""k""a""r""d""’""s"" ""w""a""l""k""""","" ""o""r"" """""R""a""n""d""o""m"" ""w""a""l""k"""""."" ""T""h""i""s"" ""a""l""g""o""r""i""t""h""m"" ""s""e""l""e""c""t""s"" ""a""n"" ""o""u""t""-""e""d""g""e"" ""f""r""o""m"" ""a"" ""v""e""r""t""e""x"" ""b""y"" ""r""a""n""d""o""m"","" ""a""n""d"" ""r""e""p""e""a""t""s"" ""t""h""e"" ""p""r""o""c""e""s""s"" ""i""n"" ""t""h""e"" ""n""e""x""t"" ""v""e""r""t""e""x""."
 
 
-[GraphWalker 2]:https://github.com/KristianKarl/GraphWalker
-[Finite State Model-Based Testing on a Shoestring]:http://www.harryrobinson.net/MBT-on-a-shoestring.pdf
-[A Star]:http://en.wikipedia.org/wiki/A*_search_algorithm
-[Depth-first Search]:http://en.wikipedia.org/wiki/Depth-first_search
-[Eulerian]:http://en.wikipedia.org/wiki/Eulerian_path
-[Fleury]:http://en.wikipedia.org/wiki/Eulerian_path#Fleury.27s_algorithm
-[Floyd-Warshall]:http://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm
-[Observer pattern]:http://en.wikipedia.org/wiki/Observer_pattern
-[SimpleMachine]:https://github.com/GraphWalker/graphwalker-core/blob/master/src/main/java/org/graphwalker/core/machine/SimpleMachine.java#L44
-[SimpleMachine.walk]:https://github.com/GraphWalker/graphwalker-core/blob/master/src/main/java/org/graphwalker/core/machine/SimpleMachine.java#L75
-[MIT license]:http://opensource.org/licenses/MIT
+"#""#""#"" ""M""a""c""h""i""n""e""s"
+"A"" ""m""a""c""h""i""n""e"" ""i""s"" ""t""h""e"" ""m""e""c""h""a""n""i""s""m"" ""t""h""a""t"" ""g""e""n""e""r""a""t""e""s"" ""a""n"" ""a""c""t""u""a""l"" ""p""a""t""h"","" ""g""i""v""e""n"":"
+"*"" ""t""h""e"" ""d""a""t""a"" ""i""n"" ""t""h""e"" ""m""o""d""e""l""(""s"")"
+"*"" ""t""h""e"" ""g""e""n""e""r""a""t""o""r""(""s"")"
+"*"" ""t""h""e"" ""s""t""o""p"" ""c""o""n""d""i""t""i""o""n""(""s"")"
+
+"A""n"" ""e""x""a""m""p""l""e"" ""o""f"" ""a"" ""m""a""c""h""i""n""e"" ""i""s"" ""t""h""e"" ""[""S""i""m""p""l""e""M""a""c""h""i""n""e""]""."
+
+"#""#""#"" ""S""t""a""t""i""s""t""i""c""s"
+"K""e""e""p""s"" ""t""r""a""c""k"" ""o""f"" ""t""h""e"" ""m""e""t""r""i""c""s"","" ""s""u""c""h"" ""a""s"" ""w""h""i""c""h"" ""p""a""r""t""s"" ""o""f"" ""t""h""e"" ""m""o""d""e""l"" ""h""a""s"" ""b""e""e""n"" ""e""x""e""c""u""t""e""d""."
+
+
+"#""#""#"" ""L""i""c""e""n""s""e"
+"G""r""a""p""h""W""a""l""k""e""r"" ""i""s"" ""u""s""i""n""g"" ""t""h""e"" ""[""M""I""T"" ""l""i""c""e""n""s""e""]""."
+
+
+"[""G""r""a""p""h""W""a""l""k""e""r"" ""2""]"":""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""K""r""i""s""t""i""a""n""K""a""r""l""/""G""r""a""p""h""W""a""l""k""e""r"
+"[""F""i""n""i""t""e"" ""S""t""a""t""e"" ""M""o""d""e""l""-""B""a""s""e""d"" ""T""e""s""t""i""n""g"" ""o""n"" ""a"" ""S""h""o""e""s""t""r""i""n""g""]"":""h""t""t""p"":""/""/""w""w""w"".""h""a""r""r""y""r""o""b""i""n""s""o""n"".""n""e""t""/""M""B""T""-""o""n""-""a""-""s""h""o""e""s""t""r""i""n""g"".""p""d""f"
+"[""A"" ""S""t""a""r""]"":""h""t""t""p"":""/""/""e""n"".""w""i""k""i""p""e""d""i""a"".""o""r""g""/""w""i""k""i""/""A""*""_""s""e""a""r""c""h""_""a""l""g""o""r""i""t""h""m"
+"[""D""e""p""t""h""-""f""i""r""s""t"" ""S""e""a""r""c""h""]"":""h""t""t""p"":""/""/""e""n"".""w""i""k""i""p""e""d""i""a"".""o""r""g""/""w""i""k""i""/""D""e""p""t""h""-""f""i""r""s""t""_""s""e""a""r""c""h"
+"[""E""u""l""e""r""i""a""n""]"":""h""t""t""p"":""/""/""e""n"".""w""i""k""i""p""e""d""i""a"".""o""r""g""/""w""i""k""i""/""E""u""l""e""r""i""a""n""_""p""a""t""h"
+"[""F""l""e""u""r""y""]"":""h""t""t""p"":""/""/""e""n"".""w""i""k""i""p""e""d""i""a"".""o""r""g""/""w""i""k""i""/""E""u""l""e""r""i""a""n""_""p""a""t""h""#""F""l""e""u""r""y"".""2""7""s""_""a""l""g""o""r""i""t""h""m"
+"[""F""l""o""y""d""-""W""a""r""s""h""a""l""l""]"":""h""t""t""p"":""/""/""e""n"".""w""i""k""i""p""e""d""i""a"".""o""r""g""/""w""i""k""i""/""F""l""o""y""d""%""E""2""%""8""0""%""9""3""W""a""r""s""h""a""l""l""_""a""l""g""o""r""i""t""h""m"
+"[""O""b""s""e""r""v""e""r"" ""p""a""t""t""e""r""n""]"":""h""t""t""p"":""/""/""e""n"".""w""i""k""i""p""e""d""i""a"".""o""r""g""/""w""i""k""i""/""O""b""s""e""r""v""e""r""_""p""a""t""t""e""r""n"
+"[""S""i""m""p""l""e""M""a""c""h""i""n""e""]"":""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e""/""b""l""o""b""/""m""a""s""t""e""r""/""s""r""c""/""m""a""i""n""/""j""a""v""a""/""o""r""g""/""g""r""a""p""h""w""a""l""k""e""r""/""c""o""r""e""/""m""a""c""h""i""n""e""/""S""i""m""p""l""e""M""a""c""h""i""n""e"".""j""a""v""a""#""L""4""4"
+"[""S""i""m""p""l""e""M""a""c""h""i""n""e"".""w""a""l""k""]"":""h""t""t""p""s"":""/""/""g""i""t""h""u""b"".""c""o""m""/""G""r""a""p""h""W""a""l""k""e""r""/""g""r""a""p""h""w""a""l""k""e""r""-""c""o""r""e""/""b""l""o""b""/""m""a""s""t""e""r""/""s""r""c""/""m""a""i""n""/""j""a""v""a""/""o""r""g""/""g""r""a""p""h""w""a""l""k""e""r""/""c""o""r""e""/""m""a""c""h""i""n""e""/""S""i""m""p""l""e""M""a""c""h""i""n""e"".""j""a""v""a""#""L""7""5"
+"[""M""I""T"" ""l""i""c""e""n""s""e""]"":""h""t""t""p"":""/""/""o""p""e""n""s""o""u""r""c""e"".""o""r""g""/""l""i""c""e""n""s""e""s""/""M""I""T"
