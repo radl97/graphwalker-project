@@ -1,1992 +1,1992 @@
-/*!
- * jQuery contextMenu v2.3.1-dev - Plugin for simple contextMenu handling
- *
- * Version: v2.3.1-dev
- *
- * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
- * Web: http://swisnl.github.io/jQuery-contextMenu/
- *
- * Copyright (c) 2011-2016 SWIS BV and contributors
- *
- * Licensed under
- *   MIT License http://www.opensource.org/licenses/mit-license
- *   GPL v3 http://opensource.org/licenses/GPL-3.0
- *
- * Date: 2016-10-25T19:12:34.446Z
- */
-
-(function (factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as anonymous module.
-        define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        // Node / CommonJS
-        factory(require('jquery'));
-    } else {
-        // Browser globals.
-        factory(jQuery);
-    }
-})(function ($) {
-
-    'use strict';
-
-    // TODO: -
-    // ARIA stuff: menuitem, menuitemcheckbox und menuitemradio
-    // create <menu> structure if $.support[htmlCommand || htmlMenuitem] and !opt.disableNative
-
-    // determine html5 compatibility
-    $.support.htmlMenuitem = ('HTMLMenuItemElement' in window);
-    $.support.htmlCommand = ('HTMLCommandElement' in window);
-    $.support.eventSelectstart = ('onselectstart' in document.documentElement);
-    /* // should the need arise, test for css user-select
-     $.support.cssUserSelect = (function(){
-     var t = false,
-     e = document.createElement('div');
-
-     $.each('Moz|Webkit|Khtml|O|ms|Icab|'.split('|'), function(i, prefix) {
-     var propCC = prefix + (prefix ? 'U' : 'u') + 'serSelect',
-     prop = (prefix ? ('-' + prefix.toLowerCase() + '-') : '') + 'user-select';
-
-     e.style.cssText = prop + ': text;';
-     if (e.style[propCC] == 'text') {
-     t = true;
-     return false;
-     }
-
-     return true;
-     });
-
-     return t;
-     })();
-     */
-
-    /* jshint ignore:start */
-    if (!$.ui || !$.widget) {
-        // duck punch $.cleanData like jQueryUI does to get that remove event
-        $.cleanData = (function (orig) {
-            return function (elems) {
-                var events, elem, i;
-                for (i = 0; elems[i] != null; i++) {
-                    elem = elems[i];
-                    try {
-                        // Only trigger remove when necessary to save time
-                        events = $._data(elem, 'events');
-                        if (events && events.remove) {
-                            $(elem).triggerHandler('remove');
-                        }
-
-                        // Http://bugs.jquery.com/ticket/8235
-                    } catch (e) {}
-                }
-                orig(elems);
-            };
-        })($.cleanData);
-    }
-    /* jshint ignore:end */
-
-    var // currently active contextMenu trigger
-        $currentTrigger = null,
-    // is contextMenu initialized with at least one menu?
-        initialized = false,
-    // window handle
-        $win = $(window),
-    // number of registered menus
-        counter = 0,
-    // mapping selector to namespace
-        namespaces = {},
-    // mapping namespace to options
-        menus = {},
-    // custom command type handlers
-        types = {},
-    // default values
-        defaults = {
-            // selector of contextMenu trigger
-            selector: null,
-            // where to append the menu to
-            appendTo: null,
-            // method to trigger context menu ["right", "left", "hover"]
-            trigger: 'right',
-            // hide menu when mouse leaves trigger / menu elements
-            autoHide: false,
-            // ms to wait before showing a hover-triggered context menu
-            delay: 200,
-            // flag denoting if a second trigger should simply move (true) or rebuild (false) an open menu
-            // as long as the trigger happened on one of the trigger-element's child nodes
-            reposition: true,
-
-            // Default classname configuration to be able avoid conflicts in frameworks
-            classNames : {
-                hover: 'context-menu-hover', // Item hover
-                disabled: 'context-menu-disabled', // Item disabled
-                visible: 'context-menu-visible', // Item visible
-                notSelectable: 'context-menu-not-selectable', // Item not selectable
-
-                icon: 'context-menu-icon',
-                iconEdit: 'context-menu-icon-edit',
-                iconCut: 'context-menu-icon-cut',
-                iconCopy: 'context-menu-icon-copy',
-                iconPaste: 'context-menu-icon-paste',
-                iconDelete: 'context-menu-icon-delete',
-                iconAdd: 'context-menu-icon-add',
-                iconQuit: 'context-menu-icon-quit',
-                iconLoadingClass: 'context-menu-icon-loading'
-            },
-
-            // determine position to show menu at
-            determinePosition: function ($menu) {
-                // position to the lower middle of the trigger element
-                if ($.ui && $.ui.position) {
-                    // .position() is provided as a jQuery UI utility
-                    // (...and it won't work on hidden elements)
-                    $menu.css('display', 'block').position({
-                        my: 'center top',
-                        at: 'center bottom',
-                        of: this,
-                        offset: '0 5',
-                        collision: 'fit'
-                    }).css('display', 'none');
-                } else {
-                    // determine contextMenu position
-                    var offset = this.offset();
-                    offset.top += this.outerHeight();
-                    offset.left += this.outerWidth() / 2 - $menu.outerWidth() / 2;
-                    $menu.css(offset);
-                }
-            },
-            // position menu
-            position: function (opt, x, y) {
-                var offset;
-                // determine contextMenu position
-                if (!x && !y) {
-                    opt.determinePosition.call(this, opt.$menu);
-                    return;
-                } else if (x === 'maintain' && y === 'maintain') {
-                    // x and y must not be changed (after re-show on command click)
-                    offset = opt.$menu.position();
-                } else {
-                    // x and y are given (by mouse event)
-                    offset = {top: y, left: x};
-                }
-
-                // correct offset if viewport demands it
-                var bottom = $win.scrollTop() + $win.height(),
-                    right = $win.scrollLeft() + $win.width(),
-                    height = opt.$menu.outerHeight(),
-                    width = opt.$menu.outerWidth();
-
-                if (offset.top + height > bottom) {
-                    offset.top -= height;
-                }
-
-                if (offset.top < 0) {
-                    offset.top = 0;
-                }
-
-                if (offset.left + width > right) {
-                    offset.left -= width;
-                }
-
-                if (offset.left < 0) {
-                    offset.left = 0;
-                }
-
-                opt.$menu.css(offset);
-            },
-            // position the sub-menu
-            positionSubmenu: function ($menu) {
-                if ($menu === undefined) {
-                    // When user hovers over item (which has sub items) handle.focusItem will call this.
-                    // but the submenu does not exist yet if opt.items is a promise. just return, will
-                    // call positionSubmenu after promise is completed.
-                    return;
-                }
-                if ($.ui && $.ui.position) {
-                    // .position() is provided as a jQuery UI utility
-                    // (...and it won't work on hidden elements)
-                    $menu.css('display', 'block').position({
-                        my: 'left top',
-                        at: 'right top',
-                        of: this,
-                        collision: 'flipfit fit'
-                    }).css('display', '');
-                } else {
-                    // determine contextMenu position
-                    var offset = {
-                        top: 0,
-                        left: this.outerWidth()
-                    };
-                    $menu.css(offset);
-                }
-            },
-            // offset to add to zIndex
-            zIndex: 1,
-            // show hide animation settings
-            animation: {
-                duration: 50,
-                show: 'slideDown',
-                hide: 'slideUp'
-            },
-            // events
-            events: {
-                show: $.noop,
-                hide: $.noop
-            },
-            // default callback
-            callback: null,
-            // list of contextMenu items
-            items: {}
-        },
-    // mouse position for hover activation
-        hoveract = {
-            timer: null,
-            pageX: null,
-            pageY: null
-        },
-    // determine zIndex
-        zindex = function ($t) {
-            var zin = 0,
-                $tt = $t;
-
-            while (true) {
-                zin = Math.max(zin, parseInt($tt.css('z-index'), 10) || 0);
-                $tt = $tt.parent();
-                if (!$tt || !$tt.length || 'html body'.indexOf($tt.prop('nodeName').toLowerCase()) > -1) {
-                    break;
-                }
-            }
-            return zin;
-        },
-    // event handlers
-        handle = {
-            // abort anything
-            abortevent: function (e) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-            },
-            // contextmenu show dispatcher
-            contextmenu: function (e) {
-                var $this = $(this);
-
-                // disable actual context-menu if we are using the right mouse button as the trigger
-                if (e.data.trigger === 'right') {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                }
-
-                // abort native-triggered events unless we're triggering on right click
-                if ((e.data.trigger !== 'right' && e.data.trigger !== 'demand') && e.originalEvent) {
-                    return;
-                }
-
-                // Let the current contextmenu decide if it should show or not based on its own trigger settings
-                if (e.mouseButton !== undefined && e.data) {
-                    if (!(e.data.trigger === 'left' && e.mouseButton === 0) && !(e.data.trigger === 'right' && e.mouseButton === 2)) {
-                        // Mouse click is not valid.
-                        return;
-                    }
-                }
-
-                // abort event if menu is visible for this trigger
-                if ($this.hasClass('context-menu-active')) {
-                    return;
-                }
-
-                if (!$this.hasClass('context-menu-disabled')) {
-                    // theoretically need to fire a show event at <menu>
-                    // http://www.whatwg.org/specs/web-apps/current-work/multipage/interactive-elements.html#context-menus
-                    // var evt = jQuery.Event("show", { data: data, pageX: e.pageX, pageY: e.pageY, relatedTarget: this });
-                    // e.data.$menu.trigger(evt);
-
-                    $currentTrigger = $this;
-                    if (e.data.build) {
-                        var built = e.data.build($currentTrigger, e);
-                        // abort if build() returned false
-                        if (built === false) {
-                            return;
-                        }
-
-                        // dynamically build menu on invocation
-                        e.data = $.extend(true, {}, defaults, e.data, built || {});
-
-                        // abort if there are no items to display
-                        if (!e.data.items || $.isEmptyObject(e.data.items)) {
-                            // Note: jQuery captures and ignores errors from event handlers
-                            if (window.console) {
-                                (console.error || console.log).call(console, 'No items specified to show in contextMenu');
-                            }
-
-                            throw new Error('No Items specified');
-                        }
-
-                        // backreference for custom command type creation
-                        e.data.$trigger = $currentTrigger;
-
-                        op.create(e.data);
-                    }
-                    var showMenu = false;
-                    for (var item in e.data.items) {
-                        if (e.data.items.hasOwnProperty(item)) {
-                            var visible;
-                            if ($.isFunction(e.data.items[item].visible)) {
-                                visible = e.data.items[item].visible.call($(e.currentTarget), item, e.data);
-                            } else if (typeof item.visible !== 'undefined') {
-                                visible = e.data.items[item].visible === true;
-                            } else {
-                                visible = true;
-                            }
-                            if (visible) {
-                                showMenu = true;
-                            }
-                        }
-                    }
-                    if (showMenu) {
-                        // show menu
-                        op.show.call($this, e.data, e.pageX, e.pageY);
-                    }
-                }
-            },
-            // contextMenu left-click trigger
-            click: function (e) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                $(this).trigger($.Event('contextmenu', {data: e.data, pageX: e.pageX, pageY: e.pageY}));
-            },
-            // contextMenu right-click trigger
-            mousedown: function (e) {
-                // register mouse down
-                var $this = $(this);
-
-                // hide any previous menus
-                if ($currentTrigger && $currentTrigger.length && !$currentTrigger.is($this)) {
-                    $currentTrigger.data('contextMenu').$menu.trigger('contextmenu:hide');
-                }
-
-                // activate on right click
-                if (e.button === 2) {
-                    $currentTrigger = $this.data('contextMenuActive', true);
-                }
-            },
-            // contextMenu right-click trigger
-            mouseup: function (e) {
-                // show menu
-                var $this = $(this);
-                if ($this.data('contextMenuActive') && $currentTrigger && $currentTrigger.length && $currentTrigger.is($this) && !$this.hasClass('context-menu-disabled')) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    $currentTrigger = $this;
-                    $this.trigger($.Event('contextmenu', {data: e.data, pageX: e.pageX, pageY: e.pageY}));
-                }
-
-                $this.removeData('contextMenuActive');
-            },
-            // contextMenu hover trigger
-            mouseenter: function (e) {
-                var $this = $(this),
-                    $related = $(e.relatedTarget),
-                    $document = $(document);
-
-                // abort if we're coming from a menu
-                if ($related.is('.context-menu-list') || $related.closest('.context-menu-list').length) {
-                    return;
-                }
-
-                // abort if a menu is shown
-                if ($currentTrigger && $currentTrigger.length) {
-                    return;
-                }
-
-                hoveract.pageX = e.pageX;
-                hoveract.pageY = e.pageY;
-                hoveract.data = e.data;
-                $document.on('mousemove.contextMenuShow', handle.mousemove);
-                hoveract.timer = setTimeout(function () {
-                    hoveract.timer = null;
-                    $document.off('mousemove.contextMenuShow');
-                    $currentTrigger = $this;
-                    $this.trigger($.Event('contextmenu', {
-                        data: hoveract.data,
-                        pageX: hoveract.pageX,
-                        pageY: hoveract.pageY
-                    }));
-                }, e.data.delay);
-            },
-            // contextMenu hover trigger
-            mousemove: function (e) {
-                hoveract.pageX = e.pageX;
-                hoveract.pageY = e.pageY;
-            },
-            // contextMenu hover trigger
-            mouseleave: function (e) {
-                // abort if we're leaving for a menu
-                var $related = $(e.relatedTarget);
-                if ($related.is('.context-menu-list') || $related.closest('.context-menu-list').length) {
-                    return;
-                }
-
-                try {
-                    clearTimeout(hoveract.timer);
-                } catch (e) {
-                }
-
-                hoveract.timer = null;
-            },
-            // click on layer to hide contextMenu
-            layerClick: function (e) {
-                var $this = $(this),
-                    root = $this.data('contextMenuRoot'),
-                    button = e.button,
-                    x = e.pageX,
-                    y = e.pageY,
-                    target,
-                    offset;
-
-                e.preventDefault();
-                e.stopImmediatePropagation();
-
-                setTimeout(function () {
-                    var $window;
-                    var triggerAction = ((root.trigger === 'left' && button === 0) || (root.trigger === 'right' && button === 2));
-
-                    // find the element that would've been clicked, wasn't the layer in the way
-                    if (document.elementFromPoint && root.$layer) {
-                        root.$layer.hide();
-                        target = document.elementFromPoint(x - $win.scrollLeft(), y - $win.scrollTop());
-                        root.$layer.show();
-                    }
-
-                    if (root.reposition && triggerAction) {
-                        if (document.elementFromPoint) {
-                            if (root.$trigger.is(target) || root.$trigger.has(target).length) {
-                                root.position.call(root.$trigger, root, x, y);
-                                return;
-                            }
-                        } else {
-                            offset = root.$trigger.offset();
-                            $window = $(window);
-                            // while this looks kinda awful, it's the best way to avoid
-                            // unnecessarily calculating any positions
-                            offset.top += $window.scrollTop();
-                            if (offset.top <= e.pageY) {
-                                offset.left += $window.scrollLeft();
-                                if (offset.left <= e.pageX) {
-                                    offset.bottom = offset.top + root.$trigger.outerHeight();
-                                    if (offset.bottom >= e.pageY) {
-                                        offset.right = offset.left + root.$trigger.outerWidth();
-                                        if (offset.right >= e.pageX) {
-                                            // reposition
-                                            root.position.call(root.$trigger, root, x, y);
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (target && triggerAction) {
-                        root.$trigger.one('contextmenu:hidden', function () {
-                            $(target).contextMenu({ x: x, y: y, button: button });
-                        });
-                    }
-
-                    if (root != null && root.$menu != null) {
-                        root.$menu.trigger('contextmenu:hide');
-                    }
-                }, 50);
-            },
-            // key handled :hover
-            keyStop: function (e, opt) {
-                if (!opt.isInput) {
-                    e.preventDefault();
-                }
-
-                e.stopPropagation();
-            },
-            key: function (e) {
-
-                var opt = {};
-
-                // Only get the data from $currentTrigger if it exists
-                if ($currentTrigger) {
-                    opt = $currentTrigger.data('contextMenu') || {};
-                }
-                // If the trigger happen on a element that are above the contextmenu do this
-                if (opt.zIndex === undefined) {
-                    opt.zIndex = 0;
-				}
-                var targetZIndex = 0;
-                var getZIndexOfTriggerTarget = function (target) {
-					if (target.style.zIndex !== '') {
-						targetZIndex = target.style.zIndex;
-					} else {
-						if (target.offsetParent !== null && target.offsetParent !== undefined) {
-							getZIndexOfTriggerTarget(target.offsetParent);
-						}
-						else if (target.parentElement !== null && target.parentElement !== undefined) {
-							getZIndexOfTriggerTarget(target.parentElement);
-						}
-					}
-                };
-                getZIndexOfTriggerTarget(e.target);
-                // If targetZIndex is heigher then opt.zIndex dont progress any futher.
-                // This is used to make sure that if you are using a dialog with a input / textarea / contenteditable div
-                // and its above the contextmenu it wont steal keys events
-                if (targetZIndex > opt.zIndex) {
-                    return;
-				}
-                switch (e.keyCode) {
-                    case 9:
-                    case 38: // up
-                        handle.keyStop(e, opt);
-                        // if keyCode is [38 (up)] or [9 (tab) with shift]
-                        if (opt.isInput) {
-                            if (e.keyCode === 9 && e.shiftKey) {
-                                e.preventDefault();
-                                if(opt.$selected) {
-                                    opt.$selected.find('input, textarea, select').blur();
-                                }
-                                if (opt.$menu != null) opt.$menu.trigger('prevcommand');
-                                return;
-                            } else if (e.keyCode === 38 && opt.$selected.find('input, textarea, select').prop('type') === 'checkbox') {
-                                // checkboxes don't capture this key
-                                e.preventDefault();
-                                return;
-                            }
-                        } else if (e.keyCode !== 9 || e.shiftKey) {
-                            if (opt.$menu != null) opt.$menu.trigger('prevcommand');
-                            return;
-                        }
-                        break;
-                    // omitting break;
-                    // case 9: // tab - reached through omitted break;
-                    case 40: // down
-                        handle.keyStop(e, opt);
-                        if (opt.isInput) {
-                            if (e.keyCode === 9) {
-                                e.preventDefault();
-                                if(opt.$selected) {
-                                    opt.$selected.find('input, textarea, select').blur();
-                                }
-                                if (opt.$menu != null) opt.$menu.trigger('nextcommand');
-                                return;
-                            } else if (e.keyCode === 40 && opt.$selected.find('input, textarea, select').prop('type') === 'checkbox') {
-                                // checkboxes don't capture this key
-                                e.preventDefault();
-                                return;
-                            }
-                        } else {
-                            if (opt.$menu != null) opt.$menu.trigger('nextcommand');
-                            return;
-                        }
-                        break;
-
-                    case 37: // left
-                        handle.keyStop(e, opt);
-                        if (opt.isInput || !opt.$selected || !opt.$selected.length) {
-                            break;
-                        }
-
-                        if (!opt.$selected.parent().hasClass('context-menu-root')) {
-                            var $parent = opt.$selected.parent().parent();
-                            opt.$selected.trigger('contextmenu:blur');
-                            opt.$selected = $parent;
-                            return;
-                        }
-                        break;
-
-                    case 39: // right
-                        handle.keyStop(e, opt);
-                        if (opt.isInput || !opt.$selected || !opt.$selected.length) {
-                            break;
-                        }
-
-                        var itemdata = opt.$selected.data('contextMenu') || {};
-                        if (itemdata.$menu && opt.$selected.hasClass('context-menu-submenu')) {
-                            opt.$selected = null;
-                            itemdata.$selected = null;
-                            itemdata.$menu.trigger('nextcommand');
-                            return;
-                        }
-                        break;
-
-                    case 35: // end
-                    case 36: // home
-                        if (opt.$selected && opt.$selected.find('input, textarea, select').length) {
-                            return;
-                        } else {
-                            (opt.$selected && opt.$selected.parent() || opt.$menu)
-                                .children(':not(.' + opt.classNames.disabled + ', .' + opt.classNames.notSelectable + ')')[e.keyCode === 36 ? 'first' : 'last']()
-                                .trigger('contextmenu:focus');
-                            e.preventDefault();
-                            return;
-                        }
-                        break;
-
-                    case 13: // enter
-                        handle.keyStop(e, opt);
-                        if (opt.isInput) {
-                            if (opt.$selected && !opt.$selected.is('textarea, select')) {
-                                e.preventDefault();
-                                return;
-                            }
-                            break;
-                        }
-                        if (typeof opt.$selected !== 'undefined' && opt.$selected !== null) {
-                            opt.$selected.trigger('mouseup');
-                        }
-                        return;
-
-                    case 32: // space
-                    case 33: // page up
-                    case 34: // page down
-                        // prevent browser from scrolling down while menu is visible
-                        handle.keyStop(e, opt);
-                        return;
-
-                    case 27: // esc
-                        handle.keyStop(e, opt);
-                        if (opt.$menu != null) opt.$menu.trigger('contextmenu:hide');
-                        return;
-
-                    default: // 0-9, a-z
-                        var k = (String.fromCharCode(e.keyCode)).toUpperCase();
-                        if (opt.accesskeys && opt.accesskeys[k]) {
-                            // according to the specs accesskeys must be invoked immediately
-                            opt.accesskeys[k].$node.trigger(opt.accesskeys[k].$menu ? 'contextmenu:focus' : 'mouseup');
-                            return;
-                        }
-                        break;
-                }
-                // pass event to selected item,
-                // stop propagation to avoid endless recursion
-                e.stopPropagation();
-                if (typeof opt.$selected !== 'undefined' && opt.$selected !== null) {
-                    opt.$selected.trigger(e);
-                }
-            },
-            // select previous possible command in menu
-            prevItem: function (e) {
-                e.stopPropagation();
-                var opt = $(this).data('contextMenu') || {};
-                var root = $(this).data('contextMenuRoot') || {};
-
-                // obtain currently selected menu
-                if (opt.$selected) {
-                    var $s = opt.$selected;
-                    opt = opt.$selected.parent().data('contextMenu') || {};
-                    opt.$selected = $s;
-                }
-
-                var $children = opt.$menu.children(),
-                    $prev = !opt.$selected || !opt.$selected.prev().length ? $children.last() : opt.$selected.prev(),
-                    $round = $prev;
-
-                // skip disabled or hidden elements
-                while ($prev.hasClass(root.classNames.disabled) || $prev.hasClass(root.classNames.notSelectable) || $prev.is(':hidden')) {
-                    if ($prev.prev().length) {
-                        $prev = $prev.prev();
-                    } else {
-                        $prev = $children.last();
-                    }
-                    if ($prev.is($round)) {
-                        // break endless loop
-                        return;
-                    }
-                }
-
-                // leave current
-                if (opt.$selected) {
-                    handle.itemMouseleave.call(opt.$selected.get(0), e);
-                }
-
-                // activate next
-                handle.itemMouseenter.call($prev.get(0), e);
-
-                // focus input
-                var $input = $prev.find('input, textarea, select');
-                if ($input.length) {
-                    $input.focus();
-                }
-            },
-            // select next possible command in menu
-            nextItem: function (e) {
-                e.stopPropagation();
-                var opt = $(this).data('contextMenu') || {};
-                var root = $(this).data('contextMenuRoot') || {};
-
-                // obtain currently selected menu
-                if (opt.$selected) {
-                    var $s = opt.$selected;
-                    opt = opt.$selected.parent().data('contextMenu') || {};
-                    opt.$selected = $s;
-                }
-
-                var $children = opt.$menu.children(),
-                    $next = !opt.$selected || !opt.$selected.next().length ? $children.first() : opt.$selected.next(),
-                    $round = $next;
-
-                // skip disabled
-                while ($next.hasClass(root.classNames.disabled) || $next.hasClass(root.classNames.notSelectable) || $next.is(':hidden')) {
-                    if ($next.next().length) {
-                        $next = $next.next();
-                    } else {
-                        $next = $children.first();
-                    }
-                    if ($next.is($round)) {
-                        // break endless loop
-                        return;
-                    }
-                }
-
-                // leave current
-                if (opt.$selected) {
-                    handle.itemMouseleave.call(opt.$selected.get(0), e);
-                }
-
-                // activate next
-                handle.itemMouseenter.call($next.get(0), e);
-
-                // focus input
-                var $input = $next.find('input, textarea, select');
-                if ($input.length) {
-                    $input.focus();
-                }
-            },
-            // flag that we're inside an input so the key handler can act accordingly
-            focusInput: function () {
-                var $this = $(this).closest('.context-menu-item'),
-                    data = $this.data(),
-                    opt = data.contextMenu,
-                    root = data.contextMenuRoot;
-
-                root.$selected = opt.$selected = $this;
-                root.isInput = opt.isInput = true;
-            },
-            // flag that we're inside an input so the key handler can act accordingly
-            blurInput: function () {
-                var $this = $(this).closest('.context-menu-item'),
-                    data = $this.data(),
-                    opt = data.contextMenu,
-                    root = data.contextMenuRoot;
-
-                root.isInput = opt.isInput = false;
-            },
-            // :hover on menu
-            menuMouseenter: function () {
-                var root = $(this).data().contextMenuRoot;
-                root.hovering = true;
-            },
-            // :hover on menu
-            menuMouseleave: function (e) {
-                var root = $(this).data().contextMenuRoot;
-                if (root.$layer && root.$layer.is(e.relatedTarget)) {
-                    root.hovering = false;
-                }
-            },
-            // :hover done manually so key handling is possible
-            itemMouseenter: function (e) {
-                var $this = $(this),
-                    data = $this.data(),
-                    opt = data.contextMenu,
-                    root = data.contextMenuRoot;
-
-                root.hovering = true;
-
-                // abort if we're re-entering
-                if (e && root.$layer && root.$layer.is(e.relatedTarget)) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                }
-
-                // make sure only one item is selected
-                (opt.$menu ? opt : root).$menu
-                    .children('.' + root.classNames.hover).trigger('contextmenu:blur')
-                    .children('.hover').trigger('contextmenu:blur');
-
-                if ($this.hasClass(root.classNames.disabled) || $this.hasClass(root.classNames.notSelectable)) {
-                    opt.$selected = null;
-                    return;
-                }
-
-                $this.trigger('contextmenu:focus');
-            },
-            // :hover done manually so key handling is possible
-            itemMouseleave: function (e) {
-                var $this = $(this),
-                    data = $this.data(),
-                    opt = data.contextMenu,
-                    root = data.contextMenuRoot;
-
-                if (root !== opt && root.$layer && root.$layer.is(e.relatedTarget)) {
-                    if (typeof root.$selected !== 'undefined' && root.$selected !== null) {
-                        root.$selected.trigger('contextmenu:blur');
-                    }
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    root.$selected = opt.$selected = opt.$node;
-                    return;
-                }
-
-                $this.trigger('contextmenu:blur');
-            },
-            // contextMenu item click
-            itemClick: function (e) {
-                var $this = $(this),
-                    data = $this.data(),
-                    opt = data.contextMenu,
-                    root = data.contextMenuRoot,
-                    key = data.contextMenuKey,
-                    callback;
-
-                // abort if the key is unknown or disabled or is a menu
-                if (!opt.items[key] || $this.is('.' + root.classNames.disabled + ', .context-menu-submenu, .context-menu-separator, .' + root.classNames.notSelectable)) {
-                    return;
-                }
-
-                e.preventDefault();
-                e.stopImmediatePropagation();
-
-                if ($.isFunction(opt.callbacks[key]) && Object.prototype.hasOwnProperty.call(opt.callbacks, key)) {
-                    // item-specific callback
-                    callback = opt.callbacks[key];
-                } else if ($.isFunction(root.callback)) {
-                    // default callback
-                    callback = root.callback;
-                } else {
-                    // no callback, no action
-                    return;
-                }
-
-                // hide menu if callback doesn't stop that
-                if (callback.call(root.$trigger, key, root) !== false) {
-                    root.$menu.trigger('contextmenu:hide');
-                } else if (root.$menu.parent().length) {
-                    op.update.call(root.$trigger, root);
-                }
-            },
-            // ignore click events on input elements
-            inputClick: function (e) {
-                e.stopImmediatePropagation();
-            },
-            // hide <menu>
-            hideMenu: function (e, data) {
-                var root = $(this).data('contextMenuRoot');
-                op.hide.call(root.$trigger, root, data && data.force);
-            },
-            // focus <command>
-            focusItem: function (e) {
-                e.stopPropagation();
-                var $this = $(this),
-                    data = $this.data(),
-                    opt = data.contextMenu,
-                    root = data.contextMenuRoot;
-
-                if ($this.hasClass(root.classNames.disabled) || $this.hasClass(root.classNames.notSelectable)) {
-                    return;
-                }
-
-                $this
-                    .addClass([root.classNames.hover, root.classNames.visible].join(' '))
-                    // select other items and included items
-                    .parent().find('.context-menu-item').not($this)
-                    .removeClass(root.classNames.visible)
-                    .filter('.' + root.classNames.hover)
-                    .trigger('contextmenu:blur');
-
-                // remember selected
-                opt.$selected = root.$selected = $this;
-
-                // position sub-menu - do after show so dumb $.ui.position can keep up
-                if (opt.$node) {
-                    root.positionSubmenu.call(opt.$node, opt.$menu);
-                }
-            },
-            // blur <command>
-            blurItem: function (e) {
-                e.stopPropagation();
-                var $this = $(this),
-                    data = $this.data(),
-                    opt = data.contextMenu,
-                    root = data.contextMenuRoot;
-
-                if (opt.autoHide) { // for tablets and touch screens this needs to remain
-                    $this.removeClass(root.classNames.visible);
-                }
-                $this.removeClass(root.classNames.hover);
-                opt.$selected = null;
-            }
-        },
-    // operations
-        op = {
-            show: function (opt, x, y) {
-                var $trigger = $(this),
-                    css = {};
-
-                // hide any open menus
-                $('#context-menu-layer').trigger('mousedown');
-
-                // backreference for callbacks
-                opt.$trigger = $trigger;
-
-                // show event
-                if (opt.events.show.call($trigger, opt) === false) {
-                    $currentTrigger = null;
-                    return;
-                }
-
-                // create or update context menu
-                op.update.call($trigger, opt);
-
-                // position menu
-                opt.position.call($trigger, opt, x, y);
-
-                // make sure we're in front
-                if (opt.zIndex) {
-                  var additionalZValue = opt.zIndex;
-                  // If opt.zIndex is a function, call the function to get the right zIndex.
-                  if (typeof opt.zIndex === 'function') {
-                      additionalZValue = opt.zIndex.call($trigger, opt);
-                  }
-                  css.zIndex = zindex($trigger) + additionalZValue;
-                }
-
-                // add layer
-                op.layer.call(opt.$menu, opt, css.zIndex);
-
-                // adjust sub-menu zIndexes
-                opt.$menu.find('ul').css('zIndex', css.zIndex + 1);
-
-                // position and show context menu
-                opt.$menu.css(css)[opt.animation.show](opt.animation.duration, function () {
-                    $trigger.trigger('contextmenu:visible');
-                });
-                // make options available and set state
-                $trigger
-                    .data('contextMenu', opt)
-                    .addClass('context-menu-active');
-
-                // register key handler
-                $(document).off('keydown.contextMenu').on('keydown.contextMenu', handle.key);
-                // register autoHide handler
-                if (opt.autoHide) {
-                    // mouse position handler
-                    $(document).on('mousemove.contextMenuAutoHide', function (e) {
-                        // need to capture the offset on mousemove,
-                        // since the page might've been scrolled since activation
-                        var pos = $trigger.offset();
-                        pos.right = pos.left + $trigger.outerWidth();
-                        pos.bottom = pos.top + $trigger.outerHeight();
-
-                        if (opt.$layer && !opt.hovering && (!(e.pageX >= pos.left && e.pageX <= pos.right) || !(e.pageY >= pos.top && e.pageY <= pos.bottom))) {
-                            /* Additional hover check after short time, you might just miss the edge of the menu */
-                            setTimeout(function () {
-                                if (!opt.hovering && opt.$menu != null) { opt.$menu.trigger('contextmenu:hide'); }
-                            }, 50);
-                        }
-                    });
-                }
-            },
-            hide: function (opt, force) {
-                var $trigger = $(this);
-                if (!opt) {
-                    opt = $trigger.data('contextMenu') || {};
-                }
-
-                // hide event
-                if (!force && opt.events && opt.events.hide.call($trigger, opt) === false) {
-                    return;
-                }
-
-                // remove options and revert state
-                $trigger
-                    .removeData('contextMenu')
-                    .removeClass('context-menu-active');
-
-                if (opt.$layer) {
-                    // keep layer for a bit so the contextmenu event can be aborted properly by opera
-                    setTimeout((function ($layer) {
-                        return function () {
-                            $layer.remove();
-                        };
-                    })(opt.$layer), 10);
-
-                    try {
-                        delete opt.$layer;
-                    } catch (e) {
-                        opt.$layer = null;
-                    }
-                }
-
-                // remove handle
-                $currentTrigger = null;
-                // remove selected
-                opt.$menu.find('.' + opt.classNames.hover).trigger('contextmenu:blur');
-                opt.$selected = null;
-                // collapse all submenus
-                opt.$menu.find('.' + opt.classNames.visible).removeClass(opt.classNames.visible);
-                // unregister key and mouse handlers
-                // $(document).off('.contextMenuAutoHide keydown.contextMenu'); // http://bugs.jquery.com/ticket/10705
-                $(document).off('.contextMenuAutoHide').off('keydown.contextMenu');
-                // hide menu
-                if(opt.$menu){
-                    opt.$menu[opt.animation.hide](opt.animation.duration, function () {
-                        // tear down dynamically built menu after animation is completed.
-                        if (opt.build) {
-                            opt.$menu.remove();
-                            $.each(opt, function (key) {
-                                switch (key) {
-                                    case 'ns':
-                                    case 'selector':
-                                    case 'build':
-                                    case 'trigger':
-                                        return true;
-
-                                    default:
-                                        opt[key] = undefined;
-                                        try {
-                                            delete opt[key];
-                                        } catch (e) {
-                                        }
-                                        return true;
-                                }
-                            });
-                        }
-
-                        setTimeout(function () {
-                            $trigger.trigger('contextmenu:hidden');
-                        }, 10);
-                    });
-                }
-            },
-            create: function (opt, root) {
-                if (root === undefined) {
-                    root = opt;
-                }
-                // create contextMenu
-                opt.$menu = $('<ul class="context-menu-list"></ul>').addClass(opt.className || '').data({
-                    'contextMenu': opt,
-                    'contextMenuRoot': root
-                });
-
-                $.each(['callbacks', 'commands', 'inputs'], function (i, k) {
-                    opt[k] = {};
-                    if (!root[k]) {
-                        root[k] = {};
-                    }
-                });
-
-                if(!root.accesskeys){
-                    root.accesskeys = {};
-                }
-
-                function createNameNode(item) {
-                    var $name = $('<span></span>');
-                    if (item._accesskey) {
-                        if (item._beforeAccesskey) {
-                            $name.append(document.createTextNode(item._beforeAccesskey));
-                        }
-                        $('<span></span>')
-                            .addClass('context-menu-accesskey')
-                            .text(item._accesskey)
-                            .appendTo($name);
-                        if (item._afterAccesskey) {
-                            $name.append(document.createTextNode(item._afterAccesskey));
-                        }
-                    } else {
-                        if (item.isHtmlName) {
-                            // restrict use with access keys
-                            if (typeof item.accesskey !== 'undefined') {
-                                throw new Error('accesskeys are not compatible with HTML names and cannot be used together in the same item');
-                            }
-                            $name.html(item.name);
-                        } else {
-                            $name.text(item.name);
-                        }
-                    }
-                    return $name;
-                }
-
-                // create contextMenu items
-                $.each(opt.items, function (key, item) {
-                    var $t = $('<li class="context-menu-item"></li>').addClass(item.className || ''),
-                        $label = null,
-                        $input = null;
-
-                    // iOS needs to see a click-event bound to an element to actually
-                    // have the TouchEvents infrastructure trigger the click event
-                    $t.on('click', $.noop);
-
-                    // Make old school string seperator a real item so checks wont be
-                    // akward later.
-                    // And normalize 'cm_separator' into 'cm_seperator'.
-                    if (typeof item === 'string' || item.type === 'cm_separator') {
-                        item = { type : 'cm_seperator' };
-                    }
-
-                    item.$node = $t.data({
-                        'contextMenu': opt,
-                        'contextMenuRoot': root,
-                        'contextMenuKey': key
-                    });
-
-                    // register accesskey
-                    // NOTE: the accesskey attribute should be applicable to any element, but Safari5 and Chrome13 still can't do that
-                    if (typeof item.accesskey !== 'undefined') {
-                        var aks = splitAccesskey(item.accesskey);
-                        for (var i = 0, ak; ak = aks[i]; i++) {
-                            if (!root.accesskeys[ak]) {
-                                root.accesskeys[ak] = item;
-                                var matched = item.name.match(new RegExp('^(.*?)(' + ak + ')(.*)$', 'i'));
-                                if (matched) {
-                                    item._beforeAccesskey = matched[1];
-                                    item._accesskey = matched[2];
-                                    item._afterAccesskey = matched[3];
-                                }
-                                break;
-                            }
-                        }
-                    }
-
-                    if (item.type && types[item.type]) {
-                        // run custom type handler
-                        types[item.type].call($t, item, opt, root);
-                        // register commands
-                        $.each([opt, root], function (i, k) {
-                            k.commands[key] = item;
-                            // Overwrite only if undefined or the item is appended to the root. This so it
-                            // doesn't overwrite callbacks of root elements if the name is the same.
-                            if ($.isFunction(item.callback) && (k.callbacks[key] === undefined || opt.type === undefined)) {
-                                k.callbacks[key] = item.callback;
-                            }
-                        });
-                    } else {
-                        // add label for input
-                        if (item.type === 'cm_seperator') {
-                            $t.addClass('context-menu-separator ' + root.classNames.notSelectable);
-                        } else if (item.type === 'html') {
-                            $t.addClass('context-menu-html ' + root.classNames.notSelectable);
-                        } else if (item.type === 'sub') {
-                           // We don't want to execute the next else-if if it is a sub.
-                        } else if (item.type) {
-                            $label = $('<label></label>').appendTo($t);
-                            createNameNode(item).appendTo($label);
-
-                            $t.addClass('context-menu-input');
-                            opt.hasTypes = true;
-                            $.each([opt, root], function (i, k) {
-                                k.commands[key] = item;
-                                k.inputs[key] = item;
-                            });
-                        } else if (item.items) {
-                            item.type = 'sub';
-                        }
-
-                        switch (item.type) {
-                            case 'cm_seperator':
-                                break;
-
-                            case 'text':
-                                $input = $('<input type="text" value="1" name="" />')
-                                    .attr('name', 'context-menu-input-' + key)
-                                    .val(item.value || '')
-                                    .appendTo($label);
-                                break;
-
-                            case 'textarea':
-                                $input = $('<textarea name=""></textarea>')
-                                    .attr('name', 'context-menu-input-' + key)
-                                    .val(item.value || '')
-                                    .appendTo($label);
-
-                                if (item.height) {
-                                    $input.height(item.height);
-                                }
-                                break;
-
-                            case 'checkbox':
-                                $input = $('<input type="checkbox" value="1" name="" />')
-                                    .attr('name', 'context-menu-input-' + key)
-                                    .val(item.value || '')
-                                    .prop('checked', !!item.selected)
-                                    .prependTo($label);
-                                break;
-
-                            case 'radio':
-                                $input = $('<input type="radio" value="1" name="" />')
-                                    .attr('name', 'context-menu-input-' + item.radio)
-                                    .val(item.value || '')
-                                    .prop('checked', !!item.selected)
-                                    .prependTo($label);
-                                break;
-
-                            case 'select':
-                                $input = $('<select name=""></select>')
-                                    .attr('name', 'context-menu-input-' + key)
-                                    .appendTo($label);
-                                if (item.options) {
-                                    $.each(item.options, function (value, text) {
-                                        $('<option></option>').val(value).text(text).appendTo($input);
-                                    });
-                                    $input.val(item.selected);
-                                }
-                                break;
-
-                            case 'sub':
-                                createNameNode(item).appendTo($t);
-                                item.appendTo = item.$node;
-                                $t.data('contextMenu', item).addClass('context-menu-submenu');
-                                item.callback = null;
-
-                                // If item contains items, and this is a promise, we should create it later
-                                // check if subitems is of type promise. If it is a promise we need to create
-                                // it later, after promise has been resolved.
-                                if ('function' === typeof item.items.then) {
-                                  // probably a promise, process it, when completed it will create the sub menu's.
-                                  op.processPromises(item, root, item.items);
-                                } else {
-                                  // normal submenu.
-                                  op.create(item, root);
-                                }
-                                break;
-
-                            case 'html':
-                                $(item.html).appendTo($t);
-                                break;
-
-                            default:
-                                $.each([opt, root], function (i, k) {
-                                    k.commands[key] = item;
-                                    // Overwrite only if undefined or the item is appended to the root. This so it
-                                    // doesn't overwrite callbacks of root elements if the name is the same.
-                                    if ($.isFunction(item.callback) && (k.callbacks[key] === undefined || opt.type === undefined)) {
-                                        k.callbacks[key] = item.callback;
-                                    }
-                                });
-                                createNameNode(item).appendTo($t);
-                                break;
-                        }
-
-                        // disable key listener in <input>
-                        if (item.type && item.type !== 'sub' && item.type !== 'html' && item.type !== 'cm_seperator') {
-                            $input
-                                .on('focus', handle.focusInput)
-                                .on('blur', handle.blurInput);
-
-                            if (item.events) {
-                                $input.on(item.events, opt);
-                            }
-                        }
-
-                        // add icons
-                        if (item.icon) {
-                            if ($.isFunction(item.icon)) {
-                                item._icon = item.icon.call(this, this, $t, key, item);
-                            } else {
-                                if ( typeof(item.icon) === 'string' && item.icon.substring(0,3) == 'fa-' ) {
-                                    // to enable font awesome
-                                    item._icon = root.classNames.icon + ' ' + root.classNames.icon + '--fa fa ' + item.icon;
-                                } else {
-                                    item._icon = root.classNames.icon + ' ' + root.classNames.icon + '-' + item.icon;
-                                }
-                            }
-                            $t.addClass(item._icon);
-                        }
-                    }
-
-                    // cache contained elements
-                    item.$input = $input;
-                    item.$label = $label;
-
-                    // attach item to menu
-                    $t.appendTo(opt.$menu);
-
-                    // Disable text selection
-                    if (!opt.hasTypes && $.support.eventSelectstart) {
-                        // browsers support user-select: none,
-                        // IE has a special event for text-selection
-                        // browsers supporting neither will not be preventing text-selection
-                        $t.on('selectstart.disableTextSelect', handle.abortevent);
-                    }
-                });
-                // attach contextMenu to <body> (to bypass any possible overflow:hidden issues on parents of the trigger element)
-                if (!opt.$node) {
-                    opt.$menu.css('display', 'none').addClass('context-menu-root');
-                }
-                opt.$menu.appendTo(opt.appendTo || document.body);
-            },
-            resize: function ($menu, nested) {
-                var domMenu;
-                // determine widths of submenus, as CSS won't grow them automatically
-                // position:absolute within position:absolute; min-width:100; max-width:200; results in width: 100;
-                // kinda sucks hard...
-
-                // determine width of absolutely positioned element
-                $menu.css({position: 'absolute', display: 'block'});
-                // don't apply yet, because that would break nested elements' widths
-                $menu.data('width',
-                    (domMenu = $menu.get(0)).getBoundingClientRect ?
-                        Math.ceil(domMenu.getBoundingClientRect().width) :
-                        $menu.outerWidth() + 1); // outerWidth() returns rounded pixels
-                // reset styles so they allow nested elements to grow/shrink naturally
-                $menu.css({
-                    position: 'static',
-                    minWidth: '0px',
-                    maxWidth: '100000px'
-                });
-                // identify width of nested menus
-                $menu.find('> li > ul').each(function () {
-                    op.resize($(this), true);
-                });
-                // reset and apply changes in the end because nested
-                // elements' widths wouldn't be calculatable otherwise
-                if (!nested) {
-                    $menu.find('ul').addBack().css({
-                        position: '',
-                        display: '',
-                        minWidth: '',
-                        maxWidth: ''
-                    }).outerWidth(function () {
-                        return $(this).data('width');
-                    });
-                }
-            },
-            update: function (opt, root) {
-                var $trigger = this;
-                if (root === undefined) {
-                    root = opt;
-                    op.resize(opt.$menu);
-                }
-                // re-check disabled for each item
-                opt.$menu.children().each(function () {
-                    var $item = $(this),
-                        key = $item.data('contextMenuKey'),
-                        item = opt.items[key],
-                        disabled = ($.isFunction(item.disabled) && item.disabled.call($trigger, key, root)) || item.disabled === true,
-                        visible;
-                    if ($.isFunction(item.visible)) {
-                        visible = item.visible.call($trigger, key, root);
-                    } else if (typeof item.visible !== 'undefined') {
-                        visible = item.visible === true;
-                    } else {
-                        visible = true;
-                    }
-                    $item[visible ? 'show' : 'hide']();
-
-                    // dis- / enable item
-                    $item[disabled ? 'addClass' : 'removeClass'](root.classNames.disabled);
-
-                    if ($.isFunction(item.icon)) {
-                        $item.removeClass(item._icon);
-                        item._icon = item.icon.call(this, $trigger, $item, key, item);
-                        $item.addClass(item._icon);
-                    }
-
-                    if (item.type) {
-                        // dis- / enable input elements
-                        $item.find('input, select, textarea').prop('disabled', disabled);
-
-                        // update input states
-                        switch (item.type) {
-                            case 'text':
-                            case 'textarea':
-                                item.$input.val(item.value || '');
-                                break;
-
-                            case 'checkbox':
-                            case 'radio':
-                                item.$input.val(item.value || '').prop('checked', !!item.selected);
-                                break;
-
-                            case 'select':
-                                item.$input.val(item.selected || '');
-                                break;
-                        }
-                    }
-
-                    if (item.$menu) {
-                        // update sub-menu
-                        op.update.call($trigger, item, root);
-                    }
-                });
-            },
-            layer: function (opt, zIndex) {
-                // add transparent layer for click area
-                // filter and background for Internet Explorer, Issue #23
-                var $layer = opt.$layer = $('<div id="context-menu-layer" style="position:fixed; z-index:' + zIndex + '; top:0; left:0; opacity: 0; filter: alpha(opacity=0); background-color: #000;"></div>')
-                    .css({height: $win.height(), width: $win.width(), display: 'block'})
-                    .data('contextMenuRoot', opt)
-                    .insertBefore(this)
-                    .on('contextmenu', handle.abortevent)
-                    .on('mousedown', handle.layerClick);
-
-                // IE6 doesn't know position:fixed;
-                if (document.body.style.maxWidth === undefined) { // IE6 doesn't support maxWidth
-                    $layer.css({
-                        'position': 'absolute',
-                        'height': $(document).height()
-                    });
-                }
-
-                return $layer;
-            },
-            processPromises: function (opt, root, promise) {
-                // Start
-                opt.$node.addClass(root.classNames.iconLoadingClass);
-
-                function completedPromise(opt,root,items) {
-                    // Completed promise (dev called promise.resolve). We now have a list of items which can
-                    // be used to create the rest of the context menu.
-                    if (items === undefined) {
-                        // Null result, dev should have checked
-                        errorPromise(undefined);//own error object
-                    }
-                    finishPromiseProcess(opt,root, items);
-                };
-                function errorPromise(opt,root,errorItem) {
-                    // User called promise.reject() with an error item, if not, provide own error item.
-                    if (errorItem === undefined) {
-                        errorItem = { "error": { name: "No items and no error item", icon: "context-menu-icon context-menu-icon-quit" } };
-                        if (window.console) {
-                            (console.error || console.log).call(console, 'When you reject a promise, provide an "items" object, equal to normal sub-menu items');
-                        }
-                    } else if(typeof errorItem === 'string'){
-						            errorItem = { "error": { name: errorItem } };
-					          }
-                    finishPromiseProcess(opt,root,errorItem);
-                };
-                function finishPromiseProcess(opt,root,items) {
-                    if(root.$menu === undefined || !root.$menu.is(':visible')){
-                        return;
-                    }
-                    opt.$node.removeClass(root.classNames.iconLoadingClass);
-                    opt.items = items;
-                    op.create(opt, root, true); // Create submenu
-                    op.update(opt, root); // Correctly update position if user is already hovered over menu item
-                    root.positionSubmenu.call(opt.$node, opt.$menu); // positionSubmenu, will only do anything if user already hovered over menu item that just got new subitems.
-                };
-
-                // Wait for promise completion. .then(success, error, notify) (we don't track notify). Bind the opt
-                // and root to avoid scope problems
-                promise.then(completedPromise.bind(this, opt, root), errorPromise.bind(this, opt, root));
-            }
-        };
-
-    // split accesskey according to http://www.whatwg.org/specs/web-apps/current-work/multipage/editing.html#assigned-access-key
-    function splitAccesskey(val) {
-        var t = val.split(/\s+/),
-            keys = [];
-
-        for (var i = 0, k; k = t[i]; i++) {
-            k = k.charAt(0).toUpperCase(); // first character only
-            // theoretically non-accessible characters should be ignored, but different systems, different keyboard layouts, ... screw it.
-            // a map to look up already used access keys would be nice
-            keys.push(k);
-        }
-
-        return keys;
-    }
-
-// handle contextMenu triggers
-    $.fn.contextMenu = function (operation) {
-        var $t = this, $o = operation;
-        if (this.length > 0) {  // this is not a build on demand menu
-            if (operation === undefined) {
-                this.first().trigger('contextmenu');
-            } else if (operation.x !== undefined && operation.y !== undefined) {
-                this.first().trigger($.Event('contextmenu', { pageX: operation.x, pageY: operation.y, mouseButton: operation.button }));
-            } else if (operation === 'hide') {
-                var $menu = this.first().data('contextMenu') ? this.first().data('contextMenu').$menu : null;
-                if($menu){
-                    $menu.trigger('contextmenu:hide');
-                }
-            } else if (operation === 'destroy') {
-                $.contextMenu('destroy', {context: this});
-            } else if ($.isPlainObject(operation)) {
-                operation.context = this;
-                $.contextMenu('create', operation);
-            } else if (operation) {
-                this.removeClass('context-menu-disabled');
-            } else if (!operation) {
-                this.addClass('context-menu-disabled');
-            }
-        } else {
-            $.each(menus, function () {
-                if (this.selector === $t.selector) {
-                    $o.data = this;
-
-                    $.extend($o.data, {trigger: 'demand'});
-                }
-            });
-
-            handle.contextmenu.call($o.target, $o);
-        }
-
-        return this;
-    };
-
-    // manage contextMenu instances
-    $.contextMenu = function (operation, options) {
-
-        if (typeof operation !== 'string') {
-            options = operation;
-            operation = 'create';
-        }
-
-        if (typeof options === 'string') {
-            options = {selector: options};
-        } else if (options === undefined) {
-            options = {};
-        }
-
-        // merge with default options
-        var o = $.extend(true, {}, defaults, options || {});
-        var $document = $(document);
-        var $context = $document;
-        var _hasContext = false;
-
-        if (!o.context || !o.context.length) {
-            o.context = document;
-        } else {
-            // you never know what they throw at you...
-            $context = $(o.context).first();
-            o.context = $context.get(0);
-            _hasContext = !$(o.context).is(document);
-        }
-
-        switch (operation) {
-            case 'create':
-                // no selector no joy
-                if (!o.selector) {
-                    throw new Error('No selector specified');
-                }
-                // make sure internal classes are not bound to
-                if (o.selector.match(/.context-menu-(list|item|input)($|\s)/)) {
-                    throw new Error('Cannot bind to selector "' + o.selector + '" as it contains a reserved className');
-                }
-                if (!o.build && (!o.items || $.isEmptyObject(o.items))) {
-                    throw new Error('No Items specified');
-                }
-                counter++;
-                o.ns = '.contextMenu' + counter;
-                if (!_hasContext) {
-                    namespaces[o.selector] = o.ns;
-                }
-                menus[o.ns] = o;
-
-                // default to right click
-                if (!o.trigger) {
-                    o.trigger = 'right';
-                }
-
-                if (!initialized) {
-                    var itemClick = o.itemClickEvent === 'click' ? 'click.contextMenu' : 'mouseup.contextMenu';
-                    var contextMenuItemObj = {
-                            // 'mouseup.contextMenu': handle.itemClick,
-                            // 'click.contextMenu': handle.itemClick,
-                            'contextmenu:focus.contextMenu': handle.focusItem,
-                            'contextmenu:blur.contextMenu': handle.blurItem,
-                            'contextmenu.contextMenu': handle.abortevent,
-                            'mouseenter.contextMenu': handle.itemMouseenter,
-                            'mouseleave.contextMenu': handle.itemMouseleave
-                        };
-                    contextMenuItemObj[itemClick] = handle.itemClick;
-                    // make sure item click is registered first
-                    $document
-                        .on({
-                            'contextmenu:hide.contextMenu': handle.hideMenu,
-                            'prevcommand.contextMenu': handle.prevItem,
-                            'nextcommand.contextMenu': handle.nextItem,
-                            'contextmenu.contextMenu': handle.abortevent,
-                            'mouseenter.contextMenu': handle.menuMouseenter,
-                            'mouseleave.contextMenu': handle.menuMouseleave
-                        }, '.context-menu-list')
-                        .on('mouseup.contextMenu', '.context-menu-input', handle.inputClick)
-                        .on(contextMenuItemObj, '.context-menu-item');
-
-                    initialized = true;
-                }
-
-                // engage native contextmenu event
-                $context
-                    .on('contextmenu' + o.ns, o.selector, o, handle.contextmenu);
-
-                if (_hasContext) {
-                    // add remove hook, just in case
-                    $context.on('remove' + o.ns, function () {
-                        $(this).contextMenu('destroy');
-                    });
-                }
-
-                switch (o.trigger) {
-                    case 'hover':
-                        $context
-                            .on('mouseenter' + o.ns, o.selector, o, handle.mouseenter)
-                            .on('mouseleave' + o.ns, o.selector, o, handle.mouseleave);
-                        break;
-
-                    case 'left':
-                        $context.on('click' + o.ns, o.selector, o, handle.click);
-                        break;
-                    /*
-                     default:
-                     // http://www.quirksmode.org/dom/events/contextmenu.html
-                     $document
-                     .on('mousedown' + o.ns, o.selector, o, handle.mousedown)
-                     .on('mouseup' + o.ns, o.selector, o, handle.mouseup);
-                     break;
-                     */
-                }
-
-                // create menu
-                if (!o.build) {
-                    op.create(o);
-                }
-                break;
-
-            case 'destroy':
-                var $visibleMenu;
-                if (_hasContext) {
-                    // get proper options
-                    var context = o.context;
-                    $.each(menus, function (ns, o) {
-                        
-                        if (!o) {
-                            return true;
-                        }
-
-                        // Is this menu equest to the context called from
-                        if (!$(context).is(o.selector)) {
-                            return true;
-                        }
-
-                        $visibleMenu = $('.context-menu-list').filter(':visible');
-                        if ($visibleMenu.length && $visibleMenu.data().contextMenuRoot.$trigger.is($(o.context).find(o.selector))) {
-                            $visibleMenu.trigger('contextmenu:hide', {force: true});
-                        }
-
-                        try {
-                            if (menus[o.ns].$menu) {
-                                menus[o.ns].$menu.remove();
-                            }
-
-                            delete menus[o.ns];
-                        } catch (e) {
-                            menus[o.ns] = null;
-                        }
-
-                        $(o.context).off(o.ns);
-
-                        return true;
-                    });
-                } else if (!o.selector) {
-                    $document.off('.contextMenu .contextMenuAutoHide');
-                    $.each(menus, function (ns, o) {
-                        $(o.context).off(o.ns);
-                    });
-
-                    namespaces = {};
-                    menus = {};
-                    counter = 0;
-                    initialized = false;
-
-                    $('#context-menu-layer, .context-menu-list').remove();
-                } else if (namespaces[o.selector]) {
-                    $visibleMenu = $('.context-menu-list').filter(':visible');
-                    if ($visibleMenu.length && $visibleMenu.data().contextMenuRoot.$trigger.is(o.selector)) {
-                        $visibleMenu.trigger('contextmenu:hide', {force: true});
-                    }
-
-                    try {
-                        if (menus[namespaces[o.selector]].$menu) {
-                            menus[namespaces[o.selector]].$menu.remove();
-                        }
-
-                        delete menus[namespaces[o.selector]];
-                    } catch (e) {
-                        menus[namespaces[o.selector]] = null;
-                    }
-
-                    $document.off(namespaces[o.selector]);
-                }
-                break;
-
-            case 'html5':
-                // if <command> or <menuitem> are not handled by the browser,
-                // or options was a bool true,
-                // initialize $.contextMenu for them
-                if ((!$.support.htmlCommand && !$.support.htmlMenuitem) || (typeof options === 'boolean' && options)) {
-                    $('menu[type="context"]').each(function () {
-                        if (this.id) {
-                            $.contextMenu({
-                                selector: '[contextmenu=' + this.id + ']',
-                                items: $.contextMenu.fromMenu(this)
-                            });
-                        }
-                    }).css('display', 'none');
-                }
-                break;
-
-            default:
-                throw new Error('Unknown operation "' + operation + '"');
-        }
-
-        return this;
-    };
-
-// import values into <input> commands
-    $.contextMenu.setInputValues = function (opt, data) {
-        if (data === undefined) {
-            data = {};
-        }
-
-        $.each(opt.inputs, function (key, item) {
-            switch (item.type) {
-                case 'text':
-                case 'textarea':
-                    item.value = data[key] || '';
-                    break;
-
-                case 'checkbox':
-                    item.selected = data[key] ? true : false;
-                    break;
-
-                case 'radio':
-                    item.selected = (data[item.radio] || '') === item.value;
-                    break;
-
-                case 'select':
-                    item.selected = data[key] || '';
-                    break;
-            }
-        });
-    };
-
-// export values from <input> commands
-    $.contextMenu.getInputValues = function (opt, data) {
-        if (data === undefined) {
-            data = {};
-        }
-
-        $.each(opt.inputs, function (key, item) {
-            switch (item.type) {
-                case 'text':
-                case 'textarea':
-                case 'select':
-                    data[key] = item.$input.val();
-                    break;
-
-                case 'checkbox':
-                    data[key] = item.$input.prop('checked');
-                    break;
-
-                case 'radio':
-                    if (item.$input.prop('checked')) {
-                        data[item.radio] = item.value;
-                    }
-                    break;
-            }
-        });
-
-        return data;
-    };
-
-// find <label for="xyz">
-    function inputLabel(node) {
-        return (node.id && $('label[for="' + node.id + '"]').val()) || node.name;
-    }
-
-// convert <menu> to items object
-    function menuChildren(items, $children, counter) {
-        if (!counter) {
-            counter = 0;
-        }
-
-        $children.each(function () {
-            var $node = $(this),
-                node = this,
-                nodeName = this.nodeName.toLowerCase(),
-                label,
-                item;
-
-            // extract <label><input>
-            if (nodeName === 'label' && $node.find('input, textarea, select').length) {
-                label = $node.text();
-                $node = $node.children().first();
-                node = $node.get(0);
-                nodeName = node.nodeName.toLowerCase();
-            }
-
-            /*
-             * <menu> accepts flow-content as children. that means <embed>, <canvas> and such are valid menu items.
-             * Not being the sadistic kind, $.contextMenu only accepts:
-             * <command>, <menuitem>, <hr>, <span>, <p> <input [text, radio, checkbox]>, <textarea>, <select> and of course <menu>.
-             * Everything else will be imported as an html node, which is not interfaced with contextMenu.
-             */
-
-            // http://www.whatwg.org/specs/web-apps/current-work/multipage/commands.html#concept-command
-            switch (nodeName) {
-                // http://www.whatwg.org/specs/web-apps/current-work/multipage/interactive-elements.html#the-menu-element
-                case 'menu':
-                    item = {name: $node.attr('label'), items: {}};
-                    counter = menuChildren(item.items, $node.children(), counter);
-                    break;
-
-                // http://www.whatwg.org/specs/web-apps/current-work/multipage/commands.html#using-the-a-element-to-define-a-command
-                case 'a':
-                // http://www.whatwg.org/specs/web-apps/current-work/multipage/commands.html#using-the-button-element-to-define-a-command
-                case 'button':
-                    item = {
-                        name: $node.text(),
-                        disabled: !!$node.attr('disabled'),
-                        callback: (function () {
-                            return function () {
-                                $node.click();
-                            };
-                        })()
-                    };
-                    break;
-
-                // http://www.whatwg.org/specs/web-apps/current-work/multipage/commands.html#using-the-command-element-to-define-a-command
-
-                case 'menuitem':
-                case 'command':
-                    switch ($node.attr('type')) {
-                        case undefined:
-                        case 'command':
-                        case 'menuitem':
-                            item = {
-                                name: $node.attr('label'),
-                                disabled: !!$node.attr('disabled'),
-                                icon: $node.attr('icon'),
-                                callback: (function () {
-                                    return function () {
-                                        $node.click();
-                                    };
-                                })()
-                            };
-                            break;
-
-                        case 'checkbox':
-                            item = {
-                                type: 'checkbox',
-                                disabled: !!$node.attr('disabled'),
-                                name: $node.attr('label'),
-                                selected: !!$node.attr('checked')
-                            };
-                            break;
-                        case 'radio':
-                            item = {
-                                type: 'radio',
-                                disabled: !!$node.attr('disabled'),
-                                name: $node.attr('label'),
-                                radio: $node.attr('radiogroup'),
-                                value: $node.attr('id'),
-                                selected: !!$node.attr('checked')
-                            };
-                            break;
-
-                        default:
-                            item = undefined;
-                    }
-                    break;
-
-                case 'hr':
-                    item = '-------';
-                    break;
-
-                case 'input':
-                    switch ($node.attr('type')) {
-                        case 'text':
-                            item = {
-                                type: 'text',
-                                name: label || inputLabel(node),
-                                disabled: !!$node.attr('disabled'),
-                                value: $node.val()
-                            };
-                            break;
-
-                        case 'checkbox':
-                            item = {
-                                type: 'checkbox',
-                                name: label || inputLabel(node),
-                                disabled: !!$node.attr('disabled'),
-                                selected: !!$node.attr('checked')
-                            };
-                            break;
-
-                        case 'radio':
-                            item = {
-                                type: 'radio',
-                                name: label || inputLabel(node),
-                                disabled: !!$node.attr('disabled'),
-                                radio: !!$node.attr('name'),
-                                value: $node.val(),
-                                selected: !!$node.attr('checked')
-                            };
-                            break;
-
-                        default:
-                            item = undefined;
-                            break;
-                    }
-                    break;
-
-                case 'select':
-                    item = {
-                        type: 'select',
-                        name: label || inputLabel(node),
-                        disabled: !!$node.attr('disabled'),
-                        selected: $node.val(),
-                        options: {}
-                    };
-                    $node.children().each(function () {
-                        item.options[this.value] = $(this).text();
-                    });
-                    break;
-
-                case 'textarea':
-                    item = {
-                        type: 'textarea',
-                        name: label || inputLabel(node),
-                        disabled: !!$node.attr('disabled'),
-                        value: $node.val()
-                    };
-                    break;
-
-                case 'label':
-                    break;
-
-                default:
-                    item = {type: 'html', html: $node.clone(true)};
-                    break;
-            }
-
-            if (item) {
-                counter++;
-                items['key' + counter] = item;
-            }
-        });
-
-        return counter;
-    }
-
-// convert html5 menu
-    $.contextMenu.fromMenu = function (element) {
-        var $this = $(element),
-            items = {};
-
-        menuChildren(items, $this.children());
-
-        return items;
-    };
-
-// make defaults accessible
-    $.contextMenu.defaults = defaults;
-    $.contextMenu.types = types;
-// export internal functions - undocumented, for hacking only!
-    $.contextMenu.handle = handle;
-    $.contextMenu.op = op;
-    $.contextMenu.menus = menus;
-
-
-});
+"/""*""!"
+" ""*"" ""j""Q""u""e""r""y"" ""c""o""n""t""e""x""t""M""e""n""u"" ""v""2"".""3"".""1""-""d""e""v"" ""-"" ""P""l""u""g""i""n"" ""f""o""r"" ""s""i""m""p""l""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""h""a""n""d""l""i""n""g"
+" ""*"
+" ""*"" ""V""e""r""s""i""o""n"":"" ""v""2"".""3"".""1""-""d""e""v"
+" ""*"
+" ""*"" ""A""u""t""h""o""r""s"":"" ""B""j""ö""r""n"" ""B""r""a""l""a"" ""(""S""W""I""S"".""n""l"")"","" ""R""o""d""n""e""y"" ""R""e""h""m"","" ""A""d""d""y"" ""O""s""m""a""n""i"" ""(""p""a""t""c""h""e""s"" ""f""o""r"" ""F""F"")"
+" ""*"" ""W""e""b"":"" ""h""t""t""p"":""/""/""s""w""i""s""n""l"".""g""i""t""h""u""b"".""i""o""/""j""Q""u""e""r""y""-""c""o""n""t""e""x""t""M""e""n""u""/"
+" ""*"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""c"")"" ""2""0""1""1""-""2""0""1""6"" ""S""W""I""S"" ""B""V"" ""a""n""d"" ""c""o""n""t""r""i""b""u""t""o""r""s"
+" ""*"
+" ""*"" ""L""i""c""e""n""s""e""d"" ""u""n""d""e""r"
+" ""*"" "" "" ""M""I""T"" ""L""i""c""e""n""s""e"" ""h""t""t""p"":""/""/""w""w""w"".""o""p""e""n""s""o""u""r""c""e"".""o""r""g""/""l""i""c""e""n""s""e""s""/""m""i""t""-""l""i""c""e""n""s""e"
+" ""*"" "" "" ""G""P""L"" ""v""3"" ""h""t""t""p"":""/""/""o""p""e""n""s""o""u""r""c""e"".""o""r""g""/""l""i""c""e""n""s""e""s""/""G""P""L""-""3"".""0"
+" ""*"
+" ""*"" ""D""a""t""e"":"" ""2""0""1""6""-""1""0""-""2""5""T""1""9"":""1""2"":""3""4"".""4""4""6""Z"
+" ""*""/"
+
+"(""f""u""n""c""t""i""o""n"" ""(""f""a""c""t""o""r""y"")"" ""{"
+" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""d""e""f""i""n""e"" ""=""=""="" ""'""f""u""n""c""t""i""o""n""'"" ""&""&"" ""d""e""f""i""n""e"".""a""m""d"")"" ""{"
+" "" "" "" "" "" "" "" ""/""/"" ""A""M""D""."" ""R""e""g""i""s""t""e""r"" ""a""s"" ""a""n""o""n""y""m""o""u""s"" ""m""o""d""u""l""e""."
+" "" "" "" "" "" "" "" ""d""e""f""i""n""e""(""[""'""j""q""u""e""r""y""'""]"","" ""f""a""c""t""o""r""y"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""e""x""p""o""r""t""s"" ""=""=""="" ""'""o""b""j""e""c""t""'"")"" ""{"
+" "" "" "" "" "" "" "" ""/""/"" ""N""o""d""e"" ""/"" ""C""o""m""m""o""n""J""S"
+" "" "" "" "" "" "" "" ""f""a""c""t""o""r""y""(""r""e""q""u""i""r""e""(""'""j""q""u""e""r""y""'"")"")"";"
+" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" ""/""/"" ""B""r""o""w""s""e""r"" ""g""l""o""b""a""l""s""."
+" "" "" "" "" "" "" "" ""f""a""c""t""o""r""y""(""j""Q""u""e""r""y"")"";"
+" "" "" "" ""}"
+"}"")""(""f""u""n""c""t""i""o""n"" ""(""$"")"" ""{"
+
+" "" "" "" ""'""u""s""e"" ""s""t""r""i""c""t""'"";"
+
+" "" "" "" ""/""/"" ""T""O""D""O"":"" ""-"
+" "" "" "" ""/""/"" ""A""R""I""A"" ""s""t""u""f""f"":"" ""m""e""n""u""i""t""e""m"","" ""m""e""n""u""i""t""e""m""c""h""e""c""k""b""o""x"" ""u""n""d"" ""m""e""n""u""i""t""e""m""r""a""d""i""o"
+" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""<""m""e""n""u"">"" ""s""t""r""u""c""t""u""r""e"" ""i""f"" ""$"".""s""u""p""p""o""r""t""[""h""t""m""l""C""o""m""m""a""n""d"" ""|""|"" ""h""t""m""l""M""e""n""u""i""t""e""m""]"" ""a""n""d"" ""!""o""p""t"".""d""i""s""a""b""l""e""N""a""t""i""v""e"
+
+" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""h""t""m""l""5"" ""c""o""m""p""a""t""i""b""i""l""i""t""y"
+" "" "" "" ""$"".""s""u""p""p""o""r""t"".""h""t""m""l""M""e""n""u""i""t""e""m"" ""="" ""(""'""H""T""M""L""M""e""n""u""I""t""e""m""E""l""e""m""e""n""t""'"" ""i""n"" ""w""i""n""d""o""w"")"";"
+" "" "" "" ""$"".""s""u""p""p""o""r""t"".""h""t""m""l""C""o""m""m""a""n""d"" ""="" ""(""'""H""T""M""L""C""o""m""m""a""n""d""E""l""e""m""e""n""t""'"" ""i""n"" ""w""i""n""d""o""w"")"";"
+" "" "" "" ""$"".""s""u""p""p""o""r""t"".""e""v""e""n""t""S""e""l""e""c""t""s""t""a""r""t"" ""="" ""(""'""o""n""s""e""l""e""c""t""s""t""a""r""t""'"" ""i""n"" ""d""o""c""u""m""e""n""t"".""d""o""c""u""m""e""n""t""E""l""e""m""e""n""t"")"";"
+" "" "" "" ""/""*"" ""/""/"" ""s""h""o""u""l""d"" ""t""h""e"" ""n""e""e""d"" ""a""r""i""s""e"","" ""t""e""s""t"" ""f""o""r"" ""c""s""s"" ""u""s""e""r""-""s""e""l""e""c""t"
+" "" "" "" "" ""$"".""s""u""p""p""o""r""t"".""c""s""s""U""s""e""r""S""e""l""e""c""t"" ""="" ""(""f""u""n""c""t""i""o""n""("")""{"
+" "" "" "" "" ""v""a""r"" ""t"" ""="" ""f""a""l""s""e"","
+" "" "" "" "" ""e"" ""="" ""d""o""c""u""m""e""n""t"".""c""r""e""a""t""e""E""l""e""m""e""n""t""(""'""d""i""v""'"")"";"
+
+" "" "" "" "" ""$"".""e""a""c""h""(""'""M""o""z""|""W""e""b""k""i""t""|""K""h""t""m""l""|""O""|""m""s""|""I""c""a""b""|""'"".""s""p""l""i""t""(""'""|""'"")"","" ""f""u""n""c""t""i""o""n""(""i"","" ""p""r""e""f""i""x"")"" ""{"
+" "" "" "" "" ""v""a""r"" ""p""r""o""p""C""C"" ""="" ""p""r""e""f""i""x"" ""+"" ""(""p""r""e""f""i""x"" ""?"" ""'""U""'"" "":"" ""'""u""'"")"" ""+"" ""'""s""e""r""S""e""l""e""c""t""'"","
+" "" "" "" "" ""p""r""o""p"" ""="" ""(""p""r""e""f""i""x"" ""?"" ""(""'""-""'"" ""+"" ""p""r""e""f""i""x"".""t""o""L""o""w""e""r""C""a""s""e""("")"" ""+"" ""'""-""'"")"" "":"" ""'""'"")"" ""+"" ""'""u""s""e""r""-""s""e""l""e""c""t""'"";"
+
+" "" "" "" "" ""e"".""s""t""y""l""e"".""c""s""s""T""e""x""t"" ""="" ""p""r""o""p"" ""+"" ""'"":"" ""t""e""x""t"";""'"";"
+" "" "" "" "" ""i""f"" ""(""e"".""s""t""y""l""e""[""p""r""o""p""C""C""]"" ""=""="" ""'""t""e""x""t""'"")"" ""{"
+" "" "" "" "" ""t"" ""="" ""t""r""u""e"";"
+" "" "" "" "" ""r""e""t""u""r""n"" ""f""a""l""s""e"";"
+" "" "" "" "" ""}"
+
+" "" "" "" "" ""r""e""t""u""r""n"" ""t""r""u""e"";"
+" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" ""r""e""t""u""r""n"" ""t"";"
+" "" "" "" "" ""}"")""("")"";"
+" "" "" "" "" ""*""/"
+
+" "" "" "" ""/""*"" ""j""s""h""i""n""t"" ""i""g""n""o""r""e"":""s""t""a""r""t"" ""*""/"
+" "" "" "" ""i""f"" ""(""!""$"".""u""i"" ""|""|"" ""!""$"".""w""i""d""g""e""t"")"" ""{"
+" "" "" "" "" "" "" "" ""/""/"" ""d""u""c""k"" ""p""u""n""c""h"" ""$"".""c""l""e""a""n""D""a""t""a"" ""l""i""k""e"" ""j""Q""u""e""r""y""U""I"" ""d""o""e""s"" ""t""o"" ""g""e""t"" ""t""h""a""t"" ""r""e""m""o""v""e"" ""e""v""e""n""t"
+" "" "" "" "" "" "" "" ""$"".""c""l""e""a""n""D""a""t""a"" ""="" ""(""f""u""n""c""t""i""o""n"" ""(""o""r""i""g"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""f""u""n""c""t""i""o""n"" ""(""e""l""e""m""s"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""e""v""e""n""t""s"","" ""e""l""e""m"","" ""i"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""o""r"" ""(""i"" ""="" ""0"";"" ""e""l""e""m""s""[""i""]"" ""!""="" ""n""u""l""l"";"" ""i""+""+"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e""l""e""m"" ""="" ""e""l""e""m""s""[""i""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""O""n""l""y"" ""t""r""i""g""g""e""r"" ""r""e""m""o""v""e"" ""w""h""e""n"" ""n""e""c""e""s""s""a""r""y"" ""t""o"" ""s""a""v""e"" ""t""i""m""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e""v""e""n""t""s"" ""="" ""$"".""_""d""a""t""a""(""e""l""e""m"","" ""'""e""v""e""n""t""s""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e""v""e""n""t""s"" ""&""&"" ""e""v""e""n""t""s"".""r""e""m""o""v""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""e""l""e""m"")"".""t""r""i""g""g""e""r""H""a""n""d""l""e""r""(""'""r""e""m""o""v""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""H""t""t""p"":""/""/""b""u""g""s"".""j""q""u""e""r""y"".""c""o""m""/""t""i""c""k""e""t""/""8""2""3""5"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""e"")"" ""{""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""r""i""g""(""e""l""e""m""s"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" ""}"")""(""$"".""c""l""e""a""n""D""a""t""a"")"";"
+" "" "" "" ""}"
+" "" "" "" ""/""*"" ""j""s""h""i""n""t"" ""i""g""n""o""r""e"":""e""n""d"" ""*""/"
+
+" "" "" "" ""v""a""r"" ""/""/"" ""c""u""r""r""e""n""t""l""y"" ""a""c""t""i""v""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""="" ""n""u""l""l"","
+" "" "" "" ""/""/"" ""i""s"" ""c""o""n""t""e""x""t""M""e""n""u"" ""i""n""i""t""i""a""l""i""z""e""d"" ""w""i""t""h"" ""a""t"" ""l""e""a""s""t"" ""o""n""e"" ""m""e""n""u""?"
+" "" "" "" "" "" "" "" ""i""n""i""t""i""a""l""i""z""e""d"" ""="" ""f""a""l""s""e"","
+" "" "" "" ""/""/"" ""w""i""n""d""o""w"" ""h""a""n""d""l""e"
+" "" "" "" "" "" "" "" ""$""w""i""n"" ""="" ""$""(""w""i""n""d""o""w"")"","
+" "" "" "" ""/""/"" ""n""u""m""b""e""r"" ""o""f"" ""r""e""g""i""s""t""e""r""e""d"" ""m""e""n""u""s"
+" "" "" "" "" "" "" "" ""c""o""u""n""t""e""r"" ""="" ""0"","
+" "" "" "" ""/""/"" ""m""a""p""p""i""n""g"" ""s""e""l""e""c""t""o""r"" ""t""o"" ""n""a""m""e""s""p""a""c""e"
+" "" "" "" "" "" "" "" ""n""a""m""e""s""p""a""c""e""s"" ""="" ""{""}"","
+" "" "" "" ""/""/"" ""m""a""p""p""i""n""g"" ""n""a""m""e""s""p""a""c""e"" ""t""o"" ""o""p""t""i""o""n""s"
+" "" "" "" "" "" "" "" ""m""e""n""u""s"" ""="" ""{""}"","
+" "" "" "" ""/""/"" ""c""u""s""t""o""m"" ""c""o""m""m""a""n""d"" ""t""y""p""e"" ""h""a""n""d""l""e""r""s"
+" "" "" "" "" "" "" "" ""t""y""p""e""s"" ""="" ""{""}"","
+" "" "" "" ""/""/"" ""d""e""f""a""u""l""t"" ""v""a""l""u""e""s"
+" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t""s"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""e""l""e""c""t""o""r"" ""o""f"" ""c""o""n""t""e""x""t""M""e""n""u"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""o""r"":"" ""n""u""l""l"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""w""h""e""r""e"" ""t""o"" ""a""p""p""e""n""d"" ""t""h""e"" ""m""e""n""u"" ""t""o"
+" "" "" "" "" "" "" "" "" "" "" "" ""a""p""p""e""n""d""T""o"":"" ""n""u""l""l"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""e""t""h""o""d"" ""t""o"" ""t""r""i""g""g""e""r"" ""c""o""n""t""e""x""t"" ""m""e""n""u"" ""["""""r""i""g""h""t""""","" """""l""e""f""t""""","" """""h""o""v""e""r"""""]"
+" "" "" "" "" "" "" "" "" "" "" "" ""t""r""i""g""g""e""r"":"" ""'""r""i""g""h""t""'"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""i""d""e"" ""m""e""n""u"" ""w""h""e""n"" ""m""o""u""s""e"" ""l""e""a""v""e""s"" ""t""r""i""g""g""e""r"" ""/"" ""m""e""n""u"" ""e""l""e""m""e""n""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""a""u""t""o""H""i""d""e"":"" ""f""a""l""s""e"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""s"" ""t""o"" ""w""a""i""t"" ""b""e""f""o""r""e"" ""s""h""o""w""i""n""g"" ""a"" ""h""o""v""e""r""-""t""r""i""g""g""e""r""e""d"" ""c""o""n""t""e""x""t"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""d""e""l""a""y"":"" ""2""0""0"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""l""a""g"" ""d""e""n""o""t""i""n""g"" ""i""f"" ""a"" ""s""e""c""o""n""d"" ""t""r""i""g""g""e""r"" ""s""h""o""u""l""d"" ""s""i""m""p""l""y"" ""m""o""v""e"" ""(""t""r""u""e"")"" ""o""r"" ""r""e""b""u""i""l""d"" ""(""f""a""l""s""e"")"" ""a""n"" ""o""p""e""n"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""s"" ""l""o""n""g"" ""a""s"" ""t""h""e"" ""t""r""i""g""g""e""r"" ""h""a""p""p""e""n""e""d"" ""o""n"" ""o""n""e"" ""o""f"" ""t""h""e"" ""t""r""i""g""g""e""r""-""e""l""e""m""e""n""t""'""s"" ""c""h""i""l""d"" ""n""o""d""e""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""r""e""p""o""s""i""t""i""o""n"":"" ""t""r""u""e"","
+
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""D""e""f""a""u""l""t"" ""c""l""a""s""s""n""a""m""e"" ""c""o""n""f""i""g""u""r""a""t""i""o""n"" ""t""o"" ""b""e"" ""a""b""l""e"" ""a""v""o""i""d"" ""c""o""n""f""l""i""c""t""s"" ""i""n"" ""f""r""a""m""e""w""o""r""k""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""l""a""s""s""N""a""m""e""s"" "":"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""h""o""v""e""r""'"","" ""/""/"" ""I""t""e""m"" ""h""o""v""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""d""i""s""a""b""l""e""d""'"","" ""/""/"" ""I""t""e""m"" ""d""i""s""a""b""l""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""v""i""s""i""b""l""e""'"","" ""/""/"" ""I""t""e""m"" ""v""i""s""i""b""l""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""o""t""S""e""l""e""c""t""a""b""l""e"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""n""o""t""-""s""e""l""e""c""t""a""b""l""e""'"","" ""/""/"" ""I""t""e""m"" ""n""o""t"" ""s""e""l""e""c""t""a""b""l""e"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""E""d""i""t"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""e""d""i""t""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""C""u""t"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""c""u""t""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""C""o""p""y"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""c""o""p""y""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""P""a""s""t""e"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""p""a""s""t""e""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""D""e""l""e""t""e"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""d""e""l""e""t""e""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""A""d""d"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""a""d""d""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""Q""u""i""t"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""q""u""i""t""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n""L""o""a""d""i""n""g""C""l""a""s""s"":"" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""l""o""a""d""i""n""g""'"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""p""o""s""i""t""i""o""n"" ""t""o"" ""s""h""o""w"" ""m""e""n""u"" ""a""t"
+" "" "" "" "" "" "" "" "" "" "" "" ""d""e""t""e""r""m""i""n""e""P""o""s""i""t""i""o""n"":"" ""f""u""n""c""t""i""o""n"" ""(""$""m""e""n""u"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""o""s""i""t""i""o""n"" ""t""o"" ""t""h""e"" ""l""o""w""e""r"" ""m""i""d""d""l""e"" ""o""f"" ""t""h""e"" ""t""r""i""g""g""e""r"" ""e""l""e""m""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""u""i"" ""&""&"" ""$"".""u""i"".""p""o""s""i""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" "".""p""o""s""i""t""i""o""n""("")"" ""i""s"" ""p""r""o""v""i""d""e""d"" ""a""s"" ""a"" ""j""Q""u""e""r""y"" ""U""I"" ""u""t""i""l""i""t""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""("".""."".""a""n""d"" ""i""t"" ""w""o""n""'""t"" ""w""o""r""k"" ""o""n"" ""h""i""d""d""e""n"" ""e""l""e""m""e""n""t""s"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""c""s""s""(""'""d""i""s""p""l""a""y""'"","" ""'""b""l""o""c""k""'"")"".""p""o""s""i""t""i""o""n""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""y"":"" ""'""c""e""n""t""e""r"" ""t""o""p""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""a""t"":"" ""'""c""e""n""t""e""r"" ""b""o""t""t""o""m""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f"":"" ""t""h""i""s"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"":"" ""'""0"" ""5""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""l""l""i""s""i""o""n"":"" ""'""f""i""t""'"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"".""c""s""s""(""'""d""i""s""p""l""a""y""'"","" ""'""n""o""n""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""p""o""s""i""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""o""f""f""s""e""t"" ""="" ""t""h""i""s"".""o""f""f""s""e""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""t""o""p"" ""+""="" ""t""h""i""s"".""o""u""t""e""r""H""e""i""g""h""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""l""e""f""t"" ""+""="" ""t""h""i""s"".""o""u""t""e""r""W""i""d""t""h""("")"" ""/"" ""2"" ""-"" ""$""m""e""n""u"".""o""u""t""e""r""W""i""d""t""h""("")"" ""/"" ""2"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""c""s""s""(""o""f""f""s""e""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""o""s""i""t""i""o""n"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""p""o""s""i""t""i""o""n"":"" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""x"","" ""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""o""f""f""s""e""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""p""o""s""i""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""x"" ""&""&"" ""!""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""d""e""t""e""r""m""i""n""e""P""o""s""i""t""i""o""n"".""c""a""l""l""(""t""h""i""s"","" ""o""p""t"".""$""m""e""n""u"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""x"" ""=""=""="" ""'""m""a""i""n""t""a""i""n""'"" ""&""&"" ""y"" ""=""=""="" ""'""m""a""i""n""t""a""i""n""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""x"" ""a""n""d"" ""y"" ""m""u""s""t"" ""n""o""t"" ""b""e"" ""c""h""a""n""g""e""d"" ""(""a""f""t""e""r"" ""r""e""-""s""h""o""w"" ""o""n"" ""c""o""m""m""a""n""d"" ""c""l""i""c""k"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"" ""="" ""o""p""t"".""$""m""e""n""u"".""p""o""s""i""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""x"" ""a""n""d"" ""y"" ""a""r""e"" ""g""i""v""e""n"" ""(""b""y"" ""m""o""u""s""e"" ""e""v""e""n""t"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"" ""="" ""{""t""o""p"":"" ""y"","" ""l""e""f""t"":"" ""x""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""r""r""e""c""t"" ""o""f""f""s""e""t"" ""i""f"" ""v""i""e""w""p""o""r""t"" ""d""e""m""a""n""d""s"" ""i""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""b""o""t""t""o""m"" ""="" ""$""w""i""n"".""s""c""r""o""l""l""T""o""p""("")"" ""+"" ""$""w""i""n"".""h""e""i""g""h""t""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""i""g""h""t"" ""="" ""$""w""i""n"".""s""c""r""o""l""l""L""e""f""t""("")"" ""+"" ""$""w""i""n"".""w""i""d""t""h""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""e""i""g""h""t"" ""="" ""o""p""t"".""$""m""e""n""u"".""o""u""t""e""r""H""e""i""g""h""t""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""w""i""d""t""h"" ""="" ""o""p""t"".""$""m""e""n""u"".""o""u""t""e""r""W""i""d""t""h""("")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""t""o""p"" ""+"" ""h""e""i""g""h""t"" "">"" ""b""o""t""t""o""m"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""t""o""p"" ""-""="" ""h""e""i""g""h""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""t""o""p"" ""<"" ""0"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""t""o""p"" ""="" ""0"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""l""e""f""t"" ""+"" ""w""i""d""t""h"" "">"" ""r""i""g""h""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""l""e""f""t"" ""-""="" ""w""i""d""t""h"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""l""e""f""t"" ""<"" ""0"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""l""e""f""t"" ""="" ""0"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""c""s""s""(""o""f""f""s""e""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""o""s""i""t""i""o""n"" ""t""h""e"" ""s""u""b""-""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""p""o""s""i""t""i""o""n""S""u""b""m""e""n""u"":"" ""f""u""n""c""t""i""o""n"" ""(""$""m""e""n""u"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""m""e""n""u"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""W""h""e""n"" ""u""s""e""r"" ""h""o""v""e""r""s"" ""o""v""e""r"" ""i""t""e""m"" ""(""w""h""i""c""h"" ""h""a""s"" ""s""u""b"" ""i""t""e""m""s"")"" ""h""a""n""d""l""e"".""f""o""c""u""s""I""t""e""m"" ""w""i""l""l"" ""c""a""l""l"" ""t""h""i""s""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""u""t"" ""t""h""e"" ""s""u""b""m""e""n""u"" ""d""o""e""s"" ""n""o""t"" ""e""x""i""s""t"" ""y""e""t"" ""i""f"" ""o""p""t"".""i""t""e""m""s"" ""i""s"" ""a"" ""p""r""o""m""i""s""e""."" ""j""u""s""t"" ""r""e""t""u""r""n"","" ""w""i""l""l"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""a""l""l"" ""p""o""s""i""t""i""o""n""S""u""b""m""e""n""u"" ""a""f""t""e""r"" ""p""r""o""m""i""s""e"" ""i""s"" ""c""o""m""p""l""e""t""e""d""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""u""i"" ""&""&"" ""$"".""u""i"".""p""o""s""i""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" "".""p""o""s""i""t""i""o""n""("")"" ""i""s"" ""p""r""o""v""i""d""e""d"" ""a""s"" ""a"" ""j""Q""u""e""r""y"" ""U""I"" ""u""t""i""l""i""t""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""("".""."".""a""n""d"" ""i""t"" ""w""o""n""'""t"" ""w""o""r""k"" ""o""n"" ""h""i""d""d""e""n"" ""e""l""e""m""e""n""t""s"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""c""s""s""(""'""d""i""s""p""l""a""y""'"","" ""'""b""l""o""c""k""'"")"".""p""o""s""i""t""i""o""n""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""y"":"" ""'""l""e""f""t"" ""t""o""p""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""a""t"":"" ""'""r""i""g""h""t"" ""t""o""p""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f"":"" ""t""h""i""s"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""l""l""i""s""i""o""n"":"" ""'""f""l""i""p""f""i""t"" ""f""i""t""'"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"".""c""s""s""(""'""d""i""s""p""l""a""y""'"","" ""'""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""p""o""s""i""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""o""f""f""s""e""t"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""o""p"":"" ""0"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""l""e""f""t"":"" ""t""h""i""s"".""o""u""t""e""r""W""i""d""t""h""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""c""s""s""(""o""f""f""s""e""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""o""f""f""s""e""t"" ""t""o"" ""a""d""d"" ""t""o"" ""z""I""n""d""e""x"
+" "" "" "" "" "" "" "" "" "" "" "" ""z""I""n""d""e""x"":"" ""1"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""h""o""w"" ""h""i""d""e"" ""a""n""i""m""a""t""i""o""n"" ""s""e""t""t""i""n""g""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""a""n""i""m""a""t""i""o""n"":"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""u""r""a""t""i""o""n"":"" ""5""0"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""h""o""w"":"" ""'""s""l""i""d""e""D""o""w""n""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""i""d""e"":"" ""'""s""l""i""d""e""U""p""'"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""e""v""e""n""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""e""v""e""n""t""s"":"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""h""o""w"":"" ""$"".""n""o""o""p"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""i""d""e"":"" ""$"".""n""o""o""p"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""f""a""u""l""t"" ""c""a""l""l""b""a""c""k"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""l""l""b""a""c""k"":"" ""n""u""l""l"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""l""i""s""t"" ""o""f"" ""c""o""n""t""e""x""t""M""e""n""u"" ""i""t""e""m""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""s"":"" ""{""}"
+" "" "" "" "" "" "" "" ""}"","
+" "" "" "" ""/""/"" ""m""o""u""s""e"" ""p""o""s""i""t""i""o""n"" ""f""o""r"" ""h""o""v""e""r"" ""a""c""t""i""v""a""t""i""o""n"
+" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""t""i""m""e""r"":"" ""n""u""l""l"","
+" "" "" "" "" "" "" "" "" "" "" "" ""p""a""g""e""X"":"" ""n""u""l""l"","
+" "" "" "" "" "" "" "" "" "" "" "" ""p""a""g""e""Y"":"" ""n""u""l""l"
+" "" "" "" "" "" "" "" ""}"","
+" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""z""I""n""d""e""x"
+" "" "" "" "" "" "" "" ""z""i""n""d""e""x"" ""="" ""f""u""n""c""t""i""o""n"" ""(""$""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""z""i""n"" ""="" ""0"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""t"" ""="" ""$""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""w""h""i""l""e"" ""(""t""r""u""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""z""i""n"" ""="" ""M""a""t""h"".""m""a""x""(""z""i""n"","" ""p""a""r""s""e""I""n""t""(""$""t""t"".""c""s""s""(""'""z""-""i""n""d""e""x""'"")"","" ""1""0"")"" ""|""|"" ""0"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""t"" ""="" ""$""t""t"".""p""a""r""e""n""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""$""t""t"" ""|""|"" ""!""$""t""t"".""l""e""n""g""t""h"" ""|""|"" ""'""h""t""m""l"" ""b""o""d""y""'"".""i""n""d""e""x""O""f""(""$""t""t"".""p""r""o""p""(""'""n""o""d""e""N""a""m""e""'"")"".""t""o""L""o""w""e""r""C""a""s""e""("")"")"" "">"" ""-""1"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""z""i""n"";"
+" "" "" "" "" "" "" "" ""}"","
+" "" "" "" ""/""/"" ""e""v""e""n""t"" ""h""a""n""d""l""e""r""s"
+" "" "" "" "" "" "" "" ""h""a""n""d""l""e"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""a""n""y""t""h""i""n""g"
+" "" "" "" "" "" "" "" "" "" "" "" ""a""b""o""r""t""e""v""e""n""t"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""m""e""n""u"" ""s""h""o""w"" ""d""i""s""p""a""t""c""h""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""o""n""t""e""x""t""m""e""n""u"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""i""s""a""b""l""e"" ""a""c""t""u""a""l"" ""c""o""n""t""e""x""t""-""m""e""n""u"" ""i""f"" ""w""e"" ""a""r""e"" ""u""s""i""n""g"" ""t""h""e"" ""r""i""g""h""t"" ""m""o""u""s""e"" ""b""u""t""t""o""n"" ""a""s"" ""t""h""e"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"".""d""a""t""a"".""t""r""i""g""g""e""r"" ""=""=""="" ""'""r""i""g""h""t""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""n""a""t""i""v""e""-""t""r""i""g""g""e""r""e""d"" ""e""v""e""n""t""s"" ""u""n""l""e""s""s"" ""w""e""'""r""e"" ""t""r""i""g""g""e""r""i""n""g"" ""o""n"" ""r""i""g""h""t"" ""c""l""i""c""k"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""(""e"".""d""a""t""a"".""t""r""i""g""g""e""r"" ""!""=""="" ""'""r""i""g""h""t""'"" ""&""&"" ""e"".""d""a""t""a"".""t""r""i""g""g""e""r"" ""!""=""="" ""'""d""e""m""a""n""d""'"")"" ""&""&"" ""e"".""o""r""i""g""i""n""a""l""E""v""e""n""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""L""e""t"" ""t""h""e"" ""c""u""r""r""e""n""t"" ""c""o""n""t""e""x""t""m""e""n""u"" ""d""e""c""i""d""e"" ""i""f"" ""i""t"" ""s""h""o""u""l""d"" ""s""h""o""w"" ""o""r"" ""n""o""t"" ""b""a""s""e""d"" ""o""n"" ""i""t""s"" ""o""w""n"" ""t""r""i""g""g""e""r"" ""s""e""t""t""i""n""g""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"".""m""o""u""s""e""B""u""t""t""o""n"" ""!""=""="" ""u""n""d""e""f""i""n""e""d"" ""&""&"" ""e"".""d""a""t""a"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""(""e"".""d""a""t""a"".""t""r""i""g""g""e""r"" ""=""=""="" ""'""l""e""f""t""'"" ""&""&"" ""e"".""m""o""u""s""e""B""u""t""t""o""n"" ""=""=""="" ""0"")"" ""&""&"" ""!""(""e"".""d""a""t""a"".""t""r""i""g""g""e""r"" ""=""=""="" ""'""r""i""g""h""t""'"" ""&""&"" ""e"".""m""o""u""s""e""B""u""t""t""o""n"" ""=""=""="" ""2"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""M""o""u""s""e"" ""c""l""i""c""k"" ""i""s"" ""n""o""t"" ""v""a""l""i""d""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""e""v""e""n""t"" ""i""f"" ""m""e""n""u"" ""i""s"" ""v""i""s""i""b""l""e"" ""f""o""r"" ""t""h""i""s"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""t""h""i""s"".""h""a""s""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""a""c""t""i""v""e""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""$""t""h""i""s"".""h""a""s""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""d""i""s""a""b""l""e""d""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""t""h""e""o""r""e""t""i""c""a""l""l""y"" ""n""e""e""d"" ""t""o"" ""f""i""r""e"" ""a"" ""s""h""o""w"" ""e""v""e""n""t"" ""a""t"" ""<""m""e""n""u"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""t""t""p"":""/""/""w""w""w"".""w""h""a""t""w""g"".""o""r""g""/""s""p""e""c""s""/""w""e""b""-""a""p""p""s""/""c""u""r""r""e""n""t""-""w""o""r""k""/""m""u""l""t""i""p""a""g""e""/""i""n""t""e""r""a""c""t""i""v""e""-""e""l""e""m""e""n""t""s"".""h""t""m""l""#""c""o""n""t""e""x""t""-""m""e""n""u""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""v""a""r"" ""e""v""t"" ""="" ""j""Q""u""e""r""y"".""E""v""e""n""t""("""""s""h""o""w""""","" ""{"" ""d""a""t""a"":"" ""d""a""t""a"","" ""p""a""g""e""X"":"" ""e"".""p""a""g""e""X"","" ""p""a""g""e""Y"":"" ""e"".""p""a""g""e""Y"","" ""r""e""l""a""t""e""d""T""a""r""g""e""t"":"" ""t""h""i""s"" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""e"".""d""a""t""a"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""e""v""t"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""="" ""$""t""h""i""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"".""d""a""t""a"".""b""u""i""l""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""b""u""i""l""t"" ""="" ""e"".""d""a""t""a"".""b""u""i""l""d""(""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"","" ""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""i""f"" ""b""u""i""l""d""("")"" ""r""e""t""u""r""n""e""d"" ""f""a""l""s""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""b""u""i""l""t"" ""=""=""="" ""f""a""l""s""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""y""n""a""m""i""c""a""l""l""y"" ""b""u""i""l""d"" ""m""e""n""u"" ""o""n"" ""i""n""v""o""c""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""d""a""t""a"" ""="" ""$"".""e""x""t""e""n""d""(""t""r""u""e"","" ""{""}"","" ""d""e""f""a""u""l""t""s"","" ""e"".""d""a""t""a"","" ""b""u""i""l""t"" ""|""|"" ""{""}"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""i""f"" ""t""h""e""r""e"" ""a""r""e"" ""n""o"" ""i""t""e""m""s"" ""t""o"" ""d""i""s""p""l""a""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""e"".""d""a""t""a"".""i""t""e""m""s"" ""|""|"" ""$"".""i""s""E""m""p""t""y""O""b""j""e""c""t""(""e"".""d""a""t""a"".""i""t""e""m""s"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""N""o""t""e"":"" ""j""Q""u""e""r""y"" ""c""a""p""t""u""r""e""s"" ""a""n""d"" ""i""g""n""o""r""e""s"" ""e""r""r""o""r""s"" ""f""r""o""m"" ""e""v""e""n""t"" ""h""a""n""d""l""e""r""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""w""i""n""d""o""w"".""c""o""n""s""o""l""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""(""c""o""n""s""o""l""e"".""e""r""r""o""r"" ""|""|"" ""c""o""n""s""o""l""e"".""l""o""g"")"".""c""a""l""l""(""c""o""n""s""o""l""e"","" ""'""N""o"" ""i""t""e""m""s"" ""s""p""e""c""i""f""i""e""d"" ""t""o"" ""s""h""o""w"" ""i""n"" ""c""o""n""t""e""x""t""M""e""n""u""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""r""r""o""r""(""'""N""o"" ""I""t""e""m""s"" ""s""p""e""c""i""f""i""e""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""a""c""k""r""e""f""e""r""e""n""c""e"" ""f""o""r"" ""c""u""s""t""o""m"" ""c""o""m""m""a""n""d"" ""t""y""p""e"" ""c""r""e""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""d""a""t""a"".""$""t""r""i""g""g""e""r"" ""="" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""c""r""e""a""t""e""(""e"".""d""a""t""a"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""s""h""o""w""M""e""n""u"" ""="" ""f""a""l""s""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""o""r"" ""(""v""a""r"" ""i""t""e""m"" ""i""n"" ""e"".""d""a""t""a"".""i""t""e""m""s"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"".""d""a""t""a"".""i""t""e""m""s"".""h""a""s""O""w""n""P""r""o""p""e""r""t""y""(""i""t""e""m"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""v""i""s""i""b""l""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""e"".""d""a""t""a"".""i""t""e""m""s""[""i""t""e""m""]"".""v""i""s""i""b""l""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"" ""="" ""e"".""d""a""t""a"".""i""t""e""m""s""[""i""t""e""m""]"".""v""i""s""i""b""l""e"".""c""a""l""l""(""$""(""e"".""c""u""r""r""e""n""t""T""a""r""g""e""t"")"","" ""i""t""e""m"","" ""e"".""d""a""t""a"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""i""t""e""m"".""v""i""s""i""b""l""e"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"" ""="" ""e"".""d""a""t""a"".""i""t""e""m""s""[""i""t""e""m""]"".""v""i""s""i""b""l""e"" ""=""=""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""v""i""s""i""b""l""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""h""o""w""M""e""n""u"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""s""h""o""w""M""e""n""u"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""h""o""w"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""s""h""o""w"".""c""a""l""l""(""$""t""h""i""s"","" ""e"".""d""a""t""a"","" ""e"".""p""a""g""e""X"","" ""e"".""p""a""g""e""Y"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""M""e""n""u"" ""l""e""f""t""-""c""l""i""c""k"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""l""i""c""k"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""t""h""i""s"")"".""t""r""i""g""g""e""r""(""$"".""E""v""e""n""t""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""{""d""a""t""a"":"" ""e"".""d""a""t""a"","" ""p""a""g""e""X"":"" ""e"".""p""a""g""e""X"","" ""p""a""g""e""Y"":"" ""e"".""p""a""g""e""Y""}"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""M""e""n""u"" ""r""i""g""h""t""-""c""l""i""c""k"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""o""u""s""e""d""o""w""n"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""g""i""s""t""e""r"" ""m""o""u""s""e"" ""d""o""w""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""i""d""e"" ""a""n""y"" ""p""r""e""v""i""o""u""s"" ""m""e""n""u""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""&""&"" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"".""l""e""n""g""t""h"" ""&""&"" ""!""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"".""i""s""(""$""t""h""i""s"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""c""t""i""v""a""t""e"" ""o""n"" ""r""i""g""h""t"" ""c""l""i""c""k"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"".""b""u""t""t""o""n"" ""=""=""="" ""2"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""="" ""$""t""h""i""s"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""A""c""t""i""v""e""'"","" ""t""r""u""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""M""e""n""u"" ""r""i""g""h""t""-""c""l""i""c""k"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""o""u""s""e""u""p"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""h""o""w"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""t""h""i""s"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""A""c""t""i""v""e""'"")"" ""&""&"" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""&""&"" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"".""l""e""n""g""t""h"" ""&""&"" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"".""i""s""(""$""t""h""i""s"")"" ""&""&"" ""!""$""t""h""i""s"".""h""a""s""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""d""i""s""a""b""l""e""d""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""="" ""$""t""h""i""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"".""t""r""i""g""g""e""r""(""$"".""E""v""e""n""t""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""{""d""a""t""a"":"" ""e"".""d""a""t""a"","" ""p""a""g""e""X"":"" ""e"".""p""a""g""e""X"","" ""p""a""g""e""Y"":"" ""e"".""p""a""g""e""Y""}"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"".""r""e""m""o""v""e""D""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""A""c""t""i""v""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""M""e""n""u"" ""h""o""v""e""r"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""o""u""s""e""e""n""t""e""r"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""r""e""l""a""t""e""d"" ""="" ""$""(""e"".""r""e""l""a""t""e""d""T""a""r""g""e""t"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""d""o""c""u""m""e""n""t"" ""="" ""$""(""d""o""c""u""m""e""n""t"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""i""f"" ""w""e""'""r""e"" ""c""o""m""i""n""g"" ""f""r""o""m"" ""a"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""r""e""l""a""t""e""d"".""i""s""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"" ""|""|"" ""$""r""e""l""a""t""e""d"".""c""l""o""s""e""s""t""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""i""f"" ""a"" ""m""e""n""u"" ""i""s"" ""s""h""o""w""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""&""&"" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""p""a""g""e""X"" ""="" ""e"".""p""a""g""e""X"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""p""a""g""e""Y"" ""="" ""e"".""p""a""g""e""Y"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""d""a""t""a"" ""="" ""e"".""d""a""t""a"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""d""o""c""u""m""e""n""t"".""o""n""(""'""m""o""u""s""e""m""o""v""e"".""c""o""n""t""e""x""t""M""e""n""u""S""h""o""w""'"","" ""h""a""n""d""l""e"".""m""o""u""s""e""m""o""v""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""t""i""m""e""r"" ""="" ""s""e""t""T""i""m""e""o""u""t""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""t""i""m""e""r"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""d""o""c""u""m""e""n""t"".""o""f""f""(""'""m""o""u""s""e""m""o""v""e"".""c""o""n""t""e""x""t""M""e""n""u""S""h""o""w""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""="" ""$""t""h""i""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"".""t""r""i""g""g""e""r""(""$"".""E""v""e""n""t""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"":"" ""h""o""v""e""r""a""c""t"".""d""a""t""a"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""a""g""e""X"":"" ""h""o""v""e""r""a""c""t"".""p""a""g""e""X"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""a""g""e""Y"":"" ""h""o""v""e""r""a""c""t"".""p""a""g""e""Y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"","" ""e"".""d""a""t""a"".""d""e""l""a""y"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""M""e""n""u"" ""h""o""v""e""r"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""o""u""s""e""m""o""v""e"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""p""a""g""e""X"" ""="" ""e"".""p""a""g""e""X"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""p""a""g""e""Y"" ""="" ""e"".""p""a""g""e""Y"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""M""e""n""u"" ""h""o""v""e""r"" ""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""o""u""s""e""l""e""a""v""e"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""i""f"" ""w""e""'""r""e"" ""l""e""a""v""i""n""g"" ""f""o""r"" ""a"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""r""e""l""a""t""e""d"" ""="" ""$""(""e"".""r""e""l""a""t""e""d""T""a""r""g""e""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""r""e""l""a""t""e""d"".""i""s""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"" ""|""|"" ""$""r""e""l""a""t""e""d"".""c""l""o""s""e""s""t""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""l""e""a""r""T""i""m""e""o""u""t""(""h""o""v""e""r""a""c""t"".""t""i""m""e""r"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""o""v""e""r""a""c""t"".""t""i""m""e""r"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""l""i""c""k"" ""o""n"" ""l""a""y""e""r"" ""t""o"" ""h""i""d""e"" ""c""o""n""t""e""x""t""M""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""l""a""y""e""r""C""l""i""c""k"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""$""t""h""i""s"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""u""t""t""o""n"" ""="" ""e"".""b""u""t""t""o""n"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""x"" ""="" ""e"".""p""a""g""e""X"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""y"" ""="" ""e"".""p""a""g""e""Y"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""a""r""g""e""t"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""t""T""i""m""e""o""u""t""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""w""i""n""d""o""w"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""t""r""i""g""g""e""r""A""c""t""i""o""n"" ""="" ""(""(""r""o""o""t"".""t""r""i""g""g""e""r"" ""=""=""="" ""'""l""e""f""t""'"" ""&""&"" ""b""u""t""t""o""n"" ""=""=""="" ""0"")"" ""|""|"" ""(""r""o""o""t"".""t""r""i""g""g""e""r"" ""=""=""="" ""'""r""i""g""h""t""'"" ""&""&"" ""b""u""t""t""o""n"" ""=""=""="" ""2"")"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""i""n""d"" ""t""h""e"" ""e""l""e""m""e""n""t"" ""t""h""a""t"" ""w""o""u""l""d""'""v""e"" ""b""e""e""n"" ""c""l""i""c""k""e""d"","" ""w""a""s""n""'""t"" ""t""h""e"" ""l""a""y""e""r"" ""i""n"" ""t""h""e"" ""w""a""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""d""o""c""u""m""e""n""t"".""e""l""e""m""e""n""t""F""r""o""m""P""o""i""n""t"" ""&""&"" ""r""o""o""t"".""$""l""a""y""e""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""l""a""y""e""r"".""h""i""d""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""a""r""g""e""t"" ""="" ""d""o""c""u""m""e""n""t"".""e""l""e""m""e""n""t""F""r""o""m""P""o""i""n""t""(""x"" ""-"" ""$""w""i""n"".""s""c""r""o""l""l""L""e""f""t""("")"","" ""y"" ""-"" ""$""w""i""n"".""s""c""r""o""l""l""T""o""p""("")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""l""a""y""e""r"".""s""h""o""w""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""r""e""p""o""s""i""t""i""o""n"" ""&""&"" ""t""r""i""g""g""e""r""A""c""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""d""o""c""u""m""e""n""t"".""e""l""e""m""e""n""t""F""r""o""m""P""o""i""n""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""$""t""r""i""g""g""e""r"".""i""s""(""t""a""r""g""e""t"")"" ""|""|"" ""r""o""o""t"".""$""t""r""i""g""g""e""r"".""h""a""s""(""t""a""r""g""e""t"")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""p""o""s""i""t""i""o""n"".""c""a""l""l""(""r""o""o""t"".""$""t""r""i""g""g""e""r"","" ""r""o""o""t"","" ""x"","" ""y"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"" ""="" ""r""o""o""t"".""$""t""r""i""g""g""e""r"".""o""f""f""s""e""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""w""i""n""d""o""w"" ""="" ""$""(""w""i""n""d""o""w"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""w""h""i""l""e"" ""t""h""i""s"" ""l""o""o""k""s"" ""k""i""n""d""a"" ""a""w""f""u""l"","" ""i""t""'""s"" ""t""h""e"" ""b""e""s""t"" ""w""a""y"" ""t""o"" ""a""v""o""i""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""u""n""n""e""c""e""s""s""a""r""i""l""y"" ""c""a""l""c""u""l""a""t""i""n""g"" ""a""n""y"" ""p""o""s""i""t""i""o""n""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""t""o""p"" ""+""="" ""$""w""i""n""d""o""w"".""s""c""r""o""l""l""T""o""p""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""t""o""p"" ""<""="" ""e"".""p""a""g""e""Y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""l""e""f""t"" ""+""="" ""$""w""i""n""d""o""w"".""s""c""r""o""l""l""L""e""f""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""l""e""f""t"" ""<""="" ""e"".""p""a""g""e""X"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""b""o""t""t""o""m"" ""="" ""o""f""f""s""e""t"".""t""o""p"" ""+"" ""r""o""o""t"".""$""t""r""i""g""g""e""r"".""o""u""t""e""r""H""e""i""g""h""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""b""o""t""t""o""m"" "">""="" ""e"".""p""a""g""e""Y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""f""f""s""e""t"".""r""i""g""h""t"" ""="" ""o""f""f""s""e""t"".""l""e""f""t"" ""+"" ""r""o""o""t"".""$""t""r""i""g""g""e""r"".""o""u""t""e""r""W""i""d""t""h""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""f""f""s""e""t"".""r""i""g""h""t"" "">""="" ""e"".""p""a""g""e""X"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""p""o""s""i""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""p""o""s""i""t""i""o""n"".""c""a""l""l""(""r""o""o""t"".""$""t""r""i""g""g""e""r"","" ""r""o""o""t"","" ""x"","" ""y"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""a""r""g""e""t"" ""&""&"" ""t""r""i""g""g""e""r""A""c""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""t""r""i""g""g""e""r"".""o""n""e""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""d""e""n""'"","" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""t""a""r""g""e""t"")"".""c""o""n""t""e""x""t""M""e""n""u""(""{"" ""x"":"" ""x"","" ""y"":"" ""y"","" ""b""u""t""t""o""n"":"" ""b""u""t""t""o""n"" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"" ""!""="" ""n""u""l""l"" ""&""&"" ""r""o""o""t"".""$""m""e""n""u"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"","" ""5""0"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""k""e""y"" ""h""a""n""d""l""e""d"" "":""h""o""v""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" ""k""e""y""S""t""o""p"":"" ""f""u""n""c""t""i""o""n"" ""(""e"","" ""o""p""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o""p""t"".""i""s""I""n""p""u""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""k""e""y"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""o""p""t"" ""="" ""{""}"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""O""n""l""y"" ""g""e""t"" ""t""h""e"" ""d""a""t""a"" ""f""r""o""m"" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""i""f"" ""i""t"" ""e""x""i""s""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""|""|"" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""f"" ""t""h""e"" ""t""r""i""g""g""e""r"" ""h""a""p""p""e""n"" ""o""n"" ""a"" ""e""l""e""m""e""n""t"" ""t""h""a""t"" ""a""r""e"" ""a""b""o""v""e"" ""t""h""e"" ""c""o""n""t""e""x""t""m""e""n""u"" ""d""o"" ""t""h""i""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""z""I""n""d""e""x"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""z""I""n""d""e""x"" ""="" ""0"";"
+"	""	""	""	""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""t""a""r""g""e""t""Z""I""n""d""e""x"" ""="" ""0"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""g""e""t""Z""I""n""d""e""x""O""f""T""r""i""g""g""e""r""T""a""r""g""e""t"" ""="" ""f""u""n""c""t""i""o""n"" ""(""t""a""r""g""e""t"")"" ""{"
+"	""	""	""	""	""i""f"" ""(""t""a""r""g""e""t"".""s""t""y""l""e"".""z""I""n""d""e""x"" ""!""=""="" ""'""'"")"" ""{"
+"	""	""	""	""	""	""t""a""r""g""e""t""Z""I""n""d""e""x"" ""="" ""t""a""r""g""e""t"".""s""t""y""l""e"".""z""I""n""d""e""x"";"
+"	""	""	""	""	""}"" ""e""l""s""e"" ""{"
+"	""	""	""	""	""	""i""f"" ""(""t""a""r""g""e""t"".""o""f""f""s""e""t""P""a""r""e""n""t"" ""!""=""="" ""n""u""l""l"" ""&""&"" ""t""a""r""g""e""t"".""o""f""f""s""e""t""P""a""r""e""n""t"" ""!""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+"	""	""	""	""	""	""	""g""e""t""Z""I""n""d""e""x""O""f""T""r""i""g""g""e""r""T""a""r""g""e""t""(""t""a""r""g""e""t"".""o""f""f""s""e""t""P""a""r""e""n""t"")"";"
+"	""	""	""	""	""	""}"
+"	""	""	""	""	""	""e""l""s""e"" ""i""f"" ""(""t""a""r""g""e""t"".""p""a""r""e""n""t""E""l""e""m""e""n""t"" ""!""=""="" ""n""u""l""l"" ""&""&"" ""t""a""r""g""e""t"".""p""a""r""e""n""t""E""l""e""m""e""n""t"" ""!""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+"	""	""	""	""	""	""	""g""e""t""Z""I""n""d""e""x""O""f""T""r""i""g""g""e""r""T""a""r""g""e""t""(""t""a""r""g""e""t"".""p""a""r""e""n""t""E""l""e""m""e""n""t"")"";"
+"	""	""	""	""	""	""}"
+"	""	""	""	""	""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""g""e""t""Z""I""n""d""e""x""O""f""T""r""i""g""g""e""r""T""a""r""g""e""t""(""e"".""t""a""r""g""e""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""f"" ""t""a""r""g""e""t""Z""I""n""d""e""x"" ""i""s"" ""h""e""i""g""h""e""r"" ""t""h""e""n"" ""o""p""t"".""z""I""n""d""e""x"" ""d""o""n""t"" ""p""r""o""g""r""e""s""s"" ""a""n""y"" ""f""u""t""h""e""r""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""T""h""i""s"" ""i""s"" ""u""s""e""d"" ""t""o"" ""m""a""k""e"" ""s""u""r""e"" ""t""h""a""t"" ""i""f"" ""y""o""u"" ""a""r""e"" ""u""s""i""n""g"" ""a"" ""d""i""a""l""o""g"" ""w""i""t""h"" ""a"" ""i""n""p""u""t"" ""/"" ""t""e""x""t""a""r""e""a"" ""/"" ""c""o""n""t""e""n""t""e""d""i""t""a""b""l""e"" ""d""i""v"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""n""d"" ""i""t""s"" ""a""b""o""v""e"" ""t""h""e"" ""c""o""n""t""e""x""t""m""e""n""u"" ""i""t"" ""w""o""n""t"" ""s""t""e""a""l"" ""k""e""y""s"" ""e""v""e""n""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""a""r""g""e""t""Z""I""n""d""e""x"" "">"" ""o""p""t"".""z""I""n""d""e""x"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+"	""	""	""	""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""e"".""k""e""y""C""o""d""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""9"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""8"":"" ""/""/"" ""u""p"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""k""e""y""S""t""o""p""(""e"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""f"" ""k""e""y""C""o""d""e"" ""i""s"" ""[""3""8"" ""(""u""p"")""]"" ""o""r"" ""[""9"" ""(""t""a""b"")"" ""w""i""t""h"" ""s""h""i""f""t""]"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""i""s""I""n""p""u""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"".""k""e""y""C""o""d""e"" ""=""=""="" ""9"" ""&""&"" ""e"".""s""h""i""f""t""K""e""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""o""p""t"".""$""s""e""l""e""c""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"".""b""l""u""r""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""m""e""n""u"" ""!""="" ""n""u""l""l"")"" ""o""p""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""p""r""e""v""c""o""m""m""a""n""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""e"".""k""e""y""C""o""d""e"" ""=""=""="" ""3""8"" ""&""&"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"".""p""r""o""p""(""'""t""y""p""e""'"")"" ""=""=""="" ""'""c""h""e""c""k""b""o""x""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""h""e""c""k""b""o""x""e""s"" ""d""o""n""'""t"" ""c""a""p""t""u""r""e"" ""t""h""i""s"" ""k""e""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""e"".""k""e""y""C""o""d""e"" ""!""=""="" ""9"" ""|""|"" ""e"".""s""h""i""f""t""K""e""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""m""e""n""u"" ""!""="" ""n""u""l""l"")"" ""o""p""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""p""r""e""v""c""o""m""m""a""n""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""o""m""i""t""t""i""n""g"" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""a""s""e"" ""9"":"" ""/""/"" ""t""a""b"" ""-"" ""r""e""a""c""h""e""d"" ""t""h""r""o""u""g""h"" ""o""m""i""t""t""e""d"" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""4""0"":"" ""/""/"" ""d""o""w""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""k""e""y""S""t""o""p""(""e"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""i""s""I""n""p""u""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"".""k""e""y""C""o""d""e"" ""=""=""="" ""9"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""o""p""t"".""$""s""e""l""e""c""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"".""b""l""u""r""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""m""e""n""u"" ""!""="" ""n""u""l""l"")"" ""o""p""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""n""e""x""t""c""o""m""m""a""n""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""e"".""k""e""y""C""o""d""e"" ""=""=""="" ""4""0"" ""&""&"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"".""p""r""o""p""(""'""t""y""p""e""'"")"" ""=""=""="" ""'""c""h""e""c""k""b""o""x""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""h""e""c""k""b""o""x""e""s"" ""d""o""n""'""t"" ""c""a""p""t""u""r""e"" ""t""h""i""s"" ""k""e""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""m""e""n""u"" ""!""="" ""n""u""l""l"")"" ""o""p""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""n""e""x""t""c""o""m""m""a""n""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""7"":"" ""/""/"" ""l""e""f""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""k""e""y""S""t""o""p""(""e"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""i""s""I""n""p""u""t"" ""|""|"" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""|""|"" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o""p""t"".""$""s""e""l""e""c""t""e""d"".""p""a""r""e""n""t""("")"".""h""a""s""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""r""o""o""t""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""p""a""r""e""n""t"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""p""a""r""e""n""t""("")"".""p""a""r""e""n""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""$""p""a""r""e""n""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""9"":"" ""/""/"" ""r""i""g""h""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""k""e""y""S""t""o""p""(""e"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""i""s""I""n""p""u""t"" ""|""|"" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""|""|"" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""i""t""e""m""d""a""t""a"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""|""|"" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m""d""a""t""a"".""$""m""e""n""u"" ""&""&"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""h""a""s""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""s""u""b""m""e""n""u""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""d""a""t""a"".""$""s""e""l""e""c""t""e""d"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""d""a""t""a"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""n""e""x""t""c""o""m""m""a""n""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""5"":"" ""/""/"" ""e""n""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""6"":"" ""/""/"" ""h""o""m""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""&""&"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""(""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""&""&"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""p""a""r""e""n""t""("")"" ""|""|"" ""o""p""t"".""$""m""e""n""u"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""c""h""i""l""d""r""e""n""(""'"":""n""o""t""("".""'"" ""+"" ""o""p""t"".""c""l""a""s""s""N""a""m""e""s"".""d""i""s""a""b""l""e""d"" ""+"" ""'"","" "".""'"" ""+"" ""o""p""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"" ""+"" ""'"")""'"")""[""e"".""k""e""y""C""o""d""e"" ""=""=""="" ""3""6"" ""?"" ""'""f""i""r""s""t""'"" "":"" ""'""l""a""s""t""'""]""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""f""o""c""u""s""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""1""3"":"" ""/""/"" ""e""n""t""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""k""e""y""S""t""o""p""(""e"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""i""s""I""n""p""u""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""&""&"" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"".""i""s""(""'""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"" ""&""&"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""!""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""t""r""i""g""g""e""r""(""'""m""o""u""s""e""u""p""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""2"":"" ""/""/"" ""s""p""a""c""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""3"":"" ""/""/"" ""p""a""g""e"" ""u""p"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""3""4"":"" ""/""/"" ""p""a""g""e"" ""d""o""w""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""r""e""v""e""n""t"" ""b""r""o""w""s""e""r"" ""f""r""o""m"" ""s""c""r""o""l""l""i""n""g"" ""d""o""w""n"" ""w""h""i""l""e"" ""m""e""n""u"" ""i""s"" ""v""i""s""i""b""l""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""k""e""y""S""t""o""p""(""e"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""2""7"":"" ""/""/"" ""e""s""c"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""k""e""y""S""t""o""p""(""e"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""m""e""n""u"" ""!""="" ""n""u""l""l"")"" ""o""p""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"" ""/""/"" ""0""-""9"","" ""a""-""z"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""k"" ""="" ""(""S""t""r""i""n""g"".""f""r""o""m""C""h""a""r""C""o""d""e""(""e"".""k""e""y""C""o""d""e"")"")"".""t""o""U""p""p""e""r""C""a""s""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""a""c""c""e""s""s""k""e""y""s"" ""&""&"" ""o""p""t"".""a""c""c""e""s""s""k""e""y""s""[""k""]"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""c""c""o""r""d""i""n""g"" ""t""o"" ""t""h""e"" ""s""p""e""c""s"" ""a""c""c""e""s""s""k""e""y""s"" ""m""u""s""t"" ""b""e"" ""i""n""v""o""k""e""d"" ""i""m""m""e""d""i""a""t""e""l""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""a""c""c""e""s""s""k""e""y""s""[""k""]"".""$""n""o""d""e"".""t""r""i""g""g""e""r""(""o""p""t"".""a""c""c""e""s""s""k""e""y""s""[""k""]"".""$""m""e""n""u"" ""?"" ""'""c""o""n""t""e""x""t""m""e""n""u"":""f""o""c""u""s""'"" "":"" ""'""m""o""u""s""e""u""p""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""a""s""s"" ""e""v""e""n""t"" ""t""o"" ""s""e""l""e""c""t""e""d"" ""i""t""e""m"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""t""o""p"" ""p""r""o""p""a""g""a""t""i""o""n"" ""t""o"" ""a""v""o""i""d"" ""e""n""d""l""e""s""s"" ""r""e""c""u""r""s""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"" ""&""&"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""!""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""t""r""i""g""g""e""r""(""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""e""l""e""c""t"" ""p""r""e""v""i""o""u""s"" ""p""o""s""s""i""b""l""e"" ""c""o""m""m""a""n""d"" ""i""n"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""p""r""e""v""I""t""e""m"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""o""p""t"" ""="" ""$""(""t""h""i""s"")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""|""|"" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""r""o""o""t"" ""="" ""$""(""t""h""i""s"")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t""'"")"" ""|""|"" ""{""}"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""o""b""t""a""i""n"" ""c""u""r""r""e""n""t""l""y"" ""s""e""l""e""c""t""e""d"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""s""e""l""e""c""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""s"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""p""a""r""e""n""t""("")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""|""|"" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""$""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""c""h""i""l""d""r""e""n"" ""="" ""o""p""t"".""$""m""e""n""u"".""c""h""i""l""d""r""e""n""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""p""r""e""v"" ""="" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""|""|"" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"".""p""r""e""v""("")"".""l""e""n""g""t""h"" ""?"" ""$""c""h""i""l""d""r""e""n"".""l""a""s""t""("")"" "":"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""p""r""e""v""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""r""o""u""n""d"" ""="" ""$""p""r""e""v"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""k""i""p"" ""d""i""s""a""b""l""e""d"" ""o""r"" ""h""i""d""d""e""n"" ""e""l""e""m""e""n""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""w""h""i""l""e"" ""(""$""p""r""e""v"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""d""i""s""a""b""l""e""d"")"" ""|""|"" ""$""p""r""e""v"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"")"" ""|""|"" ""$""p""r""e""v"".""i""s""(""'"":""h""i""d""d""e""n""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""p""r""e""v"".""p""r""e""v""("")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""p""r""e""v"" ""="" ""$""p""r""e""v"".""p""r""e""v""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""p""r""e""v"" ""="" ""$""c""h""i""l""d""r""e""n"".""l""a""s""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""p""r""e""v"".""i""s""(""$""r""o""u""n""d"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""r""e""a""k"" ""e""n""d""l""e""s""s"" ""l""o""o""p"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""l""e""a""v""e"" ""c""u""r""r""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""s""e""l""e""c""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""i""t""e""m""M""o""u""s""e""l""e""a""v""e"".""c""a""l""l""(""o""p""t"".""$""s""e""l""e""c""t""e""d"".""g""e""t""(""0"")"","" ""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""c""t""i""v""a""t""e"" ""n""e""x""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""i""t""e""m""M""o""u""s""e""e""n""t""e""r"".""c""a""l""l""(""$""p""r""e""v"".""g""e""t""(""0"")"","" ""e"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""o""c""u""s"" ""i""n""p""u""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""i""n""p""u""t"" ""="" ""$""p""r""e""v"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""i""n""p""u""t"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"".""f""o""c""u""s""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""e""l""e""c""t"" ""n""e""x""t"" ""p""o""s""s""i""b""l""e"" ""c""o""m""m""a""n""d"" ""i""n"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""n""e""x""t""I""t""e""m"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""o""p""t"" ""="" ""$""(""t""h""i""s"")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""|""|"" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""r""o""o""t"" ""="" ""$""(""t""h""i""s"")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t""'"")"" ""|""|"" ""{""}"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""o""b""t""a""i""n"" ""c""u""r""r""e""n""t""l""y"" ""s""e""l""e""c""t""e""d"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""s""e""l""e""c""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""s"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""p""a""r""e""n""t""("")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""|""|"" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""$""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""c""h""i""l""d""r""e""n"" ""="" ""o""p""t"".""$""m""e""n""u"".""c""h""i""l""d""r""e""n""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""e""x""t"" ""="" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""|""|"" ""!""o""p""t"".""$""s""e""l""e""c""t""e""d"".""n""e""x""t""("")"".""l""e""n""g""t""h"" ""?"" ""$""c""h""i""l""d""r""e""n"".""f""i""r""s""t""("")"" "":"" ""o""p""t"".""$""s""e""l""e""c""t""e""d"".""n""e""x""t""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""r""o""u""n""d"" ""="" ""$""n""e""x""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""k""i""p"" ""d""i""s""a""b""l""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""w""h""i""l""e"" ""(""$""n""e""x""t"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""d""i""s""a""b""l""e""d"")"" ""|""|"" ""$""n""e""x""t"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"")"" ""|""|"" ""$""n""e""x""t"".""i""s""(""'"":""h""i""d""d""e""n""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""n""e""x""t"".""n""e""x""t""("")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""e""x""t"" ""="" ""$""n""e""x""t"".""n""e""x""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""e""x""t"" ""="" ""$""c""h""i""l""d""r""e""n"".""f""i""r""s""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""n""e""x""t"".""i""s""(""$""r""o""u""n""d"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""r""e""a""k"" ""e""n""d""l""e""s""s"" ""l""o""o""p"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""l""e""a""v""e"" ""c""u""r""r""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""s""e""l""e""c""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""i""t""e""m""M""o""u""s""e""l""e""a""v""e"".""c""a""l""l""(""o""p""t"".""$""s""e""l""e""c""t""e""d"".""g""e""t""(""0"")"","" ""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""c""t""i""v""a""t""e"" ""n""e""x""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""i""t""e""m""M""o""u""s""e""e""n""t""e""r"".""c""a""l""l""(""$""n""e""x""t"".""g""e""t""(""0"")"","" ""e"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""o""c""u""s"" ""i""n""p""u""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""i""n""p""u""t"" ""="" ""$""n""e""x""t"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""i""n""p""u""t"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"".""f""o""c""u""s""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""l""a""g"" ""t""h""a""t"" ""w""e""'""r""e"" ""i""n""s""i""d""e"" ""a""n"" ""i""n""p""u""t"" ""s""o"" ""t""h""e"" ""k""e""y"" ""h""a""n""d""l""e""r"" ""c""a""n"" ""a""c""t"" ""a""c""c""o""r""d""i""n""g""l""y"
+" "" "" "" "" "" "" "" "" "" "" "" ""f""o""c""u""s""I""n""p""u""t"":"" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"".""c""l""o""s""e""s""t""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""i""t""e""m""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""$""t""h""i""s"".""d""a""t""a""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""$""t""h""i""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""i""s""I""n""p""u""t"" ""="" ""o""p""t"".""i""s""I""n""p""u""t"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""l""a""g"" ""t""h""a""t"" ""w""e""'""r""e"" ""i""n""s""i""d""e"" ""a""n"" ""i""n""p""u""t"" ""s""o"" ""t""h""e"" ""k""e""y"" ""h""a""n""d""l""e""r"" ""c""a""n"" ""a""c""t"" ""a""c""c""o""r""d""i""n""g""l""y"
+" "" "" "" "" "" "" "" "" "" "" "" ""b""l""u""r""I""n""p""u""t"":"" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"".""c""l""o""s""e""s""t""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""i""t""e""m""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""$""t""h""i""s"".""d""a""t""a""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""i""s""I""n""p""u""t"" ""="" ""o""p""t"".""i""s""I""n""p""u""t"" ""="" ""f""a""l""s""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" "":""h""o""v""e""r"" ""o""n"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""M""o""u""s""e""e""n""t""e""r"":"" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""r""o""o""t"" ""="" ""$""(""t""h""i""s"")"".""d""a""t""a""("")"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""h""o""v""e""r""i""n""g"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" "":""h""o""v""e""r"" ""o""n"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""M""o""u""s""e""l""e""a""v""e"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""r""o""o""t"" ""="" ""$""(""t""h""i""s"")"".""d""a""t""a""("")"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""$""l""a""y""e""r"" ""&""&"" ""r""o""o""t"".""$""l""a""y""e""r"".""i""s""(""e"".""r""e""l""a""t""e""d""T""a""r""g""e""t"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""h""o""v""e""r""i""n""g"" ""="" ""f""a""l""s""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" "":""h""o""v""e""r"" ""d""o""n""e"" ""m""a""n""u""a""l""l""y"" ""s""o"" ""k""e""y"" ""h""a""n""d""l""i""n""g"" ""i""s"" ""p""o""s""s""i""b""l""e"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""M""o""u""s""e""e""n""t""e""r"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""$""t""h""i""s"".""d""a""t""a""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""h""o""v""e""r""i""n""g"" ""="" ""t""r""u""e"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""i""f"" ""w""e""'""r""e"" ""r""e""-""e""n""t""e""r""i""n""g"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e"" ""&""&"" ""r""o""o""t"".""$""l""a""y""e""r"" ""&""&"" ""r""o""o""t"".""$""l""a""y""e""r"".""i""s""(""e"".""r""e""l""a""t""e""d""T""a""r""g""e""t"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""a""k""e"" ""s""u""r""e"" ""o""n""l""y"" ""o""n""e"" ""i""t""e""m"" ""i""s"" ""s""e""l""e""c""t""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""(""o""p""t"".""$""m""e""n""u"" ""?"" ""o""p""t"" "":"" ""r""o""o""t"")"".""$""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""c""h""i""l""d""r""e""n""(""'"".""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""h""o""v""e""r"")"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""c""h""i""l""d""r""e""n""(""'"".""h""o""v""e""r""'"")"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r""'"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""t""h""i""s"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""d""i""s""a""b""l""e""d"")"" ""|""|"" ""$""t""h""i""s"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""f""o""c""u""s""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" "":""h""o""v""e""r"" ""d""o""n""e"" ""m""a""n""u""a""l""l""y"" ""s""o"" ""k""e""y"" ""h""a""n""d""l""i""n""g"" ""i""s"" ""p""o""s""s""i""b""l""e"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""M""o""u""s""e""l""e""a""v""e"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""$""t""h""i""s"".""d""a""t""a""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"" ""!""=""="" ""o""p""t"" ""&""&"" ""r""o""o""t"".""$""l""a""y""e""r"" ""&""&"" ""r""o""o""t"".""$""l""a""y""e""r"".""i""s""(""e"".""r""e""l""a""t""e""d""T""a""r""g""e""t"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""r""o""o""t"".""$""s""e""l""e""c""t""e""d"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"" ""&""&"" ""r""o""o""t"".""$""s""e""l""e""c""t""e""d"" ""!""=""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""s""e""l""e""c""t""e""d"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""o""p""t"".""$""n""o""d""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""n""t""e""x""t""M""e""n""u"" ""i""t""e""m"" ""c""l""i""c""k"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""C""l""i""c""k"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""$""t""h""i""s"".""d""a""t""a""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k""e""y"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""K""e""y"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""l""l""b""a""c""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""b""o""r""t"" ""i""f"" ""t""h""e"" ""k""e""y"" ""i""s"" ""u""n""k""n""o""w""n"" ""o""r"" ""d""i""s""a""b""l""e""d"" ""o""r"" ""i""s"" ""a"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o""p""t"".""i""t""e""m""s""[""k""e""y""]"" ""|""|"" ""$""t""h""i""s"".""i""s""(""'"".""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""d""i""s""a""b""l""e""d"" ""+"" ""'"","" "".""c""o""n""t""e""x""t""-""m""e""n""u""-""s""u""b""m""e""n""u"","" "".""c""o""n""t""e""x""t""-""m""e""n""u""-""s""e""p""a""r""a""t""o""r"","" "".""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""p""r""e""v""e""n""t""D""e""f""a""u""l""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""o""p""t"".""c""a""l""l""b""a""c""k""s""[""k""e""y""]"")"" ""&""&"" ""O""b""j""e""c""t"".""p""r""o""t""o""t""y""p""e"".""h""a""s""O""w""n""P""r""o""p""e""r""t""y"".""c""a""l""l""(""o""p""t"".""c""a""l""l""b""a""c""k""s"","" ""k""e""y"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""t""e""m""-""s""p""e""c""i""f""i""c"" ""c""a""l""l""b""a""c""k"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""l""l""b""a""c""k"" ""="" ""o""p""t"".""c""a""l""l""b""a""c""k""s""[""k""e""y""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""r""o""o""t"".""c""a""l""l""b""a""c""k"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""f""a""u""l""t"" ""c""a""l""l""b""a""c""k"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""l""l""b""a""c""k"" ""="" ""r""o""o""t"".""c""a""l""l""b""a""c""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""n""o"" ""c""a""l""l""b""a""c""k"","" ""n""o"" ""a""c""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""i""d""e"" ""m""e""n""u"" ""i""f"" ""c""a""l""l""b""a""c""k"" ""d""o""e""s""n""'""t"" ""s""t""o""p"" ""t""h""a""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""c""a""l""l""b""a""c""k"".""c""a""l""l""(""r""o""o""t"".""$""t""r""i""g""g""e""r"","" ""k""e""y"","" ""r""o""o""t"")"" ""!""=""="" ""f""a""l""s""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""r""o""o""t"".""$""m""e""n""u"".""p""a""r""e""n""t""("")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""u""p""d""a""t""e"".""c""a""l""l""(""r""o""o""t"".""$""t""r""i""g""g""e""r"","" ""r""o""o""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""g""n""o""r""e"" ""c""l""i""c""k"" ""e""v""e""n""t""s"" ""o""n"" ""i""n""p""u""t"" ""e""l""e""m""e""n""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""n""p""u""t""C""l""i""c""k"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""I""m""m""e""d""i""a""t""e""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""i""d""e"" ""<""m""e""n""u"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""h""i""d""e""M""e""n""u"":"" ""f""u""n""c""t""i""o""n"" ""(""e"","" ""d""a""t""a"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""r""o""o""t"" ""="" ""$""(""t""h""i""s"")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""h""i""d""e"".""c""a""l""l""(""r""o""o""t"".""$""t""r""i""g""g""e""r"","" ""r""o""o""t"","" ""d""a""t""a"" ""&""&"" ""d""a""t""a"".""f""o""r""c""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""o""c""u""s"" ""<""c""o""m""m""a""n""d"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""f""o""c""u""s""I""t""e""m"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""$""t""h""i""s"".""d""a""t""a""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""t""h""i""s"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""d""i""s""a""b""l""e""d"")"" ""|""|"" ""$""t""h""i""s"".""h""a""s""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""d""d""C""l""a""s""s""(""[""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""h""o""v""e""r"","" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""v""i""s""i""b""l""e""]"".""j""o""i""n""(""'"" ""'"")"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""e""l""e""c""t"" ""o""t""h""e""r"" ""i""t""e""m""s"" ""a""n""d"" ""i""n""c""l""u""d""e""d"" ""i""t""e""m""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""p""a""r""e""n""t""("")"".""f""i""n""d""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""i""t""e""m""'"")"".""n""o""t""(""$""t""h""i""s"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""r""e""m""o""v""e""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""v""i""s""i""b""l""e"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""f""i""l""t""e""r""(""'"".""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""h""o""v""e""r"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r""'"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""m""e""m""b""e""r"" ""s""e""l""e""c""t""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""r""o""o""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""$""t""h""i""s"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""o""s""i""t""i""o""n"" ""s""u""b""-""m""e""n""u"" ""-"" ""d""o"" ""a""f""t""e""r"" ""s""h""o""w"" ""s""o"" ""d""u""m""b"" ""$"".""u""i"".""p""o""s""i""t""i""o""n"" ""c""a""n"" ""k""e""e""p"" ""u""p"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""n""o""d""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""p""o""s""i""t""i""o""n""S""u""b""m""e""n""u"".""c""a""l""l""(""o""p""t"".""$""n""o""d""e"","" ""o""p""t"".""$""m""e""n""u"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""l""u""r"" ""<""c""o""m""m""a""n""d"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""b""l""u""r""I""t""e""m"":"" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e"".""s""t""o""p""P""r""o""p""a""g""a""t""i""o""n""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""$""t""h""i""s"".""d""a""t""a""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""d""a""t""a"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""a""u""t""o""H""i""d""e"")"" ""{"" ""/""/"" ""f""o""r"" ""t""a""b""l""e""t""s"" ""a""n""d"" ""t""o""u""c""h"" ""s""c""r""e""e""n""s"" ""t""h""i""s"" ""n""e""e""d""s"" ""t""o"" ""r""e""m""a""i""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"".""r""e""m""o""v""e""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""v""i""s""i""b""l""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""h""i""s"".""r""e""m""o""v""e""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""h""o""v""e""r"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"","
+" "" "" "" ""/""/"" ""o""p""e""r""a""t""i""o""n""s"
+" "" "" "" "" "" "" "" ""o""p"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""s""h""o""w"":"" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""x"","" ""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""r""i""g""g""e""r"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""s""s"" ""="" ""{""}"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""i""d""e"" ""a""n""y"" ""o""p""e""n"" ""m""e""n""u""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""'""#""c""o""n""t""e""x""t""-""m""e""n""u""-""l""a""y""e""r""'"")"".""t""r""i""g""g""e""r""(""'""m""o""u""s""e""d""o""w""n""'"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""a""c""k""r""e""f""e""r""e""n""c""e"" ""f""o""r"" ""c""a""l""l""b""a""c""k""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""t""r""i""g""g""e""r"" ""="" ""$""t""r""i""g""g""e""r"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""h""o""w"" ""e""v""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""e""v""e""n""t""s"".""s""h""o""w"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""o""p""t"")"" ""=""=""="" ""f""a""l""s""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""o""r"" ""u""p""d""a""t""e"" ""c""o""n""t""e""x""t"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""u""p""d""a""t""e"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""o""p""t"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""o""s""i""t""i""o""n"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""p""o""s""i""t""i""o""n"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""o""p""t"","" ""x"","" ""y"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""a""k""e"" ""s""u""r""e"" ""w""e""'""r""e"" ""i""n"" ""f""r""o""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""z""I""n""d""e""x"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""a""d""d""i""t""i""o""n""a""l""Z""V""a""l""u""e"" ""="" ""o""p""t"".""z""I""n""d""e""x"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""f"" ""o""p""t"".""z""I""n""d""e""x"" ""i""s"" ""a"" ""f""u""n""c""t""i""o""n"","" ""c""a""l""l"" ""t""h""e"" ""f""u""n""c""t""i""o""n"" ""t""o"" ""g""e""t"" ""t""h""e"" ""r""i""g""h""t"" ""z""I""n""d""e""x""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""o""p""t"".""z""I""n""d""e""x"" ""=""=""="" ""'""f""u""n""c""t""i""o""n""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""a""d""d""i""t""i""o""n""a""l""Z""V""a""l""u""e"" ""="" ""o""p""t"".""z""I""n""d""e""x"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""s""s"".""z""I""n""d""e""x"" ""="" ""z""i""n""d""e""x""(""$""t""r""i""g""g""e""r"")"" ""+"" ""a""d""d""i""t""i""o""n""a""l""Z""V""a""l""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""d""d"" ""l""a""y""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""l""a""y""e""r"".""c""a""l""l""(""o""p""t"".""$""m""e""n""u"","" ""o""p""t"","" ""c""s""s"".""z""I""n""d""e""x"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""d""j""u""s""t"" ""s""u""b""-""m""e""n""u"" ""z""I""n""d""e""x""e""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""f""i""n""d""(""'""u""l""'"")"".""c""s""s""(""'""z""I""n""d""e""x""'"","" ""c""s""s"".""z""I""n""d""e""x"" ""+"" ""1"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""o""s""i""t""i""o""n"" ""a""n""d"" ""s""h""o""w"" ""c""o""n""t""e""x""t"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""c""s""s""(""c""s""s"")""[""o""p""t"".""a""n""i""m""a""t""i""o""n"".""s""h""o""w""]""(""o""p""t"".""a""n""i""m""a""t""i""o""n"".""d""u""r""a""t""i""o""n"","" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""r""i""g""g""e""r"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""v""i""s""i""b""l""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""a""k""e"" ""o""p""t""i""o""n""s"" ""a""v""a""i""l""a""b""l""e"" ""a""n""d"" ""s""e""t"" ""s""t""a""t""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"","" ""o""p""t"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""a""c""t""i""v""e""'"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""g""i""s""t""e""r"" ""k""e""y"" ""h""a""n""d""l""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""d""o""c""u""m""e""n""t"")"".""o""f""f""(""'""k""e""y""d""o""w""n"".""c""o""n""t""e""x""t""M""e""n""u""'"")"".""o""n""(""'""k""e""y""d""o""w""n"".""c""o""n""t""e""x""t""M""e""n""u""'"","" ""h""a""n""d""l""e"".""k""e""y"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""g""i""s""t""e""r"" ""a""u""t""o""H""i""d""e"" ""h""a""n""d""l""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""a""u""t""o""H""i""d""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""o""u""s""e"" ""p""o""s""i""t""i""o""n"" ""h""a""n""d""l""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""d""o""c""u""m""e""n""t"")"".""o""n""(""'""m""o""u""s""e""m""o""v""e"".""c""o""n""t""e""x""t""M""e""n""u""A""u""t""o""H""i""d""e""'"","" ""f""u""n""c""t""i""o""n"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""n""e""e""d"" ""t""o"" ""c""a""p""t""u""r""e"" ""t""h""e"" ""o""f""f""s""e""t"" ""o""n"" ""m""o""u""s""e""m""o""v""e"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""s""i""n""c""e"" ""t""h""e"" ""p""a""g""e"" ""m""i""g""h""t""'""v""e"" ""b""e""e""n"" ""s""c""r""o""l""l""e""d"" ""s""i""n""c""e"" ""a""c""t""i""v""a""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""p""o""s"" ""="" ""$""t""r""i""g""g""e""r"".""o""f""f""s""e""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""o""s"".""r""i""g""h""t"" ""="" ""p""o""s"".""l""e""f""t"" ""+"" ""$""t""r""i""g""g""e""r"".""o""u""t""e""r""W""i""d""t""h""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""o""s"".""b""o""t""t""o""m"" ""="" ""p""o""s"".""t""o""p"" ""+"" ""$""t""r""i""g""g""e""r"".""o""u""t""e""r""H""e""i""g""h""t""("")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""l""a""y""e""r"" ""&""&"" ""!""o""p""t"".""h""o""v""e""r""i""n""g"" ""&""&"" ""(""!""(""e"".""p""a""g""e""X"" "">""="" ""p""o""s"".""l""e""f""t"" ""&""&"" ""e"".""p""a""g""e""X"" ""<""="" ""p""o""s"".""r""i""g""h""t"")"" ""|""|"" ""!""(""e"".""p""a""g""e""Y"" "">""="" ""p""o""s"".""t""o""p"" ""&""&"" ""e"".""p""a""g""e""Y"" ""<""="" ""p""o""s"".""b""o""t""t""o""m"")"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""*"" ""A""d""d""i""t""i""o""n""a""l"" ""h""o""v""e""r"" ""c""h""e""c""k"" ""a""f""t""e""r"" ""s""h""o""r""t"" ""t""i""m""e"","" ""y""o""u"" ""m""i""g""h""t"" ""j""u""s""t"" ""m""i""s""s"" ""t""h""e"" ""e""d""g""e"" ""o""f"" ""t""h""e"" ""m""e""n""u"" ""*""/"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""t""T""i""m""e""o""u""t""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o""p""t"".""h""o""v""e""r""i""n""g"" ""&""&"" ""o""p""t"".""$""m""e""n""u"" ""!""="" ""n""u""l""l"")"" ""{"" ""o""p""t"".""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"")"";"" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"","" ""5""0"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""h""i""d""e"":"" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""f""o""r""c""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""r""i""g""g""e""r"" ""="" ""$""(""t""h""i""s"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o""p""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"" ""="" ""$""t""r""i""g""g""e""r"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""|""|"" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""i""d""e"" ""e""v""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""f""o""r""c""e"" ""&""&"" ""o""p""t"".""e""v""e""n""t""s"" ""&""&"" ""o""p""t"".""e""v""e""n""t""s"".""h""i""d""e"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""o""p""t"")"" ""=""=""="" ""f""a""l""s""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""m""o""v""e"" ""o""p""t""i""o""n""s"" ""a""n""d"" ""r""e""v""e""r""t"" ""s""t""a""t""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""r""i""g""g""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""r""e""m""o""v""e""D""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""r""e""m""o""v""e""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""a""c""t""i""v""e""'"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""$""l""a""y""e""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""k""e""e""p"" ""l""a""y""e""r"" ""f""o""r"" ""a"" ""b""i""t"" ""s""o"" ""t""h""e"" ""c""o""n""t""e""x""t""m""e""n""u"" ""e""v""e""n""t"" ""c""a""n"" ""b""e"" ""a""b""o""r""t""e""d"" ""p""r""o""p""e""r""l""y"" ""b""y"" ""o""p""e""r""a"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""t""T""i""m""e""o""u""t""(""(""f""u""n""c""t""i""o""n"" ""(""$""l""a""y""e""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""l""a""y""e""r"".""r""e""m""o""v""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")""(""o""p""t"".""$""l""a""y""e""r"")"","" ""1""0"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""l""e""t""e"" ""o""p""t"".""$""l""a""y""e""r"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""l""a""y""e""r"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""m""o""v""e"" ""h""a""n""d""l""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""u""r""r""e""n""t""T""r""i""g""g""e""r"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""m""o""v""e"" ""s""e""l""e""c""t""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""f""i""n""d""(""'"".""'"" ""+"" ""o""p""t"".""c""l""a""s""s""N""a""m""e""s"".""h""o""v""e""r"")"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""s""e""l""e""c""t""e""d"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""o""l""l""a""p""s""e"" ""a""l""l"" ""s""u""b""m""e""n""u""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""f""i""n""d""(""'"".""'"" ""+"" ""o""p""t"".""c""l""a""s""s""N""a""m""e""s"".""v""i""s""i""b""l""e"")"".""r""e""m""o""v""e""C""l""a""s""s""(""o""p""t"".""c""l""a""s""s""N""a""m""e""s"".""v""i""s""i""b""l""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""u""n""r""e""g""i""s""t""e""r"" ""k""e""y"" ""a""n""d"" ""m""o""u""s""e"" ""h""a""n""d""l""e""r""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""$""(""d""o""c""u""m""e""n""t"")"".""o""f""f""(""'"".""c""o""n""t""e""x""t""M""e""n""u""A""u""t""o""H""i""d""e"" ""k""e""y""d""o""w""n"".""c""o""n""t""e""x""t""M""e""n""u""'"")"";"" ""/""/"" ""h""t""t""p"":""/""/""b""u""g""s"".""j""q""u""e""r""y"".""c""o""m""/""t""i""c""k""e""t""/""1""0""7""0""5"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""d""o""c""u""m""e""n""t"")"".""o""f""f""(""'"".""c""o""n""t""e""x""t""M""e""n""u""A""u""t""o""H""i""d""e""'"")"".""o""f""f""(""'""k""e""y""d""o""w""n"".""c""o""n""t""e""x""t""M""e""n""u""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""i""d""e"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""o""p""t"".""$""m""e""n""u"")""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u""[""o""p""t"".""a""n""i""m""a""t""i""o""n"".""h""i""d""e""]""(""o""p""t"".""a""n""i""m""a""t""i""o""n"".""d""u""r""a""t""i""o""n"","" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""t""e""a""r"" ""d""o""w""n"" ""d""y""n""a""m""i""c""a""l""l""y"" ""b""u""i""l""t"" ""m""e""n""u"" ""a""f""t""e""r"" ""a""n""i""m""a""t""i""o""n"" ""i""s"" ""c""o""m""p""l""e""t""e""d""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""t"".""b""u""i""l""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""r""e""m""o""v""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""o""p""t"","" ""f""u""n""c""t""i""o""n"" ""(""k""e""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""k""e""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""n""s""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""s""e""l""e""c""t""o""r""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""b""u""i""l""d""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""r""i""g""g""e""r""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""r""u""e"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t""[""k""e""y""]"" ""="" ""u""n""d""e""f""i""n""e""d"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""l""e""t""e"" ""o""p""t""[""k""e""y""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""t""T""i""m""e""o""u""t""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t""r""i""g""g""e""r"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""d""e""n""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"","" ""1""0"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""c""r""e""a""t""e"":"" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""r""o""o""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""o""p""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""c""o""n""t""e""x""t""M""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"" ""="" ""$""(""'""<""u""l"" ""c""l""a""s""s""="""""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""""">""<""/""u""l"">""'"")"".""a""d""d""C""l""a""s""s""(""o""p""t"".""c""l""a""s""s""N""a""m""e"" ""|""|"" ""'""'"")"".""d""a""t""a""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""o""p""t"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t""'"":"" ""r""o""o""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""[""'""c""a""l""l""b""a""c""k""s""'"","" ""'""c""o""m""m""a""n""d""s""'"","" ""'""i""n""p""u""t""s""'""]"","" ""f""u""n""c""t""i""o""n"" ""(""i"","" ""k"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t""[""k""]"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""r""o""o""t""[""k""]"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t""[""k""]"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""!""r""o""o""t"".""a""c""c""e""s""s""k""e""y""s"")""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""a""c""c""e""s""s""k""e""y""s"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""u""n""c""t""i""o""n"" ""c""r""e""a""t""e""N""a""m""e""N""o""d""e""(""i""t""e""m"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""n""a""m""e"" ""="" ""$""(""'""<""s""p""a""n"">""<""/""s""p""a""n"">""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""_""a""c""c""e""s""s""k""e""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""_""b""e""f""o""r""e""A""c""c""e""s""s""k""e""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""a""m""e"".""a""p""p""e""n""d""(""d""o""c""u""m""e""n""t"".""c""r""e""a""t""e""T""e""x""t""N""o""d""e""(""i""t""e""m"".""_""b""e""f""o""r""e""A""c""c""e""s""s""k""e""y"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""'""<""s""p""a""n"">""<""/""s""p""a""n"">""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""a""c""c""e""s""s""k""e""y""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""t""e""x""t""(""i""t""e""m"".""_""a""c""c""e""s""s""k""e""y"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""p""p""e""n""d""T""o""(""$""n""a""m""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""_""a""f""t""e""r""A""c""c""e""s""s""k""e""y"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""a""m""e"".""a""p""p""e""n""d""(""d""o""c""u""m""e""n""t"".""c""r""e""a""t""e""T""e""x""t""N""o""d""e""(""i""t""e""m"".""_""a""f""t""e""r""A""c""c""e""s""s""k""e""y"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""i""s""H""t""m""l""N""a""m""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""s""t""r""i""c""t"" ""u""s""e"" ""w""i""t""h"" ""a""c""c""e""s""s"" ""k""e""y""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""i""t""e""m"".""a""c""c""e""s""s""k""e""y"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""r""r""o""r""(""'""a""c""c""e""s""s""k""e""y""s"" ""a""r""e"" ""n""o""t"" ""c""o""m""p""a""t""i""b""l""e"" ""w""i""t""h"" ""H""T""M""L"" ""n""a""m""e""s"" ""a""n""d"" ""c""a""n""n""o""t"" ""b""e"" ""u""s""e""d"" ""t""o""g""e""t""h""e""r"" ""i""n"" ""t""h""e"" ""s""a""m""e"" ""i""t""e""m""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""a""m""e"".""h""t""m""l""(""i""t""e""m"".""n""a""m""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""a""m""e"".""t""e""x""t""(""i""t""e""m"".""n""a""m""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""$""n""a""m""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""i""t""e""m""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""o""p""t"".""i""t""e""m""s"","" ""f""u""n""c""t""i""o""n"" ""(""k""e""y"","" ""i""t""e""m"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t"" ""="" ""$""(""'""<""l""i"" ""c""l""a""s""s""="""""c""o""n""t""e""x""t""-""m""e""n""u""-""i""t""e""m""""">""<""/""l""i"">""'"")"".""a""d""d""C""l""a""s""s""(""i""t""e""m"".""c""l""a""s""s""N""a""m""e"" ""|""|"" ""'""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""l""a""b""e""l"" ""="" ""n""u""l""l"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"" ""="" ""n""u""l""l"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""O""S"" ""n""e""e""d""s"" ""t""o"" ""s""e""e"" ""a"" ""c""l""i""c""k""-""e""v""e""n""t"" ""b""o""u""n""d"" ""t""o"" ""a""n"" ""e""l""e""m""e""n""t"" ""t""o"" ""a""c""t""u""a""l""l""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""a""v""e"" ""t""h""e"" ""T""o""u""c""h""E""v""e""n""t""s"" ""i""n""f""r""a""s""t""r""u""c""t""u""r""e"" ""t""r""i""g""g""e""r"" ""t""h""e"" ""c""l""i""c""k"" ""e""v""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""o""n""(""'""c""l""i""c""k""'"","" ""$"".""n""o""o""p"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""M""a""k""e"" ""o""l""d"" ""s""c""h""o""o""l"" ""s""t""r""i""n""g"" ""s""e""p""e""r""a""t""o""r"" ""a"" ""r""e""a""l"" ""i""t""e""m"" ""s""o"" ""c""h""e""c""k""s"" ""w""o""n""t"" ""b""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""k""w""a""r""d"" ""l""a""t""e""r""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""A""n""d"" ""n""o""r""m""a""l""i""z""e"" ""'""c""m""_""s""e""p""a""r""a""t""o""r""'"" ""i""n""t""o"" ""'""c""m""_""s""e""p""e""r""a""t""o""r""'""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""i""t""e""m"" ""=""=""="" ""'""s""t""r""i""n""g""'"" ""|""|"" ""i""t""e""m"".""t""y""p""e"" ""=""=""="" ""'""c""m""_""s""e""p""a""r""a""t""o""r""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"" ""t""y""p""e"" "":"" ""'""c""m""_""s""e""p""e""r""a""t""o""r""'"" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""$""n""o""d""e"" ""="" ""$""t"".""d""a""t""a""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""o""p""t"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t""'"":"" ""r""o""o""t"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""M""e""n""u""K""e""y""'"":"" ""k""e""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""g""i""s""t""e""r"" ""a""c""c""e""s""s""k""e""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""N""O""T""E"":"" ""t""h""e"" ""a""c""c""e""s""s""k""e""y"" ""a""t""t""r""i""b""u""t""e"" ""s""h""o""u""l""d"" ""b""e"" ""a""p""p""l""i""c""a""b""l""e"" ""t""o"" ""a""n""y"" ""e""l""e""m""e""n""t"","" ""b""u""t"" ""S""a""f""a""r""i""5"" ""a""n""d"" ""C""h""r""o""m""e""1""3"" ""s""t""i""l""l"" ""c""a""n""'""t"" ""d""o"" ""t""h""a""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""i""t""e""m"".""a""c""c""e""s""s""k""e""y"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""a""k""s"" ""="" ""s""p""l""i""t""A""c""c""e""s""s""k""e""y""(""i""t""e""m"".""a""c""c""e""s""s""k""e""y"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""o""r"" ""(""v""a""r"" ""i"" ""="" ""0"","" ""a""k"";"" ""a""k"" ""="" ""a""k""s""[""i""]"";"" ""i""+""+"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""r""o""o""t"".""a""c""c""e""s""s""k""e""y""s""[""a""k""]"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""a""c""c""e""s""s""k""e""y""s""[""a""k""]"" ""="" ""i""t""e""m"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""m""a""t""c""h""e""d"" ""="" ""i""t""e""m"".""n""a""m""e"".""m""a""t""c""h""(""n""e""w"" ""R""e""g""E""x""p""(""'""^""("".""*""?"")""(""'"" ""+"" ""a""k"" ""+"" ""'"")""("".""*"")""$""'"","" ""'""i""'"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""m""a""t""c""h""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""_""b""e""f""o""r""e""A""c""c""e""s""s""k""e""y"" ""="" ""m""a""t""c""h""e""d""[""1""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""_""a""c""c""e""s""s""k""e""y"" ""="" ""m""a""t""c""h""e""d""[""2""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""_""a""f""t""e""r""A""c""c""e""s""s""k""e""y"" ""="" ""m""a""t""c""h""e""d""[""3""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""t""y""p""e"" ""&""&"" ""t""y""p""e""s""[""i""t""e""m"".""t""y""p""e""]"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""u""n"" ""c""u""s""t""o""m"" ""t""y""p""e"" ""h""a""n""d""l""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e""s""[""i""t""e""m"".""t""y""p""e""]"".""c""a""l""l""(""$""t"","" ""i""t""e""m"","" ""o""p""t"","" ""r""o""o""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""g""i""s""t""e""r"" ""c""o""m""m""a""n""d""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""[""o""p""t"","" ""r""o""o""t""]"","" ""f""u""n""c""t""i""o""n"" ""(""i"","" ""k"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k"".""c""o""m""m""a""n""d""s""[""k""e""y""]"" ""="" ""i""t""e""m"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""O""v""e""r""w""r""i""t""e"" ""o""n""l""y"" ""i""f"" ""u""n""d""e""f""i""n""e""d"" ""o""r"" ""t""h""e"" ""i""t""e""m"" ""i""s"" ""a""p""p""e""n""d""e""d"" ""t""o"" ""t""h""e"" ""r""o""o""t""."" ""T""h""i""s"" ""s""o"" ""i""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""o""e""s""n""'""t"" ""o""v""e""r""w""r""i""t""e"" ""c""a""l""l""b""a""c""k""s"" ""o""f"" ""r""o""o""t"" ""e""l""e""m""e""n""t""s"" ""i""f"" ""t""h""e"" ""n""a""m""e"" ""i""s"" ""t""h""e"" ""s""a""m""e""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""i""t""e""m"".""c""a""l""l""b""a""c""k"")"" ""&""&"" ""(""k"".""c""a""l""l""b""a""c""k""s""[""k""e""y""]"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"" ""|""|"" ""o""p""t"".""t""y""p""e"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k"".""c""a""l""l""b""a""c""k""s""[""k""e""y""]"" ""="" ""i""t""e""m"".""c""a""l""l""b""a""c""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""d""d"" ""l""a""b""e""l"" ""f""o""r"" ""i""n""p""u""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""t""y""p""e"" ""=""=""="" ""'""c""m""_""s""e""p""e""r""a""t""o""r""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""s""e""p""a""r""a""t""o""r"" ""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""i""t""e""m"".""t""y""p""e"" ""=""=""="" ""'""h""t""m""l""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""h""t""m""l"" ""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""n""o""t""S""e""l""e""c""t""a""b""l""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""i""t""e""m"".""t""y""p""e"" ""=""=""="" ""'""s""u""b""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""W""e"" ""d""o""n""'""t"" ""w""a""n""t"" ""t""o"" ""e""x""e""c""u""t""e"" ""t""h""e"" ""n""e""x""t"" ""e""l""s""e""-""i""f"" ""i""f"" ""i""t"" ""i""s"" ""a"" ""s""u""b""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""i""t""e""m"".""t""y""p""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""l""a""b""e""l"" ""="" ""$""(""'""<""l""a""b""e""l"">""<""/""l""a""b""e""l"">""'"")"".""a""p""p""e""n""d""T""o""(""$""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""r""e""a""t""e""N""a""m""e""N""o""d""e""(""i""t""e""m"")"".""a""p""p""e""n""d""T""o""(""$""l""a""b""e""l"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""n""p""u""t""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""h""a""s""T""y""p""e""s"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""[""o""p""t"","" ""r""o""o""t""]"","" ""f""u""n""c""t""i""o""n"" ""(""i"","" ""k"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k"".""c""o""m""m""a""n""d""s""[""k""e""y""]"" ""="" ""i""t""e""m"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k"".""i""n""p""u""t""s""[""k""e""y""]"" ""="" ""i""t""e""m"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""i""t""e""m"".""i""t""e""m""s"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""t""y""p""e"" ""="" ""'""s""u""b""'"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""i""t""e""m"".""t""y""p""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""m""_""s""e""p""e""r""a""t""o""r""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"" ""="" ""$""(""'""<""i""n""p""u""t"" ""t""y""p""e""="""""t""e""x""t""""" ""v""a""l""u""e""="""""1""""" ""n""a""m""e""="""""""" ""/"">""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""t""t""r""(""'""n""a""m""e""'"","" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""n""p""u""t""-""'"" ""+"" ""k""e""y"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""v""a""l""(""i""t""e""m"".""v""a""l""u""e"" ""|""|"" ""'""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""p""p""e""n""d""T""o""(""$""l""a""b""e""l"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""a""r""e""a""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"" ""="" ""$""(""'""<""t""e""x""t""a""r""e""a"" ""n""a""m""e""="""""""">""<""/""t""e""x""t""a""r""e""a"">""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""t""t""r""(""'""n""a""m""e""'"","" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""n""p""u""t""-""'"" ""+"" ""k""e""y"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""v""a""l""(""i""t""e""m"".""v""a""l""u""e"" ""|""|"" ""'""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""p""p""e""n""d""T""o""(""$""l""a""b""e""l"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""h""e""i""g""h""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"".""h""e""i""g""h""t""(""i""t""e""m"".""h""e""i""g""h""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""h""e""c""k""b""o""x""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"" ""="" ""$""(""'""<""i""n""p""u""t"" ""t""y""p""e""="""""c""h""e""c""k""b""o""x""""" ""v""a""l""u""e""="""""1""""" ""n""a""m""e""="""""""" ""/"">""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""t""t""r""(""'""n""a""m""e""'"","" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""n""p""u""t""-""'"" ""+"" ""k""e""y"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""v""a""l""(""i""t""e""m"".""v""a""l""u""e"" ""|""|"" ""'""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""p""r""o""p""(""'""c""h""e""c""k""e""d""'"","" ""!""!""i""t""e""m"".""s""e""l""e""c""t""e""d"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""p""r""e""p""e""n""d""T""o""(""$""l""a""b""e""l"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""r""a""d""i""o""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"" ""="" ""$""(""'""<""i""n""p""u""t"" ""t""y""p""e""="""""r""a""d""i""o""""" ""v""a""l""u""e""="""""1""""" ""n""a""m""e""="""""""" ""/"">""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""t""t""r""(""'""n""a""m""e""'"","" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""n""p""u""t""-""'"" ""+"" ""i""t""e""m"".""r""a""d""i""o"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""v""a""l""(""i""t""e""m"".""v""a""l""u""e"" ""|""|"" ""'""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""p""r""o""p""(""'""c""h""e""c""k""e""d""'"","" ""!""!""i""t""e""m"".""s""e""l""e""c""t""e""d"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""p""r""e""p""e""n""d""T""o""(""$""l""a""b""e""l"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""s""e""l""e""c""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"" ""="" ""$""(""'""<""s""e""l""e""c""t"" ""n""a""m""e""="""""""">""<""/""s""e""l""e""c""t"">""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""t""t""r""(""'""n""a""m""e""'"","" ""'""c""o""n""t""e""x""t""-""m""e""n""u""-""i""n""p""u""t""-""'"" ""+"" ""k""e""y"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""a""p""p""e""n""d""T""o""(""$""l""a""b""e""l"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""o""p""t""i""o""n""s"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""i""t""e""m"".""o""p""t""i""o""n""s"","" ""f""u""n""c""t""i""o""n"" ""(""v""a""l""u""e"","" ""t""e""x""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""'""<""o""p""t""i""o""n"">""<""/""o""p""t""i""o""n"">""'"")"".""v""a""l""(""v""a""l""u""e"")"".""t""e""x""t""(""t""e""x""t"")"".""a""p""p""e""n""d""T""o""(""$""i""n""p""u""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"".""v""a""l""(""i""t""e""m"".""s""e""l""e""c""t""e""d"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""s""u""b""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""r""e""a""t""e""N""a""m""e""N""o""d""e""(""i""t""e""m"")"".""a""p""p""e""n""d""T""o""(""$""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""a""p""p""e""n""d""T""o"" ""="" ""i""t""e""m"".""$""n""o""d""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"","" ""i""t""e""m"")"".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""s""u""b""m""e""n""u""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""c""a""l""l""b""a""c""k"" ""="" ""n""u""l""l"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""f"" ""i""t""e""m"" ""c""o""n""t""a""i""n""s"" ""i""t""e""m""s"","" ""a""n""d"" ""t""h""i""s"" ""i""s"" ""a"" ""p""r""o""m""i""s""e"","" ""w""e"" ""s""h""o""u""l""d"" ""c""r""e""a""t""e"" ""i""t"" ""l""a""t""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""h""e""c""k"" ""i""f"" ""s""u""b""i""t""e""m""s"" ""i""s"" ""o""f"" ""t""y""p""e"" ""p""r""o""m""i""s""e""."" ""I""f"" ""i""t"" ""i""s"" ""a"" ""p""r""o""m""i""s""e"" ""w""e"" ""n""e""e""d"" ""t""o"" ""c""r""e""a""t""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""t"" ""l""a""t""e""r"","" ""a""f""t""e""r"" ""p""r""o""m""i""s""e"" ""h""a""s"" ""b""e""e""n"" ""r""e""s""o""l""v""e""d""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""'""f""u""n""c""t""i""o""n""'"" ""=""=""="" ""t""y""p""e""o""f"" ""i""t""e""m"".""i""t""e""m""s"".""t""h""e""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""r""o""b""a""b""l""y"" ""a"" ""p""r""o""m""i""s""e"","" ""p""r""o""c""e""s""s"" ""i""t"","" ""w""h""e""n"" ""c""o""m""p""l""e""t""e""d"" ""i""t"" ""w""i""l""l"" ""c""r""e""a""t""e"" ""t""h""e"" ""s""u""b"" ""m""e""n""u""'""s""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""p""r""o""c""e""s""s""P""r""o""m""i""s""e""s""(""i""t""e""m"","" ""r""o""o""t"","" ""i""t""e""m"".""i""t""e""m""s"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""n""o""r""m""a""l"" ""s""u""b""m""e""n""u""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""c""r""e""a""t""e""(""i""t""e""m"","" ""r""o""o""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""h""t""m""l""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""i""t""e""m"".""h""t""m""l"")"".""a""p""p""e""n""d""T""o""(""$""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""[""o""p""t"","" ""r""o""o""t""]"","" ""f""u""n""c""t""i""o""n"" ""(""i"","" ""k"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k"".""c""o""m""m""a""n""d""s""[""k""e""y""]"" ""="" ""i""t""e""m"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""O""v""e""r""w""r""i""t""e"" ""o""n""l""y"" ""i""f"" ""u""n""d""e""f""i""n""e""d"" ""o""r"" ""t""h""e"" ""i""t""e""m"" ""i""s"" ""a""p""p""e""n""d""e""d"" ""t""o"" ""t""h""e"" ""r""o""o""t""."" ""T""h""i""s"" ""s""o"" ""i""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""o""e""s""n""'""t"" ""o""v""e""r""w""r""i""t""e"" ""c""a""l""l""b""a""c""k""s"" ""o""f"" ""r""o""o""t"" ""e""l""e""m""e""n""t""s"" ""i""f"" ""t""h""e"" ""n""a""m""e"" ""i""s"" ""t""h""e"" ""s""a""m""e""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""i""t""e""m"".""c""a""l""l""b""a""c""k"")"" ""&""&"" ""(""k"".""c""a""l""l""b""a""c""k""s""[""k""e""y""]"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"" ""|""|"" ""o""p""t"".""t""y""p""e"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k"".""c""a""l""l""b""a""c""k""s""[""k""e""y""]"" ""="" ""i""t""e""m"".""c""a""l""l""b""a""c""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""r""e""a""t""e""N""a""m""e""N""o""d""e""(""i""t""e""m"")"".""a""p""p""e""n""d""T""o""(""$""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""i""s""a""b""l""e"" ""k""e""y"" ""l""i""s""t""e""n""e""r"" ""i""n"" ""<""i""n""p""u""t"">"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""t""y""p""e"" ""&""&"" ""i""t""e""m"".""t""y""p""e"" ""!""=""="" ""'""s""u""b""'"" ""&""&"" ""i""t""e""m"".""t""y""p""e"" ""!""=""="" ""'""h""t""m""l""'"" ""&""&"" ""i""t""e""m"".""t""y""p""e"" ""!""=""="" ""'""c""m""_""s""e""p""e""r""a""t""o""r""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""f""o""c""u""s""'"","" ""h""a""n""d""l""e"".""f""o""c""u""s""I""n""p""u""t"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""b""l""u""r""'"","" ""h""a""n""d""l""e"".""b""l""u""r""I""n""p""u""t"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""e""v""e""n""t""s"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""n""p""u""t"".""o""n""(""i""t""e""m"".""e""v""e""n""t""s"","" ""o""p""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""d""d"" ""i""c""o""n""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""i""c""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""i""t""e""m"".""i""c""o""n"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""_""i""c""o""n"" ""="" ""i""t""e""m"".""i""c""o""n"".""c""a""l""l""(""t""h""i""s"","" ""t""h""i""s"","" ""$""t"","" ""k""e""y"","" ""i""t""e""m"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""("" ""t""y""p""e""o""f""(""i""t""e""m"".""i""c""o""n"")"" ""=""=""="" ""'""s""t""r""i""n""g""'"" ""&""&"" ""i""t""e""m"".""i""c""o""n"".""s""u""b""s""t""r""i""n""g""(""0"",""3"")"" ""=""="" ""'""f""a""-""'"" "")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""t""o"" ""e""n""a""b""l""e"" ""f""o""n""t"" ""a""w""e""s""o""m""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""_""i""c""o""n"" ""="" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""i""c""o""n"" ""+"" ""'"" ""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""i""c""o""n"" ""+"" ""'""-""-""f""a"" ""f""a"" ""'"" ""+"" ""i""t""e""m"".""i""c""o""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""_""i""c""o""n"" ""="" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""i""c""o""n"" ""+"" ""'"" ""'"" ""+"" ""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""i""c""o""n"" ""+"" ""'""-""'"" ""+"" ""i""t""e""m"".""i""c""o""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""a""d""d""C""l""a""s""s""(""i""t""e""m"".""_""i""c""o""n"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""a""c""h""e"" ""c""o""n""t""a""i""n""e""d"" ""e""l""e""m""e""n""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""$""i""n""p""u""t"" ""="" ""$""i""n""p""u""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""$""l""a""b""e""l"" ""="" ""$""l""a""b""e""l"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""t""t""a""c""h"" ""i""t""e""m"" ""t""o"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""a""p""p""e""n""d""T""o""(""o""p""t"".""$""m""e""n""u"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""D""i""s""a""b""l""e"" ""t""e""x""t"" ""s""e""l""e""c""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o""p""t"".""h""a""s""T""y""p""e""s"" ""&""&"" ""$"".""s""u""p""p""o""r""t"".""e""v""e""n""t""S""e""l""e""c""t""s""t""a""r""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""r""o""w""s""e""r""s"" ""s""u""p""p""o""r""t"" ""u""s""e""r""-""s""e""l""e""c""t"":"" ""n""o""n""e"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""E"" ""h""a""s"" ""a"" ""s""p""e""c""i""a""l"" ""e""v""e""n""t"" ""f""o""r"" ""t""e""x""t""-""s""e""l""e""c""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""r""o""w""s""e""r""s"" ""s""u""p""p""o""r""t""i""n""g"" ""n""e""i""t""h""e""r"" ""w""i""l""l"" ""n""o""t"" ""b""e"" ""p""r""e""v""e""n""t""i""n""g"" ""t""e""x""t""-""s""e""l""e""c""t""i""o""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""t"".""o""n""(""'""s""e""l""e""c""t""s""t""a""r""t"".""d""i""s""a""b""l""e""T""e""x""t""S""e""l""e""c""t""'"","" ""h""a""n""d""l""e"".""a""b""o""r""t""e""v""e""n""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""t""t""a""c""h"" ""c""o""n""t""e""x""t""M""e""n""u"" ""t""o"" ""<""b""o""d""y"">"" ""(""t""o"" ""b""y""p""a""s""s"" ""a""n""y"" ""p""o""s""s""i""b""l""e"" ""o""v""e""r""f""l""o""w"":""h""i""d""d""e""n"" ""i""s""s""u""e""s"" ""o""n"" ""p""a""r""e""n""t""s"" ""o""f"" ""t""h""e"" ""t""r""i""g""g""e""r"" ""e""l""e""m""e""n""t"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o""p""t"".""$""n""o""d""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""c""s""s""(""'""d""i""s""p""l""a""y""'"","" ""'""n""o""n""e""'"")"".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""r""o""o""t""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""a""p""p""e""n""d""T""o""(""o""p""t"".""a""p""p""e""n""d""T""o"" ""|""|"" ""d""o""c""u""m""e""n""t"".""b""o""d""y"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""r""e""s""i""z""e"":"" ""f""u""n""c""t""i""o""n"" ""(""$""m""e""n""u"","" ""n""e""s""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""d""o""m""M""e""n""u"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""w""i""d""t""h""s"" ""o""f"" ""s""u""b""m""e""n""u""s"","" ""a""s"" ""C""S""S"" ""w""o""n""'""t"" ""g""r""o""w"" ""t""h""e""m"" ""a""u""t""o""m""a""t""i""c""a""l""l""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""p""o""s""i""t""i""o""n"":""a""b""s""o""l""u""t""e"" ""w""i""t""h""i""n"" ""p""o""s""i""t""i""o""n"":""a""b""s""o""l""u""t""e"";"" ""m""i""n""-""w""i""d""t""h"":""1""0""0"";"" ""m""a""x""-""w""i""d""t""h"":""2""0""0"";"" ""r""e""s""u""l""t""s"" ""i""n"" ""w""i""d""t""h"":"" ""1""0""0"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""k""i""n""d""a"" ""s""u""c""k""s"" ""h""a""r""d""."".""."
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""t""e""r""m""i""n""e"" ""w""i""d""t""h"" ""o""f"" ""a""b""s""o""l""u""t""e""l""y"" ""p""o""s""i""t""i""o""n""e""d"" ""e""l""e""m""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""c""s""s""(""{""p""o""s""i""t""i""o""n"":"" ""'""a""b""s""o""l""u""t""e""'"","" ""d""i""s""p""l""a""y"":"" ""'""b""l""o""c""k""'""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""o""n""'""t"" ""a""p""p""l""y"" ""y""e""t"","" ""b""e""c""a""u""s""e"" ""t""h""a""t"" ""w""o""u""l""d"" ""b""r""e""a""k"" ""n""e""s""t""e""d"" ""e""l""e""m""e""n""t""s""'"" ""w""i""d""t""h""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""d""a""t""a""(""'""w""i""d""t""h""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""(""d""o""m""M""e""n""u"" ""="" ""$""m""e""n""u"".""g""e""t""(""0"")"")"".""g""e""t""B""o""u""n""d""i""n""g""C""l""i""e""n""t""R""e""c""t"" ""?"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""M""a""t""h"".""c""e""i""l""(""d""o""m""M""e""n""u"".""g""e""t""B""o""u""n""d""i""n""g""C""l""i""e""n""t""R""e""c""t""("")"".""w""i""d""t""h"")"" "":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""o""u""t""e""r""W""i""d""t""h""("")"" ""+"" ""1"")"";"" ""/""/"" ""o""u""t""e""r""W""i""d""t""h""("")"" ""r""e""t""u""r""n""s"" ""r""o""u""n""d""e""d"" ""p""i""x""e""l""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""s""e""t"" ""s""t""y""l""e""s"" ""s""o"" ""t""h""e""y"" ""a""l""l""o""w"" ""n""e""s""t""e""d"" ""e""l""e""m""e""n""t""s"" ""t""o"" ""g""r""o""w""/""s""h""r""i""n""k"" ""n""a""t""u""r""a""l""l""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""c""s""s""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""o""s""i""t""i""o""n"":"" ""'""s""t""a""t""i""c""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""i""n""W""i""d""t""h"":"" ""'""0""p""x""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""a""x""W""i""d""t""h"":"" ""'""1""0""0""0""0""0""p""x""'"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""d""e""n""t""i""f""y"" ""w""i""d""t""h"" ""o""f"" ""n""e""s""t""e""d"" ""m""e""n""u""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""f""i""n""d""(""'"">"" ""l""i"" "">"" ""u""l""'"")"".""e""a""c""h""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""r""e""s""i""z""e""(""$""(""t""h""i""s"")"","" ""t""r""u""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""s""e""t"" ""a""n""d"" ""a""p""p""l""y"" ""c""h""a""n""g""e""s"" ""i""n"" ""t""h""e"" ""e""n""d"" ""b""e""c""a""u""s""e"" ""n""e""s""t""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""e""l""e""m""e""n""t""s""'"" ""w""i""d""t""h""s"" ""w""o""u""l""d""n""'""t"" ""b""e"" ""c""a""l""c""u""l""a""t""a""b""l""e"" ""o""t""h""e""r""w""i""s""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""n""e""s""t""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""f""i""n""d""(""'""u""l""'"")"".""a""d""d""B""a""c""k""("")"".""c""s""s""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""o""s""i""t""i""o""n"":"" ""'""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""p""l""a""y"":"" ""'""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""i""n""W""i""d""t""h"":"" ""'""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""a""x""W""i""d""t""h"":"" ""'""'"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"".""o""u""t""e""r""W""i""d""t""h""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""$""(""t""h""i""s"")"".""d""a""t""a""(""'""w""i""d""t""h""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""u""p""d""a""t""e"":"" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""r""o""o""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""r""i""g""g""e""r"" ""="" ""t""h""i""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""o""p""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""r""e""s""i""z""e""(""o""p""t"".""$""m""e""n""u"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""r""e""-""c""h""e""c""k"" ""d""i""s""a""b""l""e""d"" ""f""o""r"" ""e""a""c""h"" ""i""t""e""m"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""m""e""n""u"".""c""h""i""l""d""r""e""n""("")"".""e""a""c""h""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""i""t""e""m"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""k""e""y"" ""="" ""$""i""t""e""m"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""K""e""y""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""o""p""t"".""i""t""e""m""s""[""k""e""y""]"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"" ""="" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""i""t""e""m"".""d""i""s""a""b""l""e""d"")"" ""&""&"" ""i""t""e""m"".""d""i""s""a""b""l""e""d"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""k""e""y"","" ""r""o""o""t"")"")"" ""|""|"" ""i""t""e""m"".""d""i""s""a""b""l""e""d"" ""=""=""="" ""t""r""u""e"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""i""t""e""m"".""v""i""s""i""b""l""e"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"" ""="" ""i""t""e""m"".""v""i""s""i""b""l""e"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""k""e""y"","" ""r""o""o""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""t""y""p""e""o""f"" ""i""t""e""m"".""v""i""s""i""b""l""e"" ""!""=""="" ""'""u""n""d""e""f""i""n""e""d""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"" ""="" ""i""t""e""m"".""v""i""s""i""b""l""e"" ""=""=""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""i""s""i""b""l""e"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""t""e""m""[""v""i""s""i""b""l""e"" ""?"" ""'""s""h""o""w""'"" "":"" ""'""h""i""d""e""'""]""("")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""i""s""-"" ""/"" ""e""n""a""b""l""e"" ""i""t""e""m"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""t""e""m""[""d""i""s""a""b""l""e""d"" ""?"" ""'""a""d""d""C""l""a""s""s""'"" "":"" ""'""r""e""m""o""v""e""C""l""a""s""s""'""]""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""d""i""s""a""b""l""e""d"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$"".""i""s""F""u""n""c""t""i""o""n""(""i""t""e""m"".""i""c""o""n"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""t""e""m"".""r""e""m""o""v""e""C""l""a""s""s""(""i""t""e""m"".""_""i""c""o""n"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""_""i""c""o""n"" ""="" ""i""t""e""m"".""i""c""o""n"".""c""a""l""l""(""t""h""i""s"","" ""$""t""r""i""g""g""e""r"","" ""$""i""t""e""m"","" ""k""e""y"","" ""i""t""e""m"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""t""e""m"".""a""d""d""C""l""a""s""s""(""i""t""e""m"".""_""i""c""o""n"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""t""y""p""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""i""s""-"" ""/"" ""e""n""a""b""l""e"" ""i""n""p""u""t"" ""e""l""e""m""e""n""t""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""i""t""e""m"".""f""i""n""d""(""'""i""n""p""u""t"","" ""s""e""l""e""c""t"","" ""t""e""x""t""a""r""e""a""'"")"".""p""r""o""p""(""'""d""i""s""a""b""l""e""d""'"","" ""d""i""s""a""b""l""e""d"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""u""p""d""a""t""e"" ""i""n""p""u""t"" ""s""t""a""t""e""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""i""t""e""m"".""t""y""p""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""a""r""e""a""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""$""i""n""p""u""t"".""v""a""l""(""i""t""e""m"".""v""a""l""u""e"" ""|""|"" ""'""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""h""e""c""k""b""o""x""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""r""a""d""i""o""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""$""i""n""p""u""t"".""v""a""l""(""i""t""e""m"".""v""a""l""u""e"" ""|""|"" ""'""'"")"".""p""r""o""p""(""'""c""h""e""c""k""e""d""'"","" ""!""!""i""t""e""m"".""s""e""l""e""c""t""e""d"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""s""e""l""e""c""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""$""i""n""p""u""t"".""v""a""l""(""i""t""e""m"".""s""e""l""e""c""t""e""d"" ""|""|"" ""'""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""$""m""e""n""u"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""u""p""d""a""t""e"" ""s""u""b""-""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""u""p""d""a""t""e"".""c""a""l""l""(""$""t""r""i""g""g""e""r"","" ""i""t""e""m"","" ""r""o""o""t"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""l""a""y""e""r"":"" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""z""I""n""d""e""x"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""d""d"" ""t""r""a""n""s""p""a""r""e""n""t"" ""l""a""y""e""r"" ""f""o""r"" ""c""l""i""c""k"" ""a""r""e""a"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""f""i""l""t""e""r"" ""a""n""d"" ""b""a""c""k""g""r""o""u""n""d"" ""f""o""r"" ""I""n""t""e""r""n""e""t"" ""E""x""p""l""o""r""e""r"","" ""I""s""s""u""e"" ""#""2""3"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""l""a""y""e""r"" ""="" ""o""p""t"".""$""l""a""y""e""r"" ""="" ""$""(""'""<""d""i""v"" ""i""d""="""""c""o""n""t""e""x""t""-""m""e""n""u""-""l""a""y""e""r""""" ""s""t""y""l""e""="""""p""o""s""i""t""i""o""n"":""f""i""x""e""d"";"" ""z""-""i""n""d""e""x"":""'"" ""+"" ""z""I""n""d""e""x"" ""+"" ""'"";"" ""t""o""p"":""0"";"" ""l""e""f""t"":""0"";"" ""o""p""a""c""i""t""y"":"" ""0"";"" ""f""i""l""t""e""r"":"" ""a""l""p""h""a""(""o""p""a""c""i""t""y""=""0"")"";"" ""b""a""c""k""g""r""o""u""n""d""-""c""o""l""o""r"":"" ""#""0""0""0"";""""">""<""/""d""i""v"">""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""c""s""s""(""{""h""e""i""g""h""t"":"" ""$""w""i""n"".""h""e""i""g""h""t""("")"","" ""w""i""d""t""h"":"" ""$""w""i""n"".""w""i""d""t""h""("")"","" ""d""i""s""p""l""a""y"":"" ""'""b""l""o""c""k""'""}"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t""'"","" ""o""p""t"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""i""n""s""e""r""t""B""e""f""o""r""e""(""t""h""i""s"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""h""a""n""d""l""e"".""a""b""o""r""t""e""v""e""n""t"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""m""o""u""s""e""d""o""w""n""'"","" ""h""a""n""d""l""e"".""l""a""y""e""r""C""l""i""c""k"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""E""6"" ""d""o""e""s""n""'""t"" ""k""n""o""w"" ""p""o""s""i""t""i""o""n"":""f""i""x""e""d"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""d""o""c""u""m""e""n""t"".""b""o""d""y"".""s""t""y""l""e"".""m""a""x""W""i""d""t""h"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"" ""/""/"" ""I""E""6"" ""d""o""e""s""n""'""t"" ""s""u""p""p""o""r""t"" ""m""a""x""W""i""d""t""h"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""l""a""y""e""r"".""c""s""s""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""p""o""s""i""t""i""o""n""'"":"" ""'""a""b""s""o""l""u""t""e""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""h""e""i""g""h""t""'"":"" ""$""(""d""o""c""u""m""e""n""t"")"".""h""e""i""g""h""t""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""$""l""a""y""e""r"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"","
+" "" "" "" "" "" "" "" "" "" "" "" ""p""r""o""c""e""s""s""P""r""o""m""i""s""e""s"":"" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""r""o""o""t"","" ""p""r""o""m""i""s""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""S""t""a""r""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""n""o""d""e"".""a""d""d""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""i""c""o""n""L""o""a""d""i""n""g""C""l""a""s""s"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""u""n""c""t""i""o""n"" ""c""o""m""p""l""e""t""e""d""P""r""o""m""i""s""e""(""o""p""t"",""r""o""o""t"",""i""t""e""m""s"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""C""o""m""p""l""e""t""e""d"" ""p""r""o""m""i""s""e"" ""(""d""e""v"" ""c""a""l""l""e""d"" ""p""r""o""m""i""s""e"".""r""e""s""o""l""v""e"")""."" ""W""e"" ""n""o""w"" ""h""a""v""e"" ""a"" ""l""i""s""t"" ""o""f"" ""i""t""e""m""s"" ""w""h""i""c""h"" ""c""a""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""b""e"" ""u""s""e""d"" ""t""o"" ""c""r""e""a""t""e"" ""t""h""e"" ""r""e""s""t"" ""o""f"" ""t""h""e"" ""c""o""n""t""e""x""t"" ""m""e""n""u""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m""s"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""N""u""l""l"" ""r""e""s""u""l""t"","" ""d""e""v"" ""s""h""o""u""l""d"" ""h""a""v""e"" ""c""h""e""c""k""e""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e""r""r""o""r""P""r""o""m""i""s""e""(""u""n""d""e""f""i""n""e""d"")"";""/""/""o""w""n"" ""e""r""r""o""r"" ""o""b""j""e""c""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""i""n""i""s""h""P""r""o""m""i""s""e""P""r""o""c""e""s""s""(""o""p""t"",""r""o""o""t"","" ""i""t""e""m""s"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""u""n""c""t""i""o""n"" ""e""r""r""o""r""P""r""o""m""i""s""e""(""o""p""t"",""r""o""o""t"",""e""r""r""o""r""I""t""e""m"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""U""s""e""r"" ""c""a""l""l""e""d"" ""p""r""o""m""i""s""e"".""r""e""j""e""c""t""("")"" ""w""i""t""h"" ""a""n"" ""e""r""r""o""r"" ""i""t""e""m"","" ""i""f"" ""n""o""t"","" ""p""r""o""v""i""d""e"" ""o""w""n"" ""e""r""r""o""r"" ""i""t""e""m""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""e""r""r""o""r""I""t""e""m"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e""r""r""o""r""I""t""e""m"" ""="" ""{"" """""e""r""r""o""r""""":"" ""{"" ""n""a""m""e"":"" """""N""o"" ""i""t""e""m""s"" ""a""n""d"" ""n""o"" ""e""r""r""o""r"" ""i""t""e""m""""","" ""i""c""o""n"":"" """""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n"" ""c""o""n""t""e""x""t""-""m""e""n""u""-""i""c""o""n""-""q""u""i""t""""" ""}"" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""w""i""n""d""o""w"".""c""o""n""s""o""l""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""(""c""o""n""s""o""l""e"".""e""r""r""o""r"" ""|""|"" ""c""o""n""s""o""l""e"".""l""o""g"")"".""c""a""l""l""(""c""o""n""s""o""l""e"","" ""'""W""h""e""n"" ""y""o""u"" ""r""e""j""e""c""t"" ""a"" ""p""r""o""m""i""s""e"","" ""p""r""o""v""i""d""e"" ""a""n"" """""i""t""e""m""s""""" ""o""b""j""e""c""t"","" ""e""q""u""a""l"" ""t""o"" ""n""o""r""m""a""l"" ""s""u""b""-""m""e""n""u"" ""i""t""e""m""s""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f""(""t""y""p""e""o""f"" ""e""r""r""o""r""I""t""e""m"" ""=""=""="" ""'""s""t""r""i""n""g""'"")""{"
+"	""	""	""	""	""	"" "" "" "" "" "" "" "" "" "" "" "" ""e""r""r""o""r""I""t""e""m"" ""="" ""{"" """""e""r""r""o""r""""":"" ""{"" ""n""a""m""e"":"" ""e""r""r""o""r""I""t""e""m"" ""}"" ""}"";"
+"	""	""	""	""	"" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""i""n""i""s""h""P""r""o""m""i""s""e""P""r""o""c""e""s""s""(""o""p""t"",""r""o""o""t"",""e""r""r""o""r""I""t""e""m"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""u""n""c""t""i""o""n"" ""f""i""n""i""s""h""P""r""o""m""i""s""e""P""r""o""c""e""s""s""(""o""p""t"",""r""o""o""t"",""i""t""e""m""s"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""r""o""o""t"".""$""m""e""n""u"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"" ""|""|"" ""!""r""o""o""t"".""$""m""e""n""u"".""i""s""(""'"":""v""i""s""i""b""l""e""'"")"")""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""$""n""o""d""e"".""r""e""m""o""v""e""C""l""a""s""s""(""r""o""o""t"".""c""l""a""s""s""N""a""m""e""s"".""i""c""o""n""L""o""a""d""i""n""g""C""l""a""s""s"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t"".""i""t""e""m""s"" ""="" ""i""t""e""m""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""c""r""e""a""t""e""(""o""p""t"","" ""r""o""o""t"","" ""t""r""u""e"")"";"" ""/""/"" ""C""r""e""a""t""e"" ""s""u""b""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""u""p""d""a""t""e""(""o""p""t"","" ""r""o""o""t"")"";"" ""/""/"" ""C""o""r""r""e""c""t""l""y"" ""u""p""d""a""t""e"" ""p""o""s""i""t""i""o""n"" ""i""f"" ""u""s""e""r"" ""i""s"" ""a""l""r""e""a""d""y"" ""h""o""v""e""r""e""d"" ""o""v""e""r"" ""m""e""n""u"" ""i""t""e""m"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"".""p""o""s""i""t""i""o""n""S""u""b""m""e""n""u"".""c""a""l""l""(""o""p""t"".""$""n""o""d""e"","" ""o""p""t"".""$""m""e""n""u"")"";"" ""/""/"" ""p""o""s""i""t""i""o""n""S""u""b""m""e""n""u"","" ""w""i""l""l"" ""o""n""l""y"" ""d""o"" ""a""n""y""t""h""i""n""g"" ""i""f"" ""u""s""e""r"" ""a""l""r""e""a""d""y"" ""h""o""v""e""r""e""d"" ""o""v""e""r"" ""m""e""n""u"" ""i""t""e""m"" ""t""h""a""t"" ""j""u""s""t"" ""g""o""t"" ""n""e""w"" ""s""u""b""i""t""e""m""s""."
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""W""a""i""t"" ""f""o""r"" ""p""r""o""m""i""s""e"" ""c""o""m""p""l""e""t""i""o""n""."" "".""t""h""e""n""(""s""u""c""c""e""s""s"","" ""e""r""r""o""r"","" ""n""o""t""i""f""y"")"" ""(""w""e"" ""d""o""n""'""t"" ""t""r""a""c""k"" ""n""o""t""i""f""y"")""."" ""B""i""n""d"" ""t""h""e"" ""o""p""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""n""d"" ""r""o""o""t"" ""t""o"" ""a""v""o""i""d"" ""s""c""o""p""e"" ""p""r""o""b""l""e""m""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""p""r""o""m""i""s""e"".""t""h""e""n""(""c""o""m""p""l""e""t""e""d""P""r""o""m""i""s""e"".""b""i""n""d""(""t""h""i""s"","" ""o""p""t"","" ""r""o""o""t"")"","" ""e""r""r""o""r""P""r""o""m""i""s""e"".""b""i""n""d""(""t""h""i""s"","" ""o""p""t"","" ""r""o""o""t"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"";"
+
+" "" "" "" ""/""/"" ""s""p""l""i""t"" ""a""c""c""e""s""s""k""e""y"" ""a""c""c""o""r""d""i""n""g"" ""t""o"" ""h""t""t""p"":""/""/""w""w""w"".""w""h""a""t""w""g"".""o""r""g""/""s""p""e""c""s""/""w""e""b""-""a""p""p""s""/""c""u""r""r""e""n""t""-""w""o""r""k""/""m""u""l""t""i""p""a""g""e""/""e""d""i""t""i""n""g"".""h""t""m""l""#""a""s""s""i""g""n""e""d""-""a""c""c""e""s""s""-""k""e""y"
+" "" "" "" ""f""u""n""c""t""i""o""n"" ""s""p""l""i""t""A""c""c""e""s""s""k""e""y""(""v""a""l"")"" ""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""t"" ""="" ""v""a""l"".""s""p""l""i""t""(""/""\""s""+""/"")"","
+" "" "" "" "" "" "" "" "" "" "" "" ""k""e""y""s"" ""="" ""[""]"";"
+
+" "" "" "" "" "" "" "" ""f""o""r"" ""(""v""a""r"" ""i"" ""="" ""0"","" ""k"";"" ""k"" ""="" ""t""[""i""]"";"" ""i""+""+"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""k"" ""="" ""k"".""c""h""a""r""A""t""(""0"")"".""t""o""U""p""p""e""r""C""a""s""e""("")"";"" ""/""/"" ""f""i""r""s""t"" ""c""h""a""r""a""c""t""e""r"" ""o""n""l""y"
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""t""h""e""o""r""e""t""i""c""a""l""l""y"" ""n""o""n""-""a""c""c""e""s""s""i""b""l""e"" ""c""h""a""r""a""c""t""e""r""s"" ""s""h""o""u""l""d"" ""b""e"" ""i""g""n""o""r""e""d"","" ""b""u""t"" ""d""i""f""f""e""r""e""n""t"" ""s""y""s""t""e""m""s"","" ""d""i""f""f""e""r""e""n""t"" ""k""e""y""b""o""a""r""d"" ""l""a""y""o""u""t""s"","" ""."".""."" ""s""c""r""e""w"" ""i""t""."
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a"" ""m""a""p"" ""t""o"" ""l""o""o""k"" ""u""p"" ""a""l""r""e""a""d""y"" ""u""s""e""d"" ""a""c""c""e""s""s"" ""k""e""y""s"" ""w""o""u""l""d"" ""b""e"" ""n""i""c""e"
+" "" "" "" "" "" "" "" "" "" "" "" ""k""e""y""s"".""p""u""s""h""(""k"")"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""k""e""y""s"";"
+" "" "" "" ""}"
+
+"/""/"" ""h""a""n""d""l""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""t""r""i""g""g""e""r""s"
+" "" "" "" ""$"".""f""n"".""c""o""n""t""e""x""t""M""e""n""u"" ""="" ""f""u""n""c""t""i""o""n"" ""(""o""p""e""r""a""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""$""t"" ""="" ""t""h""i""s"","" ""$""o"" ""="" ""o""p""e""r""a""t""i""o""n"";"
+" "" "" "" "" "" "" "" ""i""f"" ""(""t""h""i""s"".""l""e""n""g""t""h"" "">"" ""0"")"" ""{"" "" ""/""/"" ""t""h""i""s"" ""i""s"" ""n""o""t"" ""a"" ""b""u""i""l""d"" ""o""n"" ""d""e""m""a""n""d"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o""p""e""r""a""t""i""o""n"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""i""s"".""f""i""r""s""t""("")"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""e""r""a""t""i""o""n"".""x"" ""!""=""="" ""u""n""d""e""f""i""n""e""d"" ""&""&"" ""o""p""e""r""a""t""i""o""n"".""y"" ""!""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""i""s"".""f""i""r""s""t""("")"".""t""r""i""g""g""e""r""(""$"".""E""v""e""n""t""(""'""c""o""n""t""e""x""t""m""e""n""u""'"","" ""{"" ""p""a""g""e""X"":"" ""o""p""e""r""a""t""i""o""n"".""x"","" ""p""a""g""e""Y"":"" ""o""p""e""r""a""t""i""o""n"".""y"","" ""m""o""u""s""e""B""u""t""t""o""n"":"" ""o""p""e""r""a""t""i""o""n"".""b""u""t""t""o""n"" ""}"")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""e""r""a""t""i""o""n"" ""=""=""="" ""'""h""i""d""e""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""m""e""n""u"" ""="" ""t""h""i""s"".""f""i""r""s""t""("")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"" ""?"" ""t""h""i""s"".""f""i""r""s""t""("")"".""d""a""t""a""(""'""c""o""n""t""e""x""t""M""e""n""u""'"")"".""$""m""e""n""u"" "":"" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f""(""$""m""e""n""u"")""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""m""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""e""r""a""t""i""o""n"" ""=""=""="" ""'""d""e""s""t""r""o""y""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u""(""'""d""e""s""t""r""o""y""'"","" ""{""c""o""n""t""e""x""t"":"" ""t""h""i""s""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""$"".""i""s""P""l""a""i""n""O""b""j""e""c""t""(""o""p""e""r""a""t""i""o""n"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""e""r""a""t""i""o""n"".""c""o""n""t""e""x""t"" ""="" ""t""h""i""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u""(""'""c""r""e""a""t""e""'"","" ""o""p""e""r""a""t""i""o""n"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""e""r""a""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""i""s"".""r""e""m""o""v""e""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""d""i""s""a""b""l""e""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""!""o""p""e""r""a""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""i""s"".""a""d""d""C""l""a""s""s""(""'""c""o""n""t""e""x""t""-""m""e""n""u""-""d""i""s""a""b""l""e""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""m""e""n""u""s"","" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""h""i""s"".""s""e""l""e""c""t""o""r"" ""=""=""="" ""$""t"".""s""e""l""e""c""t""o""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""o"".""d""a""t""a"" ""="" ""t""h""i""s"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""x""t""e""n""d""(""$""o"".""d""a""t""a"","" ""{""t""r""i""g""g""e""r"":"" ""'""d""e""m""a""n""d""'""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""h""a""n""d""l""e"".""c""o""n""t""e""x""t""m""e""n""u"".""c""a""l""l""(""$""o"".""t""a""r""g""e""t"","" ""$""o"")"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" "" "" ""}"";"
+
+" "" "" "" ""/""/"" ""m""a""n""a""g""e"" ""c""o""n""t""e""x""t""M""e""n""u"" ""i""n""s""t""a""n""c""e""s"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"" ""="" ""f""u""n""c""t""i""o""n"" ""(""o""p""e""r""a""t""i""o""n"","" ""o""p""t""i""o""n""s"")"" ""{"
+
+" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""o""p""e""r""a""t""i""o""n"" ""!""=""="" ""'""s""t""r""i""n""g""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t""i""o""n""s"" ""="" ""o""p""e""r""a""t""i""o""n"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""o""p""e""r""a""t""i""o""n"" ""="" ""'""c""r""e""a""t""e""'"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""i""f"" ""(""t""y""p""e""o""f"" ""o""p""t""i""o""n""s"" ""=""=""="" ""'""s""t""r""i""n""g""'"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t""i""o""n""s"" ""="" ""{""s""e""l""e""c""t""o""r"":"" ""o""p""t""i""o""n""s""}"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""o""p""t""i""o""n""s"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t""i""o""n""s"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""/""/"" ""m""e""r""g""e"" ""w""i""t""h"" ""d""e""f""a""u""l""t"" ""o""p""t""i""o""n""s"
+" "" "" "" "" "" "" "" ""v""a""r"" ""o"" ""="" ""$"".""e""x""t""e""n""d""(""t""r""u""e"","" ""{""}"","" ""d""e""f""a""u""l""t""s"","" ""o""p""t""i""o""n""s"" ""|""|"" ""{""}"")"";"
+" "" "" "" "" "" "" "" ""v""a""r"" ""$""d""o""c""u""m""e""n""t"" ""="" ""$""(""d""o""c""u""m""e""n""t"")"";"
+" "" "" "" "" "" "" "" ""v""a""r"" ""$""c""o""n""t""e""x""t"" ""="" ""$""d""o""c""u""m""e""n""t"";"
+" "" "" "" "" "" "" "" ""v""a""r"" ""_""h""a""s""C""o""n""t""e""x""t"" ""="" ""f""a""l""s""e"";"
+
+" "" "" "" "" "" "" "" ""i""f"" ""(""!""o"".""c""o""n""t""e""x""t"" ""|""|"" ""!""o"".""c""o""n""t""e""x""t"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""o"".""c""o""n""t""e""x""t"" ""="" ""d""o""c""u""m""e""n""t"";"
+" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""y""o""u"" ""n""e""v""e""r"" ""k""n""o""w"" ""w""h""a""t"" ""t""h""e""y"" ""t""h""r""o""w"" ""a""t"" ""y""o""u""."".""."
+" "" "" "" "" "" "" "" "" "" "" "" ""$""c""o""n""t""e""x""t"" ""="" ""$""(""o"".""c""o""n""t""e""x""t"")"".""f""i""r""s""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""o"".""c""o""n""t""e""x""t"" ""="" ""$""c""o""n""t""e""x""t"".""g""e""t""(""0"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""_""h""a""s""C""o""n""t""e""x""t"" ""="" ""!""$""(""o"".""c""o""n""t""e""x""t"")"".""i""s""(""d""o""c""u""m""e""n""t"")"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""o""p""e""r""a""t""i""o""n"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""r""e""a""t""e""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""n""o"" ""s""e""l""e""c""t""o""r"" ""n""o"" ""j""o""y"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o"".""s""e""l""e""c""t""o""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""r""r""o""r""(""'""N""o"" ""s""e""l""e""c""t""o""r"" ""s""p""e""c""i""f""i""e""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""a""k""e"" ""s""u""r""e"" ""i""n""t""e""r""n""a""l"" ""c""l""a""s""s""e""s"" ""a""r""e"" ""n""o""t"" ""b""o""u""n""d"" ""t""o"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""o"".""s""e""l""e""c""t""o""r"".""m""a""t""c""h""(""/"".""c""o""n""t""e""x""t""-""m""e""n""u""-""(""l""i""s""t""|""i""t""e""m""|""i""n""p""u""t"")""(""$""|""\""s"")""/"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""r""r""o""r""(""'""C""a""n""n""o""t"" ""b""i""n""d"" ""t""o"" ""s""e""l""e""c""t""o""r"" """""'"" ""+"" ""o"".""s""e""l""e""c""t""o""r"" ""+"" ""'""""" ""a""s"" ""i""t"" ""c""o""n""t""a""i""n""s"" ""a"" ""r""e""s""e""r""v""e""d"" ""c""l""a""s""s""N""a""m""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o"".""b""u""i""l""d"" ""&""&"" ""(""!""o"".""i""t""e""m""s"" ""|""|"" ""$"".""i""s""E""m""p""t""y""O""b""j""e""c""t""(""o"".""i""t""e""m""s"")"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""r""r""o""r""(""'""N""o"" ""I""t""e""m""s"" ""s""p""e""c""i""f""i""e""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""u""n""t""e""r""+""+"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o"".""n""s"" ""="" ""'"".""c""o""n""t""e""x""t""M""e""n""u""'"" ""+"" ""c""o""u""n""t""e""r"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""_""h""a""s""C""o""n""t""e""x""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e""s""p""a""c""e""s""[""o"".""s""e""l""e""c""t""o""r""]"" ""="" ""o"".""n""s"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""s""[""o"".""n""s""]"" ""="" ""o"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""d""e""f""a""u""l""t"" ""t""o"" ""r""i""g""h""t"" ""c""l""i""c""k"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o"".""t""r""i""g""g""e""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o"".""t""r""i""g""g""e""r"" ""="" ""'""r""i""g""h""t""'"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""i""n""i""t""i""a""l""i""z""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""i""t""e""m""C""l""i""c""k"" ""="" ""o"".""i""t""e""m""C""l""i""c""k""E""v""e""n""t"" ""=""=""="" ""'""c""l""i""c""k""'"" ""?"" ""'""c""l""i""c""k"".""c""o""n""t""e""x""t""M""e""n""u""'"" "":"" ""'""m""o""u""s""e""u""p"".""c""o""n""t""e""x""t""M""e""n""u""'"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""c""o""n""t""e""x""t""M""e""n""u""I""t""e""m""O""b""j"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""'""m""o""u""s""e""u""p"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""i""t""e""m""C""l""i""c""k"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""'""c""l""i""c""k"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""i""t""e""m""C""l""i""c""k"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""m""e""n""u"":""f""o""c""u""s"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""f""o""c""u""s""I""t""e""m"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""m""e""n""u"":""b""l""u""r"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""b""l""u""r""I""t""e""m"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""m""e""n""u"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""a""b""o""r""t""e""v""e""n""t"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""m""o""u""s""e""e""n""t""e""r"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""i""t""e""m""M""o""u""s""e""e""n""t""e""r"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""m""o""u""s""e""l""e""a""v""e"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""i""t""e""m""M""o""u""s""e""l""e""a""v""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""n""t""e""x""t""M""e""n""u""I""t""e""m""O""b""j""[""i""t""e""m""C""l""i""c""k""]"" ""="" ""h""a""n""d""l""e"".""i""t""e""m""C""l""i""c""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""m""a""k""e"" ""s""u""r""e"" ""i""t""e""m"" ""c""l""i""c""k"" ""i""s"" ""r""e""g""i""s""t""e""r""e""d"" ""f""i""r""s""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""d""o""c""u""m""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""h""i""d""e""M""e""n""u"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""p""r""e""v""c""o""m""m""a""n""d"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""p""r""e""v""I""t""e""m"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""n""e""x""t""c""o""m""m""a""n""d"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""n""e""x""t""I""t""e""m"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""c""o""n""t""e""x""t""m""e""n""u"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""a""b""o""r""t""e""v""e""n""t"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""m""o""u""s""e""e""n""t""e""r"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""m""e""n""u""M""o""u""s""e""e""n""t""e""r"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""'""m""o""u""s""e""l""e""a""v""e"".""c""o""n""t""e""x""t""M""e""n""u""'"":"" ""h""a""n""d""l""e"".""m""e""n""u""M""o""u""s""e""l""e""a""v""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"","" ""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""m""o""u""s""e""u""p"".""c""o""n""t""e""x""t""M""e""n""u""'"","" ""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""i""n""p""u""t""'"","" ""h""a""n""d""l""e"".""i""n""p""u""t""C""l""i""c""k"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""c""o""n""t""e""x""t""M""e""n""u""I""t""e""m""O""b""j"","" ""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""i""t""e""m""'"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""n""i""t""i""a""l""i""z""e""d"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""e""n""g""a""g""e"" ""n""a""t""i""v""e"" ""c""o""n""t""e""x""t""m""e""n""u"" ""e""v""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""o""n""t""e""x""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""c""o""n""t""e""x""t""m""e""n""u""'"" ""+"" ""o"".""n""s"","" ""o"".""s""e""l""e""c""t""o""r"","" ""o"","" ""h""a""n""d""l""e"".""c""o""n""t""e""x""t""m""e""n""u"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""_""h""a""s""C""o""n""t""e""x""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""a""d""d"" ""r""e""m""o""v""e"" ""h""o""o""k"","" ""j""u""s""t"" ""i""n"" ""c""a""s""e"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""o""n""t""e""x""t"".""o""n""(""'""r""e""m""o""v""e""'"" ""+"" ""o"".""n""s"","" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""t""h""i""s"")"".""c""o""n""t""e""x""t""M""e""n""u""(""'""d""e""s""t""r""o""y""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""o"".""t""r""i""g""g""e""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""h""o""v""e""r""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""o""n""t""e""x""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""m""o""u""s""e""e""n""t""e""r""'"" ""+"" ""o"".""n""s"","" ""o"".""s""e""l""e""c""t""o""r"","" ""o"","" ""h""a""n""d""l""e"".""m""o""u""s""e""e""n""t""e""r"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""m""o""u""s""e""l""e""a""v""e""'"" ""+"" ""o"".""n""s"","" ""o"".""s""e""l""e""c""t""o""r"","" ""o"","" ""h""a""n""d""l""e"".""m""o""u""s""e""l""e""a""v""e"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""l""e""f""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""c""o""n""t""e""x""t"".""o""n""(""'""c""l""i""c""k""'"" ""+"" ""o"".""n""s"","" ""o"".""s""e""l""e""c""t""o""r"","" ""o"","" ""h""a""n""d""l""e"".""c""l""i""c""k"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""*"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""t""t""p"":""/""/""w""w""w"".""q""u""i""r""k""s""m""o""d""e"".""o""r""g""/""d""o""m""/""e""v""e""n""t""s""/""c""o""n""t""e""x""t""m""e""n""u"".""h""t""m""l"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""d""o""c""u""m""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""m""o""u""s""e""d""o""w""n""'"" ""+"" ""o"".""n""s"","" ""o"".""s""e""l""e""c""t""o""r"","" ""o"","" ""h""a""n""d""l""e"".""m""o""u""s""e""d""o""w""n"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "".""o""n""(""'""m""o""u""s""e""u""p""'"" ""+"" ""o"".""n""s"","" ""o"".""s""e""l""e""c""t""o""r"","" ""o"","" ""h""a""n""d""l""e"".""m""o""u""s""e""u""p"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""*""/"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""c""r""e""a""t""e"" ""m""e""n""u"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o"".""b""u""i""l""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p"".""c""r""e""a""t""e""(""o"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""d""e""s""t""r""o""y""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""v""i""s""i""b""l""e""M""e""n""u"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""_""h""a""s""C""o""n""t""e""x""t"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""g""e""t"" ""p""r""o""p""e""r"" ""o""p""t""i""o""n""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""c""o""n""t""e""x""t"" ""="" ""o"".""c""o""n""t""e""x""t"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""m""e""n""u""s"","" ""f""u""n""c""t""i""o""n"" ""(""n""s"","" ""o"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""o"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""I""s"" ""t""h""i""s"" ""m""e""n""u"" ""e""q""u""e""s""t"" ""t""o"" ""t""h""e"" ""c""o""n""t""e""x""t"" ""c""a""l""l""e""d"" ""f""r""o""m"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""!""$""(""c""o""n""t""e""x""t"")"".""i""s""(""o"".""s""e""l""e""c""t""o""r"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""v""i""s""i""b""l""e""M""e""n""u"" ""="" ""$""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"".""f""i""l""t""e""r""(""'"":""v""i""s""i""b""l""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""v""i""s""i""b""l""e""M""e""n""u"".""l""e""n""g""t""h"" ""&""&"" ""$""v""i""s""i""b""l""e""M""e""n""u"".""d""a""t""a""("")"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"".""$""t""r""i""g""g""e""r"".""i""s""(""$""(""o"".""c""o""n""t""e""x""t"")"".""f""i""n""d""(""o"".""s""e""l""e""c""t""o""r"")"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""v""i""s""i""b""l""e""M""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"","" ""{""f""o""r""c""e"":"" ""t""r""u""e""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""m""e""n""u""s""[""o"".""n""s""]"".""$""m""e""n""u"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""s""[""o"".""n""s""]"".""$""m""e""n""u"".""r""e""m""o""v""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""l""e""t""e"" ""m""e""n""u""s""[""o"".""n""s""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""s""[""o"".""n""s""]"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""o"".""c""o""n""t""e""x""t"")"".""o""f""f""(""o"".""n""s"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""!""o"".""s""e""l""e""c""t""o""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""d""o""c""u""m""e""n""t"".""o""f""f""(""'"".""c""o""n""t""e""x""t""M""e""n""u"" "".""c""o""n""t""e""x""t""M""e""n""u""A""u""t""o""H""i""d""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""m""e""n""u""s"","" ""f""u""n""c""t""i""o""n"" ""(""n""s"","" ""o"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""o"".""c""o""n""t""e""x""t"")"".""o""f""f""(""o"".""n""s"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e""s""p""a""c""e""s"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""s"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""u""n""t""e""r"" ""="" ""0"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""n""i""t""i""a""l""i""z""e""d"" ""="" ""f""a""l""s""e"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""'""#""c""o""n""t""e""x""t""-""m""e""n""u""-""l""a""y""e""r"","" "".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"".""r""e""m""o""v""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""i""f"" ""(""n""a""m""e""s""p""a""c""e""s""[""o"".""s""e""l""e""c""t""o""r""]"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""v""i""s""i""b""l""e""M""e""n""u"" ""="" ""$""(""'"".""c""o""n""t""e""x""t""-""m""e""n""u""-""l""i""s""t""'"")"".""f""i""l""t""e""r""(""'"":""v""i""s""i""b""l""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""$""v""i""s""i""b""l""e""M""e""n""u"".""l""e""n""g""t""h"" ""&""&"" ""$""v""i""s""i""b""l""e""M""e""n""u"".""d""a""t""a""("")"".""c""o""n""t""e""x""t""M""e""n""u""R""o""o""t"".""$""t""r""i""g""g""e""r"".""i""s""(""o"".""s""e""l""e""c""t""o""r"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""v""i""s""i""b""l""e""M""e""n""u"".""t""r""i""g""g""e""r""(""'""c""o""n""t""e""x""t""m""e""n""u"":""h""i""d""e""'"","" ""{""f""o""r""c""e"":"" ""t""r""u""e""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""m""e""n""u""s""[""n""a""m""e""s""p""a""c""e""s""[""o"".""s""e""l""e""c""t""o""r""]""]"".""$""m""e""n""u"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""s""[""n""a""m""e""s""p""a""c""e""s""[""o"".""s""e""l""e""c""t""o""r""]""]"".""$""m""e""n""u"".""r""e""m""o""v""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""l""e""t""e"" ""m""e""n""u""s""[""n""a""m""e""s""p""a""c""e""s""[""o"".""s""e""l""e""c""t""o""r""]""]"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""m""e""n""u""s""[""n""a""m""e""s""p""a""c""e""s""[""o"".""s""e""l""e""c""t""o""r""]""]"" ""="" ""n""u""l""l"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""d""o""c""u""m""e""n""t"".""o""f""f""(""n""a""m""e""s""p""a""c""e""s""[""o"".""s""e""l""e""c""t""o""r""]"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""h""t""m""l""5""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""f"" ""<""c""o""m""m""a""n""d"">"" ""o""r"" ""<""m""e""n""u""i""t""e""m"">"" ""a""r""e"" ""n""o""t"" ""h""a""n""d""l""e""d"" ""b""y"" ""t""h""e"" ""b""r""o""w""s""e""r"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""o""r"" ""o""p""t""i""o""n""s"" ""w""a""s"" ""a"" ""b""o""o""l"" ""t""r""u""e"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""i""n""i""t""i""a""l""i""z""e"" ""$"".""c""o""n""t""e""x""t""M""e""n""u"" ""f""o""r"" ""t""h""e""m"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""(""!""$"".""s""u""p""p""o""r""t"".""h""t""m""l""C""o""m""m""a""n""d"" ""&""&"" ""!""$"".""s""u""p""p""o""r""t"".""h""t""m""l""M""e""n""u""i""t""e""m"")"" ""|""|"" ""(""t""y""p""e""o""f"" ""o""p""t""i""o""n""s"" ""=""=""="" ""'""b""o""o""l""e""a""n""'"" ""&""&"" ""o""p""t""i""o""n""s"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""(""'""m""e""n""u""[""t""y""p""e""="""""c""o""n""t""e""x""t"""""]""'"")"".""e""a""c""h""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""t""h""i""s"".""i""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u""(""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""o""r"":"" ""'""[""c""o""n""t""e""x""t""m""e""n""u""=""'"" ""+"" ""t""h""i""s"".""i""d"" ""+"" ""'""]""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""s"":"" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""f""r""o""m""M""e""n""u""(""t""h""i""s"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"".""c""s""s""(""'""d""i""s""p""l""a""y""'"","" ""'""n""o""n""e""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""E""r""r""o""r""(""'""U""n""k""n""o""w""n"" ""o""p""e""r""a""t""i""o""n"" """""'"" ""+"" ""o""p""e""r""a""t""i""o""n"" ""+"" ""'"""""'"")"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""t""h""i""s"";"
+" "" "" "" ""}"";"
+
+"/""/"" ""i""m""p""o""r""t"" ""v""a""l""u""e""s"" ""i""n""t""o"" ""<""i""n""p""u""t"">"" ""c""o""m""m""a""n""d""s"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""s""e""t""I""n""p""u""t""V""a""l""u""e""s"" ""="" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""d""a""t""a"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""d""a""t""a"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""o""p""t"".""i""n""p""u""t""s"","" ""f""u""n""c""t""i""o""n"" ""(""k""e""y"","" ""i""t""e""m"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""i""t""e""m"".""t""y""p""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""a""r""e""a""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""v""a""l""u""e"" ""="" ""d""a""t""a""[""k""e""y""]"" ""|""|"" ""'""'"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""h""e""c""k""b""o""x""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""s""e""l""e""c""t""e""d"" ""="" ""d""a""t""a""[""k""e""y""]"" ""?"" ""t""r""u""e"" "":"" ""f""a""l""s""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""r""a""d""i""o""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""s""e""l""e""c""t""e""d"" ""="" ""(""d""a""t""a""[""i""t""e""m"".""r""a""d""i""o""]"" ""|""|"" ""'""'"")"" ""=""=""="" ""i""t""e""m"".""v""a""l""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""s""e""l""e""c""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""s""e""l""e""c""t""e""d"" ""="" ""d""a""t""a""[""k""e""y""]"" ""|""|"" ""'""'"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" ""}"";"
+
+"/""/"" ""e""x""p""o""r""t"" ""v""a""l""u""e""s"" ""f""r""o""m"" ""<""i""n""p""u""t"">"" ""c""o""m""m""a""n""d""s"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""g""e""t""I""n""p""u""t""V""a""l""u""e""s"" ""="" ""f""u""n""c""t""i""o""n"" ""(""o""p""t"","" ""d""a""t""a"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""d""a""t""a"" ""=""=""="" ""u""n""d""e""f""i""n""e""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a"" ""="" ""{""}"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""$"".""e""a""c""h""(""o""p""t"".""i""n""p""u""t""s"","" ""f""u""n""c""t""i""o""n"" ""(""k""e""y"","" ""i""t""e""m"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""i""t""e""m"".""t""y""p""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""a""r""e""a""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""s""e""l""e""c""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a""[""k""e""y""]"" ""="" ""i""t""e""m"".""$""i""n""p""u""t"".""v""a""l""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""h""e""c""k""b""o""x""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a""[""k""e""y""]"" ""="" ""i""t""e""m"".""$""i""n""p""u""t"".""p""r""o""p""(""'""c""h""e""c""k""e""d""'"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""r""a""d""i""o""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"".""$""i""n""p""u""t"".""p""r""o""p""(""'""c""h""e""c""k""e""d""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""a""t""a""[""i""t""e""m"".""r""a""d""i""o""]"" ""="" ""i""t""e""m"".""v""a""l""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""d""a""t""a"";"
+" "" "" "" ""}"";"
+
+"/""/"" ""f""i""n""d"" ""<""l""a""b""e""l"" ""f""o""r""="""""x""y""z""""">"
+" "" "" "" ""f""u""n""c""t""i""o""n"" ""i""n""p""u""t""L""a""b""e""l""(""n""o""d""e"")"" ""{"
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""(""n""o""d""e"".""i""d"" ""&""&"" ""$""(""'""l""a""b""e""l""[""f""o""r""="""""'"" ""+"" ""n""o""d""e"".""i""d"" ""+"" ""'"""""]""'"")"".""v""a""l""("")"")"" ""|""|"" ""n""o""d""e"".""n""a""m""e"";"
+" "" "" "" ""}"
+
+"/""/"" ""c""o""n""v""e""r""t"" ""<""m""e""n""u"">"" ""t""o"" ""i""t""e""m""s"" ""o""b""j""e""c""t"
+" "" "" "" ""f""u""n""c""t""i""o""n"" ""m""e""n""u""C""h""i""l""d""r""e""n""(""i""t""e""m""s"","" ""$""c""h""i""l""d""r""e""n"","" ""c""o""u""n""t""e""r"")"" ""{"
+" "" "" "" "" "" "" "" ""i""f"" ""(""!""c""o""u""n""t""e""r"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""o""u""n""t""e""r"" ""="" ""0"";"
+" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" ""$""c""h""i""l""d""r""e""n"".""e""a""c""h""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""v""a""r"" ""$""n""o""d""e"" ""="" ""$""(""t""h""i""s"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""o""d""e"" ""="" ""t""h""i""s"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""o""d""e""N""a""m""e"" ""="" ""t""h""i""s"".""n""o""d""e""N""a""m""e"".""t""o""L""o""w""e""r""C""a""s""e""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""l""a""b""e""l"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""e""x""t""r""a""c""t"" ""<""l""a""b""e""l"">""<""i""n""p""u""t"">"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""n""o""d""e""N""a""m""e"" ""=""=""="" ""'""l""a""b""e""l""'"" ""&""&"" ""$""n""o""d""e"".""f""i""n""d""(""'""i""n""p""u""t"","" ""t""e""x""t""a""r""e""a"","" ""s""e""l""e""c""t""'"")"".""l""e""n""g""t""h"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""l""a""b""e""l"" ""="" ""$""n""o""d""e"".""t""e""x""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""o""d""e"" ""="" ""$""n""o""d""e"".""c""h""i""l""d""r""e""n""("")"".""f""i""r""s""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""o""d""e"" ""="" ""$""n""o""d""e"".""g""e""t""(""0"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""o""d""e""N""a""m""e"" ""="" ""n""o""d""e"".""n""o""d""e""N""a""m""e"".""t""o""L""o""w""e""r""C""a""s""e""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""/""*"
+" "" "" "" "" "" "" "" "" "" "" "" "" ""*"" ""<""m""e""n""u"">"" ""a""c""c""e""p""t""s"" ""f""l""o""w""-""c""o""n""t""e""n""t"" ""a""s"" ""c""h""i""l""d""r""e""n""."" ""t""h""a""t"" ""m""e""a""n""s"" ""<""e""m""b""e""d"">"","" ""<""c""a""n""v""a""s"">"" ""a""n""d"" ""s""u""c""h"" ""a""r""e"" ""v""a""l""i""d"" ""m""e""n""u"" ""i""t""e""m""s""."
+" "" "" "" "" "" "" "" "" "" "" "" "" ""*"" ""N""o""t"" ""b""e""i""n""g"" ""t""h""e"" ""s""a""d""i""s""t""i""c"" ""k""i""n""d"","" ""$"".""c""o""n""t""e""x""t""M""e""n""u"" ""o""n""l""y"" ""a""c""c""e""p""t""s"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" ""*"" ""<""c""o""m""m""a""n""d"">"","" ""<""m""e""n""u""i""t""e""m"">"","" ""<""h""r"">"","" ""<""s""p""a""n"">"","" ""<""p"">"" ""<""i""n""p""u""t"" ""[""t""e""x""t"","" ""r""a""d""i""o"","" ""c""h""e""c""k""b""o""x""]"">"","" ""<""t""e""x""t""a""r""e""a"">"","" ""<""s""e""l""e""c""t"">"" ""a""n""d"" ""o""f"" ""c""o""u""r""s""e"" ""<""m""e""n""u"">""."
+" "" "" "" "" "" "" "" "" "" "" "" "" ""*"" ""E""v""e""r""y""t""h""i""n""g"" ""e""l""s""e"" ""w""i""l""l"" ""b""e"" ""i""m""p""o""r""t""e""d"" ""a""s"" ""a""n"" ""h""t""m""l"" ""n""o""d""e"","" ""w""h""i""c""h"" ""i""s"" ""n""o""t"" ""i""n""t""e""r""f""a""c""e""d"" ""w""i""t""h"" ""c""o""n""t""e""x""t""M""e""n""u""."
+" "" "" "" "" "" "" "" "" "" "" "" "" ""*""/"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""t""t""p"":""/""/""w""w""w"".""w""h""a""t""w""g"".""o""r""g""/""s""p""e""c""s""/""w""e""b""-""a""p""p""s""/""c""u""r""r""e""n""t""-""w""o""r""k""/""m""u""l""t""i""p""a""g""e""/""c""o""m""m""a""n""d""s"".""h""t""m""l""#""c""o""n""c""e""p""t""-""c""o""m""m""a""n""d"
+" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""n""o""d""e""N""a""m""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""t""t""p"":""/""/""w""w""w"".""w""h""a""t""w""g"".""o""r""g""/""s""p""e""c""s""/""w""e""b""-""a""p""p""s""/""c""u""r""r""e""n""t""-""w""o""r""k""/""m""u""l""t""i""p""a""g""e""/""i""n""t""e""r""a""c""t""i""v""e""-""e""l""e""m""e""n""t""s"".""h""t""m""l""#""t""h""e""-""m""e""n""u""-""e""l""e""m""e""n""t"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""m""e""n""u""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{""n""a""m""e"":"" ""$""n""o""d""e"".""a""t""t""r""(""'""l""a""b""e""l""'"")"","" ""i""t""e""m""s"":"" ""{""}""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""u""n""t""e""r"" ""="" ""m""e""n""u""C""h""i""l""d""r""e""n""(""i""t""e""m"".""i""t""e""m""s"","" ""$""n""o""d""e"".""c""h""i""l""d""r""e""n""("")"","" ""c""o""u""n""t""e""r"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""t""t""p"":""/""/""w""w""w"".""w""h""a""t""w""g"".""o""r""g""/""s""p""e""c""s""/""w""e""b""-""a""p""p""s""/""c""u""r""r""e""n""t""-""w""o""r""k""/""m""u""l""t""i""p""a""g""e""/""c""o""m""m""a""n""d""s"".""h""t""m""l""#""u""s""i""n""g""-""t""h""e""-""a""-""e""l""e""m""e""n""t""-""t""o""-""d""e""f""i""n""e""-""a""-""c""o""m""m""a""n""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""a""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""t""t""p"":""/""/""w""w""w"".""w""h""a""t""w""g"".""o""r""g""/""s""p""e""c""s""/""w""e""b""-""a""p""p""s""/""c""u""r""r""e""n""t""-""w""o""r""k""/""m""u""l""t""i""p""a""g""e""/""c""o""m""m""a""n""d""s"".""h""t""m""l""#""u""s""i""n""g""-""t""h""e""-""b""u""t""t""o""n""-""e""l""e""m""e""n""t""-""t""o""-""d""e""f""i""n""e""-""a""-""c""o""m""m""a""n""d"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""b""u""t""t""o""n""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""$""n""o""d""e"".""t""e""x""t""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""l""l""b""a""c""k"":"" ""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""o""d""e"".""c""l""i""c""k""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""/""/"" ""h""t""t""p"":""/""/""w""w""w"".""w""h""a""t""w""g"".""o""r""g""/""s""p""e""c""s""/""w""e""b""-""a""p""p""s""/""c""u""r""r""e""n""t""-""w""o""r""k""/""m""u""l""t""i""p""a""g""e""/""c""o""m""m""a""n""d""s"".""h""t""m""l""#""u""s""i""n""g""-""t""h""e""-""c""o""m""m""a""n""d""-""e""l""e""m""e""n""t""-""t""o""-""d""e""f""i""n""e""-""a""-""c""o""m""m""a""n""d"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""m""e""n""u""i""t""e""m""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""o""m""m""a""n""d""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""$""n""o""d""e"".""a""t""t""r""(""'""t""y""p""e""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""u""n""d""e""f""i""n""e""d"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""o""m""m""a""n""d""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""m""e""n""u""i""t""e""m""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""$""n""o""d""e"".""a""t""t""r""(""'""l""a""b""e""l""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""c""o""n"":"" ""$""n""o""d""e"".""a""t""t""r""(""'""i""c""o""n""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""l""l""b""a""c""k"":"" ""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""o""d""e"".""c""l""i""c""k""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""h""e""c""k""b""o""x""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e"":"" ""'""c""h""e""c""k""b""o""x""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""$""n""o""d""e"".""a""t""t""r""(""'""l""a""b""e""l""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""c""h""e""c""k""e""d""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""r""a""d""i""o""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e"":"" ""'""r""a""d""i""o""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""$""n""o""d""e"".""a""t""t""r""(""'""l""a""b""e""l""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""a""d""i""o"":"" ""$""n""o""d""e"".""a""t""t""r""(""'""r""a""d""i""o""g""r""o""u""p""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""l""u""e"":"" ""$""n""o""d""e"".""a""t""t""r""(""'""i""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""c""h""e""c""k""e""d""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""u""n""d""e""f""i""n""e""d"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""h""r""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""'""-""-""-""-""-""-""-""'"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""i""n""p""u""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""$""n""o""d""e"".""a""t""t""r""(""'""t""y""p""e""'"")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e"":"" ""'""t""e""x""t""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""l""a""b""e""l"" ""|""|"" ""i""n""p""u""t""L""a""b""e""l""(""n""o""d""e"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""l""u""e"":"" ""$""n""o""d""e"".""v""a""l""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""c""h""e""c""k""b""o""x""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e"":"" ""'""c""h""e""c""k""b""o""x""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""l""a""b""e""l"" ""|""|"" ""i""n""p""u""t""L""a""b""e""l""(""n""o""d""e"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""c""h""e""c""k""e""d""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""r""a""d""i""o""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e"":"" ""'""r""a""d""i""o""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""l""a""b""e""l"" ""|""|"" ""i""n""p""u""t""L""a""b""e""l""(""n""o""d""e"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""a""d""i""o"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""n""a""m""e""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""l""u""e"":"" ""$""n""o""d""e"".""v""a""l""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""c""h""e""c""k""e""d""'"")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""u""n""d""e""f""i""n""e""d"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""s""e""l""e""c""t""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e"":"" ""'""s""e""l""e""c""t""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""l""a""b""e""l"" ""|""|"" ""i""n""p""u""t""L""a""b""e""l""(""n""o""d""e"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""s""e""l""e""c""t""e""d"":"" ""$""n""o""d""e"".""v""a""l""("")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""o""p""t""i""o""n""s"":"" ""{""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""$""n""o""d""e"".""c""h""i""l""d""r""e""n""("")"".""e""a""c""h""(""f""u""n""c""t""i""o""n"" ""("")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"".""o""p""t""i""o""n""s""[""t""h""i""s"".""v""a""l""u""e""]"" ""="" ""$""(""t""h""i""s"")"".""t""e""x""t""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""t""e""x""t""a""r""e""a""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""t""y""p""e"":"" ""'""t""e""x""t""a""r""e""a""'"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""n""a""m""e"":"" ""l""a""b""e""l"" ""|""|"" ""i""n""p""u""t""L""a""b""e""l""(""n""o""d""e"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""i""s""a""b""l""e""d"":"" ""!""!""$""n""o""d""e"".""a""t""t""r""(""'""d""i""s""a""b""l""e""d""'"")"","
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""v""a""l""u""e"":"" ""$""n""o""d""e"".""v""a""l""("")"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" ""'""l""a""b""e""l""'"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m"" ""="" ""{""t""y""p""e"":"" ""'""h""t""m""l""'"","" ""h""t""m""l"":"" ""$""n""o""d""e"".""c""l""o""n""e""(""t""r""u""e"")""}"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+
+" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""i""t""e""m"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""o""u""n""t""e""r""+""+"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""s""[""'""k""e""y""'"" ""+"" ""c""o""u""n""t""e""r""]"" ""="" ""i""t""e""m"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"")"";"
+
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""c""o""u""n""t""e""r"";"
+" "" "" "" ""}"
+
+"/""/"" ""c""o""n""v""e""r""t"" ""h""t""m""l""5"" ""m""e""n""u"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""f""r""o""m""M""e""n""u"" ""="" ""f""u""n""c""t""i""o""n"" ""(""e""l""e""m""e""n""t"")"" ""{"
+" "" "" "" "" "" "" "" ""v""a""r"" ""$""t""h""i""s"" ""="" ""$""(""e""l""e""m""e""n""t"")"","
+" "" "" "" "" "" "" "" "" "" "" "" ""i""t""e""m""s"" ""="" ""{""}"";"
+
+" "" "" "" "" "" "" "" ""m""e""n""u""C""h""i""l""d""r""e""n""(""i""t""e""m""s"","" ""$""t""h""i""s"".""c""h""i""l""d""r""e""n""("")"")"";"
+
+" "" "" "" "" "" "" "" ""r""e""t""u""r""n"" ""i""t""e""m""s"";"
+" "" "" "" ""}"";"
+
+"/""/"" ""m""a""k""e"" ""d""e""f""a""u""l""t""s"" ""a""c""c""e""s""s""i""b""l""e"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""d""e""f""a""u""l""t""s"" ""="" ""d""e""f""a""u""l""t""s"";"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""t""y""p""e""s"" ""="" ""t""y""p""e""s"";"
+"/""/"" ""e""x""p""o""r""t"" ""i""n""t""e""r""n""a""l"" ""f""u""n""c""t""i""o""n""s"" ""-"" ""u""n""d""o""c""u""m""e""n""t""e""d"","" ""f""o""r"" ""h""a""c""k""i""n""g"" ""o""n""l""y""!"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""h""a""n""d""l""e"" ""="" ""h""a""n""d""l""e"";"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""o""p"" ""="" ""o""p"";"
+" "" "" "" ""$"".""c""o""n""t""e""x""t""M""e""n""u"".""m""e""n""u""s"" ""="" ""m""e""n""u""s"";"
+
+
+"}"")"";"
