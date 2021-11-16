@@ -1,310 +1,310 @@
-#!/bin/sh
-# ----------------------------------------------------------------------------
-# Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing,
-# software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-# KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations
-# under the License.
-# ----------------------------------------------------------------------------
+"#""!""/""b""i""n""/""s""h"
+"#"" ""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-"
+"#"" ""L""i""c""e""n""s""e""d"" ""t""o"" ""t""h""e"" ""A""p""a""c""h""e"" ""S""o""f""t""w""a""r""e"" ""F""o""u""n""d""a""t""i""o""n"" ""(""A""S""F"")"" ""u""n""d""e""r"" ""o""n""e"
+"#"" ""o""r"" ""m""o""r""e"" ""c""o""n""t""r""i""b""u""t""o""r"" ""l""i""c""e""n""s""e"" ""a""g""r""e""e""m""e""n""t""s""."" "" ""S""e""e"" ""t""h""e"" ""N""O""T""I""C""E"" ""f""i""l""e"
+"#"" ""d""i""s""t""r""i""b""u""t""e""d"" ""w""i""t""h"" ""t""h""i""s"" ""w""o""r""k"" ""f""o""r"" ""a""d""d""i""t""i""o""n""a""l"" ""i""n""f""o""r""m""a""t""i""o""n"
+"#"" ""r""e""g""a""r""d""i""n""g"" ""c""o""p""y""r""i""g""h""t"" ""o""w""n""e""r""s""h""i""p""."" "" ""T""h""e"" ""A""S""F"" ""l""i""c""e""n""s""e""s"" ""t""h""i""s"" ""f""i""l""e"
+"#"" ""t""o"" ""y""o""u"" ""u""n""d""e""r"" ""t""h""e"" ""A""p""a""c""h""e"" ""L""i""c""e""n""s""e"","" ""V""e""r""s""i""o""n"" ""2"".""0"" ""(""t""h""e"
+"#"" """""L""i""c""e""n""s""e""""")"";"" ""y""o""u"" ""m""a""y"" ""n""o""t"" ""u""s""e"" ""t""h""i""s"" ""f""i""l""e"" ""e""x""c""e""p""t"" ""i""n"" ""c""o""m""p""l""i""a""n""c""e"
+"#"" ""w""i""t""h"" ""t""h""e"" ""L""i""c""e""n""s""e""."" "" ""Y""o""u"" ""m""a""y"" ""o""b""t""a""i""n"" ""a"" ""c""o""p""y"" ""o""f"" ""t""h""e"" ""L""i""c""e""n""s""e"" ""a""t"
+"#"
+"#"" "" "" "" ""h""t""t""p"":""/""/""w""w""w"".""a""p""a""c""h""e"".""o""r""g""/""l""i""c""e""n""s""e""s""/""L""I""C""E""N""S""E""-""2"".""0"
+"#"
+"#"" ""U""n""l""e""s""s"" ""r""e""q""u""i""r""e""d"" ""b""y"" ""a""p""p""l""i""c""a""b""l""e"" ""l""a""w"" ""o""r"" ""a""g""r""e""e""d"" ""t""o"" ""i""n"" ""w""r""i""t""i""n""g"","
+"#"" ""s""o""f""t""w""a""r""e"" ""d""i""s""t""r""i""b""u""t""e""d"" ""u""n""d""e""r"" ""t""h""e"" ""L""i""c""e""n""s""e"" ""i""s"" ""d""i""s""t""r""i""b""u""t""e""d"" ""o""n"" ""a""n"
+"#"" """""A""S"" ""I""S""""" ""B""A""S""I""S"","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""I""E""S"" ""O""R"" ""C""O""N""D""I""T""I""O""N""S"" ""O""F"" ""A""N""Y"
+"#"" ""K""I""N""D"","" ""e""i""t""h""e""r"" ""e""x""p""r""e""s""s"" ""o""r"" ""i""m""p""l""i""e""d""."" "" ""S""e""e"" ""t""h""e"" ""L""i""c""e""n""s""e"" ""f""o""r"" ""t""h""e"
+"#"" ""s""p""e""c""i""f""i""c"" ""l""a""n""g""u""a""g""e"" ""g""o""v""e""r""n""i""n""g"" ""p""e""r""m""i""s""s""i""o""n""s"" ""a""n""d"" ""l""i""m""i""t""a""t""i""o""n""s"
+"#"" ""u""n""d""e""r"" ""t""h""e"" ""L""i""c""e""n""s""e""."
+"#"" ""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-"
 
-# ----------------------------------------------------------------------------
-# Maven Start Up Batch script
-#
-# Required ENV vars:
-# ------------------
-#   JAVA_HOME - location of a JDK home dir
-#
-# Optional ENV vars
-# -----------------
-#   M2_HOME - location of maven2's installed home dir
-#   MAVEN_OPTS - parameters passed to the Java VM when running Maven
-#     e.g. to debug Maven itself, use
-#       set MAVEN_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000
-#   MAVEN_SKIP_RC - flag to disable loading of mavenrc files
-# ----------------------------------------------------------------------------
+"#"" ""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-"
+"#"" ""M""a""v""e""n"" ""S""t""a""r""t"" ""U""p"" ""B""a""t""c""h"" ""s""c""r""i""p""t"
+"#"
+"#"" ""R""e""q""u""i""r""e""d"" ""E""N""V"" ""v""a""r""s"":"
+"#"" ""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-"
+"#"" "" "" ""J""A""V""A""_""H""O""M""E"" ""-"" ""l""o""c""a""t""i""o""n"" ""o""f"" ""a"" ""J""D""K"" ""h""o""m""e"" ""d""i""r"
+"#"
+"#"" ""O""p""t""i""o""n""a""l"" ""E""N""V"" ""v""a""r""s"
+"#"" ""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-"
+"#"" "" "" ""M""2""_""H""O""M""E"" ""-"" ""l""o""c""a""t""i""o""n"" ""o""f"" ""m""a""v""e""n""2""'""s"" ""i""n""s""t""a""l""l""e""d"" ""h""o""m""e"" ""d""i""r"
+"#"" "" "" ""M""A""V""E""N""_""O""P""T""S"" ""-"" ""p""a""r""a""m""e""t""e""r""s"" ""p""a""s""s""e""d"" ""t""o"" ""t""h""e"" ""J""a""v""a"" ""V""M"" ""w""h""e""n"" ""r""u""n""n""i""n""g"" ""M""a""v""e""n"
+"#"" "" "" "" "" ""e"".""g""."" ""t""o"" ""d""e""b""u""g"" ""M""a""v""e""n"" ""i""t""s""e""l""f"","" ""u""s""e"
+"#"" "" "" "" "" "" "" ""s""e""t"" ""M""A""V""E""N""_""O""P""T""S""=""-""X""d""e""b""u""g"" ""-""X""r""u""n""j""d""w""p"":""t""r""a""n""s""p""o""r""t""=""d""t""_""s""o""c""k""e""t"",""s""e""r""v""e""r""=""y"",""s""u""s""p""e""n""d""=""y"",""a""d""d""r""e""s""s""=""8""0""0""0"
+"#"" "" "" ""M""A""V""E""N""_""S""K""I""P""_""R""C"" ""-"" ""f""l""a""g"" ""t""o"" ""d""i""s""a""b""l""e"" ""l""o""a""d""i""n""g"" ""o""f"" ""m""a""v""e""n""r""c"" ""f""i""l""e""s"
+"#"" ""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-""-"
 
-if [ -z "$MAVEN_SKIP_RC" ] ; then
+"i""f"" ""["" ""-""z"" """""$""M""A""V""E""N""_""S""K""I""P""_""R""C""""" ""]"" "";"" ""t""h""e""n"
 
-  if [ -f /etc/mavenrc ] ; then
-    . /etc/mavenrc
-  fi
+" "" ""i""f"" ""["" ""-""f"" ""/""e""t""c""/""m""a""v""e""n""r""c"" ""]"" "";"" ""t""h""e""n"
+" "" "" "" ""."" ""/""e""t""c""/""m""a""v""e""n""r""c"
+" "" ""f""i"
 
-  if [ -f "$HOME/.mavenrc" ] ; then
-    . "$HOME/.mavenrc"
-  fi
+" "" ""i""f"" ""["" ""-""f"" """""$""H""O""M""E""/"".""m""a""v""e""n""r""c""""" ""]"" "";"" ""t""h""e""n"
+" "" "" "" ""."" """""$""H""O""M""E""/"".""m""a""v""e""n""r""c""""
+" "" ""f""i"
 
-fi
+"f""i"
 
-# OS specific support.  $var _must_ be set to either true or false.
-cygwin=false;
-darwin=false;
-mingw=false
-case "`uname`" in
-  CYGWIN*) cygwin=true ;;
-  MINGW*) mingw=true;;
-  Darwin*) darwin=true
-    # Use /usr/libexec/java_home if available, otherwise fall back to /Library/Java/Home
-    # See https://developer.apple.com/library/mac/qa/qa1170/_index.html
-    if [ -z "$JAVA_HOME" ]; then
-      if [ -x "/usr/libexec/java_home" ]; then
-        export JAVA_HOME="`/usr/libexec/java_home`"
-      else
-        export JAVA_HOME="/Library/Java/Home"
-      fi
-    fi
-    ;;
-esac
+"#"" ""O""S"" ""s""p""e""c""i""f""i""c"" ""s""u""p""p""o""r""t""."" "" ""$""v""a""r"" ""_""m""u""s""t""_"" ""b""e"" ""s""e""t"" ""t""o"" ""e""i""t""h""e""r"" ""t""r""u""e"" ""o""r"" ""f""a""l""s""e""."
+"c""y""g""w""i""n""=""f""a""l""s""e"";"
+"d""a""r""w""i""n""=""f""a""l""s""e"";"
+"m""i""n""g""w""=""f""a""l""s""e"
+"c""a""s""e"" """""`""u""n""a""m""e""`""""" ""i""n"
+" "" ""C""Y""G""W""I""N""*"")"" ""c""y""g""w""i""n""=""t""r""u""e"" "";"";"
+" "" ""M""I""N""G""W""*"")"" ""m""i""n""g""w""=""t""r""u""e"";"";"
+" "" ""D""a""r""w""i""n""*"")"" ""d""a""r""w""i""n""=""t""r""u""e"
+" "" "" "" ""#"" ""U""s""e"" ""/""u""s""r""/""l""i""b""e""x""e""c""/""j""a""v""a""_""h""o""m""e"" ""i""f"" ""a""v""a""i""l""a""b""l""e"","" ""o""t""h""e""r""w""i""s""e"" ""f""a""l""l"" ""b""a""c""k"" ""t""o"" ""/""L""i""b""r""a""r""y""/""J""a""v""a""/""H""o""m""e"
+" "" "" "" ""#"" ""S""e""e"" ""h""t""t""p""s"":""/""/""d""e""v""e""l""o""p""e""r"".""a""p""p""l""e"".""c""o""m""/""l""i""b""r""a""r""y""/""m""a""c""/""q""a""/""q""a""1""1""7""0""/""_""i""n""d""e""x"".""h""t""m""l"
+" "" "" "" ""i""f"" ""["" ""-""z"" """""$""J""A""V""A""_""H""O""M""E""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" ""i""f"" ""["" ""-""x"" """""/""u""s""r""/""l""i""b""e""x""e""c""/""j""a""v""a""_""h""o""m""e""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" ""e""x""p""o""r""t"" ""J""A""V""A""_""H""O""M""E""="""""`""/""u""s""r""/""l""i""b""e""x""e""c""/""j""a""v""a""_""h""o""m""e""`""""
+" "" "" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" "" "" ""e""x""p""o""r""t"" ""J""A""V""A""_""H""O""M""E""="""""/""L""i""b""r""a""r""y""/""J""a""v""a""/""H""o""m""e""""
+" "" "" "" "" "" ""f""i"
+" "" "" "" ""f""i"
+" "" "" "" "";"";"
+"e""s""a""c"
 
-if [ -z "$JAVA_HOME" ] ; then
-  if [ -r /etc/gentoo-release ] ; then
-    JAVA_HOME=`java-config --jre-home`
-  fi
-fi
+"i""f"" ""["" ""-""z"" """""$""J""A""V""A""_""H""O""M""E""""" ""]"" "";"" ""t""h""e""n"
+" "" ""i""f"" ""["" ""-""r"" ""/""e""t""c""/""g""e""n""t""o""o""-""r""e""l""e""a""s""e"" ""]"" "";"" ""t""h""e""n"
+" "" "" "" ""J""A""V""A""_""H""O""M""E""=""`""j""a""v""a""-""c""o""n""f""i""g"" ""-""-""j""r""e""-""h""o""m""e""`"
+" "" ""f""i"
+"f""i"
 
-if [ -z "$M2_HOME" ] ; then
-  ## resolve links - $0 may be a link to maven's home
-  PRG="$0"
+"i""f"" ""["" ""-""z"" """""$""M""2""_""H""O""M""E""""" ""]"" "";"" ""t""h""e""n"
+" "" ""#""#"" ""r""e""s""o""l""v""e"" ""l""i""n""k""s"" ""-"" ""$""0"" ""m""a""y"" ""b""e"" ""a"" ""l""i""n""k"" ""t""o"" ""m""a""v""e""n""'""s"" ""h""o""m""e"
+" "" ""P""R""G""="""""$""0""""
 
-  # need this for relative symlinks
-  while [ -h "$PRG" ] ; do
-    ls=`ls -ld "$PRG"`
-    link=`expr "$ls" : '.*-> \(.*\)$'`
-    if expr "$link" : '/.*' > /dev/null; then
-      PRG="$link"
-    else
-      PRG="`dirname "$PRG"`/$link"
-    fi
-  done
+" "" ""#"" ""n""e""e""d"" ""t""h""i""s"" ""f""o""r"" ""r""e""l""a""t""i""v""e"" ""s""y""m""l""i""n""k""s"
+" "" ""w""h""i""l""e"" ""["" ""-""h"" """""$""P""R""G""""" ""]"" "";"" ""d""o"
+" "" "" "" ""l""s""=""`""l""s"" ""-""l""d"" """""$""P""R""G"""""`"
+" "" "" "" ""l""i""n""k""=""`""e""x""p""r"" """""$""l""s""""" "":"" ""'"".""*""-"">"" ""\""("".""*""\"")""$""'""`"
+" "" "" "" ""i""f"" ""e""x""p""r"" """""$""l""i""n""k""""" "":"" ""'""/"".""*""'"" "">"" ""/""d""e""v""/""n""u""l""l"";"" ""t""h""e""n"
+" "" "" "" "" "" ""P""R""G""="""""$""l""i""n""k""""
+" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" ""P""R""G""="""""`""d""i""r""n""a""m""e"" """""$""P""R""G"""""`""/""$""l""i""n""k""""
+" "" "" "" ""f""i"
+" "" ""d""o""n""e"
 
-  saveddir=`pwd`
+" "" ""s""a""v""e""d""d""i""r""=""`""p""w""d""`"
 
-  M2_HOME=`dirname "$PRG"`/..
+" "" ""M""2""_""H""O""M""E""=""`""d""i""r""n""a""m""e"" """""$""P""R""G"""""`""/"".""."
 
-  # make it fully qualified
-  M2_HOME=`cd "$M2_HOME" && pwd`
+" "" ""#"" ""m""a""k""e"" ""i""t"" ""f""u""l""l""y"" ""q""u""a""l""i""f""i""e""d"
+" "" ""M""2""_""H""O""M""E""=""`""c""d"" """""$""M""2""_""H""O""M""E""""" ""&""&"" ""p""w""d""`"
 
-  cd "$saveddir"
-  # echo Using m2 at $M2_HOME
-fi
+" "" ""c""d"" """""$""s""a""v""e""d""d""i""r""""
+" "" ""#"" ""e""c""h""o"" ""U""s""i""n""g"" ""m""2"" ""a""t"" ""$""M""2""_""H""O""M""E"
+"f""i"
 
-# For Cygwin, ensure paths are in UNIX format before anything is touched
-if $cygwin ; then
-  [ -n "$M2_HOME" ] &&
-    M2_HOME=`cygpath --unix "$M2_HOME"`
-  [ -n "$JAVA_HOME" ] &&
-    JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
-  [ -n "$CLASSPATH" ] &&
-    CLASSPATH=`cygpath --path --unix "$CLASSPATH"`
-fi
+"#"" ""F""o""r"" ""C""y""g""w""i""n"","" ""e""n""s""u""r""e"" ""p""a""t""h""s"" ""a""r""e"" ""i""n"" ""U""N""I""X"" ""f""o""r""m""a""t"" ""b""e""f""o""r""e"" ""a""n""y""t""h""i""n""g"" ""i""s"" ""t""o""u""c""h""e""d"
+"i""f"" ""$""c""y""g""w""i""n"" "";"" ""t""h""e""n"
+" "" ""["" ""-""n"" """""$""M""2""_""H""O""M""E""""" ""]"" ""&""&"
+" "" "" "" ""M""2""_""H""O""M""E""=""`""c""y""g""p""a""t""h"" ""-""-""u""n""i""x"" """""$""M""2""_""H""O""M""E"""""`"
+" "" ""["" ""-""n"" """""$""J""A""V""A""_""H""O""M""E""""" ""]"" ""&""&"
+" "" "" "" ""J""A""V""A""_""H""O""M""E""=""`""c""y""g""p""a""t""h"" ""-""-""u""n""i""x"" """""$""J""A""V""A""_""H""O""M""E"""""`"
+" "" ""["" ""-""n"" """""$""C""L""A""S""S""P""A""T""H""""" ""]"" ""&""&"
+" "" "" "" ""C""L""A""S""S""P""A""T""H""=""`""c""y""g""p""a""t""h"" ""-""-""p""a""t""h"" ""-""-""u""n""i""x"" """""$""C""L""A""S""S""P""A""T""H"""""`"
+"f""i"
 
-# For Mingw, ensure paths are in UNIX format before anything is touched
-if $mingw ; then
-  [ -n "$M2_HOME" ] &&
-    M2_HOME="`(cd "$M2_HOME"; pwd)`"
-  [ -n "$JAVA_HOME" ] &&
-    JAVA_HOME="`(cd "$JAVA_HOME"; pwd)`"
-fi
+"#"" ""F""o""r"" ""M""i""n""g""w"","" ""e""n""s""u""r""e"" ""p""a""t""h""s"" ""a""r""e"" ""i""n"" ""U""N""I""X"" ""f""o""r""m""a""t"" ""b""e""f""o""r""e"" ""a""n""y""t""h""i""n""g"" ""i""s"" ""t""o""u""c""h""e""d"
+"i""f"" ""$""m""i""n""g""w"" "";"" ""t""h""e""n"
+" "" ""["" ""-""n"" """""$""M""2""_""H""O""M""E""""" ""]"" ""&""&"
+" "" "" "" ""M""2""_""H""O""M""E""="""""`""(""c""d"" """""$""M""2""_""H""O""M""E""""";"" ""p""w""d"")""`""""
+" "" ""["" ""-""n"" """""$""J""A""V""A""_""H""O""M""E""""" ""]"" ""&""&"
+" "" "" "" ""J""A""V""A""_""H""O""M""E""="""""`""(""c""d"" """""$""J""A""V""A""_""H""O""M""E""""";"" ""p""w""d"")""`""""
+"f""i"
 
-if [ -z "$JAVA_HOME" ]; then
-  javaExecutable="`which javac`"
-  if [ -n "$javaExecutable" ] && ! [ "`expr \"$javaExecutable\" : '\([^ ]*\)'`" = "no" ]; then
-    # readlink(1) is not available as standard on Solaris 10.
-    readLink=`which readlink`
-    if [ ! `expr "$readLink" : '\([^ ]*\)'` = "no" ]; then
-      if $darwin ; then
-        javaHome="`dirname \"$javaExecutable\"`"
-        javaExecutable="`cd \"$javaHome\" && pwd -P`/javac"
-      else
-        javaExecutable="`readlink -f \"$javaExecutable\"`"
-      fi
-      javaHome="`dirname \"$javaExecutable\"`"
-      javaHome=`expr "$javaHome" : '\(.*\)/bin'`
-      JAVA_HOME="$javaHome"
-      export JAVA_HOME
-    fi
-  fi
-fi
+"i""f"" ""["" ""-""z"" """""$""J""A""V""A""_""H""O""M""E""""" ""]"";"" ""t""h""e""n"
+" "" ""j""a""v""a""E""x""e""c""u""t""a""b""l""e""="""""`""w""h""i""c""h"" ""j""a""v""a""c""`""""
+" "" ""i""f"" ""["" ""-""n"" """""$""j""a""v""a""E""x""e""c""u""t""a""b""l""e""""" ""]"" ""&""&"" ""!"" ""["" """""`""e""x""p""r"" ""\"""""$""j""a""v""a""E""x""e""c""u""t""a""b""l""e""\""""" "":"" ""'""\""(""[""^"" ""]""*""\"")""'""`""""" ""="" """""n""o""""" ""]"";"" ""t""h""e""n"
+" "" "" "" ""#"" ""r""e""a""d""l""i""n""k""(""1"")"" ""i""s"" ""n""o""t"" ""a""v""a""i""l""a""b""l""e"" ""a""s"" ""s""t""a""n""d""a""r""d"" ""o""n"" ""S""o""l""a""r""i""s"" ""1""0""."
+" "" "" "" ""r""e""a""d""L""i""n""k""=""`""w""h""i""c""h"" ""r""e""a""d""l""i""n""k""`"
+" "" "" "" ""i""f"" ""["" ""!"" ""`""e""x""p""r"" """""$""r""e""a""d""L""i""n""k""""" "":"" ""'""\""(""[""^"" ""]""*""\"")""'""`"" ""="" """""n""o""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" ""i""f"" ""$""d""a""r""w""i""n"" "";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" ""j""a""v""a""H""o""m""e""="""""`""d""i""r""n""a""m""e"" ""\"""""$""j""a""v""a""E""x""e""c""u""t""a""b""l""e""\"""""`""""
+" "" "" "" "" "" "" "" ""j""a""v""a""E""x""e""c""u""t""a""b""l""e""="""""`""c""d"" ""\"""""$""j""a""v""a""H""o""m""e""\""""" ""&""&"" ""p""w""d"" ""-""P""`""/""j""a""v""a""c""""
+" "" "" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" "" "" ""j""a""v""a""E""x""e""c""u""t""a""b""l""e""="""""`""r""e""a""d""l""i""n""k"" ""-""f"" ""\"""""$""j""a""v""a""E""x""e""c""u""t""a""b""l""e""\"""""`""""
+" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" ""j""a""v""a""H""o""m""e""="""""`""d""i""r""n""a""m""e"" ""\"""""$""j""a""v""a""E""x""e""c""u""t""a""b""l""e""\"""""`""""
+" "" "" "" "" "" ""j""a""v""a""H""o""m""e""=""`""e""x""p""r"" """""$""j""a""v""a""H""o""m""e""""" "":"" ""'""\""("".""*""\"")""/""b""i""n""'""`"
+" "" "" "" "" "" ""J""A""V""A""_""H""O""M""E""="""""$""j""a""v""a""H""o""m""e""""
+" "" "" "" "" "" ""e""x""p""o""r""t"" ""J""A""V""A""_""H""O""M""E"
+" "" "" "" ""f""i"
+" "" ""f""i"
+"f""i"
 
-if [ -z "$JAVACMD" ] ; then
-  if [ -n "$JAVA_HOME"  ] ; then
-    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
-      # IBM's JDK on AIX uses strange locations for the executables
-      JAVACMD="$JAVA_HOME/jre/sh/java"
-    else
-      JAVACMD="$JAVA_HOME/bin/java"
-    fi
-  else
-    JAVACMD="`which java`"
-  fi
-fi
+"i""f"" ""["" ""-""z"" """""$""J""A""V""A""C""M""D""""" ""]"" "";"" ""t""h""e""n"
+" "" ""i""f"" ""["" ""-""n"" """""$""J""A""V""A""_""H""O""M""E""""" "" ""]"" "";"" ""t""h""e""n"
+" "" "" "" ""i""f"" ""["" ""-""x"" """""$""J""A""V""A""_""H""O""M""E""/""j""r""e""/""s""h""/""j""a""v""a""""" ""]"" "";"" ""t""h""e""n"
+" "" "" "" "" "" ""#"" ""I""B""M""'""s"" ""J""D""K"" ""o""n"" ""A""I""X"" ""u""s""e""s"" ""s""t""r""a""n""g""e"" ""l""o""c""a""t""i""o""n""s"" ""f""o""r"" ""t""h""e"" ""e""x""e""c""u""t""a""b""l""e""s"
+" "" "" "" "" "" ""J""A""V""A""C""M""D""="""""$""J""A""V""A""_""H""O""M""E""/""j""r""e""/""s""h""/""j""a""v""a""""
+" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" ""J""A""V""A""C""M""D""="""""$""J""A""V""A""_""H""O""M""E""/""b""i""n""/""j""a""v""a""""
+" "" "" "" ""f""i"
+" "" ""e""l""s""e"
+" "" "" "" ""J""A""V""A""C""M""D""="""""`""w""h""i""c""h"" ""j""a""v""a""`""""
+" "" ""f""i"
+"f""i"
 
-if [ ! -x "$JAVACMD" ] ; then
-  echo "Error: JAVA_HOME is not defined correctly." >&2
-  echo "  We cannot execute $JAVACMD" >&2
-  exit 1
-fi
+"i""f"" ""["" ""!"" ""-""x"" """""$""J""A""V""A""C""M""D""""" ""]"" "";"" ""t""h""e""n"
+" "" ""e""c""h""o"" """""E""r""r""o""r"":"" ""J""A""V""A""_""H""O""M""E"" ""i""s"" ""n""o""t"" ""d""e""f""i""n""e""d"" ""c""o""r""r""e""c""t""l""y"".""""" "">""&""2"
+" "" ""e""c""h""o"" """"" "" ""W""e"" ""c""a""n""n""o""t"" ""e""x""e""c""u""t""e"" ""$""J""A""V""A""C""M""D""""" "">""&""2"
+" "" ""e""x""i""t"" ""1"
+"f""i"
 
-if [ -z "$JAVA_HOME" ] ; then
-  echo "Warning: JAVA_HOME environment variable is not set."
-fi
+"i""f"" ""["" ""-""z"" """""$""J""A""V""A""_""H""O""M""E""""" ""]"" "";"" ""t""h""e""n"
+" "" ""e""c""h""o"" """""W""a""r""n""i""n""g"":"" ""J""A""V""A""_""H""O""M""E"" ""e""n""v""i""r""o""n""m""e""n""t"" ""v""a""r""i""a""b""l""e"" ""i""s"" ""n""o""t"" ""s""e""t"".""""
+"f""i"
 
-CLASSWORLDS_LAUNCHER=org.codehaus.plexus.classworlds.launcher.Launcher
+"C""L""A""S""S""W""O""R""L""D""S""_""L""A""U""N""C""H""E""R""=""o""r""g"".""c""o""d""e""h""a""u""s"".""p""l""e""x""u""s"".""c""l""a""s""s""w""o""r""l""d""s"".""l""a""u""n""c""h""e""r"".""L""a""u""n""c""h""e""r"
 
-# traverses directory structure from process work directory to filesystem root
-# first directory with .mvn subdirectory is considered project base directory
-find_maven_basedir() {
+"#"" ""t""r""a""v""e""r""s""e""s"" ""d""i""r""e""c""t""o""r""y"" ""s""t""r""u""c""t""u""r""e"" ""f""r""o""m"" ""p""r""o""c""e""s""s"" ""w""o""r""k"" ""d""i""r""e""c""t""o""r""y"" ""t""o"" ""f""i""l""e""s""y""s""t""e""m"" ""r""o""o""t"
+"#"" ""f""i""r""s""t"" ""d""i""r""e""c""t""o""r""y"" ""w""i""t""h"" "".""m""v""n"" ""s""u""b""d""i""r""e""c""t""o""r""y"" ""i""s"" ""c""o""n""s""i""d""e""r""e""d"" ""p""r""o""j""e""c""t"" ""b""a""s""e"" ""d""i""r""e""c""t""o""r""y"
+"f""i""n""d""_""m""a""v""e""n""_""b""a""s""e""d""i""r""("")"" ""{"
 
-  if [ -z "$1" ]
-  then
-    echo "Path not specified to find_maven_basedir"
-    return 1
-  fi
+" "" ""i""f"" ""["" ""-""z"" """""$""1""""" ""]"
+" "" ""t""h""e""n"
+" "" "" "" ""e""c""h""o"" """""P""a""t""h"" ""n""o""t"" ""s""p""e""c""i""f""i""e""d"" ""t""o"" ""f""i""n""d""_""m""a""v""e""n""_""b""a""s""e""d""i""r""""
+" "" "" "" ""r""e""t""u""r""n"" ""1"
+" "" ""f""i"
 
-  basedir="$1"
-  wdir="$1"
-  while [ "$wdir" != '/' ] ; do
-    if [ -d "$wdir"/.mvn ] ; then
-      basedir=$wdir
-      break
-    fi
-    # workaround for JBEAP-8937 (on Solaris 10/Sparc)
-    if [ -d "${wdir}" ]; then
-      wdir=`cd "$wdir/.."; pwd`
-    fi
-    # end of workaround
-  done
-  echo "${basedir}"
-}
+" "" ""b""a""s""e""d""i""r""="""""$""1""""
+" "" ""w""d""i""r""="""""$""1""""
+" "" ""w""h""i""l""e"" ""["" """""$""w""d""i""r""""" ""!""="" ""'""/""'"" ""]"" "";"" ""d""o"
+" "" "" "" ""i""f"" ""["" ""-""d"" """""$""w""d""i""r"""""/"".""m""v""n"" ""]"" "";"" ""t""h""e""n"
+" "" "" "" "" "" ""b""a""s""e""d""i""r""=""$""w""d""i""r"
+" "" "" "" "" "" ""b""r""e""a""k"
+" "" "" "" ""f""i"
+" "" "" "" ""#"" ""w""o""r""k""a""r""o""u""n""d"" ""f""o""r"" ""J""B""E""A""P""-""8""9""3""7"" ""(""o""n"" ""S""o""l""a""r""i""s"" ""1""0""/""S""p""a""r""c"")"
+" "" "" "" ""i""f"" ""["" ""-""d"" """""$""{""w""d""i""r""}""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" ""w""d""i""r""=""`""c""d"" """""$""w""d""i""r""/""."".""""";"" ""p""w""d""`"
+" "" "" "" ""f""i"
+" "" "" "" ""#"" ""e""n""d"" ""o""f"" ""w""o""r""k""a""r""o""u""n""d"
+" "" ""d""o""n""e"
+" "" ""e""c""h""o"" """""$""{""b""a""s""e""d""i""r""}""""
+"}"
 
-# concatenates all lines of a file
-concat_lines() {
-  if [ -f "$1" ]; then
-    echo "$(tr -s '\n' ' ' < "$1")"
-  fi
-}
+"#"" ""c""o""n""c""a""t""e""n""a""t""e""s"" ""a""l""l"" ""l""i""n""e""s"" ""o""f"" ""a"" ""f""i""l""e"
+"c""o""n""c""a""t""_""l""i""n""e""s""("")"" ""{"
+" "" ""i""f"" ""["" ""-""f"" """""$""1""""" ""]"";"" ""t""h""e""n"
+" "" "" "" ""e""c""h""o"" """""$""(""t""r"" ""-""s"" ""'""\""n""'"" ""'"" ""'"" ""<"" """""$""1""""")""""
+" "" ""f""i"
+"}"
 
-BASE_DIR=`find_maven_basedir "$(pwd)"`
-if [ -z "$BASE_DIR" ]; then
-  exit 1;
-fi
+"B""A""S""E""_""D""I""R""=""`""f""i""n""d""_""m""a""v""e""n""_""b""a""s""e""d""i""r"" """""$""(""p""w""d"")"""""`"
+"i""f"" ""["" ""-""z"" """""$""B""A""S""E""_""D""I""R""""" ""]"";"" ""t""h""e""n"
+" "" ""e""x""i""t"" ""1"";"
+"f""i"
 
-##########################################################################################
-# Extension to allow automatically downloading the maven-wrapper.jar from Maven-central
-# This allows using the maven wrapper in projects that prohibit checking in binary data.
-##########################################################################################
-if [ -r "$BASE_DIR/.mvn/wrapper/maven-wrapper.jar" ]; then
-    if [ "$MVNW_VERBOSE" = true ]; then
-      echo "Found .mvn/wrapper/maven-wrapper.jar"
-    fi
-else
-    if [ "$MVNW_VERBOSE" = true ]; then
-      echo "Couldn't find .mvn/wrapper/maven-wrapper.jar, downloading it ..."
-    fi
-    if [ -n "$MVNW_REPOURL" ]; then
-      jarUrl="$MVNW_REPOURL/io/takari/maven-wrapper/0.5.6/maven-wrapper-0.5.6.jar"
-    else
-      jarUrl="https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.6/maven-wrapper-0.5.6.jar"
-    fi
-    while IFS="=" read key value; do
-      case "$key" in (wrapperUrl) jarUrl="$value"; break ;;
-      esac
-    done < "$BASE_DIR/.mvn/wrapper/maven-wrapper.properties"
-    if [ "$MVNW_VERBOSE" = true ]; then
-      echo "Downloading from: $jarUrl"
-    fi
-    wrapperJarPath="$BASE_DIR/.mvn/wrapper/maven-wrapper.jar"
-    if $cygwin; then
-      wrapperJarPath=`cygpath --path --windows "$wrapperJarPath"`
-    fi
+"#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#"
+"#"" ""E""x""t""e""n""s""i""o""n"" ""t""o"" ""a""l""l""o""w"" ""a""u""t""o""m""a""t""i""c""a""l""l""y"" ""d""o""w""n""l""o""a""d""i""n""g"" ""t""h""e"" ""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r"" ""f""r""o""m"" ""M""a""v""e""n""-""c""e""n""t""r""a""l"
+"#"" ""T""h""i""s"" ""a""l""l""o""w""s"" ""u""s""i""n""g"" ""t""h""e"" ""m""a""v""e""n"" ""w""r""a""p""p""e""r"" ""i""n"" ""p""r""o""j""e""c""t""s"" ""t""h""a""t"" ""p""r""o""h""i""b""i""t"" ""c""h""e""c""k""i""n""g"" ""i""n"" ""b""i""n""a""r""y"" ""d""a""t""a""."
+"#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#"
+"i""f"" ""["" ""-""r"" """""$""B""A""S""E""_""D""I""R""/"".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r""""" ""]"";"" ""t""h""e""n"
+" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" ""e""c""h""o"" """""F""o""u""n""d"" "".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r""""
+" "" "" "" ""f""i"
+"e""l""s""e"
+" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" ""e""c""h""o"" """""C""o""u""l""d""n""'""t"" ""f""i""n""d"" "".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r"","" ""d""o""w""n""l""o""a""d""i""n""g"" ""i""t"" "".""."".""""
+" "" "" "" ""f""i"
+" "" "" "" ""i""f"" ""["" ""-""n"" """""$""M""V""N""W""_""R""E""P""O""U""R""L""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" ""j""a""r""U""r""l""="""""$""M""V""N""W""_""R""E""P""O""U""R""L""/""i""o""/""t""a""k""a""r""i""/""m""a""v""e""n""-""w""r""a""p""p""e""r""/""0"".""5"".""6""/""m""a""v""e""n""-""w""r""a""p""p""e""r""-""0"".""5"".""6"".""j""a""r""""
+" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" ""j""a""r""U""r""l""="""""h""t""t""p""s"":""/""/""r""e""p""o"".""m""a""v""e""n"".""a""p""a""c""h""e"".""o""r""g""/""m""a""v""e""n""2""/""i""o""/""t""a""k""a""r""i""/""m""a""v""e""n""-""w""r""a""p""p""e""r""/""0"".""5"".""6""/""m""a""v""e""n""-""w""r""a""p""p""e""r""-""0"".""5"".""6"".""j""a""r""""
+" "" "" "" ""f""i"
+" "" "" "" ""w""h""i""l""e"" ""I""F""S""="""""=""""" ""r""e""a""d"" ""k""e""y"" ""v""a""l""u""e"";"" ""d""o"
+" "" "" "" "" "" ""c""a""s""e"" """""$""k""e""y""""" ""i""n"" ""(""w""r""a""p""p""e""r""U""r""l"")"" ""j""a""r""U""r""l""="""""$""v""a""l""u""e""""";"" ""b""r""e""a""k"" "";"";"
+" "" "" "" "" "" ""e""s""a""c"
+" "" "" "" ""d""o""n""e"" ""<"" """""$""B""A""S""E""_""D""I""R""/"".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""p""r""o""p""e""r""t""i""e""s""""
+" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" ""e""c""h""o"" """""D""o""w""n""l""o""a""d""i""n""g"" ""f""r""o""m"":"" ""$""j""a""r""U""r""l""""
+" "" "" "" ""f""i"
+" "" "" "" ""w""r""a""p""p""e""r""J""a""r""P""a""t""h""="""""$""B""A""S""E""_""D""I""R""/"".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r""""
+" "" "" "" ""i""f"" ""$""c""y""g""w""i""n"";"" ""t""h""e""n"
+" "" "" "" "" "" ""w""r""a""p""p""e""r""J""a""r""P""a""t""h""=""`""c""y""g""p""a""t""h"" ""-""-""p""a""t""h"" ""-""-""w""i""n""d""o""w""s"" """""$""w""r""a""p""p""e""r""J""a""r""P""a""t""h"""""`"
+" "" "" "" ""f""i"
 
-    if command -v wget > /dev/null; then
-        if [ "$MVNW_VERBOSE" = true ]; then
-          echo "Found wget ... using wget"
-        fi
-        if [ -z "$MVNW_USERNAME" ] || [ -z "$MVNW_PASSWORD" ]; then
-            wget "$jarUrl" -O "$wrapperJarPath"
-        else
-            wget --http-user=$MVNW_USERNAME --http-password=$MVNW_PASSWORD "$jarUrl" -O "$wrapperJarPath"
-        fi
-    elif command -v curl > /dev/null; then
-        if [ "$MVNW_VERBOSE" = true ]; then
-          echo "Found curl ... using curl"
-        fi
-        if [ -z "$MVNW_USERNAME" ] || [ -z "$MVNW_PASSWORD" ]; then
-            curl -o "$wrapperJarPath" "$jarUrl" -f
-        else
-            curl --user $MVNW_USERNAME:$MVNW_PASSWORD -o "$wrapperJarPath" "$jarUrl" -f
-        fi
+" "" "" "" ""i""f"" ""c""o""m""m""a""n""d"" ""-""v"" ""w""g""e""t"" "">"" ""/""d""e""v""/""n""u""l""l"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" ""e""c""h""o"" """""F""o""u""n""d"" ""w""g""e""t"" ""."".""."" ""u""s""i""n""g"" ""w""g""e""t""""
+" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" ""i""f"" ""["" ""-""z"" """""$""M""V""N""W""_""U""S""E""R""N""A""M""E""""" ""]"" ""|""|"" ""["" ""-""z"" """""$""M""V""N""W""_""P""A""S""S""W""O""R""D""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" "" "" ""w""g""e""t"" """""$""j""a""r""U""r""l""""" ""-""O"" """""$""w""r""a""p""p""e""r""J""a""r""P""a""t""h""""
+" "" "" "" "" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" "" "" "" "" "" "" ""w""g""e""t"" ""-""-""h""t""t""p""-""u""s""e""r""=""$""M""V""N""W""_""U""S""E""R""N""A""M""E"" ""-""-""h""t""t""p""-""p""a""s""s""w""o""r""d""=""$""M""V""N""W""_""P""A""S""S""W""O""R""D"" """""$""j""a""r""U""r""l""""" ""-""O"" """""$""w""r""a""p""p""e""r""J""a""r""P""a""t""h""""
+" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" ""e""l""i""f"" ""c""o""m""m""a""n""d"" ""-""v"" ""c""u""r""l"" "">"" ""/""d""e""v""/""n""u""l""l"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" ""e""c""h""o"" """""F""o""u""n""d"" ""c""u""r""l"" ""."".""."" ""u""s""i""n""g"" ""c""u""r""l""""
+" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" ""i""f"" ""["" ""-""z"" """""$""M""V""N""W""_""U""S""E""R""N""A""M""E""""" ""]"" ""|""|"" ""["" ""-""z"" """""$""M""V""N""W""_""P""A""S""S""W""O""R""D""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""u""r""l"" ""-""o"" """""$""w""r""a""p""p""e""r""J""a""r""P""a""t""h""""" """""$""j""a""r""U""r""l""""" ""-""f"
+" "" "" "" "" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""u""r""l"" ""-""-""u""s""e""r"" ""$""M""V""N""W""_""U""S""E""R""N""A""M""E"":""$""M""V""N""W""_""P""A""S""S""W""O""R""D"" ""-""o"" """""$""w""r""a""p""p""e""r""J""a""r""P""a""t""h""""" """""$""j""a""r""U""r""l""""" ""-""f"
+" "" "" "" "" "" "" "" ""f""i"
 
-    else
-        if [ "$MVNW_VERBOSE" = true ]; then
-          echo "Falling back to using Java to download"
-        fi
-        javaClass="$BASE_DIR/.mvn/wrapper/MavenWrapperDownloader.java"
-        # For Cygwin, switch paths to Windows format before running javac
-        if $cygwin; then
-          javaClass=`cygpath --path --windows "$javaClass"`
-        fi
-        if [ -e "$javaClass" ]; then
-            if [ ! -e "$BASE_DIR/.mvn/wrapper/MavenWrapperDownloader.class" ]; then
-                if [ "$MVNW_VERBOSE" = true ]; then
-                  echo " - Compiling MavenWrapperDownloader.java ..."
-                fi
-                # Compiling the Java class
-                ("$JAVA_HOME/bin/javac" "$javaClass")
-            fi
-            if [ -e "$BASE_DIR/.mvn/wrapper/MavenWrapperDownloader.class" ]; then
-                # Running the downloader
-                if [ "$MVNW_VERBOSE" = true ]; then
-                  echo " - Running MavenWrapperDownloader.java ..."
-                fi
-                ("$JAVA_HOME/bin/java" -cp .mvn/wrapper MavenWrapperDownloader "$MAVEN_PROJECTBASEDIR")
-            fi
-        fi
-    fi
-fi
-##########################################################################################
-# End of extension
-##########################################################################################
+" "" "" "" ""e""l""s""e"
+" "" "" "" "" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" ""e""c""h""o"" """""F""a""l""l""i""n""g"" ""b""a""c""k"" ""t""o"" ""u""s""i""n""g"" ""J""a""v""a"" ""t""o"" ""d""o""w""n""l""o""a""d""""
+" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" ""j""a""v""a""C""l""a""s""s""="""""$""B""A""S""E""_""D""I""R""/"".""m""v""n""/""w""r""a""p""p""e""r""/""M""a""v""e""n""W""r""a""p""p""e""r""D""o""w""n""l""o""a""d""e""r"".""j""a""v""a""""
+" "" "" "" "" "" "" "" ""#"" ""F""o""r"" ""C""y""g""w""i""n"","" ""s""w""i""t""c""h"" ""p""a""t""h""s"" ""t""o"" ""W""i""n""d""o""w""s"" ""f""o""r""m""a""t"" ""b""e""f""o""r""e"" ""r""u""n""n""i""n""g"" ""j""a""v""a""c"
+" "" "" "" "" "" "" "" ""i""f"" ""$""c""y""g""w""i""n"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" ""j""a""v""a""C""l""a""s""s""=""`""c""y""g""p""a""t""h"" ""-""-""p""a""t""h"" ""-""-""w""i""n""d""o""w""s"" """""$""j""a""v""a""C""l""a""s""s"""""`"
+" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" ""i""f"" ""["" ""-""e"" """""$""j""a""v""a""C""l""a""s""s""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""["" ""!"" ""-""e"" """""$""B""A""S""E""_""D""I""R""/"".""m""v""n""/""w""r""a""p""p""e""r""/""M""a""v""e""n""W""r""a""p""p""e""r""D""o""w""n""l""o""a""d""e""r"".""c""l""a""s""s""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e""c""h""o"" """"" ""-"" ""C""o""m""p""i""l""i""n""g"" ""M""a""v""e""n""W""r""a""p""p""e""r""D""o""w""n""l""o""a""d""e""r"".""j""a""v""a"" "".""."".""""
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""#"" ""C""o""m""p""i""l""i""n""g"" ""t""h""e"" ""J""a""v""a"" ""c""l""a""s""s"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""("""""$""J""A""V""A""_""H""O""M""E""/""b""i""n""/""j""a""v""a""c""""" """""$""j""a""v""a""C""l""a""s""s""""")"
+" "" "" "" "" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""["" ""-""e"" """""$""B""A""S""E""_""D""I""R""/"".""m""v""n""/""w""r""a""p""p""e""r""/""M""a""v""e""n""W""r""a""p""p""e""r""D""o""w""n""l""o""a""d""e""r"".""c""l""a""s""s""""" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""#"" ""R""u""n""n""i""n""g"" ""t""h""e"" ""d""o""w""n""l""o""a""d""e""r"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""e""c""h""o"" """"" ""-"" ""R""u""n""n""i""n""g"" ""M""a""v""e""n""W""r""a""p""p""e""r""D""o""w""n""l""o""a""d""e""r"".""j""a""v""a"" "".""."".""""
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""("""""$""J""A""V""A""_""H""O""M""E""/""b""i""n""/""j""a""v""a""""" ""-""c""p"" "".""m""v""n""/""w""r""a""p""p""e""r"" ""M""a""v""e""n""W""r""a""p""p""e""r""D""o""w""n""l""o""a""d""e""r"" """""$""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R""""")"
+" "" "" "" "" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" "" "" "" "" ""f""i"
+" "" "" "" ""f""i"
+"f""i"
+"#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#"
+"#"" ""E""n""d"" ""o""f"" ""e""x""t""e""n""s""i""o""n"
+"#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#""#"
 
-export MAVEN_PROJECTBASEDIR=${MAVEN_BASEDIR:-"$BASE_DIR"}
-if [ "$MVNW_VERBOSE" = true ]; then
-  echo $MAVEN_PROJECTBASEDIR
-fi
-MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
+"e""x""p""o""r""t"" ""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R""=""$""{""M""A""V""E""N""_""B""A""S""E""D""I""R"":""-"""""$""B""A""S""E""_""D""I""R"""""}"
+"i""f"" ""["" """""$""M""V""N""W""_""V""E""R""B""O""S""E""""" ""="" ""t""r""u""e"" ""]"";"" ""t""h""e""n"
+" "" ""e""c""h""o"" ""$""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R"
+"f""i"
+"M""A""V""E""N""_""O""P""T""S""="""""$""(""c""o""n""c""a""t""_""l""i""n""e""s"" """""$""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R""/"".""m""v""n""/""j""v""m"".""c""o""n""f""i""g""""")"" ""$""M""A""V""E""N""_""O""P""T""S""""
 
-# For Cygwin, switch paths to Windows format before running java
-if $cygwin; then
-  [ -n "$M2_HOME" ] &&
-    M2_HOME=`cygpath --path --windows "$M2_HOME"`
-  [ -n "$JAVA_HOME" ] &&
-    JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
-  [ -n "$CLASSPATH" ] &&
-    CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
-  [ -n "$MAVEN_PROJECTBASEDIR" ] &&
-    MAVEN_PROJECTBASEDIR=`cygpath --path --windows "$MAVEN_PROJECTBASEDIR"`
-fi
+"#"" ""F""o""r"" ""C""y""g""w""i""n"","" ""s""w""i""t""c""h"" ""p""a""t""h""s"" ""t""o"" ""W""i""n""d""o""w""s"" ""f""o""r""m""a""t"" ""b""e""f""o""r""e"" ""r""u""n""n""i""n""g"" ""j""a""v""a"
+"i""f"" ""$""c""y""g""w""i""n"";"" ""t""h""e""n"
+" "" ""["" ""-""n"" """""$""M""2""_""H""O""M""E""""" ""]"" ""&""&"
+" "" "" "" ""M""2""_""H""O""M""E""=""`""c""y""g""p""a""t""h"" ""-""-""p""a""t""h"" ""-""-""w""i""n""d""o""w""s"" """""$""M""2""_""H""O""M""E"""""`"
+" "" ""["" ""-""n"" """""$""J""A""V""A""_""H""O""M""E""""" ""]"" ""&""&"
+" "" "" "" ""J""A""V""A""_""H""O""M""E""=""`""c""y""g""p""a""t""h"" ""-""-""p""a""t""h"" ""-""-""w""i""n""d""o""w""s"" """""$""J""A""V""A""_""H""O""M""E"""""`"
+" "" ""["" ""-""n"" """""$""C""L""A""S""S""P""A""T""H""""" ""]"" ""&""&"
+" "" "" "" ""C""L""A""S""S""P""A""T""H""=""`""c""y""g""p""a""t""h"" ""-""-""p""a""t""h"" ""-""-""w""i""n""d""o""w""s"" """""$""C""L""A""S""S""P""A""T""H"""""`"
+" "" ""["" ""-""n"" """""$""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R""""" ""]"" ""&""&"
+" "" "" "" ""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R""=""`""c""y""g""p""a""t""h"" ""-""-""p""a""t""h"" ""-""-""w""i""n""d""o""w""s"" """""$""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R"""""`"
+"f""i"
 
-# Provide a "standardized" way to retrieve the CLI args that will
-# work with both Windows and non-Windows executions.
-MAVEN_CMD_LINE_ARGS="$MAVEN_CONFIG $@"
-export MAVEN_CMD_LINE_ARGS
+"#"" ""P""r""o""v""i""d""e"" ""a"" """""s""t""a""n""d""a""r""d""i""z""e""d""""" ""w""a""y"" ""t""o"" ""r""e""t""r""i""e""v""e"" ""t""h""e"" ""C""L""I"" ""a""r""g""s"" ""t""h""a""t"" ""w""i""l""l"
+"#"" ""w""o""r""k"" ""w""i""t""h"" ""b""o""t""h"" ""W""i""n""d""o""w""s"" ""a""n""d"" ""n""o""n""-""W""i""n""d""o""w""s"" ""e""x""e""c""u""t""i""o""n""s""."
+"M""A""V""E""N""_""C""M""D""_""L""I""N""E""_""A""R""G""S""="""""$""M""A""V""E""N""_""C""O""N""F""I""G"" ""$""@""""
+"e""x""p""o""r""t"" ""M""A""V""E""N""_""C""M""D""_""L""I""N""E""_""A""R""G""S"
 
-WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
+"W""R""A""P""P""E""R""_""L""A""U""N""C""H""E""R""=""o""r""g"".""a""p""a""c""h""e"".""m""a""v""e""n"".""w""r""a""p""p""e""r"".""M""a""v""e""n""W""r""a""p""p""e""r""M""a""i""n"
 
-exec "$JAVACMD" \
-  $MAVEN_OPTS \
-  -classpath "$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar" \
-  "-Dmaven.home=${M2_HOME}" "-Dmaven.multiModuleProjectDirectory=${MAVEN_PROJECTBASEDIR}" \
-  ${WRAPPER_LAUNCHER} $MAVEN_CONFIG "$@"
+"e""x""e""c"" """""$""J""A""V""A""C""M""D""""" ""\"
+" "" ""$""M""A""V""E""N""_""O""P""T""S"" ""\"
+" "" ""-""c""l""a""s""s""p""a""t""h"" """""$""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R""/"".""m""v""n""/""w""r""a""p""p""e""r""/""m""a""v""e""n""-""w""r""a""p""p""e""r"".""j""a""r""""" ""\"
+" "" """""-""D""m""a""v""e""n"".""h""o""m""e""=""$""{""M""2""_""H""O""M""E""}""""" """""-""D""m""a""v""e""n"".""m""u""l""t""i""M""o""d""u""l""e""P""r""o""j""e""c""t""D""i""r""e""c""t""o""r""y""=""$""{""M""A""V""E""N""_""P""R""O""J""E""C""T""B""A""S""E""D""I""R""}""""" ""\"
+" "" ""$""{""W""R""A""P""P""E""R""_""L""A""U""N""C""H""E""R""}"" ""$""M""A""V""E""N""_""C""O""N""F""I""G"" """""$""@""""

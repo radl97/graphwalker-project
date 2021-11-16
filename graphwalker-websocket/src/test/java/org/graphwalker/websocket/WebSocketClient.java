@@ -1,295 +1,295 @@
-package org.graphwalker.websocket;
+"p""a""c""k""a""g""e"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""w""e""b""s""o""c""k""e""t"";"
 
-/*
- * #%L
- * GraphWalker As A Service
- * %%
- * Copyright (C) 2005 - 2014 GraphWalker
- * %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * #L%
- */
+"/""*"
+" ""*"" ""#""%""L"
+" ""*"" ""G""r""a""p""h""W""a""l""k""e""r"" ""A""s"" ""A"" ""S""e""r""v""i""c""e"
+" ""*"" ""%""%"
+" ""*"" ""C""o""p""y""r""i""g""h""t"" ""(""C"")"" ""2""0""0""5"" ""-"" ""2""0""1""4"" ""G""r""a""p""h""W""a""l""k""e""r"
+" ""*"" ""%""%"
+" ""*"" ""P""e""r""m""i""s""s""i""o""n"" ""i""s"" ""h""e""r""e""b""y"" ""g""r""a""n""t""e""d"","" ""f""r""e""e"" ""o""f"" ""c""h""a""r""g""e"","" ""t""o"" ""a""n""y"" ""p""e""r""s""o""n"" ""o""b""t""a""i""n""i""n""g"" ""a"" ""c""o""p""y"
+" ""*"" ""o""f"" ""t""h""i""s"" ""s""o""f""t""w""a""r""e"" ""a""n""d"" ""a""s""s""o""c""i""a""t""e""d"" ""d""o""c""u""m""e""n""t""a""t""i""o""n"" ""f""i""l""e""s"" ""(""t""h""e"" """""S""o""f""t""w""a""r""e""""")"","" ""t""o"" ""d""e""a""l"
+" ""*"" ""i""n"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""w""i""t""h""o""u""t"" ""r""e""s""t""r""i""c""t""i""o""n"","" ""i""n""c""l""u""d""i""n""g"" ""w""i""t""h""o""u""t"" ""l""i""m""i""t""a""t""i""o""n"" ""t""h""e"" ""r""i""g""h""t""s"
+" ""*"" ""t""o"" ""u""s""e"","" ""c""o""p""y"","" ""m""o""d""i""f""y"","" ""m""e""r""g""e"","" ""p""u""b""l""i""s""h"","" ""d""i""s""t""r""i""b""u""t""e"","" ""s""u""b""l""i""c""e""n""s""e"","" ""a""n""d""/""o""r"" ""s""e""l""l"
+" ""*"" ""c""o""p""i""e""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e"","" ""a""n""d"" ""t""o"" ""p""e""r""m""i""t"" ""p""e""r""s""o""n""s"" ""t""o"" ""w""h""o""m"" ""t""h""e"" ""S""o""f""t""w""a""r""e"" ""i""s"
+" ""*"" ""f""u""r""n""i""s""h""e""d"" ""t""o"" ""d""o"" ""s""o"","" ""s""u""b""j""e""c""t"" ""t""o"" ""t""h""e"" ""f""o""l""l""o""w""i""n""g"" ""c""o""n""d""i""t""i""o""n""s"":"
+" ""*"" "
+" ""*"" ""T""h""e"" ""a""b""o""v""e"" ""c""o""p""y""r""i""g""h""t"" ""n""o""t""i""c""e"" ""a""n""d"" ""t""h""i""s"" ""p""e""r""m""i""s""s""i""o""n"" ""n""o""t""i""c""e"" ""s""h""a""l""l"" ""b""e"" ""i""n""c""l""u""d""e""d"" ""i""n"
+" ""*"" ""a""l""l"" ""c""o""p""i""e""s"" ""o""r"" ""s""u""b""s""t""a""n""t""i""a""l"" ""p""o""r""t""i""o""n""s"" ""o""f"" ""t""h""e"" ""S""o""f""t""w""a""r""e""."
+" ""*"" "
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""I""S"" ""P""R""O""V""I""D""E""D"" """""A""S"" ""I""S""""","" ""W""I""T""H""O""U""T"" ""W""A""R""R""A""N""T""Y"" ""O""F"" ""A""N""Y"" ""K""I""N""D"","" ""E""X""P""R""E""S""S"" ""O""R"
+" ""*"" ""I""M""P""L""I""E""D"","" ""I""N""C""L""U""D""I""N""G"" ""B""U""T"" ""N""O""T"" ""L""I""M""I""T""E""D"" ""T""O"" ""T""H""E"" ""W""A""R""R""A""N""T""I""E""S"" ""O""F"" ""M""E""R""C""H""A""N""T""A""B""I""L""I""T""Y"","
+" ""*"" ""F""I""T""N""E""S""S"" ""F""O""R"" ""A"" ""P""A""R""T""I""C""U""L""A""R"" ""P""U""R""P""O""S""E"" ""A""N""D"" ""N""O""N""I""N""F""R""I""N""G""E""M""E""N""T""."" ""I""N"" ""N""O"" ""E""V""E""N""T"" ""S""H""A""L""L"" ""T""H""E"
+" ""*"" ""A""U""T""H""O""R""S"" ""O""R"" ""C""O""P""Y""R""I""G""H""T"" ""H""O""L""D""E""R""S"" ""B""E"" ""L""I""A""B""L""E"" ""F""O""R"" ""A""N""Y"" ""C""L""A""I""M"","" ""D""A""M""A""G""E""S"" ""O""R"" ""O""T""H""E""R"
+" ""*"" ""L""I""A""B""I""L""I""T""Y"","" ""W""H""E""T""H""E""R"" ""I""N"" ""A""N"" ""A""C""T""I""O""N"" ""O""F"" ""C""O""N""T""R""A""C""T"","" ""T""O""R""T"" ""O""R"" ""O""T""H""E""R""W""I""S""E"","" ""A""R""I""S""I""N""G"" ""F""R""O""M"","
+" ""*"" ""O""U""T"" ""O""F"" ""O""R"" ""I""N"" ""C""O""N""N""E""C""T""I""O""N"" ""W""I""T""H"" ""T""H""E"" ""S""O""F""T""W""A""R""E"" ""O""R"" ""T""H""E"" ""U""S""E"" ""O""R"" ""O""T""H""E""R"" ""D""E""A""L""I""N""G""S"" ""I""N"
+" ""*"" ""T""H""E"" ""S""O""F""T""W""A""R""E""."
+" ""*"" ""#""L""%"
+" ""*""/"
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import org.graphwalker.io.common.ResourceUtils;
-import org.java_websocket.handshake.ServerHandshake;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""B""u""f""f""e""r""e""d""R""e""a""d""e""r"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""O""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""i""o"".""I""n""p""u""t""S""t""r""e""a""m""R""e""a""d""e""r"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""e""t"".""U""R""I"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""e""t"".""U""R""I""S""y""n""t""a""x""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""j""a""v""a"".""n""i""o"".""f""i""l""e"".""P""a""t""h"";"
+"i""m""p""o""r""t"" ""o""r""g"".""g""r""a""p""h""w""a""l""k""e""r"".""i""o"".""c""o""m""m""o""n"".""R""e""s""o""u""r""c""e""U""t""i""l""s"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""a""v""a""_""w""e""b""s""o""c""k""e""t"".""h""a""n""d""s""h""a""k""e"".""S""e""r""v""e""r""H""a""n""d""s""h""a""k""e"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""s""o""n"".""J""S""O""N""E""x""c""e""p""t""i""o""n"";"
+"i""m""p""o""r""t"" ""o""r""g"".""j""s""o""n"".""J""S""O""N""O""b""j""e""c""t"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r"";"
+"i""m""p""o""r""t"" ""o""r""g"".""s""l""f""4""j"".""L""o""g""g""e""r""F""a""c""t""o""r""y"";"
 
-public class WebSocketClient {
+"p""u""b""l""i""c"" ""c""l""a""s""s"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t"" ""{"
 
-  private org.java_websocket.client.WebSocketClient wsc;
-  private static final Logger logger = LoggerFactory.getLogger(WebSocketClient.class);
+" "" ""p""r""i""v""a""t""e"" ""o""r""g"".""j""a""v""a""_""w""e""b""s""o""c""k""e""t"".""c""l""i""e""n""t"".""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t"" ""w""s""c"";"
+" "" ""p""r""i""v""a""t""e"" ""s""t""a""t""i""c"" ""f""i""n""a""l"" ""L""o""g""g""e""r"" ""l""o""g""g""e""r"" ""="" ""L""o""g""g""e""r""F""a""c""t""o""r""y"".""g""e""t""L""o""g""g""e""r""(""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t"".""c""l""a""s""s"")"";"
 
-  private enum RX_STATE {
-    NONE,
-    HASNEXT,
-    START,
-    GETNEXT,
-    GETDATA,
-    SETDATA,
-    VISITEDELEMENT;
-  }
+" "" ""p""r""i""v""a""t""e"" ""e""n""u""m"" ""R""X""_""S""T""A""T""E"" ""{"
+" "" "" "" ""N""O""N""E"","
+" "" "" "" ""H""A""S""N""E""X""T"","
+" "" "" "" ""S""T""A""R""T"","
+" "" "" "" ""G""E""T""N""E""X""T"","
+" "" "" "" ""G""E""T""D""A""T""A"","
+" "" "" "" ""S""E""T""D""A""T""A"","
+" "" "" "" ""V""I""S""I""T""E""D""E""L""E""M""E""N""T"";"
+" "" ""}"
 
-  public boolean connected = false;
-  public RX_STATE rxState = RX_STATE.NONE;
-  public boolean cmd = false;
-  public String response = "";
-  public boolean hasNext = false;
-  private int port = 8887;
-  private String host = "localhost";
-  private WebSocketClient client;
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""c""o""n""n""e""c""t""e""d"" ""="" ""f""a""l""s""e"";"
+" "" ""p""u""b""l""i""c"" ""R""X""_""S""T""A""T""E"" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""N""O""N""E"";"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""c""m""d"" ""="" ""f""a""l""s""e"";"
+" "" ""p""u""b""l""i""c"" ""S""t""r""i""n""g"" ""r""e""s""p""o""n""s""e"" ""="" """""""";"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""h""a""s""N""e""x""t"" ""="" ""f""a""l""s""e"";"
+" "" ""p""r""i""v""a""t""e"" ""i""n""t"" ""p""o""r""t"" ""="" ""8""8""8""7"";"
+" "" ""p""r""i""v""a""t""e"" ""S""t""r""i""n""g"" ""h""o""s""t"" ""="" """""l""o""c""a""l""h""o""s""t""""";"
+" "" ""p""r""i""v""a""t""e"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t"" ""c""l""i""e""n""t"";"
 
-  /**
-   * Creates an instance of the GraphWalker WebSocket client.
-   * No connections will be made until the  {@link #run() run}  method is called.
-   * The default hostname is localhost. The default port is 8887
-   */
-  public WebSocketClient() {
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""C""r""e""a""t""e""s"" ""a""n"" ""i""n""s""t""a""n""c""e"" ""o""f"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""W""e""b""S""o""c""k""e""t"" ""c""l""i""e""n""t""."
+" "" "" ""*"" ""N""o"" ""c""o""n""n""e""c""t""i""o""n""s"" ""w""i""l""l"" ""b""e"" ""m""a""d""e"" ""u""n""t""i""l"" ""t""h""e"" "" ""{""@""l""i""n""k"" ""#""r""u""n""("")"" ""r""u""n""}"" "" ""m""e""t""h""o""d"" ""i""s"" ""c""a""l""l""e""d""."
+" "" "" ""*"" ""T""h""e"" ""d""e""f""a""u""l""t"" ""h""o""s""t""n""a""m""e"" ""i""s"" ""l""o""c""a""l""h""o""s""t""."" ""T""h""e"" ""d""e""f""a""u""l""t"" ""p""o""r""t"" ""i""s"" ""8""8""8""7"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t""("")"" ""{"
+" "" ""}"
 
-  /**
-   * Creates an instance of the GraphWalker WebSocket client.
-   * No connections will be made until the  {@link #run() run}  method is called.
-   *
-   * @param host the host to which connect this client
-   * @param port the port to which connect this client
-   */
-  public WebSocketClient(String host, int port) {
-    this.host = host;
-    this.port = port;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""C""r""e""a""t""e""s"" ""a""n"" ""i""n""s""t""a""n""c""e"" ""o""f"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""W""e""b""S""o""c""k""e""t"" ""c""l""i""e""n""t""."
+" "" "" ""*"" ""N""o"" ""c""o""n""n""e""c""t""i""o""n""s"" ""w""i""l""l"" ""b""e"" ""m""a""d""e"" ""u""n""t""i""l"" ""t""h""e"" "" ""{""@""l""i""n""k"" ""#""r""u""n""("")"" ""r""u""n""}"" "" ""m""e""t""h""o""d"" ""i""s"" ""c""a""l""l""e""d""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""h""o""s""t"" ""t""h""e"" ""h""o""s""t"" ""t""o"" ""w""h""i""c""h"" ""c""o""n""n""e""c""t"" ""t""h""i""s"" ""c""l""i""e""n""t"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""p""o""r""t"" ""t""h""e"" ""p""o""r""t"" ""t""o"" ""w""h""i""c""h"" ""c""o""n""n""e""c""t"" ""t""h""i""s"" ""c""l""i""e""n""t"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t""(""S""t""r""i""n""g"" ""h""o""s""t"","" ""i""n""t"" ""p""o""r""t"")"" ""{"
+" "" "" "" ""t""h""i""s"".""h""o""s""t"" ""="" ""h""o""s""t"";"
+" "" "" "" ""t""h""i""s"".""p""o""r""t"" ""="" ""p""o""r""t"";"
+" "" ""}"
 
-  /**
-   * Connects the GraphWalker client to the GraphWalker WebSocket
-   * server on ws://hostname:port
-   * When connected, a GraphWalker machine will be created on the server
-   * which will serve this client only.
-   */
-  public void run() {
-    client = new WebSocketClient(host, port);
-    client.connect();
-    while (!client.connected) {
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""C""o""n""n""e""c""t""s"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""c""l""i""e""n""t"" ""t""o"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""W""e""b""S""o""c""k""e""t"
+" "" "" ""*"" ""s""e""r""v""e""r"" ""o""n"" ""w""s"":""/""/""h""o""s""t""n""a""m""e"":""p""o""r""t"
+" "" "" ""*"" ""W""h""e""n"" ""c""o""n""n""e""c""t""e""d"","" ""a"" ""G""r""a""p""h""W""a""l""k""e""r"" ""m""a""c""h""i""n""e"" ""w""i""l""l"" ""b""e"" ""c""r""e""a""t""e""d"" ""o""n"" ""t""h""e"" ""s""e""r""v""e""r"
+" "" "" ""*"" ""w""h""i""c""h"" ""w""i""l""l"" ""s""e""r""v""e"" ""t""h""i""s"" ""c""l""i""e""n""t"" ""o""n""l""y""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""r""u""n""("")"" ""{"
+" "" "" "" ""c""l""i""e""n""t"" ""="" ""n""e""w"" ""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t""(""h""o""s""t"","" ""p""o""r""t"")"";"
+" "" "" "" ""c""l""i""e""n""t"".""c""o""n""n""e""c""t""("")"";"
+" "" "" "" ""w""h""i""l""e"" ""(""!""c""l""i""e""n""t"".""c""o""n""n""e""c""t""e""d"")"" ""{"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""T""h""r""e""a""d"".""s""l""e""e""p""(""1""0""0"")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""n""t""e""r""r""u""p""t""e""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""e"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" ""}"
 
-  private void connect() {
-    try {
-      wsc = new org.java_websocket.client.WebSocketClient(new URI("ws://" + host + ":" + port)) {
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""c""o""n""n""e""c""t""("")"" ""{"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""w""s""c"" ""="" ""n""e""w"" ""o""r""g"".""j""a""v""a""_""w""e""b""s""o""c""k""e""t"".""c""l""i""e""n""t"".""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t""(""n""e""w"" ""U""R""I""("""""w""s"":""/""/""""" ""+"" ""h""o""s""t"" ""+"" """"":""""" ""+"" ""p""o""r""t"")"")"" ""{"
 
-        @Override
-        public void onMessage(String message) {
-          logger.debug("Got message: " + message);
-          JSONObject root;
-          try {
-            root = new JSONObject(message);
-          } catch (JSONException e) {
-            logger.error("Message is not JSON formatted: " + e.getMessage());
-            return;
-          }
+" "" "" "" "" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" "" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""o""n""M""e""s""s""a""g""e""(""S""t""r""i""n""g"" ""m""e""s""s""a""g""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""G""o""t"" ""m""e""s""s""a""g""e"":"" """"" ""+"" ""m""e""s""s""a""g""e"")"";"
+" "" "" "" "" "" "" "" "" "" ""J""S""O""N""O""b""j""e""c""t"" ""r""o""o""t"";"
+" "" "" "" "" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""r""o""o""t"" ""="" ""n""e""w"" ""J""S""O""N""O""b""j""e""c""t""(""m""e""s""s""a""g""e"")"";"
+" "" "" "" "" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""J""S""O""N""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""M""e""s""s""a""g""e"" ""i""s"" ""n""o""t"" ""J""S""O""N"" ""f""o""r""m""a""t""t""e""d"":"" """"" ""+"" ""e"".""g""e""t""M""e""s""s""a""g""e""("")"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""r""e""t""u""r""n"";"
+" "" "" "" "" "" "" "" "" "" ""}"
 
-          rxState = RX_STATE.NONE;
-          cmd = false;
-          String command = root.getString("command").toUpperCase();
-          switch (command) {
-            case "HASNEXT":
-              hasNext = false;
-              rxState = RX_STATE.HASNEXT;
-              if (root.getBoolean("success")) {
-                cmd = true;
-                if (root.getBoolean("hasNext")) {
-                  hasNext = true;
-                }
-              }
-              break;
-            case "START":
-              rxState = RX_STATE.START;
-              if (root.getBoolean("success")) {
-                cmd = true;
-              }
-              break;
-            case "GETNEXT":
-              rxState = RX_STATE.GETNEXT;
-              if (root.getBoolean("success")) {
-                cmd = true;
-              }
-              break;
-            case "GETDATA":
-              rxState = RX_STATE.GETDATA;
-              if (root.getBoolean("success")) {
-                cmd = true;
-              }
-              if (root.has("data")) {
-                response = root.getJSONObject("data").toString();
-              } else {
-                response = "";
-              }
-              break;
-            case "SETDATA":
-              rxState = RX_STATE.SETDATA;
-              if (root.getBoolean("success")) {
-                cmd = true;
-              }
-              break;
-            case "VISITEDELEMENT":
-              rxState = RX_STATE.VISITEDELEMENT;
-              break;
-            default:
-              logger.debug("Command is not implemented: " + command);
-              break;
-          }
-        }
+" "" "" "" "" "" "" "" "" "" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""N""O""N""E"";"
+" "" "" "" "" "" "" "" "" "" ""c""m""d"" ""="" ""f""a""l""s""e"";"
+" "" "" "" "" "" "" "" "" "" ""S""t""r""i""n""g"" ""c""o""m""m""a""n""d"" ""="" ""r""o""o""t"".""g""e""t""S""t""r""i""n""g""("""""c""o""m""m""a""n""d""""")"".""t""o""U""p""p""e""r""C""a""s""e""("")"";"
+" "" "" "" "" "" "" "" "" "" ""s""w""i""t""c""h"" ""(""c""o""m""m""a""n""d"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" """""H""A""S""N""E""X""T""""":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""s""N""e""x""t"" ""="" ""f""a""l""s""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""H""A""S""N""E""X""T"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""g""e""t""B""o""o""l""e""a""n""("""""s""u""c""c""e""s""s""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""m""d"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""g""e""t""B""o""o""l""e""a""n""("""""h""a""s""N""e""x""t""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""h""a""s""N""e""x""t"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" """""S""T""A""R""T""""":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""S""T""A""R""T"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""g""e""t""B""o""o""l""e""a""n""("""""s""u""c""c""e""s""s""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""m""d"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" """""G""E""T""N""E""X""T""""":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""G""E""T""N""E""X""T"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""g""e""t""B""o""o""l""e""a""n""("""""s""u""c""c""e""s""s""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""m""d"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" """""G""E""T""D""A""T""A""""":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""G""E""T""D""A""T""A"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""g""e""t""B""o""o""l""e""a""n""("""""s""u""c""c""e""s""s""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""m""d"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""h""a""s""("""""d""a""t""a""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""s""p""o""n""s""e"" ""="" ""r""o""o""t"".""g""e""t""J""S""O""N""O""b""j""e""c""t""("""""d""a""t""a""""")"".""t""o""S""t""r""i""n""g""("")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"" ""e""l""s""e"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""e""s""p""o""n""s""e"" ""="" """""""";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" """""S""E""T""D""A""T""A""""":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""S""E""T""D""A""T""A"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""i""f"" ""(""r""o""o""t"".""g""e""t""B""o""o""l""e""a""n""("""""s""u""c""c""e""s""s""""")"")"" ""{"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""c""m""d"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""c""a""s""e"" """""V""I""S""I""T""E""D""E""L""E""M""E""N""T""""":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""V""I""S""I""T""E""D""E""L""E""M""E""N""T"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" "" "" ""d""e""f""a""u""l""t"":"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""C""o""m""m""a""n""d"" ""i""s"" ""n""o""t"" ""i""m""p""l""e""m""e""n""t""e""d"":"" """"" ""+"" ""c""o""m""m""a""n""d"")"";"
+" "" "" "" "" "" "" "" "" "" "" "" "" "" ""b""r""e""a""k"";"
+" "" "" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" "" "" ""}"
 
-        @Override
-        public void onOpen(ServerHandshake handshake) {
-          logger.info("Connected to: " + getURI());
-          connected = true;
-        }
+" "" "" "" "" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" "" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""o""n""O""p""e""n""(""S""e""r""v""e""r""H""a""n""d""s""h""a""k""e"" ""h""a""n""d""s""h""a""k""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""i""n""f""o""("""""C""o""n""n""e""c""t""e""d"" ""t""o"":"" """"" ""+"" ""g""e""t""U""R""I""("")"")"";"
+" "" "" "" "" "" "" "" "" "" ""c""o""n""n""e""c""t""e""d"" ""="" ""t""r""u""e"";"
+" "" "" "" "" "" "" "" ""}"
 
-        @Override
-        public void onClose(int code, String reason, boolean remote) {
-          logger.info("You have been disconnected from: " + getURI() + "; Code: " + code + " " + reason);
-          System.out.println();
-          connected = false;
-        }
+" "" "" "" "" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" "" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""o""n""C""l""o""s""e""(""i""n""t"" ""c""o""d""e"","" ""S""t""r""i""n""g"" ""r""e""a""s""o""n"","" ""b""o""o""l""e""a""n"" ""r""e""m""o""t""e"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""i""n""f""o""("""""Y""o""u"" ""h""a""v""e"" ""b""e""e""n"" ""d""i""s""c""o""n""n""e""c""t""e""d"" ""f""r""o""m"":"" """"" ""+"" ""g""e""t""U""R""I""("")"" ""+"" """"";"" ""C""o""d""e"":"" """"" ""+"" ""c""o""d""e"" ""+"" """"" """"" ""+"" ""r""e""a""s""o""n"")"";"
+" "" "" "" "" "" "" "" "" "" ""S""y""s""t""e""m"".""o""u""t"".""p""r""i""n""t""l""n""("")"";"
+" "" "" "" "" "" "" "" "" "" ""c""o""n""n""e""c""t""e""d"" ""="" ""f""a""l""s""e"";"
+" "" "" "" "" "" "" "" ""}"
 
-        @Override
-        public void onError(Exception ex) {
-          logger.error("Exception occured ...\n" + ex);
-          ex.printStackTrace();
-        }
-      };
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    wsc.connect();
-  }
+" "" "" "" "" "" "" "" ""@""O""v""e""r""r""i""d""e"
+" "" "" "" "" "" "" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""o""n""E""r""r""o""r""(""E""x""c""e""p""t""i""o""n"" ""e""x"")"" ""{"
+" "" "" "" "" "" "" "" "" "" ""l""o""g""g""e""r"".""e""r""r""o""r""("""""E""x""c""e""p""t""i""o""n"" ""o""c""c""u""r""e""d"" "".""."".""\""n""""" ""+"" ""e""x"")"";"
+" "" "" "" "" "" "" "" "" "" ""e""x"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" "" "" "" "" ""}"
+" "" "" "" "" "" ""}"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""U""R""I""S""y""n""t""a""x""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""e"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" ""}"
+" "" "" "" ""w""s""c"".""c""o""n""n""e""c""t""("")"";"
+" "" ""}"
 
-  private void wait(WebSocketClient client, RX_STATE state) {
-    while (client.rxState != state) {
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
-    if (!client.cmd) {
-      throw new RuntimeException("Failed to execute command");
-    }
-    client.cmd = false;
-    client.rxState = RX_STATE.NONE;
-  }
+" "" ""p""r""i""v""a""t""e"" ""v""o""i""d"" ""w""a""i""t""(""W""e""b""S""o""c""k""e""t""C""l""i""e""n""t"" ""c""l""i""e""n""t"","" ""R""X""_""S""T""A""T""E"" ""s""t""a""t""e"")"" ""{"
+" "" "" "" ""w""h""i""l""e"" ""(""c""l""i""e""n""t"".""r""x""S""t""a""t""e"" ""!""="" ""s""t""a""t""e"")"" ""{"
+" "" "" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" "" "" ""T""h""r""e""a""d"".""s""l""e""e""p""(""1""0""0"")"";"
+" "" "" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""n""t""e""r""r""u""p""t""e""d""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" "" "" ""e"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"
+" "" "" "" ""i""f"" ""(""!""c""l""i""e""n""t"".""c""m""d"")"" ""{"
+" "" "" "" "" "" ""t""h""r""o""w"" ""n""e""w"" ""R""u""n""t""i""m""e""E""x""c""e""p""t""i""o""n""("""""F""a""i""l""e""d"" ""t""o"" ""e""x""e""c""u""t""e"" ""c""o""m""m""a""n""d""""")"";"
+" "" "" "" ""}"
+" "" "" "" ""c""l""i""e""n""t"".""c""m""d"" ""="" ""f""a""l""s""e"";"
+" "" "" "" ""c""l""i""e""n""t"".""r""x""S""t""a""t""e"" ""="" ""R""X""_""S""T""A""T""E"".""N""O""N""E"";"
+" "" ""}"
 
-  /**
-   * Loads a model into the GraphWalker machine. The first model loaded, is where
-   * the execution will start.
-   * Several models can be loaded. Every model which is loaded, will have it's own
-   * context in the machine.
-   *
-   * @param path a JSON formatted GraphWalker model as a file
-   */
-  public String loadModel(Path path) {
-    logger.debug("Loading model file: " + path.toString());
-    BufferedReader reader = new BufferedReader(new InputStreamReader(ResourceUtils.getResourceAsStream(path.toString())));
-    StringBuilder out = new StringBuilder();
-    String line;
-    try {
-      while ((line = reader.readLine()) != null) {
-        out.append(line);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    try {
-      reader.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+" "" ""/""*""*"
+" "" "" ""*"" ""L""o""a""d""s"" ""a"" ""m""o""d""e""l"" ""i""n""t""o"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""m""a""c""h""i""n""e""."" ""T""h""e"" ""f""i""r""s""t"" ""m""o""d""e""l"" ""l""o""a""d""e""d"","" ""i""s"" ""w""h""e""r""e"
+" "" "" ""*"" ""t""h""e"" ""e""x""e""c""u""t""i""o""n"" ""w""i""l""l"" ""s""t""a""r""t""."
+" "" "" ""*"" ""S""e""v""e""r""a""l"" ""m""o""d""e""l""s"" ""c""a""n"" ""b""e"" ""l""o""a""d""e""d""."" ""E""v""e""r""y"" ""m""o""d""e""l"" ""w""h""i""c""h"" ""i""s"" ""l""o""a""d""e""d"","" ""w""i""l""l"" ""h""a""v""e"" ""i""t""'""s"" ""o""w""n"
+" "" "" ""*"" ""c""o""n""t""e""x""t"" ""i""n"" ""t""h""e"" ""m""a""c""h""i""n""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""p""a""r""a""m"" ""p""a""t""h"" ""a"" ""J""S""O""N"" ""f""o""r""m""a""t""t""e""d"" ""G""r""a""p""h""W""a""l""k""e""r"" ""m""o""d""e""l"" ""a""s"" ""a"" ""f""i""l""e"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""S""t""r""i""n""g"" ""l""o""a""d""M""o""d""e""l""(""P""a""t""h"" ""p""a""t""h"")"" ""{"
+" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""L""o""a""d""i""n""g"" ""m""o""d""e""l"" ""f""i""l""e"":"" """"" ""+"" ""p""a""t""h"".""t""o""S""t""r""i""n""g""("")"")"";"
+" "" "" "" ""B""u""f""f""e""r""e""d""R""e""a""d""e""r"" ""r""e""a""d""e""r"" ""="" ""n""e""w"" ""B""u""f""f""e""r""e""d""R""e""a""d""e""r""(""n""e""w"" ""I""n""p""u""t""S""t""r""e""a""m""R""e""a""d""e""r""(""R""e""s""o""u""r""c""e""U""t""i""l""s"".""g""e""t""R""e""s""o""u""r""c""e""A""s""S""t""r""e""a""m""(""p""a""t""h"".""t""o""S""t""r""i""n""g""("")"")"")"")"";"
+" "" "" "" ""S""t""r""i""n""g""B""u""i""l""d""e""r"" ""o""u""t"" ""="" ""n""e""w"" ""S""t""r""i""n""g""B""u""i""l""d""e""r""("")"";"
+" "" "" "" ""S""t""r""i""n""g"" ""l""i""n""e"";"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""w""h""i""l""e"" ""(""(""l""i""n""e"" ""="" ""r""e""a""d""e""r"".""r""e""a""d""L""i""n""e""("")"")"" ""!""="" ""n""u""l""l"")"" ""{"
+" "" "" "" "" "" "" "" ""o""u""t"".""a""p""p""e""n""d""(""l""i""n""e"")"";"
+" "" "" "" "" "" ""}"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""O""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""e"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" ""}"
+" "" "" "" ""t""r""y"" ""{"
+" "" "" "" "" "" ""r""e""a""d""e""r"".""c""l""o""s""e""("")"";"
+" "" "" "" ""}"" ""c""a""t""c""h"" ""(""I""O""E""x""c""e""p""t""i""o""n"" ""e"")"" ""{"
+" "" "" "" "" "" ""e"".""p""r""i""n""t""S""t""a""c""k""T""r""a""c""e""("")"";"
+" "" "" "" ""}"
 
-    return out.toString();
-  }
+" "" "" "" ""r""e""t""u""r""n"" ""o""u""t"".""t""o""S""t""r""i""n""g""("")"";"
+" "" ""}"
 
-  /**
-   * Closes the connection with the GraphWalker server.
-   */
-  public void close() {
-    logger.debug("Will close");
-    client.wsc.close();
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""C""l""o""s""e""s"" ""t""h""e"" ""c""o""n""n""e""c""t""i""o""n"" ""w""i""t""h"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""s""e""r""v""e""r""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""c""l""o""s""e""("")"" ""{"
+" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""W""i""l""l"" ""c""l""o""s""e""""")"";"
+" "" "" "" ""c""l""i""e""n""t"".""w""s""c"".""c""l""o""s""e""("")"";"
+" "" ""}"
 
-  /**
-   * Starts the machine. No more loadModel calls are allowed.
-   */
-  public void startMachine(Path path) {
-    logger.debug("Start the machine");
-    String startCommand = "{ command: \"start\", gw3: ";
-    startCommand += loadModel(path) + "}";
-    client.wsc.send(startCommand);
-    wait(client, RX_STATE.START);
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""S""t""a""r""t""s"" ""t""h""e"" ""m""a""c""h""i""n""e""."" ""N""o"" ""m""o""r""e"" ""l""o""a""d""M""o""d""e""l"" ""c""a""l""l""s"" ""a""r""e"" ""a""l""l""o""w""e""d""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""t""a""r""t""M""a""c""h""i""n""e""(""P""a""t""h"" ""p""a""t""h"")"" ""{"
+" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""S""t""a""r""t"" ""t""h""e"" ""m""a""c""h""i""n""e""""")"";"
+" "" "" "" ""S""t""r""i""n""g"" ""s""t""a""r""t""C""o""m""m""a""n""d"" ""="" """""{"" ""c""o""m""m""a""n""d"":"" ""\"""""s""t""a""r""t""\""""","" ""g""w""3"":"" """"";"
+" "" "" "" ""s""t""a""r""t""C""o""m""m""a""n""d"" ""+""="" ""l""o""a""d""M""o""d""e""l""(""p""a""t""h"")"" ""+"" """""}""""";"
+" "" "" "" ""c""l""i""e""n""t"".""w""s""c"".""s""e""n""d""(""s""t""a""r""t""C""o""m""m""a""n""d"")"";"
+" "" "" "" ""w""a""i""t""(""c""l""i""e""n""t"","" ""R""X""_""S""T""A""T""E"".""S""T""A""R""T"")"";"
+" "" ""}"
 
-  /**
-   * Gets the next element from the the GraphWalker machine
-   */
-  public void getNext() {
-    logger.debug("Get next step");
-    client.wsc.send("{ command: \"getNext\"}");
-    wait(client, RX_STATE.GETNEXT);
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""G""e""t""s"" ""t""h""e"" ""n""e""x""t"" ""e""l""e""m""e""n""t"" ""f""r""o""m"" ""t""h""e"" ""t""h""e"" ""G""r""a""p""h""W""a""l""k""e""r"" ""m""a""c""h""i""n""e"
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""g""e""t""N""e""x""t""("")"" ""{"
+" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""G""e""t"" ""n""e""x""t"" ""s""t""e""p""""")"";"
+" "" "" "" ""c""l""i""e""n""t"".""w""s""c"".""s""e""n""d""("""""{"" ""c""o""m""m""a""n""d"":"" ""\"""""g""e""t""N""e""x""t""\"""""}""""")"";"
+" "" "" "" ""w""a""i""t""(""c""l""i""e""n""t"","" ""R""X""_""S""T""A""T""E"".""G""E""T""N""E""X""T"")"";"
+" "" ""}"
 
-  /**
-   * Checks if the machine has more steps to generate.
-   *
-   * @return If all stop conditions are fulfilled for the machine, true is returned. Otherwise false.
-   */
-  public boolean hasNext() {
-    logger.debug("Have next step?");
-    client.wsc.send("{ command: \"hasNext\"}");
-    wait(client, RX_STATE.HASNEXT);
-    return client.hasNext;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""C""h""e""c""k""s"" ""i""f"" ""t""h""e"" ""m""a""c""h""i""n""e"" ""h""a""s"" ""m""o""r""e"" ""s""t""e""p""s"" ""t""o"" ""g""e""n""e""r""a""t""e""."
+" "" "" ""*"
+" "" "" ""*"" ""@""r""e""t""u""r""n"" ""I""f"" ""a""l""l"" ""s""t""o""p"" ""c""o""n""d""i""t""i""o""n""s"" ""a""r""e"" ""f""u""l""f""i""l""l""e""d"" ""f""o""r"" ""t""h""e"" ""m""a""c""h""i""n""e"","" ""t""r""u""e"" ""i""s"" ""r""e""t""u""r""n""e""d""."" ""O""t""h""e""r""w""i""s""e"" ""f""a""l""s""e""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""b""o""o""l""e""a""n"" ""h""a""s""N""e""x""t""("")"" ""{"
+" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""H""a""v""e"" ""n""e""x""t"" ""s""t""e""p""?""""")"";"
+" "" "" "" ""c""l""i""e""n""t"".""w""s""c"".""s""e""n""d""("""""{"" ""c""o""m""m""a""n""d"":"" ""\"""""h""a""s""N""e""x""t""\"""""}""""")"";"
+" "" "" "" ""w""a""i""t""(""c""l""i""e""n""t"","" ""R""X""_""S""T""A""T""E"".""H""A""S""N""E""X""T"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""c""l""i""e""n""t"".""h""a""s""N""e""x""t"";"
+" "" ""}"
 
-  /**
-   * Asks the machine to return all data from the current model context.
-   */
-  public String getData() {
-    logger.debug("Get data");
-    client.wsc.send("{ command: \"getData\"}");
-    wait(client, RX_STATE.GETDATA);
-    return client.response;
-  }
+" "" ""/""*""*"
+" "" "" ""*"" ""A""s""k""s"" ""t""h""e"" ""m""a""c""h""i""n""e"" ""t""o"" ""r""e""t""u""r""n"" ""a""l""l"" ""d""a""t""a"" ""f""r""o""m"" ""t""h""e"" ""c""u""r""r""e""n""t"" ""m""o""d""e""l"" ""c""o""n""t""e""x""t""."
+" "" "" ""*""/"
+" "" ""p""u""b""l""i""c"" ""S""t""r""i""n""g"" ""g""e""t""D""a""t""a""("")"" ""{"
+" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""G""e""t"" ""d""a""t""a""""")"";"
+" "" "" "" ""c""l""i""e""n""t"".""w""s""c"".""s""e""n""d""("""""{"" ""c""o""m""m""a""n""d"":"" ""\"""""g""e""t""D""a""t""a""\"""""}""""")"";"
+" "" "" "" ""w""a""i""t""(""c""l""i""e""n""t"","" ""R""X""_""S""T""A""T""E"".""G""E""T""D""A""T""A"")"";"
+" "" "" "" ""r""e""t""u""r""n"" ""c""l""i""e""n""t"".""r""e""s""p""o""n""s""e"";"
+" "" ""}"
 
-  public void setData(String action) {
-    logger.debug("Set data as an action: " + action);
-    client.wsc.send("{ command: \"setData\", action: \"" + action + "\"}");
-    wait(client, RX_STATE.SETDATA);
-  }
-}
+" "" ""p""u""b""l""i""c"" ""v""o""i""d"" ""s""e""t""D""a""t""a""(""S""t""r""i""n""g"" ""a""c""t""i""o""n"")"" ""{"
+" "" "" "" ""l""o""g""g""e""r"".""d""e""b""u""g""("""""S""e""t"" ""d""a""t""a"" ""a""s"" ""a""n"" ""a""c""t""i""o""n"":"" """"" ""+"" ""a""c""t""i""o""n"")"";"
+" "" "" "" ""c""l""i""e""n""t"".""w""s""c"".""s""e""n""d""("""""{"" ""c""o""m""m""a""n""d"":"" ""\"""""s""e""t""D""a""t""a""\""""","" ""a""c""t""i""o""n"":"" ""\"""""""" ""+"" ""a""c""t""i""o""n"" ""+"" """""\"""""}""""")"";"
+" "" "" "" ""w""a""i""t""(""c""l""i""e""n""t"","" ""R""X""_""S""T""A""T""E"".""S""E""T""D""A""T""A"")"";"
+" "" ""}"
+"}"
